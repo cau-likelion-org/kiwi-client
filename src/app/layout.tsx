@@ -1,3 +1,4 @@
+import '@styles/global.css';
 import StyledComponentsRegistry from './lib/registry'
  
 export default function RootLayout({
