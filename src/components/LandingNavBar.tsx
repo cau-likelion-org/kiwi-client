@@ -13,7 +13,7 @@ const LandingNavBar = () => {
 					<ImageWrapper>
 						<Image src="/🔍.png" alt={'search'} width={25} height={25} />
 					</ImageWrapper>
-					<SearchInput placeholder="검색.." />
+					<SearchInput placeholder="검색..." />
 				</SearchWrapper>
 				<ButtonWrapper>
 					<Image src="/random.png" alt={'random'} width={50} height={50} style={{ cursor: 'pointer' }} />
