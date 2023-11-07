@@ -44,7 +44,7 @@ const SearchPage = () => {
 			</SearchHeadSection>
 			<SearchBodySection>
 				<SearchBarWapper>
-					<Image src="/search_bar.png" alt="" width={540} height={70} priority />
+					<SearchBarInput placeholder="검색어를 입력하세요..." />
 				</SearchBarWapper>
 				<SearchResultWrapper>
 					{searchResult.map((result) => (
@@ -96,8 +96,21 @@ const SearchingText = styled.div`
 	line-height: normal;
 `;
 
-const SearchBarWapper = styled.div`
-	padding: 20px;
+const SearchBarWapper = styled.div``;
+
+const SearchBarInput = styled.input`
+	background: url('/search_bar.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: none;
+	font-size: 24px;
+	padding: 10px;
+	padding-left: 30px;
+	width: 550px;
+	height: 50px;
+	&:focus {
+		outline: none;
+	}
 `;
 
 const SearchResultWrapper = styled.div`
