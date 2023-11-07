@@ -31,33 +31,69 @@ const SearchPage = () => {
 
 	return (
 		<SearchBarSection>
-			<SearchBarWapper>
-				<Image src="/search_bar.png" alt="" width={540} height={70} priority />
-			</SearchBarWapper>
-			<SearchResultWrapper>
-				{searchResult.map((result) => (
-					<SearchResult key={result.id}>
-						<LionImageWrapper>
-							<Image src="/lion.png" alt="" width={45} height={60} />
-						</LionImageWrapper>
-						<SearchResultBox>
-							<div>{result.category}</div>
-							<SearchResultContent>{result.content}</SearchResultContent>
-							<div>{result.directory}</div>
-						</SearchResultBox>
-					</SearchResult>
-				))}
-			</SearchResultWrapper>
+			<SearchHeadSection>
+				<HeadText>STAGE 1</HeadText>
+				<HeartImageWrapper>
+					<Image src="/heart.png" alt="" width={30} height={30} />
+					<Image src="/heart.png" alt="" width={30} height={30} />
+					<Image src="/heart.png" alt="" width={30} height={30} />
+					<Image src="/heart.png" alt="" width={30} height={30} />
+					<Image src="/heart.png" alt="" width={30} height={30} />
+				</HeartImageWrapper>
+				<SearchingText>YOU SEARCHED FOR.....</SearchingText>
+			</SearchHeadSection>
+			<SearchBodySection>
+				<SearchBarWapper>
+					<Image src="/search_bar.png" alt="" width={540} height={70} priority />
+				</SearchBarWapper>
+				<SearchResultWrapper>
+					{searchResult.map((result) => (
+						<SearchResult key={result.id}>
+							<LionImageWrapper>
+								<Image src="/lion.png" alt="" width={45} height={60} />
+							</LionImageWrapper>
+							<SearchResultBox>
+								<div>{result.category}</div>
+								<SearchResultContent>{result.content}</SearchResultContent>
+								<div>{result.directory}</div>
+							</SearchResultBox>
+						</SearchResult>
+					))}
+				</SearchResultWrapper>
+			</SearchBodySection>
 		</SearchBarSection>
 	);
 };
 
 const SearchBarSection = styled.div`
+	background-color: #4546f2;
+`;
+
+const SearchHeadSection = styled.div`
+	padding: 20px;
+`;
+
+const HeadText = styled.div`
+	font-size: 36px;
+	color: white;
+`;
+
+const HeartImageWrapper = styled.div`
+	display: flex;
+	gap: 10px;
+`;
+
+const SearchBodySection = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #4546f2;
-	height: 100vh;
+`;
+
+const SearchingText = styled.div`
+	color: white;
+	font-family: LIQUIDO;
+	font-size: 50px;
+	line-height: normal;
 `;
 
 const SearchBarWapper = styled.div`
