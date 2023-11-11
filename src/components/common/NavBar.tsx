@@ -2,7 +2,7 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 
-const LandingNavBar = () => {
+const NavBar = () => {
 	return (
 		<Wrapper>
 			<LeftWrapper>
@@ -24,7 +24,7 @@ const LandingNavBar = () => {
 	);
 };
 
-export default LandingNavBar;
+export default NavBar;
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -60,7 +60,7 @@ const SearchWrapper = styled.div`
 	position: relative;
 	width: 250px;
 	margin-left: 10%;
-	margin-top: 3px;
+	/* margin-top: 3px; */
 	/* border-bottom: 2px solid black; */
 	padding: 5px;
 `;
