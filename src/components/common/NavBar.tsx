@@ -1,4 +1,6 @@
 // 세팅용 파일
+'use client';
+
 import { styled } from 'styled-components';
 import Image from 'next/image';
 
