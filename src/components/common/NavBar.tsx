@@ -33,8 +33,8 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	min-height: 64px;
-	top: 1;
 	background-color: white;
+	top: 0;
 	/* border: 1px solid black; */
 	z-index: 1;
 `;
