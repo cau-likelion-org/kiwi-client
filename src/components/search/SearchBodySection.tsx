@@ -45,7 +45,7 @@ const SearchBodySection = () => {
 				{searchResult.map((result) => (
 					<SearchResult key={result.id}>
 						<LionImageWrapper>
-							<Image src="/lion.png" alt="" width={45} height={60} />
+							<Image src="/search_lion.svg" alt="" width={128} height={137} />
 						</LionImageWrapper>
 						<SearchResultBox>
 							<div>{result.category}</div>
@@ -68,7 +68,7 @@ const SearchBodyWrapper = styled.div`
 const SearchBarWrapper = styled.div``;
 
 const SearchBarInput = styled.input`
-	background: url('/search_bar.png');
+	background: url('/search_bar.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	border: none;
