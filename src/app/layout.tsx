@@ -15,7 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html>
 			<body>
 				<NavBar />
-				<StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+
+				<StyledComponentsRegistry>
+					<div className="layout">{children}</div>
+				</StyledComponentsRegistry>
 			</body>
 		</html>
 	);
