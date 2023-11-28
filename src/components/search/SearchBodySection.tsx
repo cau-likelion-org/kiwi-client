@@ -1,8 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import SearchFound from './SearchFound';
+import SearchNotFound from './SearchNotFound';
 
 const dummyData: ISearchResult[] = [
 	{
@@ -49,30 +50,14 @@ const SearchBodySection = ({ searchKeyword }: { searchKeyword: string }) => {
 				<SearchBarInput
 					placeholder="검색어를 입력하세요..."
 					value={searchInput}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
 				/>
 			</SearchBarWrapper>
 			<SearchResultWrapper>
 				{searchResult.length > 0 ? (
-					searchResult.map((result) => (
-						<SearchResult key={result.id}>
-							<LionImageWrapper>
-								<Image src="/search_lion.svg" alt="" width={128} height={137} />
-							</LionImageWrapper>
-							<SearchResultBox>
-								<div>{result.category}</div>
-								<SearchResultContent>{result.content}</SearchResultContent>
-								<div>{result.directory}</div>
-							</SearchResultBox>
-						</SearchResult>
-					))
+					<SearchFound searchResult={searchResult} />
 				) : (
-					<>
-						<NotFoundSearchText>해당 문서가 없습니다. 위키에 {searchKeyword} 문서를 만드세요!</NotFoundSearchText>
-						<BottomImageWrapper>
-							<Image src="/no_search_lion.svg" alt="" width={800} height={250}></Image>
-						</BottomImageWrapper>
-					</>
+					<SearchNotFound searchKeyword={searchKeyword} />
 				)}
 			</SearchResultWrapper>
 		</SearchBodyWrapper>
@@ -104,49 +89,6 @@ const SearchBarInput = styled.input`
 
 const SearchResultWrapper = styled.div`
 	margin-top: 50px;
-`;
-
-const SearchResult = styled.div`
-	display: flex;
-	gap: 20px;
-	margin: 30px;
-`;
-
-const LionImageWrapper = styled.div`
-	display: flex;
-	align-items: center;
-`;
-
-const SearchResultBox = styled.div`
-	width: 50vw;
-	height: 15vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: white;
-	border: 3px solid black;
-	border-radius: 10px;
-	padding: 15px;
-`;
-
-const SearchResultContent = styled.div`
-	height: 9vh;
-	overflow: hidden;
-	line-height: 1.4;
-	margin-top: 10px;
-	margin-bottom: 10px;
-`;
-
-const NotFoundSearchText = styled.div`
-	display: flex;
-	justify-content: center;
-	color: red;
-`;
-
-const BottomImageWrapper = styled.div`
-	display: flex;
-	align-items: flex-end;
-	height: 54vh;
 `;
 
 export default SearchBodySection;
