@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "20.6.0",
-    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "axios": "^1.5.0",
     "eslint": "8.49.0",
@@ -20,12 +18,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7",
-    "styled-components": "^6.0.8",
-    "typescript": "5.2.2"
+    "styled-components": "^6.0.8"
   },
   "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.38",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "typescript": "^5.3.2"
   }
 }
