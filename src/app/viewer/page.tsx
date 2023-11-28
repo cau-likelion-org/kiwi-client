@@ -92,6 +92,7 @@ const ViewerPage = () => {
             </ContentsBody>            
           </ViewerBody>
         </Viewer>
+        <img src='/ground.png' alt="ground" style={{marginTop:"100px",width:"100px"}}/>
     </ViewerSection>
     
   )
