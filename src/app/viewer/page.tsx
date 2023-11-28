@@ -81,7 +81,14 @@ const ViewerPage = () => {
                 </ListBox>
                 }
               </ContentsLists>
-              
+              {contents.map((list)=>{
+                return(
+                  <>
+                    <ContentTitle>{list.id}. {list.title}</ContentTitle>
+                    <Content>{list.content}</Content>
+                  </>
+                )
+              })}
             </ContentsBody>            
           </ViewerBody>
         </Viewer>
