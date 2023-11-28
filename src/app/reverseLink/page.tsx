@@ -1,57 +1,49 @@
 'use client';
 
-import LinkBox from '@/components/common/viewer/LinkBox';
+interface LinkProps{
+  link?: string;
+}
+
 import Image from 'next/image';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
 const ViewerPage = () => {
-  const [openList, setOpenList] = useState(true);
 
-  const isClickedArrow = () => {
-    if(openList)setOpenList(false);
-    else setOpenList(true);
-    console.log(1);
-  }
+  const isClickedLink = ({link}: LinkProps) => {
+    console.log(link);
+  };
 
-  const [viewerContentsLists, setViewerContentsLists] = useState([
+  const [reverseLinks, setreverseLinks] = useState([
     {
       id: 1,
-      contents: '소개'
+      title: '11기',
+      link:'',
     },
     {
       id: 2,
-      contents: '11기 인물'
+      title: '냠념',
+      link:'asdf',
     },
-    {
-      id: 3,
-      contents: '11기 사건'
-    },
-    {
-      id: 4,
-      contents: '11기 프로젝트',
-    },
-  ]);
-
-  const [contents, setContents] = useState([
     {
       id: 1,
-      title: '소개',
-      content:
-      `
-      나뚜루 말차 아이스크림을 조아한다..
-      일주일에 3번씩 나뚜루를 턴다는 소문이 있을 정도 사실이다.
-
-      부산 엠버서더다.
-      부산을 너무 사랑해서 가끔 아련한 눈빛으로 ‘바다 보고 싶다..’라고 속삭이곤 한다
-      부산 놀러오면 횟집 투어 시켜준다고 함(풀코스로 쏜답니다)
-      `
+      title: '12기',
+      link:'',
+    },
+    {
+      id: 1,
+      title: '멋사진심녀',
+      link:'',
+    },
+    {
+      id: 1,
+      title: '기획파트',
+      link:'',
     }
   ])
   return (
     <ViewerSection>
 				<HeartImageWrapper>
-					<Image src="/heart.png" alt="" width={50} height={50} />
 					<Image src="/heart.png" alt="" width={50} height={50} />
 					<Image src="/heart.png" alt="" width={50} height={50} />
 					<Image src="/heart.png" alt="" width={50} height={50} />
@@ -69,7 +61,12 @@ const ViewerPage = () => {
               <Title>{"{제목}"}  문서를 가리키는 문서</Title>
             </ContentsHeader>
             <ContentsBody>
-              
+              <Content>
+                {reverseLinks.map((reverseLink)=>(
+                  <List>
+                    <Text onClick={()=>isClickedLink({link: reverseLink.link})}>&bull; {reverseLink.title}</Text> </List>
+                ))}
+              </Content>
             </ContentsBody>            
           </ViewerBody>
           <div style={{backgroundColor:"black", width: "90%", height:"15px",marginLeft:"15px"}}/>
@@ -127,10 +124,6 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 `
-const Links = styled.div`
-display: flex;
-gap: 10px;
-`
 const ContentsBody = styled.div`
 display: flex;
 margin-top: 20px;
@@ -141,63 +134,21 @@ height: auto;
 flex-direction: column;
 padding-bottom: 100px;
 `
-const ContentsLists = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-margin-bottom: 40px;
-`
-const ListTitle = styled.div`
-width: 284px;
-display: inline-flex;
-padding: 16px 8px 16px 21px;
-align-items: flex-end;
-gap: 200px;
-background-color: black;
-color: #FFF;
-text-align: center;
-font-family: NeoDunggeunmo Pro;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-`
-const ListBox = styled.div`
-width: 241px;
-display: inline-flex;
-padding: 30px 50px 30px 16px;
-align-items: center;
-gap: 8px;
-border: 3px solid #000;
-flex-direction: column;
-padding: 30px 50px 30px 16px;
-`
 const List = styled.div`
-width: 175px;
-height: 19.313px;
-flex-shrink: 0;
-color: #000;
-font-family: NeoDunggeunmo Pro;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom: 15px;
-`
-const ContentTitle = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-color: #000;
-text-align: center;
-font-family: NeoDunggeunmo Pro;
-font-size: 24px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-border-bottom: 0.5px solid black;
-padding-bottom: 20px;
+  color: #0757F1;
+  font-family: NeoDunggeunmo Pro;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 50px;
+  `
+  const Text = styled.span`
+  width: auto;
+  &:hover{
+    border-bottom: 1.5px solid #0757F1;
+  }
+  cursor: pointer;
 `
 const Content = styled.div`
 white-space: pre-line;
