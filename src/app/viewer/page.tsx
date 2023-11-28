@@ -57,7 +57,13 @@ const ViewerPage = () => {
 					<Image src="/heart.png" alt="" width={50} height={50} />
 				</HeartImageWrapper>
         <Viewer>
-          <ViewerHeaderSection src="/sketchBookHeader.png" alt="sketchbook"/> 
+          <ViewerHeaderSection> 
+          <img src="/sketchBookHeader.png" alt="sketchbook" style={{width: "calc(100% - 15px)", height: "100px"}}/>
+          <HeaderShadow>
+          <div style={{height: '50%', width: '100%'}}></div>
+          <div style={{height: '50%', width: '100%',backgroundColor:"black"}}></div>
+          </HeaderShadow>
+          </ViewerHeaderSection> 
           <ViewerBody>
             <ContentsHeader>
               <Title>권수연</Title>
@@ -91,8 +97,9 @@ const ViewerPage = () => {
               })}
             </ContentsBody>            
           </ViewerBody>
+          <div style={{backgroundColor:"black", width: "90%", height:"15px",marginLeft:"15px"}}/>
         </Viewer>
-        <img src='/ground.png' alt="ground" style={{marginTop:"100px",width:"100px"}}/>
+        <img src='/ground.png' alt="ground" style={{marginTop:"100px",width:"100%"}}/>
     </ViewerSection>
     
   )
@@ -111,24 +118,23 @@ const HeartImageWrapper = styled.div`
 `;
 const Viewer = styled.div`
 display: flex;
-// justify-content: center;
 align-items: center;
 flex-direction: column;
 `
-const ViewerHeaderSection = styled.img`
-width: 90%;
+const ViewerHeaderSection = styled.div`
+width: calc(90% + 15px);
 height: 100px;
-margin: 0;
+display: flex;
 `
 const ViewerBody = styled.div`
 background: white;
 width: 90%;
 margin: 0;
 display: flex;
-// align-items: flex-start;
 align-items: center;
 justify-content: center;
 flex-direction: column;
+border-right: 15px solid black;
 `
 const ContentsHeader = styled.div`
 display: flex;
@@ -228,5 +234,10 @@ font-weight: 400;
 line-height: 150%;
 width: 75%;
 margin-top: 40px;
-// background-color: yellow;
+`
+const HeaderShadow = styled.div`
+width: 15px;
+height: 100%;
+display: flex;
+flex-direction: column;
 `
