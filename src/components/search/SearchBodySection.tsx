@@ -49,7 +49,7 @@ const SearchBodySection = ({ searchKeyword }: { searchKeyword: string }) => {
 				<SearchBarInput
 					placeholder="검색어를 입력하세요..."
 					value={searchInput}
-					onChange={(e: any) => setSearchInput(e.target.value)}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value}
 				/>
 			</SearchBarWrapper>
 			<SearchResultWrapper>
