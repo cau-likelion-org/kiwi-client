@@ -22,3 +22,15 @@ const StyledImage = styled(Image)`
 	position: relative !important;
 	height: fit-content;
 `;
+
+const ShortCuts1 = styled.div`
+	position: relative;
+	width: 15rem;
+	background-color: black;
+`;
+
+const ShortCuts2 = styled.div`
+	position: relative;
+	width: 15rem;
+	background-color: black;
+`;
