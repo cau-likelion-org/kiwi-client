@@ -25,7 +25,7 @@ const sampleData = [
 		user: '야생의 라이언',
 		date: '2023.09.11 화요일 13:57',
 		original:
-			'중커톤 탕후루후루후루후루는 너무 귀엽고 맛있게 생겻다 다들 많관부 해줘잉~~내 최애 탕후루는 <delete>방울토마토</delete>',
+			'중커톤 <delete>탕후루후루후루후루</delete>는 너무 귀엽고 맛있게 생겻다 다들 많관부 해줘잉~~내 최애 탕후루는 <delete>방울토마토</delete>',
 		modify:
 			'중커톤 <modify>학교 앞 탕후루</modify>는 너무 귀엽고 맛있게 생겻다 다들 많관부 해줘잉~~내 최애 탕후루는 <modify>통귤!</modify>',
 	},
