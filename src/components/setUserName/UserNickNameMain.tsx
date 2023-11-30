@@ -2,16 +2,26 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import ConfirmModal from './ConfirmModal';
 
 const UserNickNameMain = () => {
 	const [userNickname, setUserNickname] = useState('어쩔사자티비');
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleModal = ()=>{
+        if(modalIsOpen){
+            setModalIsOpen(false)
+        }else{
+            setModalIsOpen(true)
+        }
+    }
 	return (
 		<Main>
+			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname}/>}
 			<Title>
 				<div className="overlay">{'STEP 01 >> 닉네임 설정'}</div>
 				<StyledImage src="/img/nicknametitle.png" alt="닉네임 박스 이미지" fill priority />
 			</Title>
-
 			<Box>
 				<Content>
 					<div className="content">
@@ -40,7 +50,7 @@ const UserNickNameMain = () => {
 							</div>
 						</div>
 					</div>
-					<SubmitBtn>다음</SubmitBtn>
+					<SubmitBtn onClick={handleModal}>다음</SubmitBtn>
 				</Content>
 				<StyledImage src="/img/windowDesign.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
@@ -69,12 +79,12 @@ const Main = styled.div`
 	flex-direction: column;
 	font-family: NeoDunggeunmo Pro;
 	.lionwrap {
-        position: relative;
+		position: relative;
 		width: 90%;
 		display: flex;
 		margin-top: 10rem;
 		gap: 3rem;
-        bottom: 0;
+		bottom: 0;
 	}
 	background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
 		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
