@@ -1,4 +1,4 @@
-import '@styles/global.css';
+import './global.css';
 import StyledComponentsRegistry from './lib/registry';
 import NavBar from '@/components/common/NavBar';
 import type { Metadata } from 'next';
@@ -14,8 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html>
 			<body>
-				<NavBar />
-				<StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+				<StyledComponentsRegistry>
+					<NavBar />
+					{children}
+				</StyledComponentsRegistry>
 			</body>
 		</html>
 	);
