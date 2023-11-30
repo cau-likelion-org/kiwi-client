@@ -60,7 +60,6 @@ export default UserNickNameMain;
 const Main = styled.div`
 	background: #4c4df5;
 	margin-top: 64px;
-	min-height: 95vh;
 	height: fit-content;
 	padding-top: 10rem;
 	width: 100%;
@@ -70,10 +69,12 @@ const Main = styled.div`
 	flex-direction: column;
 	font-family: NeoDunggeunmo Pro;
 	.lionwrap {
+        position: relative;
 		width: 90%;
 		display: flex;
 		margin-top: 10rem;
 		gap: 3rem;
+        bottom: 0;
 	}
 	background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
 		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
@@ -207,7 +208,6 @@ const StyledImage = styled(Image)`
 
 const SubmitBtn = styled.button`
 	z-index: 1;
-	width: 15%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
