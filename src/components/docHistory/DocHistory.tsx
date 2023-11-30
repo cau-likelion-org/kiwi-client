@@ -51,6 +51,7 @@ const DocHistory = () => {
 			</div>
 			<Docs>
 				<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
+				<Boder>
 				<ContentSection>
 					{sampleData.map((data, index) => (
 						<EditInfo key={index}>
@@ -87,6 +88,8 @@ const DocHistory = () => {
 						</Color>
 					</ColorChip>
 				</ContentSection>
+				</Boder>
+				<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
 			</Docs>
 			<div className="lionwrap">
 				<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
@@ -139,14 +142,20 @@ const Docs = styled.div`
 const ContentSection = styled.div`
 	width: 100%;
 	min-height: 90vh;
-	background-color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	margin-top: -1%;
 	z-index: 1;
 	padding-bottom: 9rem;
+	margin-top: 50px;
+	background-color: white;
+	@media (max-width: 795px) {
+		margin-top: 30px;
+	}
+	@media (max-width: 494px) {
+		margin-top: 1.5rem;
+	}
 `;
 
 const EditInfo = styled.div`
@@ -155,7 +164,7 @@ const EditInfo = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 6rem;
+	margin-bottom: 4rem;
 	.profile {
 		width: 100%;
 		display: flex;
@@ -167,6 +176,7 @@ const EditInfo = styled.div`
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
+		margin-top: 5rem;
 	}
 	.profile-circle {
 		width: 2.7rem;
@@ -206,7 +216,6 @@ const OriginalContent = styled.div`
 	width: 100%;
 	border-radius: 1rem;
 	border: 3px solid #000;
-	background: #fff;
 	max-height: 12rem;
 	overflow: scroll;
 	font-family: Pretendard;
@@ -267,12 +276,20 @@ const Color = styled.div`
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-		background-color: #FF7;;
+		background-color: #ff7;
 	}
 	.color-circle3 {
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-		background-color: #FAA;
+		background-color: #faa;
 	}
+`;
+const Boder = styled.div`
+	z-index: 3;
+	position: relative;
+	border-right: 0.8rem black solid;
+	border-bottom:0.8rem black solid;
+	margin-top: -8%;
+	background-color: none;
 `;
