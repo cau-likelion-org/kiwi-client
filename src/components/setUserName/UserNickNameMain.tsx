@@ -42,9 +42,15 @@ const UserNickNameMain = () => {
 					</div>
 					<SubmitBtn>다음</SubmitBtn>
 				</Content>
-
 				<StyledImage src="/img/windowDesign.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
+			<div className="lionwrap">
+				<StyledImage src="/img/lionred.png" alt="닉네임 박스 이미지" fill priority />
+				<StyledImage src="/img/lionorange.png" alt="닉네임 박스 이미지" fill priority />
+				<StyledImage src="/img/liongreen.png" alt="닉네임 박스 이미지" fill priority />
+				<StyledImage src="/img/lionblue.png" alt="닉네임 박스 이미지" fill priority />
+				<StyledImage src="/img/lionpurple.png" alt="닉네임 박스 이미지" fill priority />
+			</div>
 		</Main>
 	);
 };
@@ -55,12 +61,28 @@ const Main = styled.div`
 	background: #4c4df5;
 	margin-top: 64px;
 	min-height: 95vh;
+	height: fit-content;
+	padding-top: 10rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	font-family: NeoDunggeunmo Pro;
+	.lionwrap {
+		width: 90%;
+		display: flex;
+		margin-top: 10rem;
+		gap: 3rem;
+	}
+	background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
+	background-size:
+		100px 100px,
+		100px 100px;
+	background-position:
+		-2px -2px,
+		-2px -2px;
 `;
 
 const Title = styled.div`
@@ -109,15 +131,15 @@ const Content = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-    flex-direction: column;
-    gap: 3rem;
+	flex-direction: column;
+	gap: 3rem;
 	.content {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
 		height: fit-content;
-        gap: 1.8rem;
+		gap: 1.8rem;
 	}
 	.left {
 		position: relative;
@@ -202,5 +224,5 @@ const SubmitBtn = styled.button`
 	gap: 0.8rem;
 	border-radius: 1rem;
 	background: #4c4df5;
-    color: white;
+	color: white;
 `;
