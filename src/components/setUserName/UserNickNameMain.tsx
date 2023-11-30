@@ -68,7 +68,6 @@ const UserNickNameMain = () => {
 export default UserNickNameMain;
 
 const Main = styled.div`
-	background: #4c4df5;
 	margin-top: 64px;
 	height: fit-content;
 	padding-top: 10rem;
@@ -86,14 +85,14 @@ const Main = styled.div`
 		gap: 3rem;
 		bottom: 0;
 	}
-	background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+	/* background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
 		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
 	background-size:
 		100px 100px,
 		100px 100px;
 	background-position:
 		-2px -2px,
-		-2px -2px;
+		-2px -2px; */
 `;
 
 const Title = styled.div`
