@@ -66,7 +66,7 @@ const SearchPage = () => {
 };
 
 const SearchBarSection = styled.div`
-	background-color: #4546f2;
+	margin-top: 64px;
 `;
 
 const SearchHeadSection = styled.div`
@@ -74,6 +74,7 @@ const SearchHeadSection = styled.div`
 `;
 
 const HeadText = styled.div`
+	font-family: NeoDunggeunmo Pro;
 	font-size: 36px;
 	color: white;
 `;
@@ -108,6 +109,7 @@ const SearchBarInput = styled.input`
 	padding-left: 30px;
 	width: 550px;
 	height: 50px;
+	font-family: NeoDunggeunmo Pro;
 	&:focus {
 		outline: none;
 	}
