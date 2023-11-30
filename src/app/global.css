@@ -65,10 +65,10 @@ body {
     margin: 0;
     padding: 0;
     /* 드래그 방지 */
-    -webkit-user-select: none;
+    /* -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none; */
   }
 
   @media (min-width:0px) {
