@@ -292,4 +292,8 @@ const Boder = styled.div`
 	border-bottom:0.8rem black solid;
 	margin-top: -8%;
 	background-color: none;
+	@media (min-width: 1600px) {
+		margin-top: -7%;
+		width: 99.5%;
+	}
 `;
