@@ -73,7 +73,7 @@ const SearchBodyWrapper = styled.div`
 const SearchBarWrapper = styled.div``;
 
 const SearchBarInput = styled.input`
-	background: url('/search_bar.svg');
+	background: url('/img/search_bar.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	border: none;

@@ -14,7 +14,7 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 			{searchResult.map((result) => (
 				<SearchResult key={result.id}>
 					<LionImageWrapper>
-						<Image src="/search_lion.svg" alt="" width={128} height={137} />
+						<Image src="/img/search_lion.svg" alt="" width={128} height={137} />
 					</LionImageWrapper>
 					<SearchResultBox>
 						<SearchResultCategory>{result.category}</SearchResultCategory>
