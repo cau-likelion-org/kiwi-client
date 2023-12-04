@@ -4,6 +4,30 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
 
 html {
     -webkit-text-size-adjust​: none;
@@ -19,14 +43,14 @@ html {
     display: flex;
     justify-content: center;
     background: #4c4df5;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
-		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
 	background-size:
 		100px 100px,
 		100px 100px;
 	background-position:
-		-2px -2px,
-		-2px -2px;
+		-1px -1px,
+		-1px -1px;
 }
 
 html::-webkit-scrollbar {
@@ -41,10 +65,10 @@ body {
     margin: 0;
     padding: 0;
     /* 드래그 방지 */
-    -webkit-user-select: none;
+    /* -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none; */
   }
 
   @media (min-width:0px) {
