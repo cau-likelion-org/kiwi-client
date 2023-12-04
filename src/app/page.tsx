@@ -1,9 +1,12 @@
-// 'use client';
+import Landing from '@/components/landing/Landing';
+import React from 'react';
 
-export default function Page() {
+const Page = () => {
 	return (
 		<>
-			<div className="space-y-4"></div>
+			<Landing />
 		</>
 	);
-}
+};
+
+export default Page;

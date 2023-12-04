@@ -16,7 +16,7 @@ const SearchPage = () => {
 };
 
 const SearchBarSection = styled.div`
-	background-color: #4546f2;
+	margin-top: 64px;
 `;
 
 export default SearchPage;
