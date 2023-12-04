@@ -62,8 +62,8 @@ const ViewerPage = () => {
             </ContentsHeader>
             <ContentsBody>
               <Content>
-                {reverseLinks.map((reverseLink)=>(
-                  <List>
+                {reverseLinks.map((reverseLink, index)=>(
+                  <List key={index}>
                     <Text onClick={()=>isClickedLink({link: reverseLink.link})}>&bull; {reverseLink.title}</Text> </List>
                 ))}
               </Content>
