@@ -1,4 +1,4 @@
-import UserNickNameMain from '@/components/setUserName/UserNickNameMain';
+import UserNickNameMain from '@/components/userName/UserNickNameMain';
 import React from 'react';
 
 const page = () => {
