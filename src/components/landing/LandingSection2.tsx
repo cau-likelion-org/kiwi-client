@@ -4,6 +4,25 @@ import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
+interface EditList {
+	title: string;
+}
+
+const dummy: EditList[] = [
+	{
+		title: '12기 회장',
+	},
+	{
+		title: '옹졸한 이기웅',
+	},
+	{
+		title: '하남자 민병록',
+	},
+	{
+		title: '가식왕 양희철',
+	},
+];
+
 const LandingSection2 = () => {
 	return (
 		<ImageWrapper>
@@ -12,7 +31,13 @@ const LandingSection2 = () => {
 				<StyledImage3 src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
 			</Title>
 			<Box>
-				<Content>안녕하세용</Content>
+				<Content>
+					{dummy.map((result, idx) => (
+						<div className="list" key={idx}>
+							{result.title}
+						</div>
+					))}
+				</Content>
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
 			<LionWrapper>
@@ -87,14 +112,21 @@ const Box = styled.div`
 const Content = styled.div`
 	z-index: 2;
 	position: absolute;
-	margin-top: 4rem;
-	height: 70%;
+	margin-top: 3.2rem;
 	width: 90%;
+	height: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
 	flex-direction: column;
-	gap: 3rem;
+	.list {
+		width: 100%;
+		height: fit-content;
+		font-size: 25px;
+		border-bottom: 1px solid black;
+		font-weight: 500;
+		font-family: NeoDunggeunmo Pro;
+	}
 `;
 
 const StyledImage = styled(Image)`
