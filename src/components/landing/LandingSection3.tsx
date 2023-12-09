@@ -113,7 +113,7 @@ const Lion1 = styled.div`
 const Lion2 = styled.div`
 	position: absolute;
 	width: 12rem;
-	bottom: 2rem;
+	bottom: 1rem;
 	right: 0;
 `;
 
