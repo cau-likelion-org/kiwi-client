@@ -7,9 +7,12 @@ import styled from 'styled-components';
 const LandingSection2 = () => {
 	return (
 		<ImageWrapper>
-			<Box>
+			<Title>
+				<div className="overlay">{'> 최근 편집 목록 <'}</div>
 				<StyledImage3 src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
-				<Content></Content>
+			</Title>
+			<Box>
+				<Content>안녕하세용</Content>
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
 			<LionWrapper>
@@ -37,6 +40,34 @@ const ImageWrapper = styled.div`
 	align-items: center;
 	position: relative;
 	top: 15rem;
+`;
+
+const Title = styled.div`
+	position: relative;
+	width: 30%;
+	min-width: 330px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+	margin-left: 3rem;
+	margin-bottom: 10rem;
+	.overlay {
+		z-index: 1;
+		position: absolute;
+		height: 100%;
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 200%;
+		font-family: NeoDunggeunmo Pro;
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.3125rem;
+	}
 `;
 
 const Box = styled.div`

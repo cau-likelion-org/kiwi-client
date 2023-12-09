@@ -10,6 +10,7 @@ const LandingSection3 = () => {
 			<ImageWrapper>
 				<Wrapper>
 					<Title>
+						<div className="overlay">{'> WIKI GUIDE <'}</div>
 						<StyledImage src="/img/wikiGuide.png" alt={'랜딩'} fill priority></StyledImage>
 					</Title>
 					<Box>
@@ -61,6 +62,22 @@ const Title = styled.div`
 	height: max-content;
 	margin-left: 3rem;
 	z-index: 1;
+	.overlay {
+		z-index: 2;
+		position: absolute;
+		height: 100%;
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 200%;
+		font-family: NeoDunggeunmo Pro;
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.3125rem;
+	}
 `;
 
 const Box = styled.div`
