@@ -9,10 +9,10 @@ const LandingSection1 = () => {
 		<ImageWrapper>
 			<Wrapper>
 				<Title>
-					<StyledImage src="/img/landingTitle.png" alt={'랜딩'} fill priority></StyledImage>
+					<StyledImage src="/img/landingTitle.png" alt={'제목'} fill priority></StyledImage>
 				</Title>
 				<Game>
-					<StyledImage src="/img/landingGame.png" alt={'랜딩'} fill priority></StyledImage>
+					<StyledImage src="/img/landingGame.png" alt={'화면'} fill priority></StyledImage>
 				</Game>
 			</Wrapper>
 		</ImageWrapper>

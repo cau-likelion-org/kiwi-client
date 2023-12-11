@@ -76,7 +76,7 @@ const Title = styled.div`
 	justify-content: center;
 	height: max-content;
 	margin-left: 3rem;
-	margin-bottom: 10rem;
+	margin-bottom: 8rem;
 	.overlay {
 		z-index: 1;
 		position: absolute;
@@ -114,7 +114,7 @@ const Content = styled.div`
 	position: absolute;
 	margin-top: 3.2rem;
 	width: 90%;
-	height: 100%;
+	height: 80%;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -122,10 +122,11 @@ const Content = styled.div`
 	.list {
 		width: 100%;
 		height: fit-content;
-		font-size: 25px;
+		font-size: 170%;
 		border-bottom: 1px solid black;
 		font-weight: 500;
 		font-family: NeoDunggeunmo Pro;
+		padding: 5px 0rem;
 	}
 `;
 

@@ -8,18 +8,18 @@ const NavBar = () => {
 	return (
 		<Wrapper>
 			<LeftWrapper>
-				<Image src="/logo.png" alt={'logo'} width={190} height={45} />
+				<Image src="/img/logo.png" alt={'logo'} width={190} height={45} />
 			</LeftWrapper>
 			<RightWrapper>
 				<SearchWrapper>
 					<ImageWrapper>
-						<Image src="/🔍.png" alt={'search'} width={25} height={25} />
+						<Image src="/img/🔍.png" alt={'search'} width={25} height={25} />
 					</ImageWrapper>
 					<SearchInput placeholder="검색..." />
 				</SearchWrapper>
 				<ButtonWrapper>
-					<Image src="/random.png" alt={'random'} width={50} height={50} style={{ cursor: 'pointer' }} />
-					<Image src="/login.png" alt={'login'} width={50} height={50} style={{ cursor: 'pointer' }} />
+					<Image src="/img/random.png" alt={'random'} width={50} height={50} style={{ cursor: 'pointer' }} />
+					<Image src="/img/login.png" alt={'login'} width={50} height={50} style={{ cursor: 'pointer' }} />
 				</ButtonWrapper>
 			</RightWrapper>
 		</Wrapper>
