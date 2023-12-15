@@ -4,7 +4,7 @@ import '@uiw/react-markdown-preview/markdown.css';
 import dynamic from 'next/dynamic';
 import { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { ICommand } from '@uiw/react-md-editor';
+import { ICommand, commands } from '@uiw/react-md-editor';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
 	ssr: false,
@@ -22,7 +22,9 @@ const Upload: NextPage = () => {
 	};
 	return (
 		<Wrapper>
-			<MDEditor value={md} onChange={setMd} height={500} aria-placeholder="마크다운 편집기입니다!" />
+			<input ref={inputRef} type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+			<UploadBtn onClick={() => inputRef.current?.click()}>이미지 업로드</UploadBtn>
+			<MDEditor value={md} onChange={setMd} height={500} />
 		</Wrapper>
 	);
 };
@@ -32,4 +34,17 @@ export default Upload;
 const Wrapper = styled.div`
 	width: 98%;
 	margin-top: 1rem;
+`;
+
+const UploadBtn = styled.button`
+	display: inline-flex;
+	padding: 1rem 2rem;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	border-radius: 1.875rem;
+	border: 1px solid #000;
+	background: #fff;
+	font-size: 1rem;
+	margin-bottom: 1rem;
 `;
