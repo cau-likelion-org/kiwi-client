@@ -3,12 +3,9 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import QuillEditor from './QuillEditor';
 import MD from './MD';
 
-const Editor = () => {
-	const [html, setHtml] = useState('');
-
+const Post = () => {
 	return (
 		<Main>
 			<div className="heart">
@@ -24,7 +21,6 @@ const Editor = () => {
 							<Btn>취소</Btn>
 							<Btn>완료</Btn>
 						</BtnWrapper>
-						{/* <QuillEditor html={html} setHtml={setHtml} /> */}
 						<MD />
 					</ContentSection>
 				</Boder>
@@ -37,7 +33,7 @@ const Editor = () => {
 	);
 };
 
-export default Editor;
+export default Post;
 
 const Main = styled.div`
 	height: fit-content;
