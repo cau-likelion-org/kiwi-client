@@ -3,9 +3,30 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import MD from './MD';
+import Upload from './MD';
+
+interface IOption {
+	value: string;
+	label: string;
+}
 
 const Post = () => {
+	const [title, setTitle] = useState<string>('');
+	const [md, setMd] = useState<string>('');
+	const [class1, setClass1] = useState<IOption | null>(null);
+	const [class2, setClass2] = useState<IOption | null>(null);
+
+	const goLog = () => {
+		console.log(title);
+		console.log(class1?.value);
+		console.log(class2?.value);
+		console.log(md);
+	};
+
+	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value);
+	};
+
 	return (
 		<Main>
 			<div className="heart">
@@ -19,9 +40,10 @@ const Post = () => {
 					<ContentSection>
 						<BtnWrapper>
 							<Btn>취소</Btn>
-							<Btn>완료</Btn>
+							<Btn onClick={goLog}>완료</Btn>
 						</BtnWrapper>
-						<MD />
+						<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
+						<Upload md={md} setMd={setMd} class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
 					</ContentSection>
 				</Boder>
 				<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
@@ -121,8 +143,9 @@ const BtnWrapper = styled.div`
 	display: flex;
 	align-items: flex-end;
 	justify-content: end;
-	padding: 0.5rem;
-	margin-right: 2rem;
+	padding: 1rem;
+	margin-top: 1rem;
+	margin-right: 4rem;
 	gap: 1rem;
 `;
 
@@ -140,4 +163,15 @@ const Btn = styled.div`
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
+`;
+
+const Input = styled.input`
+	width: 93%;
+	font-size: 2.5rem;
+	border: none;
+	border-bottom: 2px solid #d9d9d9;
+	margin-bottom: 1rem;
+	&:focus {
+		outline: none;
+	}
 `;

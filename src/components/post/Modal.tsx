@@ -5,17 +5,24 @@ import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import Dropdown from './Dropdown';
 
-const Modal = () => {
-	const router = useRouter();
+interface IOption {
+	value: string;
+	label: string;
+}
 
-	const onClick = () => {
-		router.push('/');
-	};
+type ModalProps = {
+	closeModal: () => void;
+	class1: IOption | null;
+	setClass1: React.Dispatch<React.SetStateAction<IOption | null>>;
+	class2: IOption | null;
+	setClass2: React.Dispatch<React.SetStateAction<IOption | null>>;
+};
 
+const Modal = ({ closeModal, class1, setClass1, class2, setClass2 }: ModalProps) => {
 	return (
 		<Wrapper>
 			<ModalSection>
-				<X>
+				<X onClick={closeModal}>
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
 						<g clip-path="url(#clip0_929_193)">
 							<path
@@ -34,8 +41,8 @@ const Modal = () => {
 					</svg>
 				</X>
 				<Title>해당 문서의 카테고리를 선택하세요!</Title>
-				<Dropdown />
-				<Btn onClick={onClick}>확인</Btn>
+				<Dropdown class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
+				<Btn onClick={closeModal}>확인</Btn>
 				<Lions>
 					<StyledImage2 src="/img/lion.png" alt="파랑 사자" fill priority />
 				</Lions>
