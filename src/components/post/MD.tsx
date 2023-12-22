@@ -14,20 +14,20 @@ interface IOption {
 	value: string;
 	label: string;
 }
-interface PropsType {
-	md: string;
-	setMd: React.Dispatch<React.SetStateAction<string>>;
-	class1: IOption | null;
-	setClass1: React.Dispatch<React.SetStateAction<IOption | null>>;
-	class2: IOption | null;
-	setClass2: React.Dispatch<React.SetStateAction<IOption | null>>;
-}
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
 
-const Upload: React.FC<PropsType> = ({ md, setMd, class1, setClass1, class2, setClass2 }) => {
+const Upload: React.FC = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [modal, setModal] = useState(false);
+	const [title, setTitle] = useState<string>('');
+	const [md, setMd] = useState<string>('');
+	const [class1, setClass1] = useState<IOption | null>(null);
+	const [class2, setClass2] = useState<IOption | null>(null);
+
+	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value);
+	};
 
 	const onModal = () => {
 		setModal(true);
@@ -43,14 +43,6 @@ const Upload: React.FC<PropsType> = ({ md, setMd, class1, setClass1, class2, set
 			setMd(value);
 		}
 	};
-
-	// const handleImageUpload = async () => {
-	// 	if (!inputRef.current?.files?.length) return;
-	// 	const file = inputRef.current.files[0];
-	// 	// const imageUrl = await uploadImageToServer(file); // 이미지를 서버에 업로드하고 URL을 반환받는 함수
-	// 	const imageMarkdown = `![업로드한 이미지](${file})`;
-	// 	setMd((currentMd) => (currentMd ? `${currentMd}\n${imageMarkdown}` : imageMarkdown));
-	// };
 
 	const imageUploadCommand: ICommand = {
 		name: 'image-upload',
@@ -82,9 +74,11 @@ const Upload: React.FC<PropsType> = ({ md, setMd, class1, setClass1, class2, set
 	return (
 		<>
 			<Wrapper>
-				<UploadBtn onClick={onModal}>*카테고리 선택</UploadBtn>
-				{/* <input ref={inputRef} type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} /> */}
-				{/* <UploadBtn2 onClick={() => inputRef.current?.click()}>이미지 업로드</UploadBtn2> */}
+				<BtnWrapper>
+					<Btn>취소</Btn>
+					<Btn onClick={onModal}>완료</Btn>
+				</BtnWrapper>
+				<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
 				<div className="markarea">
 					<div data-color-mode="dark">
 						<MDEditor
@@ -97,7 +91,15 @@ const Upload: React.FC<PropsType> = ({ md, setMd, class1, setClass1, class2, set
 				</div>
 			</Wrapper>
 			{modal && (
-				<Modal closeModal={closeModal} class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
+				<Modal
+					md={md}
+					title={title}
+					closeModal={closeModal}
+					class1={class1}
+					class2={class2}
+					setClass1={setClass1}
+					setClass2={setClass2}
+				/>
 			)}
 		</>
 	);
@@ -107,7 +109,6 @@ export default Upload;
 
 const Wrapper = styled.div`
 	width: 98%;
-	margin-top: 1rem;
 `;
 
 const UploadBtn = styled.button`
@@ -125,23 +126,40 @@ const UploadBtn = styled.button`
 	margin-left: 1rem;
 `;
 
-const UploadBtn2 = styled.button`
-	display: inline-flex;
+const BtnWrapper = styled.div`
+	width: 98%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: end;
+	padding: 1rem;
+	gap: 1rem;
+`;
+
+const Btn = styled.div`
+	border-radius: 1.25rem;
+	background: #4c4df5;
+	display: flex;
 	padding: 1rem 2rem;
 	justify-content: center;
 	align-items: center;
-	gap: 1rem;
-	border-radius: 1.875rem;
-	border: 1px solid black;
-	background: #fff;
-	font-size: 1rem;
-	margin-bottom: 1.5rem;
-	margin-right: 0.5rem;
-	margin-left: 1rem;
+	color: #fff;
+	text-align: center;
+	font-family: Pretendard;
+	font-size: 1.3rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
 `;
 
-const BtnWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+const Input = styled.input`
+	width: 98%;
+	font-family: Pretendard;
+	margin-left: 1rem;
+	font-size: 2.5rem;
+	border: none;
+	border-bottom: 2px solid #d9d9d9;
+	margin-bottom: 1.5rem;
+	&:focus {
+		outline: none;
+	}
 `;

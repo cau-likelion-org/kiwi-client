@@ -107,7 +107,7 @@ const Wrapper = styled.div`
 const BouncingArrow = styled.div`
 	padding: 2px;
 	color: blue;
-	animation: bounce 1s infinite;
+	animation: bounce 2s infinite;
 	@keyframes bounce {
 		0%,
 		20%,
@@ -117,10 +117,10 @@ const BouncingArrow = styled.div`
 			transform: translateY(0);
 		}
 		40% {
-			transform: translateY(-10px);
+			transform: translateY(10px);
 		}
 		60% {
-			transform: translateY(-5px);
+			transform: translateY(5px);
 		}
 	}
 `;

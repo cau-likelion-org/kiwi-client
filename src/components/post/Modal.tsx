@@ -11,6 +11,8 @@ interface IOption {
 }
 
 type ModalProps = {
+	md: string;
+	title: string;
 	closeModal: () => void;
 	class1: IOption | null;
 	setClass1: React.Dispatch<React.SetStateAction<IOption | null>>;
@@ -18,7 +20,18 @@ type ModalProps = {
 	setClass2: React.Dispatch<React.SetStateAction<IOption | null>>;
 };
 
-const Modal = ({ closeModal, class1, setClass1, class2, setClass2 }: ModalProps) => {
+const Modal = ({ closeModal, class1, setClass1, class2, setClass2, md, title }: ModalProps) => {
+	const handleSubmit = () => {
+		if (class1 && class2) {
+			console.log(class1.value);
+			console.log(class2.value);
+			console.log(title);
+			console.log(md);
+			closeModal();
+		} else {
+			alert('🦁카테고리 선택은 필수🦁');
+		}
+	};
 	return (
 		<Wrapper>
 			<ModalSection>
@@ -42,7 +55,7 @@ const Modal = ({ closeModal, class1, setClass1, class2, setClass2 }: ModalProps)
 				</X>
 				<Title>해당 문서의 카테고리를 선택하세요!</Title>
 				<Dropdown class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
-				<Btn onClick={closeModal}>확인</Btn>
+				<Btn onClick={handleSubmit}>확인</Btn>
 				<Lions>
 					<StyledImage2 src="/img/lion.png" alt="파랑 사자" fill priority />
 				</Lions>

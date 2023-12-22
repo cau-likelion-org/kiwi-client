@@ -11,47 +11,28 @@ interface IOption {
 }
 
 const Post = () => {
-	const [title, setTitle] = useState<string>('');
-	const [md, setMd] = useState<string>('');
-	const [class1, setClass1] = useState<IOption | null>(null);
-	const [class2, setClass2] = useState<IOption | null>(null);
-
-	const goLog = () => {
-		console.log(title);
-		console.log(class1?.value);
-		console.log(class2?.value);
-		console.log(md);
-	};
-
-	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value);
-	};
-
 	return (
-		<Main>
-			<div className="heart">
-				<StyledImage src="/img/heart3group.png" alt="문서역사" fill priority />
-			</div>
-			<Docs>
-				<TopWrapper>
-					<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
-				</TopWrapper>
-				<Boder>
-					<ContentSection>
-						<BtnWrapper>
-							<Btn>취소</Btn>
-							<Btn onClick={goLog}>완료</Btn>
-						</BtnWrapper>
-						<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
-						<Upload md={md} setMd={setMd} class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
-					</ContentSection>
-				</Boder>
-				<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
-			</Docs>
-			<div className="lionwrap">
-				<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
-			</div>
-		</Main>
+		<>
+			<Main>
+				<div className="heart">
+					<StyledImage src="/img/heart3group.png" alt="문서역사" fill priority />
+				</div>
+				<Docs>
+					<TopWrapper>
+						<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
+					</TopWrapper>
+					<Boder>
+						<ContentSection>
+							<Upload />
+						</ContentSection>
+					</Boder>
+					<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
+				</Docs>
+				<div className="lionwrap">
+					<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
+				</div>
+			</Main>
+		</>
 	);
 };
 
@@ -76,7 +57,7 @@ const Main = styled.div`
 	}
 	.heart {
 		margin-right: 65%;
-		width: 20%;
+		width: 15%;
 		margin-bottom: 1.5rem;
 		min-width: 10rem;
 		margin-top: 2rem;
