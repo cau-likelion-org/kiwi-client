@@ -13,12 +13,6 @@ const options: IOption[] = [
 	{ value: '11기', label: '11기' },
 ];
 
-const options2: IOption[] = [
-	{ value: '인물', label: '인물' },
-	{ value: '프로젝트', label: '프로젝트' },
-	{ value: '행사', label: '행사' },
-];
-
 const customStyles = {
 	option: (provided: any, state: any) => ({
 		...provided,
@@ -76,20 +70,12 @@ const DropdownIndicator = (props: any) => {
 interface PropsType {
 	generation: readonly IOption[] | null;
 	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
-	category: IOption | null;
-	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 }
 
-const Dropdown: React.FC<PropsType> = ({ generation, setGeneration, category, setCategory }) => {
+const Dropdown: React.FC<PropsType> = ({ generation, setGeneration }) => {
 	const handleChange = (option: readonly IOption[] | null) => {
 		if (option) {
 			setGeneration(Array.from(option));
-		}
-	};
-
-	const handleChange2 = (option: IOption | null) => {
-		if (option) {
-			setCategory(option);
 		}
 	};
 

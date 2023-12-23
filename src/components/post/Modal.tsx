@@ -16,11 +16,9 @@ type ModalProps = {
 	closeModal: () => void;
 	generation: readonly IOption[] | null;
 	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
-	category: IOption | null;
-	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 };
 
-const Modal = ({ closeModal, generation, setGeneration, category, setCategory, md, title }: ModalProps) => {
+const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps) => {
 	const handleSubmit = () => {
 		if (generation) {
 			generation.map((item, index) => {
@@ -55,7 +53,7 @@ const Modal = ({ closeModal, generation, setGeneration, category, setCategory, m
 					</svg>
 				</X>
 				<Title>해당 문서의 카테고리를 선택하세요!</Title>
-				<Dropdown generation={generation} category={category} setGeneration={setGeneration} setCategory={setCategory} />
+				<Dropdown generation={generation} setGeneration={setGeneration} />
 				<Btn onClick={handleSubmit}>확인</Btn>
 				<Lions>
 					<StyledImage2 src="/img/lion.png" alt="파랑 사자" fill priority />

@@ -5,11 +5,7 @@ import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
 import Modal from './Modal';
-// import MDEditor from '@uiw/react-md-editor';
-
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
-	ssr: false,
-});
+import MDEditor from '@uiw/react-md-editor';
 
 interface IOption {
 	value: string;
@@ -91,15 +87,7 @@ const Upload: React.FC = () => {
 				</div>
 			</Wrapper>
 			{modal && (
-				<Modal
-					md={md}
-					title={title}
-					closeModal={closeModal}
-					generation={generation}
-					category={category}
-					setGeneration={setGeneration}
-					setCategory={setCategory}
-				/>
+				<Modal md={md} title={title} closeModal={closeModal} generation={generation} setGeneration={setGeneration} />
 			)}
 		</>
 	);
