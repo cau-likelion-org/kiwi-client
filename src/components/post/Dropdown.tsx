@@ -1,11 +1,7 @@
+import { IOption } from '@/types/request';
 import React, { FC, useState } from 'react';
 import Select, { components } from 'react-select';
 import styled from 'styled-components';
-
-interface IOption {
-	value: string;
-	label: string;
-}
 
 const customStyles = {
 	menu: (provided: any, state: any) => ({

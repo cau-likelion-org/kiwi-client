@@ -4,11 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import Dropdown from './Dropdown';
-
-interface IOption {
-	value: string;
-	label: string;
-}
+import { IOption } from '@/types/request';
 
 const options: IOption[] = [
 	{ value: '9기', label: '9기' },

@@ -6,11 +6,7 @@ import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
 import Modal from './Modal';
 import MDEditor from '@uiw/react-md-editor';
-
-interface IOption {
-	value: string;
-	label: string;
-}
+import { IOption } from '@/types/request';
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
 
