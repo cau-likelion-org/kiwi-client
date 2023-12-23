@@ -22,7 +22,7 @@ const Upload: React.FC = () => {
 	const [modal, setModal] = useState(false);
 	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
-	const [generation, setGeneration] = useState<IOption[] | null>([]);
+	const [generation, setGeneration] = useState<readonly IOption[] | null>([]);
 	const [category, setCategory] = useState<IOption | null>(null);
 
 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

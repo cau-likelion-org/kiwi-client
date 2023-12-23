@@ -74,14 +74,14 @@ const DropdownIndicator = (props: any) => {
 };
 
 interface PropsType {
-	generation: IOption[] | null;
-	setGeneration: React.Dispatch<React.SetStateAction<IOption[] | null>>;
+	generation: readonly IOption[] | null;
+	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
 	category: IOption | null;
 	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 }
 
 const Dropdown: React.FC<PropsType> = ({ generation, setGeneration, category, setCategory }) => {
-	const handleChange = (option: IOption[] | null) => {
+	const handleChange = (option: readonly IOption[] | null) => {
 		if (option) {
 			setGeneration(Array.from(option));
 		}
@@ -97,6 +97,7 @@ const Dropdown: React.FC<PropsType> = ({ generation, setGeneration, category, se
 		<Wrapper>
 			<Select
 				isMulti
+				isClearable={false}
 				value={generation}
 				onChange={handleChange}
 				options={options}

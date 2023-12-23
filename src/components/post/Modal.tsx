@@ -14,8 +14,8 @@ type ModalProps = {
 	md: string;
 	title: string;
 	closeModal: () => void;
-	generation: IOption[] | null;
-	setGeneration: React.Dispatch<React.SetStateAction<IOption[] | null>>;
+	generation: readonly IOption[] | null;
+	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
 	category: IOption | null;
 	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 };
