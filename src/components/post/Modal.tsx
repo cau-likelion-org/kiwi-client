@@ -20,7 +20,7 @@ type ModalProps = {
 
 const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps) => {
 	const handleSubmit = () => {
-		if (generation) {
+		if (generation && generation.length > 0) {
 			generation.map((item, index) => {
 				console.log(item.value);
 			});
@@ -88,16 +88,16 @@ const Btn = styled.div`
 	align-items: center;
 	color: #fff;
 	text-align: center;
-	font-family: 'Pretendard';
-	font-size: 1.3rem;
+	font-family: 'NeoDunggeunmo Pro';
+	font-size: 1.5rem;
 	font-style: normal;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: normal;
 	cursor: pointer;
 `;
 
 const Title = styled.div`
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-weight: bold;
 	color: var(--dark-gray, #585858);
 `;
@@ -117,8 +117,8 @@ const ModalSection = styled.div`
 	position: absolute;
 	color: #000;
 	text-align: center;
-	font-family: Pretendard;
-	font-weight: 600;
+	font-family: 'NeoDunggeunmo Pro';
+	font-weight: 500;
 `;
 
 const X = styled.div`

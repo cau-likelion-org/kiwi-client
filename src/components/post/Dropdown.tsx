@@ -14,45 +14,58 @@ const options: IOption[] = [
 ];
 
 const customStyles = {
+	menu: (provided: any, state: any) => ({
+		...provided,
+		fontFamily: 'NeoDunggeunmo Pro',
+	}),
 	option: (provided: any, state: any) => ({
 		...provided,
 		width: '100%',
 		color: state.isSelected ? 'white' : 'black',
 		backgroundColor: state.isSelected ? 'blue' : 'white',
+		fontFamily: 'NeoDunggeunmo Pro',
+		fontSize: '1.5rem',
 		textAlign: 'left',
 	}),
 	control: (provided: any, state: any) => ({
 		...provided,
 		width: '300px',
 		margin: '2rem',
+		fontFamily: 'NeoDunggeunmo Pro',
 		backgroundColor: state.isSelected ? 'blue' : 'white',
 	}),
 	singleValue: (provided: any, state: any) => ({
 		...provided,
 		width: '100%',
+		fontFamily: 'NeoDunggeunmo Pro',
 		color: state.isSelected ? 'white' : 'blue',
 	}),
 	valueContainer: (provided: any) => ({
 		...provided,
 		textAlign: 'left',
+		fontFamily: 'NeoDunggeunmo Pro',
 		padding: '1rem',
 	}),
 	indicatorSeparator: () => ({}),
 	multiValue: (styles: any, { data }: any) => {
 		return {
 			...styles,
+			width: '30%',
 			backgroundColor: 'white',
+			fontFamily: 'NeoDunggeunmo Pro',
 		};
 	},
 	multiValueLabel: (styles: any, { data }: any) => ({
 		...styles,
-		color: 'blue',
+		color: '#4c4df5',
+		fontSize: '1.5rem',
 	}),
 	multiValueRemove: (styles: any, { data, isFocused }: any) => ({
 		...styles,
 		color: isFocused ? 'green' : styles.color,
 		':hover': {
-			color: 'blue',
+			backgroundColor: '#4c4df5',
+			color: 'white',
 		},
 	}),
 };
@@ -90,6 +103,8 @@ const Dropdown: React.FC<PropsType> = ({ generation, setGeneration }) => {
 				styles={customStyles}
 				components={{ DropdownIndicator }}
 				placeholder={'기수를 선택해주세요!'}
+				noOptionsMessage={() => '모든 옵션이 선택되었습니다.'}
+				isSearchable={false}
 			/>
 		</Wrapper>
 	);
@@ -98,7 +113,7 @@ const Dropdown: React.FC<PropsType> = ({ generation, setGeneration }) => {
 export default Dropdown;
 
 const Wrapper = styled.div`
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-family: Pretendard;
 `;
 

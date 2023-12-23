@@ -18,20 +18,23 @@ const Upload: React.FC = () => {
 	const [modal, setModal] = useState(false);
 	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
-	const [generation, setGeneration] = useState<readonly IOption[] | null>([]);
+	const [generation, setGeneration] = useState<readonly IOption[] | null>(null);
 	const [category, setCategory] = useState<IOption | null>(null);
 
-	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value);
-	};
-
 	const onModal = () => {
-		setModal(true);
-		document.body.style.overflow = 'hidden';
+		if (md == '' || title == '') {
+			alert('🦁제목 및 내용을 입력해주세요!🦁');
+		} else {
+			setModal(true);
+		}
 	};
 
 	const closeModal = () => {
 		setModal(false);
+	};
+
+	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value);
 	};
 
 	const handleEditorChange = (value?: string | undefined) => {
