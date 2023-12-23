@@ -19,7 +19,6 @@ const Upload: React.FC = () => {
 	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
 	const [generation, setGeneration] = useState<readonly IOption[] | null>(null);
-	const [category, setCategory] = useState<IOption | null>(null);
 
 	const onModal = () => {
 		if (md == '' || title == '') {
@@ -100,21 +99,6 @@ export default Upload;
 
 const Wrapper = styled.div`
 	width: 98%;
-`;
-
-const UploadBtn = styled.button`
-	display: inline-flex;
-	padding: 1rem 2rem;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	border-radius: 1.875rem;
-	border: 1px solid #000;
-	background: #fff;
-	font-size: 1rem;
-	margin-bottom: 1.5rem;
-	margin-right: 0.5rem;
-	margin-left: 1rem;
 `;
 
 const BtnWrapper = styled.div`
