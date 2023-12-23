@@ -106,7 +106,7 @@ const Title = styled.div`
 		letter-spacing: 0.3125rem;
 	}
 	@media screen and (min-width: 1024px) {
-		top: 6rem;
+		top: 7rem;
 	}
 `;
 
@@ -190,7 +190,7 @@ const LionWrapper = styled.div`
 	position: relative;
 	bottom: 12rem;
 	@media screen and (min-width: 1024px) {
-		bottom: 25rem;
+		bottom: 27rem;
 	}
 `;
 
@@ -199,7 +199,7 @@ const Lions = styled.div`
 	width: fit-content;
 	height: 20rem;
 	@media screen and (min-width: 1024px) {
-		height: 25rem;
-		margin-top: 5rem;
+		height: 30rem;
+		margin-top: 3rem;
 	}
 `;
