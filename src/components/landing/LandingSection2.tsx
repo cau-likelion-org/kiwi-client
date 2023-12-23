@@ -112,7 +112,7 @@ const Title = styled.div`
 
 const Box = styled.div`
 	position: relative;
-	width: 60%;
+	width: 55%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
