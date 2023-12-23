@@ -29,7 +29,7 @@ const customStyles = {
 	}),
 	control: (provided: any, state: any) => ({
 		...provided,
-		width: '270px',
+		width: '300px',
 		margin: '2rem',
 		backgroundColor: state.isSelected ? 'blue' : 'white',
 	}),
@@ -41,57 +41,68 @@ const customStyles = {
 	valueContainer: (provided: any) => ({
 		...provided,
 		textAlign: 'left',
+		padding: '1rem',
 	}),
 	indicatorSeparator: () => ({}),
+	multiValue: (styles: any, { data }: any) => {
+		return {
+			...styles,
+			backgroundColor: 'white',
+		};
+	},
+	multiValueLabel: (styles: any, { data }: any) => ({
+		...styles,
+		color: 'blue',
+	}),
+	multiValueRemove: (styles: any, { data, isFocused }: any) => ({
+		...styles,
+		color: isFocused ? 'green' : styles.color,
+		':hover': {
+			color: 'blue',
+		},
+	}),
 };
 
 const DropdownIndicator = (props: any) => {
 	return (
 		components.DropdownIndicator && (
 			<components.DropdownIndicator {...props}>
-				<BouncingArrow style={{ padding: '2px', color: 'blue' }}>▼</BouncingArrow>
+				<BouncingArrow>▼</BouncingArrow>
 			</components.DropdownIndicator>
 		)
 	);
 };
 
 interface PropsType {
-	class1: IOption | null;
-	class2: IOption | null;
-	setClass1: React.Dispatch<React.SetStateAction<IOption | null>>;
-	setClass2: React.Dispatch<React.SetStateAction<IOption | null>>;
+	generation: IOption[] | null;
+	setGeneration: React.Dispatch<React.SetStateAction<IOption[] | null>>;
+	category: IOption | null;
+	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 }
 
-const Dropdown: React.FC<PropsType> = ({ class1, setClass1, class2, setClass2 }) => {
-	const handleChange = (option: IOption | null) => {
+const Dropdown: React.FC<PropsType> = ({ generation, setGeneration, category, setCategory }) => {
+	const handleChange = (option: IOption[] | null) => {
 		if (option) {
-			setClass1(option);
+			setGeneration(Array.from(option));
 		}
 	};
 
 	const handleChange2 = (option: IOption | null) => {
 		if (option) {
-			setClass2(option);
+			setCategory(option);
 		}
 	};
 
 	return (
 		<Wrapper>
 			<Select
-				value={class1}
+				isMulti
+				value={generation}
 				onChange={handleChange}
 				options={options}
 				styles={customStyles}
 				components={{ DropdownIndicator }}
-				placeholder={'카테고리1'}
-			/>
-			<Select
-				value={class2}
-				onChange={handleChange2}
-				options={options2}
-				styles={customStyles}
-				components={{ DropdownIndicator }}
-				placeholder={'카테고리2'}
+				placeholder={'기수를 선택해주세요!'}
 			/>
 		</Wrapper>
 	);
@@ -100,12 +111,13 @@ const Dropdown: React.FC<PropsType> = ({ class1, setClass1, class2, setClass2 })
 export default Dropdown;
 
 const Wrapper = styled.div`
-	font-size: 1.5rem;
+	font-size: 2rem;
 	font-family: Pretendard;
 `;
 
 const BouncingArrow = styled.div`
 	padding: 2px;
+	font-size: 1.8rem;
 	color: blue;
 	animation: bounce 2s infinite;
 	@keyframes bounce {

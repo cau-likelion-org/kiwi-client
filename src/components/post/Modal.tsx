@@ -14,17 +14,18 @@ type ModalProps = {
 	md: string;
 	title: string;
 	closeModal: () => void;
-	class1: IOption | null;
-	setClass1: React.Dispatch<React.SetStateAction<IOption | null>>;
-	class2: IOption | null;
-	setClass2: React.Dispatch<React.SetStateAction<IOption | null>>;
+	generation: IOption[] | null;
+	setGeneration: React.Dispatch<React.SetStateAction<IOption[] | null>>;
+	category: IOption | null;
+	setCategory: React.Dispatch<React.SetStateAction<IOption | null>>;
 };
 
-const Modal = ({ closeModal, class1, setClass1, class2, setClass2, md, title }: ModalProps) => {
+const Modal = ({ closeModal, generation, setGeneration, category, setCategory, md, title }: ModalProps) => {
 	const handleSubmit = () => {
-		if (class1 && class2) {
-			console.log(class1.value);
-			console.log(class2.value);
+		if (generation) {
+			generation.map((item, index) => {
+				console.log(item.value);
+			});
 			console.log(title);
 			console.log(md);
 			closeModal();
@@ -54,7 +55,7 @@ const Modal = ({ closeModal, class1, setClass1, class2, setClass2, md, title }: 
 					</svg>
 				</X>
 				<Title>해당 문서의 카테고리를 선택하세요!</Title>
-				<Dropdown class1={class1} class2={class2} setClass1={setClass1} setClass2={setClass2} />
+				<Dropdown generation={generation} category={category} setGeneration={setGeneration} setCategory={setCategory} />
 				<Btn onClick={handleSubmit}>확인</Btn>
 				<Lions>
 					<StyledImage2 src="/img/lion.png" alt="파랑 사자" fill priority />

@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
 import Modal from './Modal';
+// import MDEditor from '@uiw/react-md-editor';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
 	ssr: false,
@@ -18,12 +19,11 @@ interface IOption {
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
 
 const Upload: React.FC = () => {
-	const inputRef = useRef<HTMLInputElement>(null);
 	const [modal, setModal] = useState(false);
 	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
-	const [class1, setClass1] = useState<IOption | null>(null);
-	const [class2, setClass2] = useState<IOption | null>(null);
+	const [generation, setGeneration] = useState<IOption[] | null>([]);
+	const [category, setCategory] = useState<IOption | null>(null);
 
 	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(event.target.value);
@@ -62,7 +62,7 @@ const Upload: React.FC = () => {
 			fileInput.accept = 'image/*';
 			fileInput.onchange = async () => {
 				if (!fileInput.files?.length) return;
-				const file = fileInput.files[0];
+				const [file] = Array.from(fileInput.files);
 				// const imageUrl = await uploadImageToServer(file); // 이미지를 서버에 업로드하고 URL을 반환받는 함수
 				const imageMarkdown = `![Uploaded image](${file})`;
 				api.replaceSelection(imageMarkdown);
@@ -95,10 +95,10 @@ const Upload: React.FC = () => {
 					md={md}
 					title={title}
 					closeModal={closeModal}
-					class1={class1}
-					class2={class2}
-					setClass1={setClass1}
-					setClass2={setClass2}
+					generation={generation}
+					category={category}
+					setGeneration={setGeneration}
+					setCategory={setCategory}
 				/>
 			)}
 		</>
@@ -131,6 +131,7 @@ const BtnWrapper = styled.div`
 	display: flex;
 	align-items: flex-end;
 	justify-content: end;
+	margin-top: 1rem;
 	padding: 1rem;
 	gap: 1rem;
 `;

@@ -5,10 +5,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import Upload from './MD';
 
-interface IOption {
-	value: string;
-	label: string;
-}
+
 
 const Post = () => {
 	return (
