@@ -10,6 +10,12 @@ interface IOption {
 	label: string;
 }
 
+const options: IOption[] = [
+	{ value: '9기', label: '9기' },
+	{ value: '10기', label: '10기' },
+	{ value: '11기', label: '11기' },
+];
+
 type ModalProps = {
 	md: string;
 	title: string;
@@ -53,7 +59,7 @@ const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps)
 					</svg>
 				</X>
 				<Title>해당 문서의 카테고리를 선택하세요!</Title>
-				<Dropdown generation={generation} setGeneration={setGeneration} />
+				<Dropdown options={options} generation={generation} setGeneration={setGeneration} />
 				<Btn onClick={handleSubmit}>확인</Btn>
 				<Lions>
 					<StyledImage2 src="/img/lion.png" alt="파랑 사자" fill priority />

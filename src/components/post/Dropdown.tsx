@@ -7,12 +7,6 @@ interface IOption {
 	label: string;
 }
 
-const options: IOption[] = [
-	{ value: '9기', label: '9기' },
-	{ value: '10기', label: '10기' },
-	{ value: '11기', label: '11기' },
-];
-
 const customStyles = {
 	menu: (provided: any, state: any) => ({
 		...provided,
@@ -81,11 +75,12 @@ const DropdownIndicator = (props: any) => {
 };
 
 interface PropsType {
+	options: IOption[];
 	generation: readonly IOption[] | null;
 	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
 }
 
-const Dropdown: React.FC<PropsType> = ({ generation, setGeneration }) => {
+const Dropdown: React.FC<PropsType> = ({ options, generation, setGeneration }) => {
 	const handleChange = (option: readonly IOption[] | null) => {
 		if (option) {
 			setGeneration(Array.from(option));
