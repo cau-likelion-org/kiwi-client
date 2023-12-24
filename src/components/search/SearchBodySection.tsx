@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchFound from './SearchFound';
@@ -39,11 +39,17 @@ interface ISearchResult {
 
 const SearchBodySection = () => {
 	const params = useSearchParams();
+	const router = useRouter();
 
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
 
 	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
 	const [searchInput, setSearchInput] = useState('');
+
+	const handleSubmitSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		router.push(`search/?search=${searchInput}`);
+	};
 
 	useEffect(() => {
 		const searchParams = params.get('search');
@@ -53,14 +59,23 @@ const SearchBodySection = () => {
 		}
 	}, [params]);
 
+	// useEffect(() => {
+	// 	// TODO: 검색결과 가져오는 API 요청
+	// 	getSearchResult().then((res) => {
+	// 		setSearchResult(res);
+	// 	})
+	// }, [])
+
 	return (
 		<SearchBodyWrapper>
 			<SearchBarWrapper>
-				<SearchBarInput
-					placeholder="검색어를 입력하세요..."
-					value={searchInput}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
-				/>
+				<form onSubmit={handleSubmitSearch}>
+					<SearchBarInput
+						placeholder="검색어를 입력하세요..."
+						value={searchInput}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
+					/>
+				</form>
 			</SearchBarWrapper>
 			<SearchResultWrapper>
 				{searchResult.length > 0 ? (

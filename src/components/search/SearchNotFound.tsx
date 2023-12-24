@@ -16,6 +16,8 @@ const NotFoundSearchText = styled.div`
 	display: flex;
 	justify-content: center;
 	color: red;
+	font-weight: bold;
+	font-size: 1.5rem;
 `;
 
 const BottomImageWrapper = styled.div`
