@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const SearchForm = ({ searchKeyword }: { searchKeyword: string }) => {
+const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: string }) => {
 	const router = useRouter();
 
 	const [searchInput, setSearchInput] = useState(searchKeyword);
@@ -22,10 +22,24 @@ const SearchForm = ({ searchKeyword }: { searchKeyword: string }) => {
 
 	return (
 		<form onSubmit={handleSearchSubmit}>
-			<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+			{type === 'search' ? (
+				<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+			) : (
+				<SearchHeaderInput placeholder="검색..." value={searchInput} onChange={handleSearchInput} />
+			)}
 		</form>
 	);
 };
+
+const SearchHeaderInput = styled.input`
+	width: 100%;
+	height: 100%;
+	margin-left: 12%;
+	font-size: 22px;
+	border-bottom: 2px solid black !important;
+	border: none;
+	outline: none;
+`;
 
 const SearchBarInput = styled.input`
 	background: url('/img/search_bar.svg');

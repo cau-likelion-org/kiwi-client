@@ -3,6 +3,7 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
+import SearchForm from '../search/SearchForm';
 
 const NavBar = () => {
 	return (
@@ -15,7 +16,7 @@ const NavBar = () => {
 					<ImageWrapper>
 						<Image src="/img/🔍.png" alt={'search'} width={25} height={25} />
 					</ImageWrapper>
-					<SearchInput placeholder="검색..." />
+					<SearchForm type="header" />
 				</SearchWrapper>
 				<ButtonWrapper>
 					<Image src="/img/random.png" alt={'random'} width={50} height={50} style={{ cursor: 'pointer' }} />
@@ -69,15 +70,6 @@ const SearchWrapper = styled.div`
 const ImageWrapper = styled.div`
 	position: absolute;
 	top: 15%;
-`;
-const SearchInput = styled.input`
-	width: 100%;
-	height: 100%;
-	margin-left: 12%;
-	font-size: 22px;
-	border-bottom: 2px solid black !important;
-	border: none;
-	outline: none;
 `;
 
 const ButtonWrapper = styled.div`

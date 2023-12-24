@@ -40,9 +40,7 @@ interface ISearchResult {
 
 const SearchBodySection = () => {
 	const params = useSearchParams();
-
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
-
 	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
 
 	useEffect(() => {
@@ -62,7 +60,7 @@ const SearchBodySection = () => {
 	return (
 		<SearchBodyWrapper>
 			<SearchBarWrapper>
-				<SearchForm searchKeyword={searchKeyword} />
+				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
 			<SearchResultWrapper>
 				{searchResult.length > 0 ? (
@@ -82,21 +80,6 @@ const SearchBodyWrapper = styled.div`
 `;
 
 const SearchBarWrapper = styled.div``;
-
-const SearchBarInput = styled.input`
-	background: url('/img/search_bar.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	border: none;
-	font-size: 24px;
-	padding: 10px;
-	padding-left: 30px;
-	width: 550px;
-	height: 50px;
-	&:focus {
-		outline: none;
-	}
-`;
 
 const SearchResultWrapper = styled.div`
 	margin-top: 50px;
