@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchFound from './SearchFound';
@@ -36,13 +37,21 @@ interface ISearchResult {
 	directory: string;
 }
 
-const SearchBodySection = ({ searchKeyword }: { searchKeyword: string }) => {
+const SearchBodySection = () => {
+	const params = useSearchParams();
+
+	const [searchKeyword, setSearchKeyword] = useState<string>('');
+
 	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
 	const [searchInput, setSearchInput] = useState('');
 
 	useEffect(() => {
-		// TODO: 검색키워드에 따라 검색 API 호출
-	}, []);
+		const searchParams = params.get('search');
+		if (typeof searchParams == 'string') {
+			setSearchKeyword(searchParams);
+			setSearchInput(searchParams);
+		}
+	}, [params]);
 
 	return (
 		<SearchBodyWrapper>
