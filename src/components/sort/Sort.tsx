@@ -9,11 +9,16 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 
 const Sort = () => {
+  const [sortContent, setSortContent] = useState('11기');
 
   const isClickedLink = ({link}: LinkProps) => {
     console.log(link);
     //여기에 링크로 이동하는 코드 작성
   };
+
+  const whatSort = () => {
+
+  }
 
   const [reverseLinks, setreverseLinks] = useState([
     {
@@ -59,7 +64,7 @@ const Sort = () => {
           </ViewerHeaderSection> 
           <ViewerBody>
             <ContentsHeader>
-              <Title>분류: {}</Title>
+              <Title>분류: {sortContent}</Title>
             </ContentsHeader>
             <ContentsBody>
                <Content>
