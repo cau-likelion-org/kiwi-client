@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import SearchForm from './SearchForm';
 import SearchFound from './SearchFound';
 import SearchNotFound from './SearchNotFound';
 
@@ -39,23 +40,15 @@ interface ISearchResult {
 
 const SearchBodySection = () => {
 	const params = useSearchParams();
-	const router = useRouter();
 
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
 
 	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
-	const [searchInput, setSearchInput] = useState('');
-
-	const handleSubmitSearch = (e: React.ChangeEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		router.push(`search/?search=${searchInput}`);
-	};
 
 	useEffect(() => {
 		const searchParams = params.get('search');
 		if (typeof searchParams == 'string') {
 			setSearchKeyword(searchParams);
-			setSearchInput(searchParams);
 		}
 	}, [params]);
 
@@ -69,13 +62,7 @@ const SearchBodySection = () => {
 	return (
 		<SearchBodyWrapper>
 			<SearchBarWrapper>
-				<form onSubmit={handleSubmitSearch}>
-					<SearchBarInput
-						placeholder="검색어를 입력하세요..."
-						value={searchInput}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
-					/>
-				</form>
+				<SearchForm searchKeyword={searchKeyword} />
 			</SearchBarWrapper>
 			<SearchResultWrapper>
 				{searchResult.length > 0 ? (

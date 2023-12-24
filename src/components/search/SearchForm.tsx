@@ -1,0 +1,45 @@
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+const SearchForm = ({ searchKeyword }: { searchKeyword: string }) => {
+	const router = useRouter();
+
+	const [searchInput, setSearchInput] = useState(searchKeyword);
+
+	const handleSearchSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		router.push(`search/?search=${searchInput}`);
+	};
+
+	const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchInput(e.target.value);
+	};
+
+	useEffect(() => {
+		setSearchInput(searchKeyword);
+	}, [searchKeyword]);
+
+	return (
+		<form onSubmit={handleSearchSubmit}>
+			<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+		</form>
+	);
+};
+
+const SearchBarInput = styled.input`
+	background: url('/img/search_bar.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: none;
+	font-size: 24px;
+	padding: 10px;
+	padding-left: 30px;
+	width: 550px;
+	height: 50px;
+	&:focus {
+		outline: none;
+	}
+`;
+
+export default SearchForm;
