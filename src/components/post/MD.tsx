@@ -80,6 +80,7 @@ const Upload: React.FC = () => {
 							value={md}
 							onChange={handleEditorChange}
 							height={500}
+							className="md-editor"
 						/>
 					</div>
 				</div>
@@ -95,6 +96,9 @@ export default Upload;
 
 const Wrapper = styled.div`
 	width: 98%;
+	.md-editor {
+		white-space: pre-line;
+	}
 `;
 
 const BtnWrapper = styled.div`
