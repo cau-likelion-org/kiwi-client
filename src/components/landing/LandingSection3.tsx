@@ -14,6 +14,16 @@ const LandingSection3 = () => {
 						<StyledImage src="/img/wikiGuide.png" alt={'랜딩'} fill priority></StyledImage>
 					</Title>
 					<Box>
+						<Content>
+							<TextWrapper>
+								<div>멋사 중대의 이야기를 저장하고 공유하는 공간으로,</div>
+								<div>운영진/아기사자 외에는 문서 작성 및 편집이 불가합니다. </div>
+							</TextWrapper>
+							<TextWrapper>
+								<div>욕설 및 음란성 내용을 포함하거나, </div>
+								<div>타인을 비난하는 내용 작성 시 제재당할 수 있습니다.🚨</div>
+							</TextWrapper>
+						</Content>
 						<StyledImage src="/img/guideSection.png" alt={'랜딩'} fill priority></StyledImage>
 					</Box>
 				</Wrapper>
@@ -34,7 +44,7 @@ export default LandingSection3;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 98vh;
+	height: 100vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -77,12 +87,16 @@ const Title = styled.div`
 		font-weight: bold;
 		line-height: normal;
 		letter-spacing: 0.3125rem;
+		@media screen and (min-width: 1024px) {
+			width: 60%;
+			font-size: 3rem;
+		}
 	}
 `;
 
 const Box = styled.div`
 	position: relative;
-	width: 70%;
+	width: 90%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -91,6 +105,11 @@ const Box = styled.div`
 	margin-left: 3rem;
 	gap: 1rem;
 	z-index: 1;
+	font-size: 2rem;
+	@media screen and (min-width: 1024px) {
+		width: 70%;
+		font-size: 3rem;
+	}
 `;
 
 const StyledImage = styled(Image)`
@@ -126,11 +145,21 @@ const Content = styled.div`
 	z-index: 2;
 	position: absolute;
 	margin-top: 4rem;
-	height: 70%;
+	height: 60%;
 	width: 90%;
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-direction: column;
-	gap: 3rem;
+	align-items: center;
+	justify-content: space-around;
+	flex-direction: column;
+	font-family: 'NeoDunggeunmo Pro';
+	margin-bottom: 1.5rem;
+`;
+
+const TextWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	letter-spacing: 0.3rem;
 `;

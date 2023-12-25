@@ -6,20 +6,29 @@ import styled from 'styled-components';
 
 interface EditList {
 	title: string;
+	date: string;
 }
 
 const dummy: EditList[] = [
 	{
 		title: '12기 회장',
+		date: '2023.12.24',
 	},
 	{
 		title: '옹졸한 이기웅',
+		date: '2023.12.24',
 	},
 	{
 		title: '하남자 민병록',
+		date: '2023.12.24',
 	},
 	{
 		title: '가식왕 양희철',
+		date: '2023.12.24',
+	},
+	{
+		title: '멋사뷔 이재욱',
+		date: '2023.12.24',
 	},
 ];
 
@@ -33,9 +42,12 @@ const LandingSection2 = () => {
 			<Box>
 				<Content>
 					{dummy.map((result, idx) => (
-						<div className="list" key={idx}>
-							{result.title}
-						</div>
+						<>
+							<div className="list" key={idx}>
+								<div>{result.title}</div>
+								<div>{result.date}</div>
+							</div>
+						</>
 					))}
 				</Content>
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
@@ -93,11 +105,14 @@ const Title = styled.div`
 		line-height: normal;
 		letter-spacing: 0.3125rem;
 	}
+	@media screen and (min-width: 1024px) {
+		top: 7rem;
+	}
 `;
 
 const Box = styled.div`
 	position: relative;
-	width: 44%;
+	width: 55%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -107,6 +122,11 @@ const Box = styled.div`
 	gap: 1rem;
 	bottom: 7rem;
 	z-index: 1;
+	@media screen and (min-width: 1024px) {
+		top: 2rem;
+		width: 44%;
+		font-size: 1.3rem;
+	}
 `;
 
 const Content = styled.div`
@@ -122,6 +142,8 @@ const Content = styled.div`
 	.list {
 		width: 100%;
 		height: fit-content;
+		display: flex;
+		justify-content: space-between;
 		font-size: 170%;
 		border-bottom: 1px solid black;
 		font-weight: 500;
@@ -166,11 +188,18 @@ const LionWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-	bottom: 20rem;
+	bottom: 12rem;
+	@media screen and (min-width: 1024px) {
+		bottom: 27rem;
+	}
 `;
 
 const Lions = styled.div`
 	display: flex;
 	width: fit-content;
 	height: 20rem;
+	@media screen and (min-width: 1024px) {
+		height: 30rem;
+		margin-top: 3rem;
+	}
 `;
