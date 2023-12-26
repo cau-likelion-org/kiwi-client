@@ -36,22 +36,23 @@ const SearchHeaderInput = styled.input`
 	width: 100%;
 	height: 100%;
 	margin-left: 12%;
-	font-size: 22px;
+	font-size: 2.2rem;
 	border-bottom: 2px solid black !important;
 	border: none;
 	outline: none;
 `;
 
 const SearchBarInput = styled.input`
-	background: url('/img/search_bar.svg');
+	background: url('/img/search_bar.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	border: none;
-	font-size: 24px;
+	font-size: 2rem;
+	font-family: Pretendard;
 	padding: 10px;
 	padding-left: 30px;
 	width: 550px;
-	height: 50px;
+	min-height: 53px;
 	&:focus {
 		outline: none;
 	}
