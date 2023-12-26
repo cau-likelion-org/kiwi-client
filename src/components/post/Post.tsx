@@ -5,14 +5,12 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import Upload from './MD';
 
-
-
 const Post = () => {
 	return (
 		<>
 			<Main>
 				<div className="heart">
-					<StyledImage src="/img/heart3group.png" alt="문서역사" fill priority />
+					<StyledImage src="/img/heart3Group.png" alt="문서역사" fill priority />
 				</div>
 				<Docs>
 					<TopWrapper>
