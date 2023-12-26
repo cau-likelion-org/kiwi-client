@@ -4,8 +4,10 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import SearchForm from '../search/SearchForm';
+import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
+	const router = useRouter();
 	return (
 		<Wrapper>
 			<LeftWrapper>
@@ -14,13 +16,23 @@ const NavBar = () => {
 			<RightWrapper>
 				<SearchWrapper>
 					<ImageWrapper>
-						<Image src="/img/🔍.png" alt={'search'} width={25} height={25} />
+						<Image src="/img/🔍.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
 					</ImageWrapper>
 					<SearchForm type="header" />
 				</SearchWrapper>
 				<ButtonWrapper>
-					<Image src="/img/random.png" alt={'random'} width={50} height={50} style={{ cursor: 'pointer' }} />
-					<Image src="/img/login.png" alt={'login'} width={50} height={50} style={{ cursor: 'pointer' }} />
+					<Image
+						onClick={() => {
+							router.push('/post');
+						}}
+						src="/img/newPost.png"
+						alt={'newPost'}
+						width={32}
+						height={40}
+						style={{ cursor: 'pointer' }}
+					/>
+					<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
+					<Image src="/img/login.png" alt={'login'} width={33} height={40} style={{ cursor: 'pointer' }} />
 				</ButtonWrapper>
 			</RightWrapper>
 		</Wrapper>
@@ -51,30 +63,30 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
 	display: flex;
-	width: 500px;
-	margin-right: 3%;
+	width: 60%;
+	margin-right: 1%;
 	justify-content: space-between;
 	align-items: center;
+	@media screen and (min-width: 1024px) {
+		width: 40%;
+	}
 `;
 
 const SearchWrapper = styled.div`
 	display: flex;
 	position: relative;
-	width: 250px;
-	margin-left: 10%;
-	/* margin-top: 3px; */
-	/* border-bottom: 2px solid black; */
-	padding: 5px;
+	width: 45%;
 `;
 
 const ImageWrapper = styled.div`
 	position: absolute;
 	top: 15%;
+	margin-right: 3rem;
 `;
 
 const ButtonWrapper = styled.div`
 	display: flex;
-	width: 150px;
+	width: 40%;
 	margin-top: 6px;
 	justify-content: space-between;
 	align-items: center;
