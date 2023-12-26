@@ -50,8 +50,14 @@ const DocHistory = () => {
 				<StyledImage src="/img/heart4group.png" alt="문서역사" fill priority />
 			</div>
 			<Docs>
-				<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
-				<Boder>
+				<ViewerHeaderSection>
+					<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
+					{/* <img src="/sketchBookHeader.png" alt="sketchbook" style={{width: "calc(100% - 15px)", height: "100px"}}/> */}
+					<HeaderShadow>
+						<div style={{ height: '50%', width: '100%' }}></div>
+						<div style={{ height: '50%', width: '100%', backgroundColor: 'black' }}></div>
+					</HeaderShadow>
+				</ViewerHeaderSection>
 				<ContentSection>
 					{sampleData.map((data, index) => (
 						<EditInfo key={index}>
@@ -88,8 +94,7 @@ const DocHistory = () => {
 						</Color>
 					</ColorChip>
 				</ContentSection>
-				</Boder>
-				<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
+				<div style={{ backgroundColor: 'black', width: '100%', height: '15px', marginLeft: '15px' }} />
 			</Docs>
 			<div className="lionwrap">
 				<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
@@ -140,22 +145,14 @@ const Docs = styled.div`
 	flex-direction: column;
 `;
 const ContentSection = styled.div`
+	background: white;
 	width: 100%;
-	min-height: 90vh;
+	margin: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	z-index: 1;
-	padding-bottom: 9rem;
-	margin-top: 50px;
-	background-color: white;
-	@media (max-width: 795px) {
-		margin-top: 30px;
-	}
-	@media (max-width: 494px) {
-		margin-top: 1.5rem;
-	}
+	border-right: 15px solid black;
 `;
 
 const EditInfo = styled.div`
@@ -258,6 +255,7 @@ const ColorChip = styled.div`
 	justify-content: flex-start;
 	flex-direction: column;
 	gap: 1rem;
+	margin-bottom: 5rem;
 `;
 
 const Color = styled.div`
@@ -285,15 +283,17 @@ const Color = styled.div`
 		background-color: #faa;
 	}
 `;
-const Boder = styled.div`
-	z-index: 3;
+
+const ViewerHeaderSection = styled.div`
 	position: relative;
-	border-right: 0.8rem black solid;
-	border-bottom:0.8rem black solid;
-	margin-top: -8%;
-	background-color: none;
-	@media (min-width: 1600px) {
-		margin-top: -7%;
-		width: 99.5%;
-	}
+	top: 10px;
+	width: calc(100% + 15px);
+	height: 100px;
+	display: flex;
+`;
+const HeaderShadow = styled.div`
+	width: 15px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 `;
