@@ -19,7 +19,7 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 			{searchResult.map((result) => (
 				<SearchResult key={result.id}>
 					<LionImageWrapper>
-						<Image src="/img/search_lion.svg" alt="" width={128} height={137} />
+						<StyledImage src="/img/search_lion.svg" alt="search_lion" fill priority />
 					</LionImageWrapper>
 					<SearchResultBox>
 						<SearchResultTitle>{result.title}</SearchResultTitle>
@@ -47,8 +47,16 @@ const SearchResult = styled.div`
 `;
 
 const LionImageWrapper = styled.div`
+	width: 128px;
+	height: 137px;
 	display: flex;
 	align-items: center;
+`;
+
+const StyledImage = styled(Image)`
+	position: relative !important;
+	height: unset !important;
+	object-fit: cover;
 `;
 
 const SearchResultBox = styled.div`

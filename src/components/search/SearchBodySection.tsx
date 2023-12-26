@@ -65,7 +65,9 @@ const SearchBodySection = () => {
 	return (
 		<>
 			<SearchBarWrapper>
-				<Image src="/img/search_text.png" alt="" width={300} height={40} />
+				<TextImageWrapper>
+					<StyledImage src="/img/search_text.png" alt="search_text" fill priority />
+				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
 			{searchResult.length > 0 ? (
@@ -82,6 +84,17 @@ const SearchBarWrapper = styled.div`
 	flex-direction: column;
 	gap: 20px;
 	margin-left: 18%;
+`;
+
+const TextImageWrapper = styled.div`
+	width: 300px;
+	height: 40px;
+`;
+
+const StyledImage = styled(Image)`
+	position: relative !important;
+	height: unset !important;
+	object-fit: cover;
 `;
 
 export default SearchBodySection;

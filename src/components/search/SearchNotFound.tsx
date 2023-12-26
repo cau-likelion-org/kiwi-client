@@ -6,7 +6,9 @@ const SearchNotFound = ({ searchKeyword }: { searchKeyword: string }) => {
 		<SearchNotFoundWrapper>
 			<NotFoundSearchText>해당 문서가 없습니다. 위키에 {searchKeyword} 문서를 만드세요!</NotFoundSearchText>
 			<BottomImageWrapper>
-				<Image src="/img/no_search_lion.svg" alt="" width={800} height={250}></Image>
+				<LionImageWrapper>
+					<StyledImage src="/img/no_search_lion.svg" alt="no_search_lion" fill priority />
+				</LionImageWrapper>
 			</BottomImageWrapper>
 		</SearchNotFoundWrapper>
 	);
@@ -27,6 +29,16 @@ const BottomImageWrapper = styled.div`
 	height: 54vh;
 	display: flex;
 	align-items: flex-end;
+`;
+
+const LionImageWrapper = styled.div`
+	width: 800px;
+`;
+
+const StyledImage = styled(Image)`
+	position: relative !important;
+	height: unset !important;
+	object-fit: cover;
 `;
 
 export default SearchNotFound;
