@@ -14,3 +14,9 @@ export interface ISearchDocs {
 		},
 	];
 }
+
+export interface CreateDocs {
+	title: string;
+	generation: string[];
+	contents: string;
+}

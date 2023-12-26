@@ -64,7 +64,7 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
 	position: relative;
-	width: 45%;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -72,6 +72,10 @@ const Title = styled.div`
 	height: max-content;
 	margin-left: 3rem;
 	z-index: 1;
+	@media screen and (min-width: 1024px) {
+		width: 35%;
+		font-size: 3rem;
+	}
 	.overlay {
 		z-index: 2;
 		position: absolute;
@@ -88,7 +92,7 @@ const Title = styled.div`
 		line-height: normal;
 		letter-spacing: 0.3125rem;
 		@media screen and (min-width: 1024px) {
-			width: 60%;
+			width: 50%;
 			font-size: 3rem;
 		}
 	}
@@ -107,8 +111,8 @@ const Box = styled.div`
 	z-index: 1;
 	font-size: 2rem;
 	@media screen and (min-width: 1024px) {
-		width: 70%;
-		font-size: 3rem;
+		width: 60%;
+		font-size: 2rem;
 	}
 `;
 
