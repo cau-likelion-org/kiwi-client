@@ -4,8 +4,10 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import SearchForm from '../search/SearchForm';
+import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
+	const router = useRouter();
 	return (
 		<Wrapper>
 			<LeftWrapper>
@@ -19,8 +21,17 @@ const NavBar = () => {
 					<SearchForm type="header" />
 				</SearchWrapper>
 				<ButtonWrapper>
-					<Image src="/img/newPost.png" alt={'newPost'} width={32} height={40} style={{ cursor: 'pointer' }} />
-					<Image src="/img/random.png" alt={'random'} width={40} height={40} style={{ cursor: 'pointer' }} />
+					<Image
+						onClick={() => {
+							router.push('/post');
+						}}
+						src="/img/newPost.png"
+						alt={'newPost'}
+						width={32}
+						height={40}
+						style={{ cursor: 'pointer' }}
+					/>
+					<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
 					<Image src="/img/login.png" alt={'login'} width={33} height={40} style={{ cursor: 'pointer' }} />
 				</ButtonWrapper>
 			</RightWrapper>
