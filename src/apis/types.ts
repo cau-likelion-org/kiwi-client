@@ -11,6 +11,6 @@ export interface ISearchDocs {
 			author: string;
 			generation: string[];
 			contents: string;
-		}[],
+		},
 	];
 }
