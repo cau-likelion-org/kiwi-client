@@ -107,6 +107,7 @@ const Title = styled.div`
 	}
 	@media screen and (min-width: 1024px) {
 		top: 7rem;
+		width: 25%;
 	}
 `;
 
@@ -124,7 +125,7 @@ const Box = styled.div`
 	z-index: 1;
 	@media screen and (min-width: 1024px) {
 		top: 2rem;
-		width: 44%;
+		width: 38%;
 		font-size: 1.3rem;
 	}
 `;
@@ -199,7 +200,7 @@ const Lions = styled.div`
 	width: fit-content;
 	height: 20rem;
 	@media screen and (min-width: 1024px) {
-		height: 30rem;
-		margin-top: 3rem;
+		height: 27rem;
+		margin-top: 10rem;
 	}
 `;
