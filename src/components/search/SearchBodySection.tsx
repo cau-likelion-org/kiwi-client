@@ -9,39 +9,40 @@ import SearchNotFound from './SearchNotFound';
 
 const dummyData: ISearchResult[] = [
 	{
-		id: 0,
-		category: '11기 해커톤',
-		content:
-			'Lorem ipsum dolor sit amet consectetur. Velit at nibh rutrum ultrices. Vestibulum magna nunc euismod diam. Nisl bibendum neque dignissim leo commodo elit volutpat. Dictum facilisi blandit tincidunt gravida ut tellus cursus tempor ipsum. Purus accumsan sagittis facilisis mauris cras dolor interdum. Tempor volutpat tellus nibh quisque mi commodo orci sed tincidunt',
-		directory: '11기 > 11기 행사 > 해커톤',
+		id: '20231223205359_홍보팀',
+		title: '홍보팀',
+		updated_at: '2023-12-23 20:53:59',
+		created_at: '2023-11-11 20:53:59',
+		author: '웅장한홍보팀장',
+		generation: ['12기'],
+		contents: '12기 홍보팀은 이기웅, 누구로 구성되어 있으며 ~',
 	},
 	{
-		id: 1,
-		category: '10기 해커톤',
-		content:
-			'Lorem ipsum dolor sit amet consectetur. Velit at nibh rutrum ultrices. Vestibulum magna nunc euismod diam. Nisl bibendum neque dignissim leo commodo elit volutpat. Dictum facilisi blandit tincidunt gravida ut tellus cursus tempor ipsum. Purus accumsan sagittis facilisis mauris cras dolor interdum. Tempor volutpat tellus nibh quisque mi commodo orci sed tincidunt',
-		directory: '10기 > 10기 행사 > 해커톤',
-	},
-	{
-		id: 2,
-		category: '9기 해커톤',
-		content:
-			'Lorem ipsum dolor sit amet consectetur. Velit at nibh rutrum ultrices. Vestibulum magna nunc euismod diam. Nisl bibendum neque dignissim leo commodo elit volutpat. Dictum facilisi blandit tincidunt gravida ut tellus cursus tempor ipsum. Purus accumsan sagittis facilisis mauris cras dolor interdum. Tempor volutpat tellus nibh quisque mi commodo orci sed tincidunt',
-		directory: '9기 > 9기 행사 > 해커톤',
+		id: '20231223205359_베베',
+		title: '베베',
+		updated_at: '2023-12-23 20:53:59',
+		created_at: '2023-11-11 20:53:59',
+		author: '웅장한홍보팀장',
+		generation: ['11기, 12기'],
+		contents:
+			'베베는 11기 해커톤 프로젝트로, 백엔드는 이기웅, 민병록 ~ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae ut nostrum ipsa dolorum deleniti at non, reprehenderit amet facere error, inventore reiciendis minima? Hic delectus ab aspernatur maxime. Numquam, adipisci! asdasd',
 	},
 ];
 
 interface ISearchResult {
-	id: number;
-	category: string;
-	content: string;
-	directory: string;
+	id: string;
+	title: string;
+	updated_at: string;
+	created_at: string;
+	author: string;
+	generation: string[];
+	contents: string;
 }
 
 const SearchBodySection = () => {
 	const params = useSearchParams();
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
-	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
+	const [searchResult, setSearchResult] = useState<ISearchResult[]>(dummyData);
 
 	useEffect(() => {
 		const searchParams = params.get('search');

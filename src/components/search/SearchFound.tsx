@@ -4,10 +4,13 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 interface ISearchResult {
-	id: number;
-	category: string;
-	content: string;
-	directory: string;
+	id: string;
+	title: string;
+	updated_at: string;
+	created_at: string;
+	author: string;
+	generation: string[];
+	contents: string;
 }
 
 const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
@@ -19,9 +22,9 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 						<Image src="/img/search_lion.svg" alt="" width={128} height={137} />
 					</LionImageWrapper>
 					<SearchResultBox>
-						<SearchResultCategory>{result.category}</SearchResultCategory>
-						<SearchResultContent>{result.content}</SearchResultContent>
-						<SearchResultDirectory>{result.directory}</SearchResultDirectory>
+						<SearchResultTitle>{result.title}</SearchResultTitle>
+						<SearchResultContent>{result.contents}</SearchResultContent>
+						<SearchResultDirectory>{result.generation.join(', ')}</SearchResultDirectory>
 					</SearchResultBox>
 				</SearchResult>
 			))}
@@ -52,7 +55,10 @@ const SearchResultBox = styled.div`
 	padding: 15px;
 `;
 
-const SearchResultCategory = styled.div``;
+const SearchResultTitle = styled.div`
+	font-size: 1.8rem;
+	font-weight: bold;
+`;
 
 const SearchResultContent = styled.div`
 	height: 9vh;
@@ -60,8 +66,12 @@ const SearchResultContent = styled.div`
 	line-height: 1.4;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	font-size: 1.4rem;
 `;
 
-const SearchResultDirectory = styled.div``;
+const SearchResultDirectory = styled.div`
+	font-size: 1.6rem;
+	font-weight: bold;
+`;
 
 export default SearchFound;

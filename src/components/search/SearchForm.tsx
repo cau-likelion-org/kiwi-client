@@ -22,9 +22,10 @@ const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: str
 
 	return (
 		<form onSubmit={handleSearchSubmit}>
-			{type === 'search' ? (
+			{type === 'search' && (
 				<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
-			) : (
+			)}
+			{type === 'header' && (
 				<SearchHeaderInput placeholder="검색..." value={searchInput} onChange={handleSearchInput} />
 			)}
 		</form>
