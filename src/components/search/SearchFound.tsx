@@ -1,46 +1,67 @@
+'use client';
+
 import Image from 'next/image';
 import styled from 'styled-components';
 
 interface ISearchResult {
-	id: number;
-	category: string;
-	content: string;
-	directory: string;
+	id: string;
+	title: string;
+	updated_at: string;
+	created_at: string;
+	author: string;
+	generation: string[];
+	contents: string;
 }
 
 const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 	return (
-		<>
+		<SearchFoundWrapper>
 			{searchResult.map((result) => (
 				<SearchResult key={result.id}>
 					<LionImageWrapper>
-						<Image src="/img/search_lion.svg" alt="" width={128} height={137} />
+						<StyledImage src="/img/search_lion.svg" alt="search_lion" fill priority />
 					</LionImageWrapper>
 					<SearchResultBox>
-						<SearchResultCategory>{result.category}</SearchResultCategory>
-						<SearchResultContent>{result.content}</SearchResultContent>
-						<SearchResultDirectory>{result.directory}</SearchResultDirectory>
+						<SearchResultTitle>{result.title}</SearchResultTitle>
+						<SearchResultContent>{result.contents}</SearchResultContent>
+						<SearchResultDirectory>{result.generation.join(', ')}</SearchResultDirectory>
 					</SearchResultBox>
 				</SearchResult>
 			))}
-		</>
+		</SearchFoundWrapper>
 	);
 };
 
+const SearchFoundWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 15px;
+`;
+
 const SearchResult = styled.div`
 	display: flex;
+	align-items: end;
 	gap: 20px;
 	margin: 30px;
 `;
 
 const LionImageWrapper = styled.div`
+	width: 128px;
+	height: 137px;
 	display: flex;
 	align-items: center;
 `;
 
+const StyledImage = styled(Image)`
+	position: relative !important;
+	height: unset !important;
+	object-fit: cover;
+`;
+
 const SearchResultBox = styled.div`
 	width: 50vw;
-	height: 15vh;
+	height: 18vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -50,7 +71,10 @@ const SearchResultBox = styled.div`
 	padding: 15px;
 `;
 
-const SearchResultCategory = styled.div``;
+const SearchResultTitle = styled.div`
+	font-size: 1.8rem;
+	font-weight: bold;
+`;
 
 const SearchResultContent = styled.div`
 	height: 9vh;
@@ -58,8 +82,12 @@ const SearchResultContent = styled.div`
 	line-height: 1.4;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	font-size: 1.4rem;
 `;
 
-const SearchResultDirectory = styled.div``;
+const SearchResultDirectory = styled.div`
+	font-size: 1.6rem;
+	font-weight: bold;
+`;
 
 export default SearchFound;
