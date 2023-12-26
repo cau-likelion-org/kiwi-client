@@ -32,16 +32,6 @@ const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: str
 	);
 };
 
-const SearchHeaderInput = styled.input`
-	width: 100%;
-	height: 100%;
-	margin-left: 12%;
-	font-size: 2.2rem;
-	border-bottom: 2px solid black !important;
-	border: none;
-	outline: none;
-`;
-
 const SearchBarInput = styled.input`
 	background: url('/img/search_bar.png');
 	background-repeat: no-repeat;
@@ -56,6 +46,16 @@ const SearchBarInput = styled.input`
 	&:focus {
 		outline: none;
 	}
+`;
+
+const SearchHeaderInput = styled.input`
+	width: 100%;
+	height: 100%;
+	margin-left: 12%;
+	font-size: 2.2rem;
+	border-bottom: 2px solid black !important;
+	border: none;
+	outline: none;
 `;
 
 export default SearchForm;

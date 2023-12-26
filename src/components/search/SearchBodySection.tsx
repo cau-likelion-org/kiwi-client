@@ -6,9 +6,7 @@ import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import SearchFound from './SearchFound';
 import SearchNotFound from './SearchNotFound';
-import { Rubik_Vinyl } from 'next/font/google';
-
-const rubik = Rubik_Vinyl({ weight: '400', subsets: ['latin'] });
+import Image from 'next/image';
 
 const dummyData: ISearchResult[] = [
 	{
@@ -45,7 +43,7 @@ interface ISearchResult {
 const SearchBodySection = () => {
 	const params = useSearchParams();
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
-	const [searchResult, setSearchResult] = useState<ISearchResult[]>(dummyData);
+	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
 
 	useEffect(() => {
 		const searchParams = params.get('search');
@@ -64,18 +62,14 @@ const SearchBodySection = () => {
 	return (
 		<>
 			<SearchBarWrapper>
-				<SearchingText className={rubik.className}>YOU SEARCHED FOR.....</SearchingText>
+				<Image src="/img/search_text.png" alt="" width={300} height={50} />
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
-			<SearchBodyWrapper>
-				<SearchResultWrapper>
-					{searchResult.length > 0 ? (
-						<SearchFound searchResult={searchResult} />
-					) : (
-						<SearchNotFound searchKeyword={searchKeyword} />
-					)}
-				</SearchResultWrapper>
-			</SearchBodyWrapper>
+			{searchResult.length > 0 ? (
+				<SearchFound searchResult={searchResult} />
+			) : (
+				<SearchNotFound searchKeyword={searchKeyword} />
+			)}
 		</>
 	);
 };
@@ -84,23 +78,7 @@ const SearchBarWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-left: 20%;
-`;
-
-const SearchBodyWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const SearchingText = styled.div`
-	color: white;
-	font-size: 5rem;
-	line-height: normal;
-`;
-
-const SearchResultWrapper = styled.div`
-	margin-top: 50px;
+	margin-left: 18%;
 `;
 
 export default SearchBodySection;

@@ -15,7 +15,7 @@ interface ISearchResult {
 
 const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 	return (
-		<>
+		<SearchFoundWrapper>
 			{searchResult.map((result) => (
 				<SearchResult key={result.id}>
 					<LionImageWrapper>
@@ -28,12 +28,20 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 					</SearchResultBox>
 				</SearchResult>
 			))}
-		</>
+		</SearchFoundWrapper>
 	);
 };
 
+const SearchFoundWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 15px;
+`;
+
 const SearchResult = styled.div`
 	display: flex;
+	align-items: end;
 	gap: 20px;
 	margin: 30px;
 `;
@@ -45,7 +53,7 @@ const LionImageWrapper = styled.div`
 
 const SearchResultBox = styled.div`
 	width: 50vw;
-	height: 15vh;
+	height: 18vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
