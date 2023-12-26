@@ -1,9 +1,9 @@
-import ReverseLink from '@/components/reverseLink/ReverseLink';
+import Sort from '@/components/sort/Sort';
 import React from 'react'
 
 const page = () => {
   return (
-    <ReverseLink/>
+    <Sort/>
   )
 }
 

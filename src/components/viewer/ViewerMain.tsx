@@ -4,14 +4,43 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
+interface LinkProps{
+  link?: string;
+}
+
 const ViewerMain = () => {
   const [openList, setOpenList] = useState(true);
+  const [depthOne, setDepthOne] = useState(true);
+
+  const isDepthOne = ()=>{
+    const depth = "2";
+    if(depth === "2")setDepthOne(false);
+    else setDepthOne(true);
+  }
 
   const isClickedArrow = () => {
     if(openList)setOpenList(false);
     else setOpenList(true);
     console.log(1);
   }
+
+  const isClickedLink = ({link}: LinkProps) => {
+    console.log(link);
+    //여기에 링크로 이동하는 코드 작성
+  };
+
+  const [sortLinks, setSortLinks] = useState([
+    {
+      id: 1,
+      title: '11기',
+      link:'',
+    },
+    {
+      id: 2,
+      title: '12기',
+      link:'asdf',
+    }
+  ])
 
   const [viewerContentsLists, setViewerContentsLists] = useState([
     {
@@ -55,7 +84,6 @@ const ViewerMain = () => {
         <Viewer>
           <ViewerHeaderSection> 
           <StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />  
-          {/* <img src="/sketchBookHeader.png" alt="sketchbook" style={{width: "calc(100% - 15px)", height: "100px"}}/> */}
           <HeaderShadow>
           <div style={{height: '50%', width: '100%'}}></div>
           <div style={{height: '50%', width: '100%',backgroundColor:"black"}}></div>
@@ -71,10 +99,31 @@ const ViewerMain = () => {
               </Links>
             </ContentsHeader>
             <ContentsBody>
+              {
+                !depthOne ?
+
+              <SortBox>
+                <div className="sortTitle">
+                  분류
+                </div>
+                <div className="line">|</div>
+                {sortLinks.map((sortLink, index)=>(
+                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink({link: sortLink.link})}> {sortLink.title}</div>
+                 ))}
+                <div className="sortContent"></div>
+              </SortBox>
+
+              :
+              null
+              }
               <ContentsLists>
                 <ListTitle>
                   <>목차</>
-                  <StyledImage src="/img/Polygon.png" alt="arrow" width={27} height={27} onClick={isClickedArrow}></StyledImage>
+                  {openList ?
+                    <StyledImage src="/img/Polygon.png" alt="arrow" width={27} height={27} onClick={isClickedArrow}></StyledImage>
+                    :
+                    <StyledImage src="/img/Polygon_up.png" alt="arrow" width={27} height={27} onClick={isClickedArrow}></StyledImage>
+                  }
                 </ListTitle>
                 {openList &&
                 <ListBox>
@@ -97,7 +146,12 @@ const ViewerMain = () => {
           <div style={{backgroundColor:"black", width: "100%", height:"15px",marginLeft:"15px"}}/>
         </Viewer>
         <div className="lionwrap">
-				<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
+        {
+          depthOne?
+          <StyledImage src="/img/cloud.png" alt="문서역사 하단" fill priority />
+          :
+          <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
+        }
 			</div>
     </Main>
     
@@ -282,3 +336,57 @@ const StyledImage = styled(Image)`
 	height: unset !important;
 	object-fit: cover;
 `;
+const SortBox = styled.div`
+width: 70rem;
+height: 4.5rem;
+flex-shrink: 0;
+border-radius: 0.625rem;
+border: 0.8px solid #000;
+margin-bottom: 2.5rem;
+
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0.5rem;
+@media (max-width: 980px) {
+  width: 40rem; // 원하는 값으로 수정
+}
+@media (max-width: 460px) {
+  width: 30rem; // 원하는 값으로 수정
+}
+
+.sortTitle{
+  color: #000;
+  text-align: center;
+  font-family: NeoDunggeunmo Pro;
+  font-size: 1.7rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0 2rem 0 2rem;
+}
+.line{
+  text-align: center;
+  color: #B1B1B1;
+  font-family: NeoDunggeunmo Pro;
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.sortContent{
+  color: #4C4DF5;
+  text-align: center;
+  font-family: NeoDunggeunmo Pro;
+  font-size: 1.7rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 2rem 0 2rem;
+  cursor: pointer;
+  &:hover{
+    border-bottom: 1.5px solid #0757F1;
+    border-color: #0757F1;
+  }
+}
+`
