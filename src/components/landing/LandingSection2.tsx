@@ -52,6 +52,16 @@ const LandingSection2 = () => {
 				</Content>
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
+			<ImageWrapper2>
+				<ShortCuts1>
+					<div className="overlay">{'10기 문서 바로가기'}</div>
+					<StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
+				</ShortCuts1>
+				<ShortCuts2>
+					<div className="overlay">{'11기 문서 바로가기'}</div>
+					<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
+				</ShortCuts2>
+			</ImageWrapper2>
 			<LionWrapper>
 				<Lions>
 					<StyledImage src="/img/landingblue.png" alt="파랑 사자" fill priority />
@@ -88,12 +98,12 @@ const Title = styled.div`
 	justify-content: center;
 	height: max-content;
 	margin-left: 3rem;
-	margin-bottom: 8rem;
+	margin-bottom: 4rem;
 	.overlay {
 		z-index: 1;
 		position: absolute;
 		height: 100%;
-		width: 90%;
+		width: 80%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -106,7 +116,7 @@ const Title = styled.div`
 		letter-spacing: 0.3125rem;
 	}
 	@media screen and (min-width: 1024px) {
-		top: 7rem;
+		top: 13rem;
 		width: 25%;
 	}
 `;
@@ -121,10 +131,10 @@ const Box = styled.div`
 	height: max-content;
 	margin-left: 3rem;
 	gap: 1rem;
-	bottom: 7rem;
+	bottom: 3rem;
 	z-index: 1;
 	@media screen and (min-width: 1024px) {
-		top: 2rem;
+		top: 10rem;
 		width: 38%;
 		font-size: 1.3rem;
 	}
@@ -171,16 +181,81 @@ const StyledImage3 = styled(Image)`
 `;
 
 const ImageWrapper2 = styled.div`
-	width: 25rem;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	width: 97%;
 	height: 15rem;
+	bottom: 17rem;
+	@media screen and (min-width: 1024px) {
+		width: 98%;
+		bottom: 23.5rem;
+	}
 `;
 
-const ShortCuts1 = styled.div``;
+const ShortCuts1 = styled.div`
+	width: 11rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	.overlay {
+		z-index: 1;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 1.5rem;
+		font-family: 'NeoDunggeunmo Pro';
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.4rem;
+		margin-bottom: 7px;
+		@media screen and (min-width: 1024px) {
+			width: 90%;
+			font-size: 1.7rem;
+			letter-spacing: 0rem;
+		}
+	}
+	@media screen and (min-width: 1024px) {
+		width: 12%;
+		font-size: 1.3rem;
+	}
+`;
 
 const ShortCuts2 = styled.div`
+	width: 11rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 	position: relative;
-	width: 15rem;
-	background-color: black;
+	.overlay {
+		z-index: 1;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 1.5rem;
+		font-family: 'NeoDunggeunmo Pro';
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.4rem;
+		@media screen and (min-width: 1024px) {
+			width: 90%;
+			font-size: 1.7rem;
+			letter-spacing: 0rem;
+		}
+	}
+	@media screen and (min-width: 1024px) {
+		width: 12%;
+		font-size: 1.3rem;
+	}
 `;
 
 const LionWrapper = styled.div`
@@ -189,9 +264,9 @@ const LionWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-	bottom: 12rem;
+	bottom: 15rem;
 	@media screen and (min-width: 1024px) {
-		bottom: 27rem;
+		bottom: 32rem;
 	}
 `;
 
