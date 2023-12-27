@@ -73,7 +73,7 @@ const Title = styled.div`
 	margin-left: 3rem;
 	z-index: 1;
 	@media screen and (min-width: 1024px) {
-		width: 35%;
+		width: 30%;
 		font-size: 3rem;
 	}
 	.overlay {
@@ -88,12 +88,12 @@ const Title = styled.div`
 		font-size: 200%;
 		font-family: NeoDunggeunmo Pro;
 		font-style: normal;
-		font-weight: bold;
+		font-weight: 600;
 		line-height: normal;
 		letter-spacing: 0.3125rem;
 		@media screen and (min-width: 1024px) {
 			width: 50%;
-			font-size: 3rem;
+			font-size: 2.5rem;
 		}
 	}
 `;
@@ -166,4 +166,9 @@ const TextWrapper = styled.div`
 	flex-direction: column;
 	text-align: center;
 	letter-spacing: 0.3rem;
+	font-weight: 500;
+	@media screen and (min-width: 1024px) {
+		letter-spacing: 0.4rem;
+		line-height: 115%;
+	}
 `;
