@@ -17,7 +17,6 @@ const sampleData = [
 		change:
 			'<added>사당역 13번 출구 앞</added> 스타벅스에서 아아 마시는 중',
 	},
-
 ];
 const DocHistory = () => {
 	const renderOldStr = (change: any) => {
