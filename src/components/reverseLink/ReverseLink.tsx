@@ -46,7 +46,7 @@ const ReverseLink = () => {
   return (
     <Main>
 				<div className="heart">
-				<StyledImage src="/img/heart4group.png" alt="문서역사" fill priority />
+				<StyledImage src="/img/heart4Group.png" alt="문서역사" fill priority />
 			  </div>
         <Viewer>
           <ViewerHeaderSection> 
