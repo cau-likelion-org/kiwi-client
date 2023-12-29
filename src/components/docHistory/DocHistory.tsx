@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { VscTriangleDown } from 'react-icons/vsc';
+import { getDocHistories } from '@/apis/history';
+import { useSearchParams } from 'next/navigation';
 
 const sampleData = [
 	{
@@ -14,11 +16,24 @@ const sampleData = [
 	{
 		user: '머싸머싸',
 		date: '2023.11.25 토요일 5:57',
-		change:
-			'<added>사당역 13번 출구 앞</added> 스타벅스에서 아아 마시는 중',
+		change: '<modified_from> 11기 </modified_from> <modified_to> 12기 </modified_to> 정준하 백엔드 <modified_from> 아기사자 </modified_from> <modified_to> 운영진 </modified_to>',
 	},
 ];
 const DocHistory = () => {
+	const params = useSearchParams();
+	const title = params.get('title');
+	const [dataList, setDataList] = useState();
+
+	useEffect(() => {
+		const getHistory = async () => {
+			if(title){
+				const result = await getDocHistories(title);
+				console.log(title);
+			}
+		};
+		getHistory();
+	}, [title]);
+
 	const renderOldStr = (change: any) => {
 		var oldStr = change.replace(
 			/<modified_to>(.*?)<\/modified_to>|<added>(.*?)<\/added>/g,
