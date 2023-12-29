@@ -21,7 +21,7 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 						닉네임은 최초 1회 설정 후 <br />
 						변경이 불가능합니다. <br />
 						<br />
-						정말 {props.nickname}
+						정말 {`{${props.nickname}}`}
 						{`(으)`}로 하시겠습니까?
 					</Content>
 				)}

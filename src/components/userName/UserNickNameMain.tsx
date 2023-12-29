@@ -3,28 +3,43 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ConfirmModal from './ConfirmModal';
-import { getRandomNickname } from '@/apis/login';
+import { checkNickName, getRandomNickname } from '@/apis/login';
 
 const UserNickNameMain = () => {
 	const [userNickname, setUserNickname] = useState('어쩔사자티비');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [isAvailable, setIsAvailable] = useState(true);
 
-	const handleModal = () => {
-		if (modalIsOpen) {
-			setModalIsOpen(false);
-		} else {
-			setModalIsOpen(true);
+	const handleModal = async () => {
+		try {
+			const result = await checkNickName(userNickname);
+			if(!userNickname){
+				alert('닉네임을 입력해주세요')
+				return false;
+			}
+			if (result.status === '200') {
+				if (modalIsOpen) {
+					setModalIsOpen(false);
+				} else {
+					setModalIsOpen(true);
+				}
+			} else {
+				setIsAvailable(false);
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
 	const handleRandomBtn = async () => {
 		try {
 			const response = await getRandomNickname();
-			setUserNickname(response.data.name)
+			setUserNickname(response.data.name);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	return (
 		<Main>
 			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname} />}
@@ -50,9 +65,12 @@ const UserNickNameMain = () => {
 									className="input"
 									type="text"
 									name="user"
-									placeholder="ex) arti_fashion_design"
+									placeholder="닉네임을 써주세요"
 									value={userNickname}
-									onChange={(e) => setUserNickname(e.target.value)}
+									onChange={(e) => {
+										setUserNickname(e.target.value);
+										setIsAvailable(true);
+									}}
 								></input>
 								<div className="shufflebtn">
 									<StyledImage
@@ -64,6 +82,7 @@ const UserNickNameMain = () => {
 									/>
 								</div>
 							</div>
+							{isAvailable === false ? <div className="checkText">이미 사용 중인 닉네임 입니다</div> : <div className="checkText"></div>}
 						</div>
 					</div>
 					<SubmitBtn onClick={handleModal}>다음</SubmitBtn>
@@ -165,10 +184,13 @@ const Content = styled.div`
 		min-width: 11rem;
 	}
 	.right {
-		width: 45%;
+		width: 49%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	.top {
-		width: 100%;
+		width: 90%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -176,7 +198,7 @@ const Content = styled.div`
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
 	}
 	.barimg {
 		width: 60%;
@@ -206,6 +228,7 @@ const Content = styled.div`
 		font-weight: 400;
 		line-height: normal;
 		padding: 0rem 1rem;
+		text-align: center;
 	}
 	.shufflebtn {
 		min-width: 3.7rem;
@@ -214,6 +237,14 @@ const Content = styled.div`
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
+	}
+	.checkText {
+		width: 80%;
+		color: #ff4e4e;
+		min-height : 1.5rem;
+		margin-top: 0.5rem;
+		font-size: 1rem;
+		text-align: center;
 	}
 `;
 

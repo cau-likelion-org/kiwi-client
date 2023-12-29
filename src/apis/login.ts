@@ -65,10 +65,9 @@ export const getRandomNickname = async () => {
 // 닉네임 중복여부 확인
 export const checkNickName = async (name: string) => {
 	var resultString = name.replace(/\s+/g, '+');
-
 	try {
-		const response = await axios.get(`${baseURL}users/check-name/?name=${resultString}/`);
-		return response;
+		const response = await axios.get(`${baseURL}users/check-name/?name=${resultString}`);
+		return response.data;
 	} catch (error) {
 		// 사용할 수 없는 닉네임
 		console.log(error);
