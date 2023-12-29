@@ -7,6 +7,7 @@ import { ICommand, commands } from '@uiw/react-md-editor';
 import Modal from './Modal';
 import MDEditor from '@uiw/react-md-editor';
 import { IOption } from '@/types/request';
+import { uploadImageToServer } from '@/apis/docs';
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
 
@@ -57,7 +58,7 @@ const Upload: React.FC = () => {
 			fileInput.onchange = async () => {
 				if (!fileInput.files?.length) return;
 				const [file] = Array.from(fileInput.files);
-				// const imageUrl = await uploadImageToServer(file); // 이미지를 서버에 업로드하고 URL을 반환받는 함수
+				const imageUrl = await uploadImageToServer(file); // 이미지를 서버에 업로드하고 URL을 반환받는 함수
 				const imageMarkdown = `![Uploaded image](${file})`;
 				api.replaceSelection(imageMarkdown);
 			};
