@@ -51,7 +51,7 @@ const ReverseLink = () => {
           </ViewerHeaderSection> 
           <ViewerBody>
             <ContentsHeader>
-              <Title>{"{제목}"}  문서를 가리키는 문서</Title>
+              <Title>{`{${docTitle}} 문서를 가리키는 문서`}</Title>
             </ContentsHeader>
             <ContentsBody>
                <Content>
