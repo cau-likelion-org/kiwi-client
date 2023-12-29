@@ -3,21 +3,31 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ConfirmModal from './ConfirmModal';
+import { getRandomNickname } from '@/apis/login';
 
 const UserNickNameMain = () => {
 	const [userNickname, setUserNickname] = useState('어쩔사자티비');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const handleModal = ()=>{
-        if(modalIsOpen){
-            setModalIsOpen(false)
-        }else{
-            setModalIsOpen(true)
-        }
-    }
+	const handleModal = () => {
+		if (modalIsOpen) {
+			setModalIsOpen(false);
+		} else {
+			setModalIsOpen(true);
+		}
+	};
+
+	const handleRandomBtn = async () => {
+		try {
+			const response = await getRandomNickname();
+			setUserNickname(response.data.name)
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<Main>
-			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname}/>}
+			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname} />}
 			<Title>
 				<div className="overlay">{'STEP 01 >> 닉네임 설정'}</div>
 				<StyledImage src="/img/nicknametitle.png" alt="닉네임 박스 이미지" fill priority />
@@ -45,7 +55,13 @@ const UserNickNameMain = () => {
 									onChange={(e) => setUserNickname(e.target.value)}
 								></input>
 								<div className="shufflebtn">
-									<StyledImage src="/img/shufflelogo.png" alt="닉네임 박스 이미지" fill priority />
+									<StyledImage
+										onClick={handleRandomBtn}
+										src="/img/shufflelogo.png"
+										alt="닉네임 박스 이미지"
+										fill
+										priority
+									/>
 								</div>
 							</div>
 						</div>
@@ -85,14 +101,6 @@ const Main = styled.div`
 		gap: 3rem;
 		bottom: 0;
 	}
-	/* background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
-		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
-	background-size:
-		100px 100px,
-		100px 100px;
-	background-position:
-		-2px -2px,
-		-2px -2px; */
 `;
 
 const Title = styled.div`
@@ -137,7 +145,7 @@ const Content = styled.div`
 	position: absolute;
 	margin-top: 4rem;
 	height: 70%;
-	width: 90%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -157,7 +165,7 @@ const Content = styled.div`
 		min-width: 11rem;
 	}
 	.right {
-		width: 40%;
+		width: 45%;
 	}
 	.top {
 		width: 100%;

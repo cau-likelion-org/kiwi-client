@@ -26,10 +26,10 @@ const GoogleLogin = () => {
 		const login = async () => {
 			try {
 			  await postCode(body);
-			  route.push('/');
+			//   route.push('/');
 			} catch (error) {
 			  console.error('Error in postCode:', error);
-			  route.push('/');
+			//   route.push('/');
 			}
 		  };
 		
