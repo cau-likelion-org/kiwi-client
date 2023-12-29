@@ -18,6 +18,12 @@ export const userEmailAtom = atom({
 	effects_UNSTABLE: [persistAtom],
 });
 
+export const userNameAtom = atom({
+	key: 'userName',
+	default: '',
+	effects_UNSTABLE: [persistAtom],
+});
+
 export default function RecoidContextProvider({ children }: { children: React.ReactNode }) {
 	return <RecoilRoot>{children}</RecoilRoot>;
 }

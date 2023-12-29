@@ -6,17 +6,21 @@ const baseURL = `http://llwiki.p-e.kr:8000/`;
 export const postCode = async (body: postCodeBody) => {
 	try {
 		const response = await axios.post(`${baseURL}users/google/callback/`, body);
-		const accessToken = response.data.accessToken;
-		const refreshToken = response.data.refreshToken;
+		// console.log(response.data);
+		// 가입된 사용자
+		if (response.data.status === '200') {
+			const accessToken = response.data.data.token.access_token;
+			const refreshToken = response.data.data.token.refresh_token;
 
-		localStorage.setItem('access', accessToken);
-		localStorage.setItem('refresh', refreshToken);
+			localStorage.setItem('access', accessToken);
+			localStorage.setItem('refresh', refreshToken);
+		} 
+		return response.data;
 	} catch (error) {
 		console.error('에러 발생', error);
 		throw error;
 	}
 };
-
 
 // 토큰 재발급
 // export const getNewRefreshToken = async () => {
@@ -41,10 +45,17 @@ export const postCode = async (body: postCodeBody) => {
 
 // 회원가입
 export const signUp = async (emailInput: string, nameInput: string) => {
-    // 구글 로그인 후 context에 이메일 저장하고 있음
+	// 구글 로그인 후 context에 이메일 저장하고 있음
 	try {
 		const response = await axios.post(`${baseURL}users/signup/`, { email: emailInput, name: nameInput });
-		return response;
+		if (response.data.status === '201') {
+			const accessToken = response.data.data.token.access_token;
+			const refreshToken = response.data.data.token.refresh_token;
+
+			localStorage.setItem('access', accessToken);
+			localStorage.setItem('refresh', refreshToken);
+		} 
+		return response.data;
 	} catch (error) {
 		console.log(error);
 		return false;

@@ -1,10 +1,41 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { signUp } from '@/apis/login';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isLoginAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { useRouter } from 'next/navigation';
 
 const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>; nickname: string }) => {
+	const route = useRouter();
 	const totalHeight = document.documentElement.scrollHeight;
+	const userEmail = useRecoilValue(userEmailAtom);
 	const [userConfirm, setUserConfirm] = useState(false);
+	const setIsLogin = useSetRecoilState(isLoginAtom);
+	const setUserEmail = useSetRecoilState(userEmailAtom);
+	const setUserName = useSetRecoilState(userNameAtom);
+
+	const handleConfirm = async () => {
+		setUserConfirm(true);
+		try {
+			const result = await signUp(userEmail, props.nickname);
+			console.log(result);
+			setIsLogin(true);
+			setUserEmail(result.data.email);
+			setUserName(result.data.name);
+		} catch (error) {
+			console.log('error');
+			alert('회원가입 과정에서 에러가 발생했습니다. 다시 시도해 주세요.');
+			setTimeout(() => {
+				route.push('/login');
+			}, 1000);
+			return false;
+		}
+	};
+
+	const handleStart = () => {
+		route.push('/');
+	};
 
 	return (
 		<ModalSection height={totalHeight}>
@@ -27,16 +58,16 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 				)}
 				{userConfirm ? (
 					<ButtonWrapper>
-						<ButtonStyle onClick={() => props.setModalIsOpen(false)} isRightButton={false}>
+						<ButtonStyle onClick={handleStart} $isRightButton={false}>
 							시작하기
 						</ButtonStyle>
 					</ButtonWrapper>
 				) : (
 					<ButtonWrapper>
-						<ButtonStyle onClick={() => setUserConfirm(true)} isRightButton={false}>
+						<ButtonStyle onClick={handleConfirm} $isRightButton={false}>
 							예
 						</ButtonStyle>
-						<ButtonStyle onClick={() => props.setModalIsOpen(false)} isRightButton={true}>
+						<ButtonStyle onClick={() => props.setModalIsOpen(false)} $isRightButton={true}>
 							아니오
 						</ButtonStyle>
 					</ButtonWrapper>
@@ -109,7 +140,7 @@ const Content = styled.div`
 	line-height: 3rem;
 `;
 
-const ButtonStyle = styled.div<{ isRightButton: boolean }>`
+const ButtonStyle = styled.div<{ $isRightButton: boolean }>`
 	display: flex;
 	text-align: center;
 	justify-content: center;
@@ -117,7 +148,7 @@ const ButtonStyle = styled.div<{ isRightButton: boolean }>`
 	background: #b1ebff;
 	min-width: 5rem;
 	padding: 1.4rem 1rem;
-  cursor: pointer;
+	cursor: pointer;
 `;
 
 const StyledImage = styled(Image)`

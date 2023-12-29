@@ -1,18 +1,19 @@
 'use client';
-
 import { postCode } from '@/apis/login';
-import { isLoginAtom } from '@/app/recoilContextProvider';
+import { isLoginAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { postCodeBody } from '@/types/request';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
+import Loading from '../common/Loading';
 
 const GoogleLogin = () => {
-    const route = useRouter();
+	const route = useRouter();
 	const setIsLogin = useSetRecoilState(isLoginAtom);
+	const setUserEmail = useSetRecoilState(userEmailAtom);
+	const setUserName = useSetRecoilState(userNameAtom);
 
-	let code = null;
+	let code: string | null = null;
 
 	if (typeof window !== 'undefined') {
 		code = new URL(window.location.href).searchParams.get('code');
@@ -24,35 +25,36 @@ const GoogleLogin = () => {
 
 	useEffect(() => {
 		const login = async () => {
-			try {
-			  await postCode(body);
-			//   route.push('/');
-			} catch (error) {
-			  console.error('Error in postCode:', error);
-			//   route.push('/');
+			if (code !== null) {
+				const result = await postCode(body);
+				// 로그인 성공
+				if(result.status==='200'){
+					setIsLogin(true);
+					setUserEmail(result.data.email);
+					setUserName(result.data.name);
+					setTimeout(() => {
+						route.push('/');
+					}, 1000);
+				} else if(result.status==='202'){
+					// 회원가입 필요
+					setUserEmail(result.data.email);
+					setTimeout(() => {
+						route.push('/signup');
+					}, 1000);
+				}else{
+					// 로그인 과정 중에 문제 발생
+					alert('로그인 과정에서 문제가 발생했습니다. 다시 시도해주세요.')
+					setTimeout(() => {
+						route.push('/');
+					}, 1000);
+				}
+				
 			}
-		  };
-		
-		  login();
+		};
+		login();
 	}, []);
 
-	return (
-		<Container>
-			<FontSize>로그인이 완료되었습니다.</FontSize>
-		</Container>
-	);
-}
+	return <Loading />;
+};
 
-export default GoogleLogin
-
-const Container = styled.div`
-	height: 98vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-`;
-const FontSize = styled.div`
-	font-size: 24px;
-	font-weight: 700;
-`;
+export default GoogleLogin;
