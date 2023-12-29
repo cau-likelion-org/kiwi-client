@@ -1,48 +1,68 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { VscTriangleDown } from 'react-icons/vsc';
+import { getDocHistories } from '@/apis/history';
+import { useSearchParams } from 'next/navigation';
 
 const sampleData = [
 	{
 		user: '떠나요제주도🌴',
 		date: '2023.12.01 금요일 2:57',
-		original:
-			'어쩌구저쩌구야호야호김수한무 거북이와 두루미 삼천갑자 동방삭 <delete>치치카포 사리사리센타 워리워리 세브리깡</delete> 무두셀라 구름이 허리케인에 담벼락 담벼락에 서생원 서생원에 고양이 고양이엔 바둑이 바둑이는 돌돌이 ',
-		modify:
-			'어쩌구저쩌구야호야호김수한무 거북이와 두루미 삼천갑자 동방삭 <modify>칙칙폭폭 킹몰랑 돈워리 새우깡은 역시 매운 새우깡</modify> 무두셀라 구름이 허리케인에 담벼락 담벼락에 서생원 서생원에 고양이 고양이엔 바둑이 바둑이는 돌돌이 ',
+		change:
+			'I like cats. I like <modified_from> dogs and apple fruit pies. </modified_from> <modified_to> kiwis. bye! Hello </modified_to> Mutsa <deleted> is the best </deleted>',
 	},
 	{
-		user: 'zㅣ존몰랑',
-		date: '2023.11.25 토요일 2:57',
-		original:
-			'11기의 프론트엔드<delete> 아기사자이자 </delete>테트리스 고수로 활동 중이며, 백은비(디자인)에게 테트리스 3연승의 영광을 가지고 있다. 민트초코와 파인애플피자를 좋아하며 최근에는 로제마라샹궈를 선호한다. 오전 2시인데 삘받아서 열심히 개발하고 잇는중이다 ㅇㅅㅇ.. 최근에 열심히 캐롤을 듣고있다. </br>We wish you a merry Christmas We wish you a <delete>merry Christmas</delete> We wish you a merry Christmas And a happy new year Glad tidings we bring To you and your kin Glad tidings for Christmas And a happy New Year',
-		modify:
-			'11기의 프론트엔드이자 <modify>12기의 운영진이되어따..</modify> 테트리스 고수로 활동 중이며, 백은비(디자인)에게 테트리스 3연승의 영광을 가지고 있다. 민트초코와 파인애플피자를 좋아하며 최근에는 로제마라샹궈를 선호한다. 오전 2시인데 삘받아서 열심히 개발하고 잇는중이다 ㅇㅅㅇ.. 최근에 열심히 캐롤을 듣고있다. </br>We wish you a merry Christmas We wish you a <modify>메리 크리스마수🎄</modify> We wish you a merry Christmas And a happy new year Glad tidings we bring To you and your kin Glad tidings for Christmas And a happy New Year',
-	},
-	{
-		user: '야생의 라이언',
-		date: '2023.09.11 화요일 13:57',
-		original:
-			'중커톤 <delete>탕후루후루후루후루</delete>는 너무 귀엽고 맛있게 생겻다 다들 많관부 해줘잉~~내 최애 탕후루는 <delete>방울토마토</delete>',
-		modify:
-			'중커톤 <modify>학교 앞 탕후루</modify>는 너무 귀엽고 맛있게 생겻다 다들 많관부 해줘잉~~내 최애 탕후루는 <modify>통귤!</modify>',
+		user: '머싸머싸',
+		date: '2023.11.25 토요일 5:57',
+		change: '<modified_from> 11기 </modified_from> <modified_to> 12기 </modified_to> 정준하 백엔드 <modified_from> 아기사자 </modified_from> <modified_to> 운영진 </modified_to>',
 	},
 ];
 const DocHistory = () => {
-	const renderContent = (content: any) => {
-		// <delete> 태그를 <Span className='delete'>으로 변환
-		const deletedContent = content.replace(/<delete>(.*?)<\/delete>/g, (match: any, p1: any) => {
-			return `<span className='delete'>${p1}</span>`;
-		});
+	const params = useSearchParams();
+	const title = params.get('title');
+	const [dataList, setDataList] = useState();
 
-		// <modify> 태그를 <Span className='modify'>으로 변환
-		const modifiedContent = deletedContent.replace(/<modify>(.*?)<\/modify>/g, (match: any, p1: any) => {
-			return `<span className='modify'>${p1}</span>`;
-		});
+	useEffect(() => {
+		const getHistory = async () => {
+			if(title){
+				const result = await getDocHistories(title);
+				console.log(title);
+			}
+		};
+		getHistory();
+	}, [title]);
 
-		return { __html: modifiedContent };
+	const renderOldStr = (change: any) => {
+		var oldStr = change.replace(
+			/<modified_to>(.*?)<\/modified_to>|<added>(.*?)<\/added>/g,
+			function ([match, p1, p2]: any) {
+				return p1 ? ' ' : p2 ? ' ' : '';
+			},
+		);
+
+		oldStr = oldStr.replace(/<deleted>/g, ' ' + "<span class='delete'>");
+		oldStr = oldStr.replace(/<\/deleted>/g, '</span>');
+		oldStr = oldStr.replace(/<modified_from>/g, ' ' + "<span class='from'>");
+		oldStr = oldStr.replace(/<\/modified_from>/g, '</span>');
+
+		return { __html: oldStr };
+	};
+	const renderNewStr = (change: any) => {
+		var newStr = change.replace(
+			/<modified_from>(.*?)<\/modified_from>|<deleted>(.*?)<\/deleted>/g,
+			function ([match, p1, p2]: any) {
+				return p1 ? ' ' : p2 ? ' ' : '';
+			},
+		);
+
+		newStr = newStr.replace(/<added>/g, ' ' + "<span class='add'>");
+		newStr = newStr.replace(/<\/added>/g, '</span>');
+		newStr = newStr.replace(/<modified_to>/g, ' ' + "<span class='to'>");
+		newStr = newStr.replace(/<\/modified_to>/g, '</span>');
+
+		return { __html: newStr };
 	};
 	return (
 		<Main>
@@ -71,11 +91,11 @@ const DocHistory = () => {
 							</div>
 							<div className="date">{data.date}</div>
 							<OriginalContent>
-								<div dangerouslySetInnerHTML={renderContent(data.original)} />
+								<div dangerouslySetInnerHTML={renderOldStr(data.change)} />
 							</OriginalContent>
 							<VscTriangleDown size="4rem" color="rgba(76, 77, 245, 0.8)" />
 							<ModifyContent>
-								<div dangerouslySetInnerHTML={renderContent(data.modify)} />
+								<div dangerouslySetInnerHTML={renderNewStr(data.change)} />
 							</ModifyContent>
 						</EditInfo>
 					))}
@@ -221,7 +241,10 @@ const OriginalContent = styled.div`
 	div {
 		padding: 2rem;
 	}
-	span {
+	.from {
+		background-color: #ff7;
+	}
+	.delete {
 		background-color: #faa;
 	}
 `;
@@ -237,7 +260,10 @@ const ModifyContent = styled.div`
 	div {
 		padding: 2rem;
 	}
-	span {
+	.to {
+		background-color: #ff7;
+	}
+	.add {
 		background-color: #afa;
 	}
 `;
