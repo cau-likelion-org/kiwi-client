@@ -1,9 +1,9 @@
-import ReverseLink from '@/components/reverseLink/ReverseLink';
+import BackLink from '@/components/backLink/BackLink';
 import React from 'react'
 
 const page = () => {
   return (
-    <ReverseLink/>
+    <BackLink/>
   )
 }
 

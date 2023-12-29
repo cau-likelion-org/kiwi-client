@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
-const ReverseLink = () => {
+const BackLink = () => {
   const router = useRouter();
   const {docTitle} = router.query;
 
@@ -72,7 +72,7 @@ const ReverseLink = () => {
   )
 }
 
-export default ReverseLink;
+export default BackLink;
 
 const Main = styled.div`
 height: fit-content;
