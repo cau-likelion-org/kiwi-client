@@ -1,11 +1,20 @@
 'use client';
 
+import { useEffect } from 'react';
 import LandingSection1 from './LandingSection1';
 import LandingSection2 from './LandingSection2';
 import LandingSection3 from './LandingSection3';
 import { styled } from 'styled-components';
+import { getRecentDocs } from '@/apis/docs';
 
 const Landing = () => {
+	useEffect(() => {
+		const getDocs = async () => {
+			const result = await getRecentDocs();
+		};
+		getDocs();
+	});
+
 	return (
 		<ScrollContainer>
 			<Section1>
