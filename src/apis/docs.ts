@@ -21,15 +21,26 @@ export const newDocs = async (body: CreateDocs) => {
 	return result.data;
 };
 
-export const uploadImageToServer = async (image: File) => {
+// export const uploadImageToServer = async (image: string) => {
+// 	let formData = new FormData();
+// 	formData.append('key', 'image');
+// 	formData.append('image', image);
+// 	const result = await axios.post(`${baseURL}/docs/image/`, formData);
+// 	return result;
+// };
+
+async function urlToBlob(url: string) {
+	const response = await fetch(url);
+	const blob = await response.blob();
+	return blob;
+}
+
+export const uploadImageToServer = async (blobUrl: string) => {
 	let formData = new FormData();
-	formData.append('image', image);
-	const result = await axios.post(`${baseURL}/docs/image`, formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-	});
-	return result.data;
+	formData.append('key', 'image');
+	formData.append('value', blobUrl);
+	const result = await axios.post(`${baseURL}/docs/image/`, formData);
+	return result;
 };
 
 export const getRecentDocs = async () => {
