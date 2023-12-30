@@ -44,7 +44,7 @@ export default LandingSection3;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: 80vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -124,6 +124,7 @@ const StyledImage = styled(Image)`
 const LionWrapper = styled.div`
 	position: relative;
 	width: 100%;
+	margin-top: 5rem;
 `;
 
 const Lion1 = styled.div`

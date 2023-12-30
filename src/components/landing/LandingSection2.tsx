@@ -68,7 +68,7 @@ export default LandingSection2;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 98vh;
+	height: 83vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

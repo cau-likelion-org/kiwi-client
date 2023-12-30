@@ -43,12 +43,12 @@ const ScrollContainer = styled.div`
 
 const Section1 = styled.section`
 	height: 100vh;
-	scroll-snap-align: center;
+	scroll-snap-align: start;
 `;
 
 const Section2 = styled.section`
 	height: 100vh;
-	scroll-snap-align: start;
+	scroll-snap-align: center;
 `;
 
 const Section3 = styled.section`
