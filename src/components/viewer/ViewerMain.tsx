@@ -12,7 +12,7 @@ interface LinkProps{
 }
 
 const ViewerMain = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const params = useSearchParams();
 	const docTitle = params.get('title');
 
@@ -37,13 +37,13 @@ const ViewerMain = () => {
 
   const isClickedButton = (content: string)=>{
     if(content === "편집"){
-      router.push(`/edit?title=${docTitle}`);
+      // router.push(`/edit?title=${docTitle}`);
     }
     else if(content === "역사"){
-      router.push(`/docHistory?title=${docTitle}`);
+      // router.push(`/docHistory?title=${docTitle}`);
     }
     else if(content === "역링크"){
-      router.push(`/viewer?title=${docTitle}`);
+      // router.push(`/viewer?title=${docTitle}`);
     }
   }
 
@@ -110,9 +110,10 @@ const ViewerMain = () => {
   useEffect(()=>{
     const fetchData = async ()=>{
       if(typeof docTitle === 'string'){
+        console.log(docTitle);
         const data = await getDocsContent(docTitle);
         // console.log("데이터");
-        // console.log(data);
+        console.log(data);
         if(data !== undefined){
           const { viewerContentsLists, contents } = parseMarkdown(data.content);
           setViewerContentsLists(viewerContentsLists);
