@@ -1,10 +1,10 @@
 import React from 'react';
-import Post from '@/components/post/Post';
+import Edit from '@/components/edit/Edit';
 
 const page = () => {
 	return (
 		<>
-			<Post />
+			<Edit />
 		</>
 	);
 };

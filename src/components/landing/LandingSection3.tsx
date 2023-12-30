@@ -145,7 +145,7 @@ const Lion1 = styled.div`
 const Lion2 = styled.div`
 	position: absolute;
 	width: 12rem;
-	bottom: -3rem;
+	bottom: -5rem;
 	right: 0;
 	@media screen and (min-width: 1024px) {
 		width: 15rem;

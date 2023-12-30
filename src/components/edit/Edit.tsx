@@ -3,7 +3,7 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Upload from './MD';
+import Editor from './Editor';
 
 const Edit = () => {
 	return (
@@ -18,7 +18,7 @@ const Edit = () => {
 					</TopWrapper>
 					<Boder>
 						<ContentSection>
-							<Upload />
+							<Editor />
 						</ContentSection>
 					</Boder>
 					<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
@@ -35,7 +35,7 @@ export default Edit;
 
 const Main = styled.div`
 	height: fit-content;
-	padding-top: 10rem;
+	padding-top: 3rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
