@@ -35,7 +35,7 @@ export default Post;
 
 const Main = styled.div`
 	height: fit-content;
-	padding-top: 10rem;
+	padding-top: 3rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
