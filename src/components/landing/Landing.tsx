@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LandingSection1 from './LandingSection1';
 import LandingSection2 from './LandingSection2';
 import LandingSection3 from './LandingSection3';
@@ -8,12 +8,14 @@ import { styled } from 'styled-components';
 import { getRecentDocs } from '@/apis/docs';
 
 const Landing = () => {
+	const [docs, setDocs] = useState([]);
 	useEffect(() => {
 		const getDocs = async () => {
 			const result = await getRecentDocs();
+			setDocs(result);
 		};
 		getDocs();
-	});
+	}, []);
 
 	return (
 		<ScrollContainer>
@@ -21,7 +23,7 @@ const Landing = () => {
 				<LandingSection1 />
 			</Section1>
 			<Section2>
-				<LandingSection2 />
+				<LandingSection2 data={docs} />
 			</Section2>
 			<Section3>
 				<LandingSection3 />
