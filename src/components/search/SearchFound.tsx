@@ -1,23 +1,14 @@
 'use client';
 
+import { Generation, IGenerations, ISearchResult } from '@/types/request';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-interface ISearchResult {
-	id: string;
-	title: string;
-	updated_at: string;
-	created_at: string;
-	author: string;
-	generation: string[];
-	contents: string;
-}
-
 const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 	const router = useRouter();
 
-	const handleClickSearchResult = (id: string) => {
+	const handleClickSearchResult = (id: number) => {
 		const selectedDocTitle = searchResult.filter((result) => result.id === id)[0].title;
 		router.push(`viewer?title=${selectedDocTitle}`);
 	};
@@ -31,13 +22,21 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 					</LionImageWrapper>
 					<SearchResultBox onClick={() => handleClickSearchResult(result.id)}>
 						<SearchResultTitle>{result.title}</SearchResultTitle>
-						<SearchResultContent>{result.contents}</SearchResultContent>
-						<SearchResultDirectory>{result.generation.join(', ')}</SearchResultDirectory>
+						<SearchResultContent>{result.content}</SearchResultContent>
+						<SearchResultDirectory>{getGenerationFormat(result.generations)}</SearchResultDirectory>
 					</SearchResultBox>
 				</SearchResult>
 			))}
 		</SearchFoundWrapper>
 	);
+};
+
+const getGenerationFormat = (generations: IGenerations[]) => {
+	const genFormat: string[] = [];
+	generations.forEach((data) => {
+		genFormat.push(data.generation);
+	});
+	return genFormat.join(', ');
 };
 
 const SearchFoundWrapper = styled.div`

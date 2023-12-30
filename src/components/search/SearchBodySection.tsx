@@ -8,38 +8,44 @@ import SearchFound from './SearchFound';
 import SearchNotFound from './SearchNotFound';
 import Image from 'next/image';
 import { getSearchResult } from '@/apis/docs';
+import { ISearchResult } from '@/types/request';
 
 const dummyData: ISearchResult[] = [
 	{
-		id: '20231223205359_홍보팀',
-		title: '홍보팀',
-		updated_at: '2023-12-23 20:53:59',
-		created_at: '2023-11-11 20:53:59',
-		author: '웅장한홍보팀장',
-		generation: ['12기'],
-		contents: '12기 홍보팀은 이기웅, 누구로 구성되어 있으며 ~',
+		id: 5,
+		title: '한윤호',
+		generations: [
+			{
+				generation: '11기',
+			},
+			{
+				generation: '12기',
+			},
+		],
+		updated_at: '2023-12-30T03:01:42.531210',
+		created_at: '2023-12-30T03:01:42.532248',
+		author: 'oro6',
+		content: '#파트 : [백엔드](http://localhost:3000/viewer?title=백엔드)',
+		titleMatched: true,
 	},
 	{
-		id: '20231223205359_베베',
-		title: '베베',
-		updated_at: '2023-12-23 20:53:59',
-		created_at: '2023-11-11 20:53:59',
-		author: '웅장한홍보팀장',
-		generation: ['11기, 12기'],
-		contents:
-			'베베는 11기 해커톤 프로젝트로, 백엔드는 이기웅, 민병록 ~ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae ut nostrum ipsa dolorum deleniti at non, reprehenderit amet facere error, inventore reiciendis minima? Hic delectus ab aspernatur maxime. Numquam, adipisci! asdasd',
+		id: 4,
+		title: '백엔드',
+		generations: [
+			{
+				generation: '11기',
+			},
+			{
+				generation: '12기',
+			},
+		],
+		updated_at: '2023-12-30T03:00:35.900116',
+		created_at: '2023-12-30T03:00:35.901128',
+		author: 'oro6',
+		content: '#인원 : 한윤호(http://127.0.0.1:8000/docs/recent/한윤호/), 이기웅',
+		titleMatched: false,
 	},
 ];
-
-interface ISearchResult {
-	id: string;
-	title: string;
-	updated_at: string;
-	created_at: string;
-	author: string;
-	generation: string[];
-	contents: string;
-}
 
 const SearchBodySection = () => {
 	const router = useRouter();
@@ -54,13 +60,15 @@ const SearchBodySection = () => {
 		}
 	}, [params]);
 
-	// useEffect(() => {
-	// 	// TODO: 검색결과 가져오는 API 요청
-	// 	getSearchResult(searchKeyword).then((res) => {
-	// 		if (res.title_match) router.push(`viewer?title=${searchKeyword}`); // 100% 일치 -> 리다이렉트
-	// 		else setSearchResult(res.data); // 100% 일치 X -> 검색결과
-	// 	});
-	// }, [router, searchKeyword]);
+	// 검색어와 문서 제목이 100% 일치 : 리다이렉트, 일치 X -> 검색 결과
+	useEffect(() => {
+		if (searchKeyword) {
+			getSearchResult(searchKeyword).then((res) => {
+				if (res[0].titleMatched) router.push(`viewer?title=${searchKeyword}`);
+				else setSearchResult(res);
+			});
+		}
+	}, [router, searchKeyword]);
 
 	return (
 		<>
