@@ -1,11 +1,12 @@
+import { ISearchResult } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
-import { CreateDocs, ISearchDocs } from './types';
+import { CreateDocs } from './types';
 
 const baseURL = 'http://llwiki.p-e.kr:8000';
 
-export const getSearchResult = async (keyword: string): Promise<ISearchDocs> => {
-	const result = await Server.get(`/docs/?search=${keyword}`);
+export const getSearchResult = async (keyword: string) => {
+	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${keyword}/`);
 	return result.data;
 };
 

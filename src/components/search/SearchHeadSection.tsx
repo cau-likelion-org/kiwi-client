@@ -7,7 +7,7 @@ const SearchHeadSection = () => {
 	return (
 		<SearchHeadWrapper>
 			<HeartImageWrapper>
-				<Image src="/img/heart.svg" alt="" width={310} height={98} />
+				<StyledImage src="/img/heart.svg" alt="heart_image" fill priority />
 			</HeartImageWrapper>
 		</SearchHeadWrapper>
 	);
@@ -20,6 +20,16 @@ const SearchHeadWrapper = styled.div`
 	padding: 50px;
 `;
 
-const HeartImageWrapper = styled.div``;
+const StyledImage = styled(Image)`
+	position: relative !important;
+	height: unset !important;
+	object-fit: cover;
+`;
+
+const HeartImageWrapper = styled.div`
+	position: relative;
+	width: 310px;
+	height: 98px;
+`;
 
 export default SearchHeadSection;
