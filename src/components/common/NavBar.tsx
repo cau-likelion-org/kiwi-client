@@ -1,4 +1,3 @@
-// 세팅용 파일
 'use client';
 
 import { styled } from 'styled-components';
@@ -32,7 +31,16 @@ const NavBar = () => {
 						style={{ cursor: 'pointer' }}
 					/>
 					<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
-					<Image src="/img/login.png" alt={'login'} width={33} height={40} style={{ cursor: 'pointer' }} />
+					<Image
+						onClick={() => {
+							router.push('/login');
+						}}
+						src="/img/login.png"
+						alt={'login'}
+						width={33}
+						height={40}
+						style={{ cursor: 'pointer' }}
+					/>
 				</ButtonWrapper>
 			</RightWrapper>
 		</Wrapper>

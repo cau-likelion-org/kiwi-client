@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import Dropdown from './Dropdown';
 import { IOption } from '@/types/request';
+import { newDocs } from '@/apis/docs';
 
 const options: IOption[] = [
 	{ value: '9기', label: '9기' },
@@ -20,14 +21,32 @@ type ModalProps = {
 	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
 };
 
+export interface Generation {
+	generation: string;
+}
+
+export interface Depth {
+	generations: Generation[];
+}
+
+export interface CreateDocs extends Depth {
+	title: string;
+	author: string;
+	content: string;
+}
+
 const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps) => {
-	const handleSubmit = () => {
+	const author = '영';
+	const handleSubmit = async () => {
 		if (generation && generation.length > 0) {
-			generation.map((item, index) => {
-				console.log(item.value);
-			});
-			console.log(title);
-			console.log(md);
+			const body: CreateDocs = {
+				title: title,
+				author: author,
+				content: md,
+				generations: generation.map((item) => ({ generation: item.value })),
+			};
+			const result = await newDocs(body);
+			console.log(result); // 결과를 확인
 			closeModal();
 		} else {
 			alert('🦁카테고리 선택은 필수🦁');
