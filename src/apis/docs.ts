@@ -22,25 +22,35 @@ export const newDocs = async (body: CreateDocs) => {
 	return result.data;
 };
 
-// export const uploadImageToServer = async (image: string) => {
+// export const uploadImageToServer = async (blobUrl: string) => {
 // 	let formData = new FormData();
-// 	formData.append('key', 'image');
-// 	formData.append('image', image);
-// 	const result = await axios.post(`${baseURL}/docs/image/`, formData);
+// 	formData.append('image', blobUrl);
+// 	const config = {
+// 		headers: {
+// 			'Content-Type': 'multipart/form-data',
+// 		},
+// 	};
+// 	const result = await axios.post(`${baseURL}/docs/image/`, formData, config);
 // 	return result;
 // };
 
-async function urlToBlob(url: string) {
-	const response = await fetch(url);
-	const blob = await response.blob();
-	return blob;
-}
-
 export const uploadImageToServer = async (blobUrl: string) => {
+	// blob URL로부터 Blob 객체 가져오기
+	const response = await fetch(blobUrl);
+	const blob = await response.blob();
+
+	// Blob 객체를 File 객체로 변환
+	const file = new File([blob], 'image.png', { type: 'image/png' });
+
+	// 이미지 파일을 서버에 전송
 	let formData = new FormData();
-	formData.append('key', 'image');
-	formData.append('value', blobUrl);
-	const result = await axios.post(`${baseURL}/docs/image/`, formData);
+	formData.append('image', blob);
+	const config = {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	};
+	const result = await axios.post(`${baseURL}/docs/image/`, formData, config);
 	return result;
 };
 

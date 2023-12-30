@@ -70,8 +70,8 @@ const Upload: React.FC = () => {
 				const [file] = Array.from(fileInput.files);
 				const blobUrl = createBlobUrl(file); // blob URL 생성
 				// const imageBlob = await urlToBlob(blobUrl);
-				// const imageUrl = await uploadImageToServer(blobUrl);
-				const imageMarkdown = `![image](${blobUrl})`;
+				const imageUrl = await uploadImageToServer(blobUrl);
+				const imageMarkdown = `![image](${imageUrl})`;
 				api.replaceSelection(imageMarkdown);
 			};
 			fileInput.click();
