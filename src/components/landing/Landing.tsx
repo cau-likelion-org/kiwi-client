@@ -52,6 +52,6 @@ const Section2 = styled.section`
 `;
 
 const Section3 = styled.section`
-	height: 95vh;
-	scroll-snap-align: start;
+	height: 92.5vh;
+	scroll-snap-align: end;
 `;
