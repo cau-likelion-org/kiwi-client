@@ -1,13 +1,15 @@
 import useSearchForm from '@/hooks/useSearchForm';
+import { ISearchResult } from '@/types/request';
 import Image from 'next/image';
 import styled from 'styled-components';
+import AutoCompleteBox from './AutoCompleteBox';
 
 interface SearchFormProps {
-	searchKeyword?: string;
 	type: string;
+	searchKeyword?: string;
 }
 
-const SearchForm = ({ searchKeyword, type }: SearchFormProps) => {
+const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {
 	const { values, handleChange, handleSearchSubmit } = useSearchForm({
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
@@ -23,6 +25,7 @@ const SearchForm = ({ searchKeyword, type }: SearchFormProps) => {
 						value={values.searchInput}
 						onChange={handleChange}
 					/>
+					<AutoCompleteBox searchInput={values.searchInput} />
 				</FormWrapper>
 			)}
 			{type === 'header' && (
