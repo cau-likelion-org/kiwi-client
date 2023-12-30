@@ -1,7 +1,9 @@
 "use client";
+import { getDocsContent } from '@/apis/viewer';
 import LinkBox from '@/components/common/viewer/LinkBox';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 interface LinkProps{
@@ -9,6 +11,9 @@ interface LinkProps{
 }
 
 const ViewerMain = () => {
+  const params = useSearchParams();
+	const docTitle = params.get('title');
+
   const [openList, setOpenList] = useState(true);
   const [depthOne, setDepthOne] = useState(true);
 
@@ -42,40 +47,75 @@ const ViewerMain = () => {
     }
   ])
 
-  const [viewerContentsLists, setViewerContentsLists] = useState([
-    {
-      id: 1,
-      contents: '소개'
-    },
-    {
-      id: 2,
-      contents: '11기 인물'
-    },
-    {
-      id: 3,
-      contents: '11기 사건'
-    },
-    {
-      id: 4,
-      contents: '11기 프로젝트',
-    },
-  ]);
+  const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
 
-  const [contents, setContents] = useState([
-    {
-      id: 1,
-      title: '소개',
-      content:
-      `
-      나뚜루 말차 아이스크림을 조아한다..
-      일주일에 3번씩 나뚜루를 턴다는 소문이 있을 정도 사실이다.
+  const [contents, setContents] = useState<{ id: number, title: string, content: string }[]>([]);
 
-      부산 엠버서더다.
-      부산을 너무 사랑해서 가끔 아련한 눈빛으로 ‘바다 보고 싶다..’라고 속삭이곤 한다
-      부산 놀러오면 횟집 투어 시켜준다고 함(풀코스로 쏜답니다)
-      `
+
+  const parseMarkdown = (text: string) => {
+    const lines = text.split("\n");
+    const viewerContentsLists :{ id: number, contents: string }[] = [];
+    const contents : { id: number, title:string, content: string }[]= [];
+    let id = 1;
+    let contentId = 1;
+    let contentTitle = "";
+    let contentBody = "";
+
+    lines.forEach((line, index) => {
+      const match = line.match(/^(#+) (.+)/);
+      if (match) {
+        const level = match[1].length; // '#'의 개수
+        const title = match[2]; // 제목 텍스트
+
+        viewerContentsLists.push({ id: id++, contents: title });
+
+        if (level === 1) {
+          if (contentTitle) {
+            contents.push({
+              id: contentId++,
+              title: contentTitle,
+              content: contentBody,
+            });
+            contentTitle = title;
+            contentBody = "";
+          } else {
+            contentTitle = title;
+          }
+        }
+      } else {
+        contentBody += line + "\n";
+      }
+
+      if (index === lines.length - 1) {
+        contents.push({
+          id: contentId++,
+          title: contentTitle,
+          content: contentBody,
+        });
+      }
+    });
+
+    return { viewerContentsLists, contents };
+  };
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      if(typeof docTitle === 'string'){
+        const data = await getDocsContent(docTitle);
+        // console.log("데이터");
+        // console.log(data);
+        if(data !== undefined){
+          const { viewerContentsLists, contents } = parseMarkdown(data);
+          setViewerContentsLists(viewerContentsLists);
+          setContents(contents);
+        }
+
+
+      }
     }
-  ])
+    fetchData();
+  }, [docTitle]);
+
   return (
     <Main>
 				<div className="heart">
@@ -91,7 +131,7 @@ const ViewerMain = () => {
           </ViewerHeaderSection> 
           <ViewerBody>
             <ContentsHeader>
-              <Title>권수연</Title>
+              <Title>{docTitle}</Title>
               <Links>
                 <LinkBox text="편집"/>
                 <LinkBox text="역사"/>
