@@ -1,6 +1,5 @@
+import useSearchForm from '@/hooks/useSearchForm';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchFormProps {
@@ -9,49 +8,35 @@ interface SearchFormProps {
 }
 
 const SearchForm = ({ searchKeyword, type }: SearchFormProps) => {
-	const router = useRouter();
-
-	const [searchInput, setSearchInput] = useState(searchKeyword);
-	const [searchHeaderInput, setSearchHeaderInput] = useState('');
-
-	const handleSearchHeaderSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setSearchHeaderInput('');
-		router.push(`search/?search=${searchHeaderInput}`);
-	};
-
-	const handleSearchHeaderInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchHeaderInput(e.target.value);
-	};
-
-	const handleSearchSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setSearchHeaderInput('');
-		router.push(`search/?search=${searchInput}`);
-	};
-
-	const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchInput(e.target.value);
-	};
-
-	useEffect(() => {
-		if (searchKeyword) setSearchInput(searchKeyword);
-	}, [searchKeyword]);
+	const { values, handleChange, handleSearchSubmit } = useSearchForm({
+		initialValue: { searchInput: '', searchHeaderInput: '' },
+		searchKeyword,
+	});
 
 	return (
 		<>
 			{type === 'search' && (
-				<FormWrapper onSubmit={handleSearchSubmit}>
-					<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+				<FormWrapper name="searchInput" onSubmit={handleSearchSubmit}>
+					<SearchBarInput
+						name="searchInput"
+						placeholder="검색어를 입력하세요..."
+						value={values.searchInput}
+						onChange={handleChange}
+					/>
 				</FormWrapper>
 			)}
 			{type === 'header' && (
-				<FormWrapper onSubmit={handleSearchHeaderSubmit}>
+				<FormWrapper name="searchHeaderInput" onSubmit={handleSearchSubmit}>
 					<SearchWrapper>
 						<ImageButtonWrapper>
 							<Image src="/img/searchIcon.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
 						</ImageButtonWrapper>
-						<SearchHeaderInput placeholder="검색..." value={searchHeaderInput} onChange={handleSearchHeaderInput} />
+						<SearchHeaderInput
+							name="searchHeaderInput"
+							placeholder="검색..."
+							value={values.searchHeaderInput}
+							onChange={handleChange}
+						/>
 					</SearchWrapper>
 				</FormWrapper>
 			)}
