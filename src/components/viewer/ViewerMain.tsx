@@ -3,6 +3,7 @@ import { getDocsContent } from '@/apis/viewer';
 import LinkBox from '@/components/common/viewer/LinkBox';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
@@ -11,6 +12,7 @@ interface LinkProps{
 }
 
 const ViewerMain = () => {
+  const router = useRouter();
   const params = useSearchParams();
 	const docTitle = params.get('title');
 
@@ -32,6 +34,18 @@ const ViewerMain = () => {
     console.log(link);
     //여기에 링크로 이동하는 코드 작성
   };
+
+  const isClickedButton = (content: string)=>{
+    if(content === "편집"){
+      router.push(`/edit?title=${docTitle}`);
+    }
+    else if(content === "역사"){
+      router.push(`/docHistory?title=${docTitle}`);
+    }
+    else if(content === "역링크"){
+      router.push(`/viewer?title=${docTitle}`);
+    }
+  }
 
   const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
@@ -130,7 +144,7 @@ const ViewerMain = () => {
             <ContentsHeader>
               <Title>{docTitle}</Title>
               <Links>
-                <LinkBox text="편집"/>
+                <LinkBox text="편집" onClick={()=>isClickedButton("편집")}/>
                 <LinkBox text="역사"/>
                 <LinkBox text="역링크"/>
               </Links>
