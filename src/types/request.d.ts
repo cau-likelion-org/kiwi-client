@@ -6,3 +6,7 @@ export interface IOption {
 	value: Generation;
 	label: Generation;
 }
+
+export interface postCodeBody {
+	code: string | null;
+}
