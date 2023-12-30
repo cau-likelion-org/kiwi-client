@@ -32,6 +32,7 @@ const BottomImageWrapper = styled.div`
 `;
 
 const LionImageWrapper = styled.div`
+	position: relative;
 	width: 800px;
 `;
 

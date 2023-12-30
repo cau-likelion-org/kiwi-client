@@ -40,7 +40,13 @@ const SearchBodySection = () => {
 		<>
 			<SearchBarWrapper>
 				<TextImageWrapper>
-					<StyledImage src="/img/search_text.png" alt="search_text" fill priority />
+					<StyledImage
+						src="/img/search_text.png"
+						alt="search_text"
+						fill
+						priority
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					/>
 				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
@@ -61,6 +67,7 @@ const SearchBarWrapper = styled.div`
 `;
 
 const TextImageWrapper = styled.div`
+	position: relative;
 	width: 300px;
 	height: 40px;
 `;
