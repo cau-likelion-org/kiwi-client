@@ -6,13 +6,15 @@ interface LinkProps{
 
 import { getReverseList } from '@/apis/reverse';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 const BackLink = () => {
   const router = useRouter();
-  const {docTitle} = router.query;
+  const params = useSearchParams();
+	const docTitle = params.get('title');
 
   const isClickedLink = ({title}: LinkProps) => {
     router.push(`/viewer?title=${title}`);
