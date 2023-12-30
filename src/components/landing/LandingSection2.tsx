@@ -3,36 +3,24 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
+import { Depth } from '../post/Modal';
 
-interface EditList {
+interface DataType extends Depth {
+	author: string;
+	content: string;
+	created_at: string;
+	id: number;
 	title: string;
-	date: string;
+	titleMatched: boolean;
+	updated_at: string;
 }
 
-const dummy: EditList[] = [
-	{
-		title: '12기 회장',
-		date: '2023.12.24',
-	},
-	{
-		title: '옹졸한 이기웅',
-		date: '2023.12.24',
-	},
-	{
-		title: '하남자 민병록',
-		date: '2023.12.24',
-	},
-	{
-		title: '가식왕 양희철',
-		date: '2023.12.24',
-	},
-	{
-		title: '멋사뷔 이재욱',
-		date: '2023.12.24',
-	},
-];
-
-const LandingSection2 = () => {
+const LandingSection2 = ({ data }: { data: DataType[] }) => {
+	function formatDate(update: string) {
+		const date = update.split('T')[0];
+		const formattedDate = date.split('-').join('.');
+		return formattedDate;
+	}
 	return (
 		<ImageWrapper>
 			<Title>
@@ -41,11 +29,11 @@ const LandingSection2 = () => {
 			</Title>
 			<Box>
 				<Content>
-					{dummy.map((result, idx) => (
+					{data.map((result, idx) => (
 						<>
 							<div className="list" key={idx}>
 								<div>{result.title}</div>
-								<div>{result.date}</div>
+								<div>{formatDate(result.updated_at)}</div>
 							</div>
 						</>
 					))}
