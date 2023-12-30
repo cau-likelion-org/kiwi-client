@@ -20,18 +20,6 @@ export const newDocs = async (body: CreateDocs) => {
 	return result.data;
 };
 
-// export const uploadImageToServer = async (blobUrl: string) => {
-// 	let formData = new FormData();
-// 	formData.append('image', blobUrl);
-// 	const config = {
-// 		headers: {
-// 			'Content-Type': 'multipart/form-data',
-// 		},
-// 	};
-// 	const result = await axios.post(`${baseURL}/docs/image/`, formData, config);
-// 	return result;
-// };
-
 export const uploadImageToServer = async (blobUrl: string) => {
 	// blob URL로부터 Blob 객체 가져오기
 	const response = await fetch(blobUrl);
