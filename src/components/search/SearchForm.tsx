@@ -3,13 +3,30 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: string }) => {
+interface SearchFormProps {
+	searchKeyword?: string;
+	type: string;
+}
+
+const SearchForm = ({ searchKeyword, type }: SearchFormProps) => {
 	const router = useRouter();
 
 	const [searchInput, setSearchInput] = useState(searchKeyword);
+	const [searchHeaderInput, setSearchHeaderInput] = useState('');
+
+	const handleSearchHeaderSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setSearchHeaderInput('');
+		router.push(`search/?search=${searchHeaderInput}`);
+	};
+
+	const handleSearchHeaderInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchHeaderInput(e.target.value);
+	};
 
 	const handleSearchSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setSearchHeaderInput('');
 		router.push(`search/?search=${searchInput}`);
 	};
 
@@ -18,23 +35,27 @@ const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: str
 	};
 
 	useEffect(() => {
-		setSearchInput(searchKeyword);
+		if (searchKeyword) setSearchInput(searchKeyword);
 	}, [searchKeyword]);
 
 	return (
-		<form onSubmit={handleSearchSubmit}>
+		<>
 			{type === 'search' && (
-				<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+				<form onSubmit={handleSearchSubmit}>
+					<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
+				</form>
 			)}
 			{type === 'header' && (
-				<Search>
-					<ImageWrapper>
-						<Image src="/img/searchIcon.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
-					</ImageWrapper>
-					<SearchHeaderInput placeholder="검색..." value={searchInput} onChange={handleSearchInput} />
-				</Search>
+				<form onSubmit={handleSearchHeaderSubmit}>
+					<Search>
+						<ImageWrapper>
+							<Image src="/img/searchIcon.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
+						</ImageWrapper>
+						<SearchHeaderInput placeholder="검색..." value={searchHeaderInput} onChange={handleSearchHeaderInput} />
+					</Search>
+				</form>
 			)}
-		</form>
+		</>
 	);
 };
 
@@ -54,12 +75,12 @@ const SearchBarInput = styled.input`
 	}
 `;
 
-const Search =styled.div`
+const Search = styled.div`
 	display: flex;
 	align-items: center;
-	border-bottom : 1px solid black;
-	padding :3px 0rem;
-`
+	border-bottom: 1px solid black;
+	padding: 3px 0rem;
+`;
 const SearchHeaderInput = styled.input`
 	font-family: NeoDunggeunmo Pro;
 	width: 100%;
@@ -70,7 +91,6 @@ const SearchHeaderInput = styled.input`
 	padding-left: 1rem;
 `;
 
-const ImageWrapper = styled.div`
-`;
+const ImageWrapper = styled.div``;
 
 export default SearchForm;

@@ -10,43 +10,6 @@ import Image from 'next/image';
 import { getSearchResult } from '@/apis/docs';
 import { ISearchResult } from '@/types/request';
 
-const dummyData: ISearchResult[] = [
-	{
-		id: 5,
-		title: '한윤호',
-		generations: [
-			{
-				generation: '11기',
-			},
-			{
-				generation: '12기',
-			},
-		],
-		updated_at: '2023-12-30T03:01:42.531210',
-		created_at: '2023-12-30T03:01:42.532248',
-		author: 'oro6',
-		content: '#파트 : [백엔드](http://localhost:3000/viewer?title=백엔드)',
-		titleMatched: true,
-	},
-	{
-		id: 4,
-		title: '백엔드',
-		generations: [
-			{
-				generation: '11기',
-			},
-			{
-				generation: '12기',
-			},
-		],
-		updated_at: '2023-12-30T03:00:35.900116',
-		created_at: '2023-12-30T03:00:35.901128',
-		author: 'oro6',
-		content: '#인원 : 한윤호(http://127.0.0.1:8000/docs/recent/한윤호/), 이기웅',
-		titleMatched: false,
-	},
-];
-
 const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
@@ -64,8 +27,11 @@ const SearchBodySection = () => {
 	useEffect(() => {
 		if (searchKeyword) {
 			getSearchResult(searchKeyword).then((res) => {
-				if (res[0].titleMatched) router.push(`viewer?title=${searchKeyword}`);
-				else setSearchResult(res);
+				if (Array.isArray(res)) {
+					setSearchResult(res);
+				} else if (res.titleMatched) {
+					router.push(`viewer?title=${searchKeyword}`);
+				}
 			});
 		}
 	}, [router, searchKeyword]);

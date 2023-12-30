@@ -1,6 +1,6 @@
 'use client';
 
-import { Generation, IGenerations, ISearchResult } from '@/types/request';
+import { IGenerations, ISearchResult } from '@/types/request';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
@@ -76,6 +76,7 @@ const SearchResultBox = styled.div`
 	border: 3px solid black;
 	border-radius: 10px;
 	padding: 15px;
+	cursor: pointer;
 `;
 
 const SearchResultTitle = styled.div`

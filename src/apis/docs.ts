@@ -6,7 +6,7 @@ import { CreateDocs } from './types';
 const baseURL = 'http://llwiki.p-e.kr:8000';
 
 export const getSearchResult = async (keyword: string) => {
-	const result = await Server.get<ISearchResult[]>(`docs/search/${keyword}/`);
+	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${keyword}/`);
 	return result.data;
 };
 
