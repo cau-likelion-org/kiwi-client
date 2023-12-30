@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import { Depth } from '../post/Modal';
+import { Depth } from '../common/post/Modal';
 
 interface DataType extends Depth {
 	author: string;
@@ -68,7 +68,7 @@ export default LandingSection2;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 98vh;
+	height: 83vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

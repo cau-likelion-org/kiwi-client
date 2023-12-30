@@ -42,14 +42,14 @@ export const uploadImageToServer = async (blobUrl: string) => {
 
 	// 이미지 파일을 서버에 전송
 	let formData = new FormData();
-	formData.append('image', blob);
+	formData.append('image', file);
 	const config = {
 		headers: {
 			'Content-Type': 'multipart/form-data',
 		},
 	};
 	const result = await axios.post(`${baseURL}/docs/image/`, formData, config);
-	return result;
+	return result.data.image;
 };
 
 export const getRecentDocs = async () => {
