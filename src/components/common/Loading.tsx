@@ -41,10 +41,6 @@ const ImageWrapper = styled(motion.div)`
 	width: 4vw;
 	margin-left: 4.5px;
 	margin-right: 4.5px;
-	@media (max-width: 900px) {
-		width: 100px;
-		height: 100px;
-	}
 `;
 const ImagesWrapper = styled.div`
 	position: absolute;
