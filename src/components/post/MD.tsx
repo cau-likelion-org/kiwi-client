@@ -39,6 +39,16 @@ const Upload: React.FC = () => {
 		}
 	};
 
+	function createBlobUrl(file: any) {
+		return URL.createObjectURL(file);
+	}
+
+	async function urlToBlob(url: string) {
+		const response = await fetch(url);
+		const blob = await response.blob();
+		return blob;
+	}
+
 	const imageUploadCommand: ICommand = {
 		name: 'image-upload',
 		keyCommand: 'image-upload',
@@ -58,8 +68,10 @@ const Upload: React.FC = () => {
 			fileInput.onchange = async () => {
 				if (!fileInput.files?.length) return;
 				const [file] = Array.from(fileInput.files);
-				const imageUrl = await uploadImageToServer(file); // 이미지를 서버에 업로드하고 URL을 반환받는 함수
-				const imageMarkdown = `![Uploaded image](${file})`;
+				const blobUrl = createBlobUrl(file); // blob URL 생성
+				// const imageBlob = await urlToBlob(blobUrl);
+				// const imageUrl = await uploadImageToServer(blobUrl);
+				const imageMarkdown = `![image](${blobUrl})`;
 				api.replaceSelection(imageMarkdown);
 			};
 			fileInput.click();

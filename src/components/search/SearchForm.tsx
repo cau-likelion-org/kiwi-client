@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -26,7 +27,12 @@ const SearchForm = ({ searchKeyword, type }: { searchKeyword?: string; type: str
 				<SearchBarInput placeholder="검색어를 입력하세요..." value={searchInput} onChange={handleSearchInput} />
 			)}
 			{type === 'header' && (
-				<SearchHeaderInput placeholder="검색..." value={searchInput} onChange={handleSearchInput} />
+				<Search>
+					<ImageWrapper>
+						<Image src="/img/searchIcon.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
+					</ImageWrapper>
+					<SearchHeaderInput placeholder="검색..." value={searchInput} onChange={handleSearchInput} />
+				</Search>
 			)}
 		</form>
 	);
@@ -48,14 +54,23 @@ const SearchBarInput = styled.input`
 	}
 `;
 
+const Search =styled.div`
+	display: flex;
+	align-items: center;
+	border-bottom : 1px solid black;
+	padding :3px 0rem;
+`
 const SearchHeaderInput = styled.input`
+	font-family: NeoDunggeunmo Pro;
 	width: 100%;
 	height: 100%;
-	margin-left: 12%;
-	font-size: 2.2rem;
-	border-bottom: 2px solid black !important;
+	font-size: 2rem;
 	border: none;
 	outline: none;
+	padding-left: 1rem;
+`;
+
+const ImageWrapper = styled.div`
 `;
 
 export default SearchForm;

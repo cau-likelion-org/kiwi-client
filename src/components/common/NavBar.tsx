@@ -1,4 +1,3 @@
-// 세팅용 파일
 'use client';
 
 import { styled } from 'styled-components';
@@ -9,37 +8,59 @@ import { useRouter } from 'next/navigation';
 const NavBar = () => {
 	const router = useRouter();
 	return (
-		<Wrapper>
-			<LeftWrapper>
-				<Image src="/img/logo.png" alt={'logo'} width={190} height={45} />
-			</LeftWrapper>
-			<RightWrapper>
-				<SearchWrapper>
-					<ImageWrapper>
-						<Image src="/img/🔍.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
-					</ImageWrapper>
-					<SearchForm type="header" />
-				</SearchWrapper>
-				<ButtonWrapper>
+		<>
+			<Margin />
+			<Wrapper>
+				<LeftWrapper>
 					<Image
 						onClick={() => {
-							router.push('/post');
+							router.push('/');
 						}}
-						src="/img/newPost.png"
-						alt={'newPost'}
-						width={32}
-						height={40}
-						style={{ cursor: 'pointer' }}
+						src="/img/logo.png"
+						alt={'logo'}
+						width={190}
+						height={45}
 					/>
-					<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
-					<Image src="/img/login.png" alt={'login'} width={33} height={40} style={{ cursor: 'pointer' }} />
-				</ButtonWrapper>
-			</RightWrapper>
-		</Wrapper>
+				</LeftWrapper>
+				<RightWrapper>
+					<SearchWrapper>
+						<SearchForm type="header" />
+					</SearchWrapper>
+					<ButtonWrapper>
+						<Image
+							onClick={() => {
+								router.push('/post');
+							}}
+							src="/img/newPost.png"
+							alt={'newPost'}
+							width={32}
+							height={40}
+							style={{ cursor: 'pointer' }}
+						/>
+						<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
+						<Image
+							onClick={() => {
+								router.push('/login');
+							}}
+							src="/img/login.png"
+							alt={'login'}
+							width={33}
+							height={40}
+							style={{ cursor: 'pointer' }}
+						/>
+					</ButtonWrapper>
+				</RightWrapper>
+			</Wrapper>
+		</>
 	);
 };
 
 export default NavBar;
+
+const Margin = styled.div`
+	width: 100%;
+	min-height: 64px;
+`;
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -76,12 +97,6 @@ const SearchWrapper = styled.div`
 	display: flex;
 	position: relative;
 	width: 45%;
-`;
-
-const ImageWrapper = styled.div`
-	position: absolute;
-	top: 15%;
-	margin-right: 3rem;
 `;
 
 const ButtonWrapper = styled.div`

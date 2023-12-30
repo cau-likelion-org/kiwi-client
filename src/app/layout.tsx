@@ -2,6 +2,7 @@ import './global.css';
 import StyledComponentsRegistry from './lib/registry';
 import NavBar from '@/components/common/NavBar';
 import type { Metadata } from 'next';
+import RecoidContextProvider from './recoilContextProvider';
 
 export const metadata: Metadata = {
 	title: '멋사 위키',
@@ -17,10 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html>
 			<body>
-				<StyledComponentsRegistry>
-					<NavBar />
-					{children}
-				</StyledComponentsRegistry>
+				<RecoidContextProvider>
+					<StyledComponentsRegistry>
+						<NavBar />
+						{children}
+					</StyledComponentsRegistry>
+				</RecoidContextProvider>
 			</body>
 		</html>
 	);
