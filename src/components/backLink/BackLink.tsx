@@ -1,47 +1,39 @@
 'use client';
 
 interface LinkProps{
-  link?: string;
+  title?: string;
 }
 
+import { getReverseList } from '@/apis/reverse';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
-const ReverseLink = () => {
+const BackLink = () => {
+  const router = useRouter();
+  const {docTitle} = router.query;
 
-  const isClickedLink = ({link}: LinkProps) => {
-    console.log(link);
-    //여기에 링크로 이동하는 코드 작성
+  const isClickedLink = ({title}: LinkProps) => {
+    router.push(`/viewer?title=${title}`);
   };
 
-  const [reverseLinks, setreverseLinks] = useState([
-    {
-      id: 1,
-      title: '11기',
-      link:'',
-    },
-    {
-      id: 2,
-      title: '냠념',
-      link:'asdf',
-    },
-    {
-      id: 1,
-      title: '12기',
-      link:'',
-    },
-    {
-      id: 1,
-      title: '멋사진심녀',
-      link:'',
-    },
-    {
-      id: 1,
-      title: '기획파트',
-      link:'',
-    }
-  ])
+  const [reverseLinks, setReverseLinks] = useState([]);
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try{
+        if(typeof docTitle === 'string'){
+          const backlinkList = await getReverseList(docTitle);
+          setReverseLinks(backlinkList.backlinks_created_for);
+        }
+      }
+      catch(error){
+        console.error('Error : ', error);
+      }
+    };
+    fetchData();
+  },[docTitle]);
 
   return (
     <Main>
@@ -59,13 +51,13 @@ const ReverseLink = () => {
           </ViewerHeaderSection> 
           <ViewerBody>
             <ContentsHeader>
-              <Title>{"{제목}"}  문서를 가리키는 문서</Title>
+              <Title>{`{${docTitle}} 문서를 가리키는 문서`}</Title>
             </ContentsHeader>
             <ContentsBody>
                <Content>
-                 {reverseLinks.map((reverseLink, index)=>(
+                 {reverseLinks.map((title, index)=>(
                    <List key={index}>
-                     <Text onClick={()=>isClickedLink({link: reverseLink.link})}>&bull; {reverseLink.title}</Text> </List>
+                     <Text onClick={()=>isClickedLink({title})}>&bull; {title}</Text> </List>
                  ))}
                </Content>
             </ContentsBody>            
@@ -80,7 +72,7 @@ const ReverseLink = () => {
   )
 }
 
-export default ReverseLink;
+export default BackLink;
 
 const Main = styled.div`
 height: fit-content;
