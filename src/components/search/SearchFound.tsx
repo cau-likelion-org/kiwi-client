@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 interface ISearchResult {
@@ -14,6 +15,13 @@ interface ISearchResult {
 }
 
 const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
+	const router = useRouter();
+
+	const handleClickSearchResult = (id: string) => {
+		const selectedDocTitle = searchResult.filter((result) => result.id === id)[0].title;
+		router.push(`viewer?title=${selectedDocTitle}`);
+	};
+
 	return (
 		<SearchFoundWrapper>
 			{searchResult.map((result) => (
@@ -21,7 +29,7 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 					<LionImageWrapper>
 						<StyledImage src="/img/search_lion.svg" alt="search_lion" fill priority />
 					</LionImageWrapper>
-					<SearchResultBox>
+					<SearchResultBox onClick={() => handleClickSearchResult(result.id)}>
 						<SearchResultTitle>{result.title}</SearchResultTitle>
 						<SearchResultContent>{result.contents}</SearchResultContent>
 						<SearchResultDirectory>{result.generation.join(', ')}</SearchResultDirectory>

@@ -57,7 +57,7 @@ const SearchBodySection = () => {
 	// useEffect(() => {
 	// 	// TODO: 검색결과 가져오는 API 요청
 	// 	getSearchResult(searchKeyword).then((res) => {
-	// 		if (res.title_match) router.push(`search/${searchKeyword}`); // 100% 일치 -> 리다이렉트
+	// 		if (res.title_match) router.push(`viewer?title=${searchKeyword}`); // 100% 일치 -> 리다이렉트
 	// 		else setSearchResult(res.data); // 100% 일치 X -> 검색결과
 	// 	});
 	// }, [router, searchKeyword]);
