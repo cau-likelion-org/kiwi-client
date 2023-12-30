@@ -17,10 +17,9 @@ const ViewerMain = () => {
   const [openList, setOpenList] = useState(true);
   const [depthOne, setDepthOne] = useState(true);
 
-  const isDepthOne = ()=>{
-    const depth = "2";
-    if(depth === "2")setDepthOne(false);
-    else setDepthOne(true);
+  const isDepthOne = (depth : number)=>{
+    if(depth === 1)setDepthOne(true);
+    else setDepthOne(false);
   }
 
   const isClickedArrow = () => {
@@ -34,23 +33,19 @@ const ViewerMain = () => {
     //여기에 링크로 이동하는 코드 작성
   };
 
-  const [sortLinks, setSortLinks] = useState([
-    {
-      id: 1,
-      title: '11기',
-      link:'',
-    },
-    {
-      id: 2,
-      title: '12기',
-      link:'asdf',
-    }
-  ])
+  const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
   const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
 
   const [contents, setContents] = useState<{ id: number, title: string, content: string }[]>([]);
 
+  function transformDepth(data :{ generation: string }[]) {
+  return data.map((generation, index) => ({
+    id: index + 1,
+    title: `${generation.generation}기`,
+    link: '',
+  }));
+}
 
   const parseMarkdown = (text: string) => {
     const lines = text.split("\n");
@@ -105,12 +100,14 @@ const ViewerMain = () => {
         // console.log("데이터");
         // console.log(data);
         if(data !== undefined){
-          const { viewerContentsLists, contents } = parseMarkdown(data);
+          const { viewerContentsLists, contents } = parseMarkdown(data.content);
           setViewerContentsLists(viewerContentsLists);
           setContents(contents);
+
+          const sortLinks = transformDepth(data.generations);
+          setSortLinks(sortLinks);
+          isDepthOne(sortLinks.length + 1);
         }
-
-
       }
     }
     fetchData();
@@ -187,9 +184,9 @@ const ViewerMain = () => {
         </Viewer>
         <div className="lionwrap">
         {
-          depthOne?
-          <StyledImage src="/img/cloud.png" alt="문서역사 하단" fill priority />
-          :
+          // depthOne?
+          // <StyledImage src="/img/cloud.png" alt="문서역사 하단" fill priority />
+          // :
           <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
         }
 			</div>
