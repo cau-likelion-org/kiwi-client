@@ -10,9 +10,7 @@ export const getSearchResult = async (keyword: string): Promise<ISearchDocs> => 
 };
 
 export const newDocs = async (body: CreateDocs) => {
-	// const token = localStorage.getItem('access');
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0NDcwMTIzLCJpYXQiOjE3MDM4NjUzMjMsImp0aSI6ImNkYmVhYzBhMDYwYjQ2MmNiMjlhZjAxYmNjOWFmOGRhIiwidXNlcl9pZCI6M30.pektrmv59h84IK1mxVyWASlqkl7F2IOTbRabuOlJUGM';
+	const token = localStorage.getItem('access');
 	const result = await axios.post(`${baseURL}/docs/`, body, {
 		headers: {
 			Authorization: `Bearer ${token}`,
