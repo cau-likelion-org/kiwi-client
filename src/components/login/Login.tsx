@@ -24,7 +24,6 @@ return (
 export default Login;
 
 const Main = styled.div`
-	margin-top: 64px;
 	height: fit-content;
 	padding-top: 10rem;
 	width: 100%;

@@ -46,5 +46,4 @@ const ImagesWrapper = styled.div`
 	position: absolute;
 	display: flex;
 	height: 100%;
-	margin-top: 64px;
 `;
