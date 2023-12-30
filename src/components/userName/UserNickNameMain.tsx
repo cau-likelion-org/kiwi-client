@@ -3,21 +3,46 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ConfirmModal from './ConfirmModal';
+import { checkNickName, getRandomNickname } from '@/apis/login';
 
 const UserNickNameMain = () => {
 	const [userNickname, setUserNickname] = useState('어쩔사자티비');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [isAvailable, setIsAvailable] = useState(true);
 
-    const handleModal = ()=>{
-        if(modalIsOpen){
-            setModalIsOpen(false)
-        }else{
-            setModalIsOpen(true)
-        }
-    }
+	const handleModal = async () => {
+		try {
+			const result = await checkNickName(userNickname);
+			if(!userNickname){
+				alert('닉네임을 입력해주세요')
+				return false;
+			}
+			if (result.status === '200') {
+				if (modalIsOpen) {
+					setModalIsOpen(false);
+				} else {
+					setModalIsOpen(true);
+				}
+			} else {
+				setIsAvailable(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleRandomBtn = async () => {
+		try {
+			const response = await getRandomNickname();
+			setUserNickname(response.data.name);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<Main>
-			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname}/>}
+			{modalIsOpen === true && <ConfirmModal setModalIsOpen={setModalIsOpen} nickname={userNickname} />}
 			<Title>
 				<div className="overlay">{'STEP 01 >> 닉네임 설정'}</div>
 				<StyledImage src="/img/nicknametitle.png" alt="닉네임 박스 이미지" fill priority />
@@ -40,14 +65,24 @@ const UserNickNameMain = () => {
 									className="input"
 									type="text"
 									name="user"
-									placeholder="ex) arti_fashion_design"
+									placeholder="닉네임을 써주세요"
 									value={userNickname}
-									onChange={(e) => setUserNickname(e.target.value)}
+									onChange={(e) => {
+										setUserNickname(e.target.value);
+										setIsAvailable(true);
+									}}
 								></input>
 								<div className="shufflebtn">
-									<StyledImage src="/img/shufflelogo.png" alt="닉네임 박스 이미지" fill priority />
+									<StyledImage
+										onClick={handleRandomBtn}
+										src="/img/shufflelogo.png"
+										alt="닉네임 박스 이미지"
+										fill
+										priority
+									/>
 								</div>
 							</div>
+							{isAvailable === false ? <div className="checkText">이미 사용 중인 닉네임 입니다</div> : <div className="checkText"></div>}
 						</div>
 					</div>
 					<SubmitBtn onClick={handleModal}>다음</SubmitBtn>
@@ -68,7 +103,6 @@ const UserNickNameMain = () => {
 export default UserNickNameMain;
 
 const Main = styled.div`
-	margin-top: 64px;
 	height: fit-content;
 	padding-top: 10rem;
 	width: 100%;
@@ -85,14 +119,6 @@ const Main = styled.div`
 		gap: 3rem;
 		bottom: 0;
 	}
-	/* background-image: linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
-		linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px);
-	background-size:
-		100px 100px,
-		100px 100px;
-	background-position:
-		-2px -2px,
-		-2px -2px; */
 `;
 
 const Title = styled.div`
@@ -137,7 +163,7 @@ const Content = styled.div`
 	position: absolute;
 	margin-top: 4rem;
 	height: 70%;
-	width: 90%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -157,10 +183,13 @@ const Content = styled.div`
 		min-width: 11rem;
 	}
 	.right {
-		width: 40%;
+		width: 49%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	.top {
-		width: 100%;
+		width: 90%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -168,7 +197,7 @@ const Content = styled.div`
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
 	}
 	.barimg {
 		width: 60%;
@@ -198,6 +227,7 @@ const Content = styled.div`
 		font-weight: 400;
 		line-height: normal;
 		padding: 0rem 1rem;
+		text-align: center;
 	}
 	.shufflebtn {
 		min-width: 3.7rem;
@@ -206,6 +236,14 @@ const Content = styled.div`
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
+	}
+	.checkText {
+		width: 80%;
+		color: #ff4e4e;
+		min-height : 1.5rem;
+		margin-top: 0.5rem;
+		font-size: 1rem;
+		text-align: center;
 	}
 `;
 
