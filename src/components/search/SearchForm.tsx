@@ -1,5 +1,4 @@
 import useSearchForm from '@/hooks/useSearchForm';
-import { ISearchResult } from '@/types/request';
 import Image from 'next/image';
 import styled from 'styled-components';
 import AutoCompleteBox from './AutoCompleteBox';
@@ -10,7 +9,7 @@ interface SearchFormProps {
 }
 
 const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {
-	const { values, handleChange, handleSearchSubmit } = useSearchForm({
+	const { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur } = useSearchForm({
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
 	});
@@ -24,8 +23,10 @@ const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {
 						placeholder="검색어를 입력하세요..."
 						value={values.searchInput}
 						onChange={handleChange}
+						onFocus={handleFocus}
+						autoComplete="off"
 					/>
-					<AutoCompleteBox searchInput={values.searchInput} />
+					{isFocused && values.searchInput.length > 0 && <AutoCompleteBox searchInput={values.searchInput} />}
 				</FormWrapper>
 			)}
 			{type === 'header' && (
@@ -39,6 +40,7 @@ const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {
 							placeholder="검색..."
 							value={values.searchHeaderInput}
 							onChange={handleChange}
+							autoComplete="off"
 						/>
 					</SearchWrapper>
 				</FormWrapper>

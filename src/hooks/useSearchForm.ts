@@ -12,6 +12,15 @@ interface useFormProps {
 const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 	const router = useRouter();
 	const [values, setValues] = useState(initialValue);
+	const [isFocused, setIsFocused] = useState(false);
+
+	const handleFocus = () => {
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -20,6 +29,7 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 
 	const handleSearchSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setIsFocused(false);
 		const { name } = e.target;
 		if (name === 'searchInput' || name === 'searchHeaderInput') {
 			setValues({ ...values, searchInput: values[name], searchHeaderInput: '' });
@@ -31,7 +41,7 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 		if (searchKeyword) setValues({ searchInput: searchKeyword, searchHeaderInput: '' });
 	}, [searchKeyword]);
 
-	return { values, handleChange, handleSearchSubmit };
+	return { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur };
 };
 
 export default useSearchForm;

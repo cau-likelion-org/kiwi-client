@@ -7,6 +7,10 @@ const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
 	const router = useRouter();
 	const [dropdownList, setDropdownList] = useState<string[]>([]);
 
+	const handleClickItem = (title: string) => {
+		router.push(`search/?search=${title}`);
+	};
+
 	useEffect(() => {
 		if (searchInput) {
 			const timer = setTimeout(() => {
@@ -17,8 +21,10 @@ const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
 							if (data.title.includes(searchInput)) titleList.push(data.title);
 						});
 						setDropdownList(titleList);
-					} else {
+					} else if (res) {
 						setDropdownList([res.title]);
+					} else {
+						setDropdownList([]);
 					}
 				});
 			}, 200);
@@ -26,29 +32,35 @@ const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
 			return () => {
 				clearTimeout(timer);
 			};
+		} else {
+			setDropdownList([]);
 		}
 	}, [searchInput]);
 
 	return (
 		<BoxWrapper>
 			{dropdownList.length > 0 ? (
-				dropdownList.map((item, idx) => <ItemWrapper key={idx}>{item}</ItemWrapper>)
+				dropdownList.map((item, idx) => (
+					<ItemWrapper key={idx} onClick={() => handleClickItem(item)}>
+						{item}
+					</ItemWrapper>
+				))
 			) : (
-				<div>검색결과가 없습니다.</div>
+				<NoResultWrapper>검색결과가 없습니다.</NoResultWrapper>
 			)}
 		</BoxWrapper>
 	);
 };
 
 const BoxWrapper = styled.div`
-	width: 500px;
-	// height: 100px;
-	background-color: white;
-	margin-left: 3vw;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
+	width: 35vw;
+	background-color: white;
+	margin-left: 2vw;
 	gap: 10px;
-	position: absolute;
+	box-shadow: 2px 2px 2px black;
 `;
 
 const ItemWrapper = styled.div`
@@ -58,6 +70,12 @@ const ItemWrapper = styled.div`
 	&:hover {
 		background-color: lightgrey;
 	}
+`;
+
+const NoResultWrapper = styled.div`
+	padding: 15px;
+	font-size: 1.4rem;
+	box-shadow: 2px 2px 2px black;
 `;
 
 export default AutoCompleteBox;

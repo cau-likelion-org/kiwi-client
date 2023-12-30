@@ -26,7 +26,7 @@ const NotFoundSearchText = styled.div`
 `;
 
 const BottomImageWrapper = styled.div`
-	height: 54vh;
+	height: 48vh;
 	display: flex;
 	align-items: flex-end;
 `;
