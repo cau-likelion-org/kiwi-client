@@ -4,9 +4,10 @@ interface LinkBoxProps {
   width?: string;
   height?: string;
   text: string;
+  onClick?: ()=>void;
 }
 
-const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text }) => (
+const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text, onClick }) => (
   text=="역링크"?
   <svg xmlns="http://www.w3.org/2000/svg" width="61" height="34" viewBox="0 0 61 34" fill="none">
     <rect x="0.5" y="0.5" width="60" height="33" rx="9.5" fill="white" stroke="black"/>
