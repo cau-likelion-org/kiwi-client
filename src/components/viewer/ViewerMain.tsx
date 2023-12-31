@@ -30,7 +30,7 @@ const ViewerMain = () => {
   }
 
   const isClickedLink = (link : string) => {
-    router.push(`/viewer?title=${link}기`);
+    router.push(`/viewer?title=${link}`);
     //여기에 링크로 이동하는 코드 작성
   };
 
@@ -55,9 +55,13 @@ function parseLinks(text:string) {
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
   return text.replace(regex, (match, linkText, linkUrl) => {
+    if(linkText === "image"){
+      return `<img src="${linkUrl}" alt="image" width="500">`
+    }
     return `<a href="${linkUrl}">${linkText}</a>`;
   });
 }
+
 
 const processInput = (input: string) => {
   const lines = input.split('\n');
@@ -146,7 +150,7 @@ const processInput = (input: string) => {
                 </div>
                 <div className="line">|</div>
                 {sortLinks.map((sortLink, index)=>(
-                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}기</div>
+                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}</div>
                  ))}
                 <div className="sortContent"></div>
               </SortBox>
