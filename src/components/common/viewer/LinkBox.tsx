@@ -19,7 +19,7 @@ const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text, do
       router.push(`/docHistory?title=${docTitle}`);
     }
     else if(text === "역링크"){
-      router.push(`/viewer?title=${docTitle}`);
+      router.push(`/backlink?title=${docTitle}`);
     }
   };
   
