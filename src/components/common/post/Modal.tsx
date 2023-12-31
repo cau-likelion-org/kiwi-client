@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import Dropdown from './Dropdown';
-import { IOption } from '@/types/request';
+import { CreateDocs, IOption } from '@/types/request';
 import { newDocs } from '@/apis/docs';
 import { useRecoilValue } from 'recoil';
 import { userNameAtom } from '@/app/recoilContextProvider';
@@ -13,6 +13,7 @@ const options: IOption[] = [
 	{ value: '9기', label: '9기' },
 	{ value: '10기', label: '10기' },
 	{ value: '11기', label: '11기' },
+	{ value: '12기', label: '12기' },
 ];
 
 type ModalProps = {
@@ -22,20 +23,6 @@ type ModalProps = {
 	generation: readonly IOption[] | null;
 	setGeneration: React.Dispatch<React.SetStateAction<readonly IOption[] | null>>;
 };
-
-export interface Generation {
-	generation: string;
-}
-
-export interface Depth {
-	generations: Generation[];
-}
-
-export interface CreateDocs extends Depth {
-	title: string;
-	author: string;
-	content: string;
-}
 
 const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps) => {
 	const author = useRecoilValue(userNameAtom);

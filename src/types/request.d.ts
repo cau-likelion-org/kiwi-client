@@ -25,3 +25,28 @@ export interface ISearchResult {
 export interface IGenerations {
 	[key: string]: Generation;
 }
+
+///문서 작성
+export interface Generations {
+	generation: string;
+}
+
+export interface Depth {
+	generations: Generations[];
+}
+
+export interface DataType extends Depth {
+	author: string;
+	content: string;
+	created_at: string;
+	id: number;
+	title: string;
+	titleMatched: boolean;
+	updated_at: string;
+}
+
+export interface CreateDocs extends Depth {
+	title: string;
+	author: string;
+	content: string;
+}

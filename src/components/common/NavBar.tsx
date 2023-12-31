@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
 	const router = useRouter();
+	const token = localStorage.getItem('access');
 	return (
 		<>
 			<Margin />
@@ -40,6 +41,10 @@ const NavBar = () => {
 						<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
 						<Image
 							onClick={() => {
+								if (!token) {
+									alert('🦁로그인을 먼저 해주세요🦁');
+									router.push('/signup');
+								}
 								router.push('/login');
 							}}
 							src="/img/login.png"

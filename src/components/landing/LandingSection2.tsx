@@ -3,17 +3,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import { Depth } from '../common/post/Modal';
-
-interface DataType extends Depth {
-	author: string;
-	content: string;
-	created_at: string;
-	id: number;
-	title: string;
-	titleMatched: boolean;
-	updated_at: string;
-}
+import { DataType } from '@/types/request';
 
 const LandingSection2 = ({ data }: { data: DataType[] }) => {
 	function formatDate(update: string) {

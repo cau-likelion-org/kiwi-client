@@ -4,16 +4,14 @@ import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
 import MDEditor from '@uiw/react-md-editor';
-import { Generation, IOption } from '@/types/request';
+import { Generations, IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
 import { useSearchParams } from 'next/navigation';
 import { getDocsContent } from '@/apis/viewer';
 import Modal from '../common/post/Modal';
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
-interface IGeneration {
-	generation: string;
-}
+
 const Editor: React.FC = () => {
 	const [modal, setModal] = useState(false);
 	const [md, setMd] = useState<string>('');
@@ -25,7 +23,7 @@ const Editor: React.FC = () => {
 			if (title) {
 				const result = await getDocsContent(docsTitle);
 				setMd(result.content);
-				const fetchedGenerations = result.generations.map((item: IGeneration) => ({
+				const fetchedGenerations = result.generations.map((item: Generations) => ({
 					value: item.generation,
 					label: item.generation,
 				}));
