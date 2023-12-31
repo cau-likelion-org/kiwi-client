@@ -30,15 +30,15 @@ const ViewerMain = () => {
   }
 
   const isClickedLink = (link : string) => {
-    router.push(`/viewer?title=${link}기`);
+    router.push(`/viewer?title=${link}`);
     //여기에 링크로 이동하는 코드 작성
   };
 
   const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
-  const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
+  const [viewerContentsLists, setViewerContentsLists] = useState<{ id: string, contents: string }[]>([]);
 
-  const [contents, setContents] = useState<{ id: number, title: string, content: string }[]>([]);
+  const [contents, setContents] = useState<{ id: string, title: string, content: string }[]>([]);
   // const [linkReplacements, setLinkReplacements] = useState< { displayText: string, url: string }[]>([]);
 
 
@@ -55,6 +55,9 @@ function parseLinks(text:string) {
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
   return text.replace(regex, (match, linkText, linkUrl) => {
+    if(linkText === "image"){
+      return `<img src="${linkUrl}" alt="image" width="60%">`
+    }
     return `<a href="${linkUrl}">${linkText}</a>`;
   });
 }
@@ -62,52 +65,84 @@ function parseLinks(text:string) {
 const processInput = (input: string) => {
   const lines = input.split('\n');
   let id = 1;
-  const lists: { id: number, contents: string }[] = [];
-  const docContents: { id: number, title: string, content: string }[] = [];
+  let subId = 1;
+  let subSubId = 1;
+  const lists: { id: string, contents: string }[] = [];
+  const docContents: { id: string, title: string, content: string }[] = [];
+
+  // #로 시작하는 목차가 없을 경우를 대비
+  let hasTitle = false;
 
   lines.forEach((line, index) => {
-    const level = line.match(/#/g)?.length;
+    const level = line.match(/(#+)\s?/g)?.[0].trim().length;
     const text = line.replace(/#+\s?/, '');
+    let title;  // title을 미리 undefined로 초기화
 
     if(level !== undefined && level > 0){
-      const title = `${id}. ${text.trim()}`;
-      lists.push({ id, contents: title });
-      docContents.push({
-        id,
-        title,
-        content: '',
-      });
-      id += 1;
+      hasTitle = true;
+      if(level === 1){
+        title = `${id}. ${text.trim()}`;
+        subId = 1;
+        subSubId = 1;
+        id += 1;
+      } else if(level === 2) {
+        title = `${id - 1}.${subId}. ${text.trim()}`;
+        subSubId = 1;
+        subId += 1;
+      } else if(level === 3) {
+        console.log("레벨");
+        console.log(level);
+        title = `${id - 1}.${subId - 1}.${subSubId}. ${text.trim()}`;
+        subSubId += 1;
+      }
+
+      // title이 undefined가 아닐 때만 lists와 docContents에 추가
+      if (title !== undefined) {
+        lists.push({ id: title.split('. ')[0], contents: title });
+        docContents.push({
+          id: title.split('. ')[0],
+          title,
+          content: '',
+        });
+      }
     } else {
-      // '#'로 시작하지 않는 라인을 docContents의 마지막 항목의 content에 추가
       if (docContents.length > 0) {
         docContents[docContents.length - 1].content += line;
       }
     }
+
+          // '#'로 시작하는 라인이 없는 경우 '0. 소개'를 목차에 추가
+      if (!hasTitle) {
+        lists.unshift({ id: "0", contents: '0. 소개' });
+        docContents.unshift({ id: "0", title: '0. 소개', content: input });
+      }
   });
 
   return { lists, docContents };
 };
 
-
-
   useEffect(()=>{
     const fetchData = async ()=>{
       if(typeof docTitle === 'string'){
-        console.log(docTitle);
-        const data = await getDocsContent(docTitle);
-        console.log(data);
-        const parsed = parseLinks(data.content);
-        console.log(parsed);
-        if(data !== undefined){
-          const { lists, docContents } = processInput(data.content);
-          setViewerContentsLists(lists);
-          setContents(docContents);
-          
-
-          const sortLinks = transformDepth(data.generations);
-          setSortLinks(sortLinks);
-          isDepthOne(sortLinks.length + 1);
+        try{
+          const data = await getDocsContent(docTitle);
+          console.log(data);
+          const parsed = parseLinks(data.content);
+          console.log(parsed);
+          if(data !== undefined){
+            const { lists, docContents } = processInput(data.content);
+            setViewerContentsLists(lists);
+            setContents(docContents);
+            
+  
+            const sortLinks = transformDepth(data.generations);
+            setSortLinks(sortLinks);
+            isDepthOne(sortLinks.length + 1);
+          }
+        }
+        catch(error){
+          alert('🦁문서가 존재하지 않습니다🦁');
+          console.error(error);
         }
       }
     }
@@ -146,7 +181,7 @@ const processInput = (input: string) => {
                 </div>
                 <div className="line">|</div>
                 {sortLinks.map((sortLink, index)=>(
-                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}기</div>
+                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}</div>
                  ))}
                 <div className="sortContent"></div>
               </SortBox>
@@ -175,12 +210,8 @@ const processInput = (input: string) => {
               {contents.map((list)=>{
                 return(
                   <>
-                    {/* <ContentTitle>{list.title}</ContentTitle>
-                    <Content>{list.content}</Content> */}
-                    {/* <ContentTitle>{parseLinks(list.title)}</ContentTitle> */}
                     <ContentTitle dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }} />
                     <Content dangerouslySetInnerHTML={{ __html: parseLinks(list.content) }} />
-
                   </>
                 )
               })}
