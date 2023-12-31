@@ -6,13 +6,14 @@ interface LinkProps{
 
 import { getReverseList } from '@/apis/reverse';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 const BackLink = () => {
   const router = useRouter();
-  const {docTitle} = router.query;
+  const params = useSearchParams();
+	const docTitle = params.get('title');
 
   const isClickedLink = ({title}: LinkProps) => {
     router.push(`/viewer?title=${title}`);
@@ -29,6 +30,7 @@ const BackLink = () => {
         }
       }
       catch(error){
+        alert("🦁문서를 찾을 수 없습니다🦁");
         console.error('Error : ', error);
       }
     };
