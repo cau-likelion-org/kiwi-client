@@ -55,21 +55,6 @@ const Landing = () => {
 				<div className="mini animate3" id="mini11">
 					<Image src="/img/heart.png" alt="" width={30} height={30} />
 				</div>
-				<div className="mini animate1" id="mini12">
-					<Image src="/img/minilion.png" alt="" width={30} height={30} />
-				</div>
-				<div className="mini animate1" id="mini13">
-					<Image src="/img/crylion.png" alt="" width={30} height={30} />
-				</div>
-				<div className="mini animate1" id="mini14">
-					<Image src="/img/minilion.png" alt="" width={30} height={30} />
-				</div>
-				<div className="mini animate1" id="mini15">
-					<Image src="/img/crylion.png" alt="" width={30} height={30} />
-				</div>
-				<div className="mini animate3" id="mini16">
-					<Image src="/img/heart.png" alt="" width={30} height={30} />
-				</div>
 			</Section1>
 			<Section2>
 				<LandingSection2 data={docs} />
@@ -96,9 +81,9 @@ const Section1 = styled.section`
 	.mini {
 		position: absolute;
 		z-index: 1;
-		/* @media (max-width: 1000px) {
+		@media (max-width: 1000px) {
 			display: none;
-		} */
+		}
 		&.animate1 {
 			animation: moveUpDown 1s infinite alternate ease-in-out;
 		}
@@ -137,8 +122,8 @@ const Section1 = styled.section`
 		right: 28%;
 	}
 	#mini6 {
-		bottom: 20%;
-		right: 10%;
+		bottom: 35%;
+		right: 5%;
 	}
 	#mini7 {
 		top: 12%;
@@ -149,36 +134,16 @@ const Section1 = styled.section`
 		left: 12%;
 	}
 	#mini9 {
-		top: 24%;
-		right: 30%;
+		top: 30%;
+		right: 3%;
 	}
 	#mini10 {
 		top: 48%;
 		left: 30%;
 	}
 	#mini11 {
-		bottom: 14%;
-		right: 50%;
-	}
-	#mini12 {
-		top: 12%;
-		right: 8%;
-	}
-	#mini13 {
-		bottom: 8%;
-		right: 24%;
-	}
-	#mini14 {
-		bottom: 50%;
-		left: 2%;
-	}
-	#mini15 {
-		bottom: 51%;
-		right: 9%;
-	}
-	#mini16 {
-		bottom: 30%;
-		left: 38%;
+		bottom: 7%;
+		right: 11%;
 	}
 `;
 
