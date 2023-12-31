@@ -6,32 +6,42 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import { getDocHistories } from '@/apis/history';
 import { useSearchParams } from 'next/navigation';
 
-const sampleData = [
-	{
-		user: '떠나요제주도🌴',
-		date: '2023.12.01 금요일 2:57',
-		change:
-			'I like cats. I like <modified_from> dogs and apple fruit pies. </modified_from> <modified_to> kiwis. bye! Hello </modified_to> Mutsa <deleted> is the best </deleted>',
-	},
-	{
-		user: '머싸머싸',
-		date: '2023.11.25 토요일 5:57',
-		change: '<modified_from> 11기 </modified_from> <modified_to> 12기 </modified_to> 정준하 백엔드 <modified_from> 아기사자 </modified_from> <modified_to> 운영진 </modified_to>',
-	},
-];
+interface HistoryData {
+	title: string,
+	author: string,
+	created_at: string,
+	content: string,
+	change: string,
+}
+// const sampleData = [
+// 	{
+// 		user: '떠나요제주도🌴',
+// 		date: '2023.12.01 금요일 2:57',
+// 		change:
+// 			'I like cats. I like <modified_from> dogs and apple fruit pies. </modified_from> <modified_to> kiwis. bye! Hello </modified_to> Mutsa <deleted> is the best </deleted>',
+// 	},
+// 	{
+// 		user: '머싸머싸',
+// 		date: '2023.11.25 토요일 5:57',
+// 		change:
+// 			'<modified_from> 11기 </modified_from> <modified_to> 12기 </modified_to> 정준하 백엔드 <modified_from> 아기사자 </modified_from> <modified_to> 운영진 </modified_to>',
+// 	},
+// ];
 const DocHistory = () => {
 	const params = useSearchParams();
 	const title = params.get('title');
-	const [dataList, setDataList] = useState();
+	const [dataList, setDataList] = useState<HistoryData[]>();
 
 	useEffect(() => {
 		const getHistory = async () => {
-			if(title){
+			if (title) {
 				const result = await getDocHistories(title);
-				console.log(title);
+				console.log(result);
+				setDataList(result.data);
 			}
 		};
 		getHistory();
+		console.log(dataList);
 	}, [title]);
 
 	const renderOldStr = (change: any) => {
@@ -79,26 +89,41 @@ const DocHistory = () => {
 					</HeaderShadow>
 				</ViewerHeaderSection>
 				<ContentSection>
-					{sampleData.map((data, index) => (
-						<EditInfo key={index}>
-							<div className="profile">
-								<div className="profile-circle">
-									<div className="profile-img">
-										<StyledImage src="/img/modallion.png" alt="문서역사" fill priority />
+					{dataList &&
+						dataList.map((data, index) => (
+							<EditInfo key={index}>
+								<div className="profile">
+									<div className="profile-circle">
+										<div className="profile-img">
+											<StyledImage src="/img/modallion.png" alt="문서역사" fill priority />
+										</div>
 									</div>
+									<div>{`{${data.author}}`}님이 편집했어요</div>
 								</div>
-								<div>{`{${data.user}}`}님이 편집했어요</div>
-							</div>
-							<div className="date">{data.date}</div>
-							<OriginalContent>
-								<div dangerouslySetInnerHTML={renderOldStr(data.change)} />
-							</OriginalContent>
-							<VscTriangleDown size="4rem" color="rgba(76, 77, 245, 0.8)" />
-							<ModifyContent>
-								<div dangerouslySetInnerHTML={renderNewStr(data.change)} />
-							</ModifyContent>
-						</EditInfo>
-					))}
+								<div className="date">{data.created_at}</div>
+								{data.change ? (
+									<>
+										<OriginalContent>
+											<div dangerouslySetInnerHTML={renderOldStr(data.change)} />
+										</OriginalContent>
+										<VscTriangleDown size="4rem" color="rgba(76, 77, 245, 0.8)" />
+										<ModifyContent>
+											<div dangerouslySetInnerHTML={renderNewStr(data.change)} />
+										</ModifyContent>
+									</>
+								) : (
+									<>
+										<OriginalContent>
+										<span className='first'>{`{${data.title}}`} 문서가 생성되었어요</span>
+										</OriginalContent>
+										<VscTriangleDown size="4rem" color="rgba(76, 77, 245, 0.8)" />
+										<ModifyContent>
+											<span className='add'>{data.content}</span>
+										</ModifyContent>
+									</>
+								)}
+							</EditInfo>
+						))}
 					<ColorChip>
 						<Color>
 							<div className="color-circle1" />
@@ -238,8 +263,12 @@ const OriginalContent = styled.div`
 	font-family: Pretendard;
 	font-size: 1.5rem;
 	margin-top: 1rem;
+	padding: 2rem 0.5rem;
 	div {
 		padding: 2rem;
+	}
+	.first{
+		color: #4c4df5;
 	}
 	.from {
 		background-color: #ff7;
@@ -257,6 +286,7 @@ const ModifyContent = styled.div`
 	overflow: scroll;
 	font-family: Pretendard;
 	font-size: 1.5rem;
+	padding: 2rem 0.5rem;
 	div {
 		padding: 2rem;
 	}
@@ -282,6 +312,7 @@ const ColorChip = styled.div`
 	flex-direction: column;
 	gap: 1rem;
 	margin-bottom: 5rem;
+	margin-top: 3rem;
 `;
 
 const Color = styled.div`
