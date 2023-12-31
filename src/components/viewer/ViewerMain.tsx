@@ -11,7 +11,7 @@ interface LinkProps{
 }
 
 const ViewerMain = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const params = useSearchParams();
 	const docTitle = params.get('title');
 
@@ -29,7 +29,8 @@ const ViewerMain = () => {
     console.log(1);
   }
 
-  const isClickedLink = ({link}: LinkProps) => {
+  const isClickedLink = (link : string) => {
+    router.push(`/viewer?title=${link}`);
     console.log(link);
     //여기에 링크로 이동하는 코드 작성
   };
@@ -39,6 +40,8 @@ const ViewerMain = () => {
   const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
 
   const [contents, setContents] = useState<{ id: number, title: string, content: string }[]>([]);
+  // const [linkReplacements, setLinkReplacements] = useState< { displayText: string, url: string }[]>([]);
+
 
   function transformDepth(data :{ generation: string }[]) {
   return data.map((generation, index) => ({
@@ -46,6 +49,15 @@ const ViewerMain = () => {
     title: `${generation.generation}`,
     link: '',
   }));
+}
+
+function parseLinks(text:string) {
+  // text = text || '';
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+  return text.replace(regex, (match, linkText, linkUrl) => {
+    return `<a href="${linkUrl}">${linkText}</a>`;
+  });
 }
 
 const processInput = (input: string) => {
@@ -85,8 +97,9 @@ const processInput = (input: string) => {
       if(typeof docTitle === 'string'){
         console.log(docTitle);
         const data = await getDocsContent(docTitle);
-        // console.log("데이터");
         console.log(data);
+        const parsed = parseLinks(data.content);
+        console.log(parsed);
         if(data !== undefined){
           const { lists, docContents } = processInput(data.content);
           setViewerContentsLists(lists);
@@ -134,7 +147,7 @@ const processInput = (input: string) => {
                 </div>
                 <div className="line">|</div>
                 {sortLinks.map((sortLink, index)=>(
-                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink({link: sortLink.link})}> {sortLink.title}</div>
+                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}기</div>
                  ))}
                 <div className="sortContent"></div>
               </SortBox>
@@ -162,8 +175,12 @@ const processInput = (input: string) => {
               {contents.map((list)=>{
                 return(
                   <>
-                    <ContentTitle>{list.title}</ContentTitle>
-                    <Content>{list.content}</Content>
+                    {/* <ContentTitle>{list.title}</ContentTitle>
+                    <Content>{list.content}</Content> */}
+                    {/* <ContentTitle>{parseLinks(list.title)}</ContentTitle> */}
+                    <ContentTitle dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }} />
+                    <Content dangerouslySetInnerHTML={{ __html: parseLinks(list.content) }} />
+
                   </>
                 )
               })}
