@@ -30,8 +30,7 @@ const ViewerMain = () => {
   }
 
   const isClickedLink = (link : string) => {
-    router.push(`/viewer?title=${link}`);
-    console.log(link);
+    router.push(`/viewer?title=${link}기`);
     //여기에 링크로 이동하는 코드 작성
   };
 
@@ -165,12 +164,13 @@ const processInput = (input: string) => {
                   }
                 </ListTitle>
                 {openList &&
-                <ListBox>
-                  {viewerContentsLists.map((list)=>(
-                    <List key={list.id}>{list.contents}</List>
-                  ))}
-                </ListBox>
+                  <ListBox>
+                    {viewerContentsLists.map((list) => (
+                      <List key={list.id} dangerouslySetInnerHTML={{ __html: parseLinks(list.contents) }}></List>
+                    ))}
+                  </ListBox>
                 }
+
               </ContentsLists>
               {contents.map((list)=>{
                 return(
