@@ -2,8 +2,7 @@
 import { getDocsContent } from '@/apis/viewer';
 import LinkBox from '@/components/common/viewer/LinkBox';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
@@ -12,7 +11,7 @@ interface LinkProps{
 }
 
 const ViewerMain = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const params = useSearchParams();
 	const docTitle = params.get('title');
 
@@ -30,94 +29,81 @@ const ViewerMain = () => {
     console.log(1);
   }
 
-  const isClickedLink = ({link}: LinkProps) => {
-    console.log(link);
+  const isClickedLink = (link : string) => {
+    router.push(`/viewer?title=${link}기`);
     //여기에 링크로 이동하는 코드 작성
   };
-
-  const isClickedButton = (content: string)=>{
-    if(content === "편집"){
-      // router.push(`/edit?title=${docTitle}`);
-    }
-    else if(content === "역사"){
-      // router.push(`/docHistory?title=${docTitle}`);
-    }
-    else if(content === "역링크"){
-      // router.push(`/viewer?title=${docTitle}`);
-    }
-  }
 
   const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
   const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
 
   const [contents, setContents] = useState<{ id: number, title: string, content: string }[]>([]);
+  // const [linkReplacements, setLinkReplacements] = useState< { displayText: string, url: string }[]>([]);
+
 
   function transformDepth(data :{ generation: string }[]) {
   return data.map((generation, index) => ({
     id: index + 1,
-    title: `${generation.generation}기`,
+    title: `${generation.generation}`,
     link: '',
   }));
 }
 
-  const parseMarkdown = (text: string) => {
-    const lines = text.split("\n");
-    const viewerContentsLists :{ id: number, contents: string }[] = [];
-    const contents : { id: number, title:string, content: string }[]= [];
-    let id = 1;
-    let contentId = 1;
-    let contentTitle = "";
-    let contentBody = "";
+function parseLinks(text:string) {
+  // text = text || '';
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
-    lines.forEach((line, index) => {
-      const match = line.match(/^(#+) (.+)/);
-      if (match) {
-        const level = match[1].length; // '#'의 개수
-        const title = match[2]; // 제목 텍스트
+  return text.replace(regex, (match, linkText, linkUrl) => {
+    return `<a href="${linkUrl}">${linkText}</a>`;
+  });
+}
 
-        viewerContentsLists.push({ id: id++, contents: title });
+const processInput = (input: string) => {
+  const lines = input.split('\n');
+  let id = 1;
+  const lists: { id: number, contents: string }[] = [];
+  const docContents: { id: number, title: string, content: string }[] = [];
 
-        if (level === 1) {
-          if (contentTitle) {
-            contents.push({
-              id: contentId++,
-              title: contentTitle,
-              content: contentBody,
-            });
-            contentTitle = title;
-            contentBody = "";
-          } else {
-            contentTitle = title;
-          }
-        }
-      } else {
-        contentBody += line + "\n";
+  lines.forEach((line, index) => {
+    const level = line.match(/#/g)?.length;
+    const text = line.replace(/#+\s?/, '');
+
+    if(level !== undefined && level > 0){
+      const title = `${id}. ${text.trim()}`;
+      lists.push({ id, contents: title });
+      docContents.push({
+        id,
+        title,
+        content: '',
+      });
+      id += 1;
+    } else {
+      // '#'로 시작하지 않는 라인을 docContents의 마지막 항목의 content에 추가
+      if (docContents.length > 0) {
+        docContents[docContents.length - 1].content += line;
       }
+    }
+  });
 
-      if (index === lines.length - 1) {
-        contents.push({
-          id: contentId++,
-          title: contentTitle,
-          content: contentBody,
-        });
-      }
-    });
+  return { lists, docContents };
+};
 
-    return { viewerContentsLists, contents };
-  };
+
 
   useEffect(()=>{
     const fetchData = async ()=>{
       if(typeof docTitle === 'string'){
         console.log(docTitle);
         const data = await getDocsContent(docTitle);
-        // console.log("데이터");
         console.log(data);
+        const parsed = parseLinks(data.content);
+        console.log(parsed);
         if(data !== undefined){
-          const { viewerContentsLists, contents } = parseMarkdown(data.content);
-          setViewerContentsLists(viewerContentsLists);
-          setContents(contents);
+          const { lists, docContents } = processInput(data.content);
+          setViewerContentsLists(lists);
+          setContents(docContents);
+          
 
           const sortLinks = transformDepth(data.generations);
           setSortLinks(sortLinks);
@@ -145,9 +131,9 @@ const ViewerMain = () => {
             <ContentsHeader>
               <Title>{docTitle}</Title>
               <Links>
-                <LinkBox text="편집" onClick={()=>isClickedButton("편집")}/>
-                <LinkBox text="역사"/>
-                <LinkBox text="역링크"/>
+                <LinkBox text="편집" docTitle={docTitle || ''}/>
+                <LinkBox text="역사" docTitle={docTitle || ''}/>
+                <LinkBox text="역링크" docTitle={docTitle || ''}/>
               </Links>
             </ContentsHeader>
             <ContentsBody>
@@ -160,7 +146,7 @@ const ViewerMain = () => {
                 </div>
                 <div className="line">|</div>
                 {sortLinks.map((sortLink, index)=>(
-                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink({link: sortLink.link})}> {sortLink.title}</div>
+                   <div className = "sortContent" key={index}  onClick={()=>isClickedLink(sortLink.title)}> {sortLink.title}기</div>
                  ))}
                 <div className="sortContent"></div>
               </SortBox>
@@ -178,18 +164,23 @@ const ViewerMain = () => {
                   }
                 </ListTitle>
                 {openList &&
-                <ListBox>
-                  {viewerContentsLists.map((list)=>(
-                    <List key={list.id}>{list.id}. {list.contents}</List>
-                  ))}
-                </ListBox>
+                  <ListBox>
+                    {viewerContentsLists.map((list) => (
+                      <List key={list.id} dangerouslySetInnerHTML={{ __html: parseLinks(list.contents) }}></List>
+                    ))}
+                  </ListBox>
                 }
+
               </ContentsLists>
               {contents.map((list)=>{
                 return(
                   <>
-                    <ContentTitle>{list.id}. {list.title}</ContentTitle>
-                    <Content>{list.content}</Content>
+                    {/* <ContentTitle>{list.title}</ContentTitle>
+                    <Content>{list.content}</Content> */}
+                    {/* <ContentTitle>{parseLinks(list.title)}</ContentTitle> */}
+                    <ContentTitle dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }} />
+                    <Content dangerouslySetInnerHTML={{ __html: parseLinks(list.content) }} />
+
                   </>
                 )
               })}
@@ -198,12 +189,7 @@ const ViewerMain = () => {
           <div style={{backgroundColor:"black", width: "100%", height:"15px",marginLeft:"15px"}}/>
         </Viewer>
         <div className="lionwrap">
-        {
-          // depthOne?
-          // <StyledImage src="/img/cloud.png" alt="문서역사 하단" fill priority />
-          // :
-          <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
-        }
+        <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
 			</div>
     </Main>
     
