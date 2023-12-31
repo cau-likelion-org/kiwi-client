@@ -18,43 +18,52 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 	};
 	return (
 		<ImageWrapper>
-			<Title>
+			<RecentSection>
+				<Left>
+					<LionLeft>
+						<ShortCut1>
+							<div className="overlay">10기 문서<br/>바로가기</div>
+							<StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
+						</ShortCut1>
+						<Lions>
+							<StyledImage src="/img/lionblue.png" alt="파랑 사자" fill priority />
+							<StyledImage src="/img/liongreen.png" alt="초록 사자" fill priority />
+						</Lions>
+					</LionLeft>
+				</Left>
+				<Middle>
+				<Title>
 				<div className="overlay">{'> 최근 편집 목록 <'}</div>
-				<StyledImage3 src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
+				<StyledImage src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
 			</Title>
-			<Box>
-				<Content>
-					{data.map((result, idx) => (
-						<>
-							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
-								<div>{result.title}</div>
-								<div>{formatDate(result.updated_at)}</div>
-							</div>
-						</>
-					))}
-				</Content>
-				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
-			</Box>
-			<ImageWrapper2>
-				<ShortCuts1>
-					<div className="overlay">{'10기 문서 바로가기'}</div>
-					<StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
-				</ShortCuts1>
-				<ShortCuts2>
-					<div className="overlay">{'11기 문서 바로가기'}</div>
-					<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
-				</ShortCuts2>
-			</ImageWrapper2>
-			<LionWrapper>
-				<Lions>
-					<StyledImage src="/img/landingblue.png" alt="파랑 사자" fill priority />
-					<StyledImage src="/img/landinggreen.png" alt="초록 사자" fill priority />
-				</Lions>
-				<Lions>
-					<StyledImage src="/img/landingorange.png" alt="주황 사자" fill priority />
-					<StyledImage src="/img/landingred.png" alt="빨강 사자" fill priority />
-				</Lions>
-			</LionWrapper>
+				<Box>
+					<Content>
+						{data.map((result, idx) => (
+							<>
+								<div className="list" key={idx} onClick={() => handleClick(result.title)}>
+									<div>{result.title}</div>
+									<div>{formatDate(result.updated_at)}</div>
+								</div>
+							</>
+						))}
+					</Content>
+					<StyledImage src="/img/recent.png" alt="박스 이미지" fill priority />
+				</Box>
+					</Middle>
+			
+				<Right>
+					<LionRight>
+						<ShortCut2>
+							<div className="overlay">11기 문서<br/>바로가기</div>
+							<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
+						</ShortCut2>
+						<Lions>
+							<StyledImage src="/img/lionorange.png" alt="주황 사자" fill priority />
+							<StyledImage src="/img/lionred.png" alt="빨강 사자" fill priority />
+						</Lions>
+					</LionRight>
+				</Right>
+			</RecentSection>
 		</ImageWrapper>
 	);
 };
@@ -63,29 +72,28 @@ export default LandingSection2;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 83vh;
+	height: fit-content;
+	min-height: 90vh;
+	overflow:hidden;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	top: 15rem;
 `;
 
 const Title = styled.div`
 	position: relative;
+	z-index: 4;
 	width: 30%;
 	min-width: 330px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: max-content;
-	margin-left: 3rem;
-	margin-bottom: 4rem;
+	margin-bottom: 1rem;
 	.overlay {
-		z-index: 1;
+		z-index: 4;
 		position: absolute;
-		height: 100%;
 		width: 80%;
 		display: flex;
 		align-items: center;
@@ -98,37 +106,28 @@ const Title = styled.div`
 		line-height: normal;
 		letter-spacing: 0.3125rem;
 	}
-	@media screen and (min-width: 1024px) {
-		top: 13rem;
-		width: 25%;
-	}
 `;
 
 const Box = styled.div`
 	position: relative;
-	width: 55%;
+	width: 40%;
+	min-width: 350px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: max-content;
-	margin-left: 3rem;
 	gap: 1rem;
-	bottom: 3rem;
-	z-index: 1;
-	@media screen and (min-width: 1024px) {
-		top: 10rem;
-		width: 38%;
-		font-size: 1.3rem;
+	z-index: 2;
+	@media (max-width: 1000px) {
+		width: 60%;
 	}
 `;
 
 const Content = styled.div`
 	z-index: 2;
 	position: absolute;
-	margin-top: 3.2rem;
 	width: 90%;
-	height: 80%;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -149,119 +148,130 @@ const Content = styled.div`
 
 const StyledImage = styled(Image)`
 	position: relative !important;
-	height: fit-content;
+	/* height: fit-content; */
 `;
 
-const StyledImage2 = styled(Image)`
-	position: relative !important;
-	height: unset !important;
-	object-fit: cover;
-`;
-
-const StyledImage3 = styled(Image)`
-	position: relative !important;
-	height: unset !important;
-	object-fit: cover;
-`;
-
-const ImageWrapper2 = styled.div`
-	display: flex;
-	justify-content: space-between;
-	position: relative;
-	width: 97%;
-	height: 15rem;
-	bottom: 17rem;
-	z-index: 2;
-	@media screen and (min-width: 1024px) {
-		width: 98%;
-		bottom: 23.5rem;
-	}
-`;
-
-const ShortCuts1 = styled.div`
-	width: 11rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	position: relative;
-	.overlay {
-		z-index: 1;
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #000;
-		font-size: 1.5rem;
-		font-family: 'NeoDunggeunmo Pro';
-		font-style: normal;
-		font-weight: bold;
-		line-height: normal;
-		letter-spacing: 0.4rem;
-		margin-bottom: 7px;
-		@media screen and (min-width: 1024px) {
-			width: 90%;
-			font-size: 1.7rem;
-			letter-spacing: 0rem;
-		}
-	}
-	@media screen and (min-width: 1024px) {
-		width: 12%;
-		font-size: 1.3rem;
-	}
-`;
-
-const ShortCuts2 = styled.div`
-	width: 11rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	position: relative;
-	.overlay {
-		z-index: 1;
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #000;
-		font-size: 1.5rem;
-		font-family: 'NeoDunggeunmo Pro';
-		font-style: normal;
-		font-weight: bold;
-		line-height: normal;
-		letter-spacing: 0.4rem;
-		@media screen and (min-width: 1024px) {
-			width: 90%;
-			font-size: 1.7rem;
-			letter-spacing: 0rem;
-		}
-	}
-	@media screen and (min-width: 1024px) {
-		width: 12%;
-		font-size: 1.3rem;
-	}
-`;
-
-const LionWrapper = styled.div`
+const ShortCutWrap = styled.div`
 	display: flex;
 	width: 100%;
-	justify-content: space-between;
+`;
+
+const ShortCut1 = styled.div`
+	display: flex;
+	width: 35%;
+	justify-content: center;
 	align-items: center;
+	text-align: center;
 	position: relative;
-	bottom: 15rem;
-	z-index: 2;
-	@media screen and (min-width: 1024px) {
-		bottom: 32rem;
+	z-index: 3;
+	margin-left: 25%;
+	.overlay {
+		z-index: 2;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 1.5rem;
+		font-family: 'NeoDunggeunmo Pro';
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.4rem;
+	}
+	@media (max-width: 1200px) {
+		width: 50%;
+	}
+`;
+
+const ShortCut2 = styled.div`
+	display: flex;
+	width: 35%;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	z-index: 3;
+	margin-right: 20%;
+	.overlay {
+		z-index: 3;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		font-size: 1.5rem;
+		font-family: 'NeoDunggeunmo Pro';
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		letter-spacing: 0.4rem;
+	}	@media (max-width: 1200px) {
+		width: 50%;
+	}
+`;
+
+const RecentSection = styled.div`
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	align-items: end;
+	justify-content: centers;
+`;
+const Left = styled.div`
+	width: 35%;
+	min-width: 230px;
+	display: flex;
+	position: absolute;
+	@media (max-width: 1200px) {
+		margin-bottom: -8%;
+	}
+`;
+
+const Middle = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+`;
+const Right = styled.div`
+	width: 35%;
+	min-width: 230px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right:0;
+	@media (max-width: 1200px) {
+		margin-bottom: -8%;
 	}
 `;
 
 const Lions = styled.div`
+	z-index: 3;
 	display: flex;
-	width: fit-content;
-	height: 20rem;
-	@media screen and (min-width: 1024px) {
-		height: 27rem;
-		margin-top: 10rem;
-	}
+	width: 90%;
+	align-items: end;
+	justify-content: end;
+`;
+
+const LionLeft = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: end;
+	margin-left: -10%;
+`;
+
+const LionRight = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	justify-content: end;
+	margin-right: -10%;
 `;
