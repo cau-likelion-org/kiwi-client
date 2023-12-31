@@ -48,30 +48,37 @@ const ViewerMain = () => {
   }));
 }
 
-  const processInput = (input: string) => {
-    const lines = input.split('\n');
-    let id = 1;
-    const lists: { id: number, contents: string }[] = [];
-    const docContents: { id: number, title: string, content: string }[] = [];
-  
-    lines.forEach((line, index) => {
-      const level = line.match(/#/g)?.length;
-      const text = line.replace(/#+\s?/, '');
-  
-      if(level !== undefined && level > 0){
-        const title = `${id}. ${text.trim()}`;
-        lists.push({ id, contents: title });
-        docContents.push({
-          id,
-          title,
-          content: '',
-        });
-        id += 1;
+const processInput = (input: string) => {
+  const lines = input.split('\n');
+  let id = 1;
+  const lists: { id: number, contents: string }[] = [];
+  const docContents: { id: number, title: string, content: string }[] = [];
+
+  lines.forEach((line, index) => {
+    const level = line.match(/#/g)?.length;
+    const text = line.replace(/#+\s?/, '');
+
+    if(level !== undefined && level > 0){
+      const title = `${id}. ${text.trim()}`;
+      lists.push({ id, contents: title });
+      docContents.push({
+        id,
+        title,
+        content: '',
+      });
+      id += 1;
+    } else {
+      // '#'로 시작하지 않는 라인을 docContents의 마지막 항목의 content에 추가
+      if (docContents.length > 0) {
+        docContents[docContents.length - 1].content += line;
       }
-    });
-  
-    return { lists, docContents };
-  };
+    }
+  });
+
+  return { lists, docContents };
+};
+
+
 
   useEffect(()=>{
     const fetchData = async ()=>{
