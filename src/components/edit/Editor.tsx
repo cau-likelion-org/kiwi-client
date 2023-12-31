@@ -1,21 +1,39 @@
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
-import dynamic from 'next/dynamic';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
-import Modal from '../common/post/Modal';
 import MDEditor from '@uiw/react-md-editor';
-import { IOption } from '@/types/request';
+import { Generation, IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
+import { useSearchParams } from 'next/navigation';
+import { getDocsContent } from '@/apis/viewer';
+import Modal from '../common/post/Modal';
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
-
-const Upload: React.FC = () => {
+interface IGeneration {
+	generation: string;
+}
+const Editor: React.FC = () => {
 	const [modal, setModal] = useState(false);
-	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
-	const [generation, setGeneration] = useState<readonly IOption[] | null>(null);
+	const [selectedGenerations, setSelectedGenerations] = useState<readonly IOption[] | null>([]);
+	const params = useSearchParams();
+	const title: string = params.get('title') || '';
+	useEffect(() => {
+		const getDocument = async (docsTitle: string) => {
+			if (title) {
+				const result = await getDocsContent(docsTitle);
+				setMd(result.content);
+				const fetchedGenerations = result.generations.map((item: IGeneration) => ({
+					value: item.generation,
+					label: item.generation,
+				}));
+				setSelectedGenerations(fetchedGenerations);
+			}
+		};
+		getDocument(title);
+	}, [title]);
 
 	const onModal = () => {
 		if (md == '' || title == '') {
@@ -27,10 +45,6 @@ const Upload: React.FC = () => {
 
 	const closeModal = () => {
 		setModal(false);
-	};
-
-	const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value);
 	};
 
 	const handleEditorChange = (value?: string | undefined) => {
@@ -78,7 +92,7 @@ const Upload: React.FC = () => {
 					<Btn>취소</Btn>
 					<Btn onClick={onModal}>완료</Btn>
 				</BtnWrapper>
-				<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
+				<Input value={title} />
 				<div className="markarea">
 					<div data-color-mode="dark">
 						<MDEditor
@@ -92,13 +106,19 @@ const Upload: React.FC = () => {
 				</div>
 			</Wrapper>
 			{modal && (
-				<Modal md={md} title={title} closeModal={closeModal} generation={generation} setGeneration={setGeneration} />
+				<Modal
+					md={md}
+					title={title}
+					closeModal={closeModal}
+					generation={selectedGenerations}
+					setGeneration={setSelectedGenerations}
+				/>
 			)}
 		</>
 	);
 };
 
-export default Upload;
+export default Editor;
 
 const Wrapper = styled.div`
 	width: 98%;
@@ -143,5 +163,8 @@ const Input = styled.input`
 	margin-bottom: 1.5rem;
 	&:focus {
 		outline: none;
+	}
+	&[readonly] {
+		background-color: #7c7b7b;
 	}
 `;

@@ -3,33 +3,31 @@
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import MD from './MD';
+import Editor from './Editor';
 
 const Edit = () => {
 	return (
-		<Main>
-			<div className="heart">
-				<StyledImage src="/img/heart3group.png" alt="문서역사" fill priority />
-			</div>
-			<Docs>
-				<TopWrapper>
-					<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
-				</TopWrapper>
-				<Boder>
-					<ContentSection>
-						<BtnWrapper>
-							<Btn>취소</Btn>
-							<Btn>완료</Btn>
-						</BtnWrapper>
-						<MD />
-					</ContentSection>
-				</Boder>
-				<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
-			</Docs>
-			<div className="lionwrap">
-				<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
-			</div>
-		</Main>
+		<>
+			<Main>
+				<div className="heart">
+					<StyledImage src="/img/heart3Group.png" alt="문서역사" fill priority />
+				</div>
+				<Docs>
+					<TopWrapper>
+						<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
+					</TopWrapper>
+					<Boder>
+						<ContentSection>
+							<Editor />
+						</ContentSection>
+					</Boder>
+					<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
+				</Docs>
+				<div className="lionwrap">
+					<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
+				</div>
+			</Main>
+		</>
 	);
 };
 
@@ -37,7 +35,7 @@ export default Edit;
 
 const Main = styled.div`
 	height: fit-content;
-	padding-top: 10rem;
+	padding-top: 3rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -54,7 +52,7 @@ const Main = styled.div`
 	}
 	.heart {
 		margin-right: 65%;
-		width: 20%;
+		width: 15%;
 		margin-bottom: 1.5rem;
 		min-width: 10rem;
 		margin-top: 2rem;
@@ -121,8 +119,9 @@ const BtnWrapper = styled.div`
 	display: flex;
 	align-items: flex-end;
 	justify-content: end;
-	padding: 0.5rem;
-	margin-right: 2rem;
+	padding: 1rem;
+	margin-top: 1rem;
+	margin-right: 4rem;
 	gap: 1rem;
 `;
 
@@ -140,4 +139,15 @@ const Btn = styled.div`
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
+`;
+
+const Input = styled.input`
+	width: 93%;
+	font-size: 2.5rem;
+	border: none;
+	border-bottom: 2px solid #d9d9d9;
+	margin-bottom: 1rem;
+	&:focus {
+		outline: none;
+	}
 `;

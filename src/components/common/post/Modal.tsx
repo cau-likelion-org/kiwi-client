@@ -6,6 +6,8 @@ import { styled } from 'styled-components';
 import Dropdown from './Dropdown';
 import { IOption } from '@/types/request';
 import { newDocs } from '@/apis/docs';
+import { useRecoilValue } from 'recoil';
+import { userNameAtom } from '@/app/recoilContextProvider';
 
 const options: IOption[] = [
 	{ value: '9기', label: '9기' },
@@ -36,7 +38,9 @@ export interface CreateDocs extends Depth {
 }
 
 const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps) => {
-	const author = '영';
+	const author = useRecoilValue(userNameAtom);
+	const router = useRouter();
+
 	const handleSubmit = async () => {
 		if (generation && generation.length > 0) {
 			const body: CreateDocs = {
@@ -46,8 +50,7 @@ const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps)
 				generations: generation.map((item) => ({ generation: item.value })),
 			};
 			const result = await newDocs(body);
-			console.log(result); // 결과를 확인
-			closeModal();
+			router.push(`/viewer/?title=${title}`);
 		} else {
 			alert('🦁카테고리 선택은 필수🦁');
 		}

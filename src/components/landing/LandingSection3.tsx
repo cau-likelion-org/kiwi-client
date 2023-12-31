@@ -27,15 +27,15 @@ const LandingSection3 = () => {
 						<StyledImage src="/img/guideSection.png" alt={'랜딩'} fill priority></StyledImage>
 					</Box>
 				</Wrapper>
+				<LionWrapper>
+					<Lion1>
+						<StyledImage2 src="/img/heartlion.png" alt={'랜딩'} fill priority></StyledImage2>
+					</Lion1>
+					<Lion2>
+						<StyledImage2 src="/img/glasslion.png" alt={'랜딩'} fill priority></StyledImage2>
+					</Lion2>
+				</LionWrapper>
 			</ImageWrapper>
-			<LionWrapper>
-				<Lion1>
-					<StyledImage2 src="/img/heartlion.png" alt={'랜딩'} fill priority></StyledImage2>
-				</Lion1>
-				<Lion2>
-					<StyledImage2 src="/img/glasslion.png" alt={'랜딩'} fill priority></StyledImage2>
-				</Lion2>
-			</LionWrapper>
 		</>
 	);
 };
@@ -44,12 +44,13 @@ export default LandingSection3;
 
 const ImageWrapper = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: 80vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	/* overflow-y: hidden; */
 `;
 
 const Wrapper = styled.div`
@@ -60,6 +61,7 @@ const Wrapper = styled.div`
 	position: relative;
 	width: 100%;
 	gap: 1rem;
+	bottom: 5rem;
 `;
 
 const Title = styled.div`
@@ -124,20 +126,31 @@ const StyledImage = styled(Image)`
 const LionWrapper = styled.div`
 	position: relative;
 	width: 100%;
+	top: 4.5rem;
+	@media screen and (min-width: 1024px) {
+		top: 8.5rem;
+	}
 `;
 
 const Lion1 = styled.div`
 	position: absolute;
 	width: 15rem;
-	bottom: 0;
 	left: 3rem;
+	@media screen and (min-width: 1024px) {
+		bottom: 0;
+		width: 17rem;
+	}
 `;
 
 const Lion2 = styled.div`
 	position: absolute;
 	width: 12rem;
-	bottom: 1rem;
+	bottom: -5rem;
 	right: 0;
+	@media screen and (min-width: 1024px) {
+		width: 15rem;
+		bottom: 7rem;
+	}
 `;
 
 const StyledImage2 = styled(Image)`
