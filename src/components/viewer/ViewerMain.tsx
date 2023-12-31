@@ -34,21 +34,6 @@ const ViewerMain = () => {
     //여기에 링크로 이동하는 코드 작성
   };
 
-<<<<<<< HEAD
-=======
-  const isClickedButton = (content: string)=>{
-    if(content === "편집"){
-      // router.push(`/edit?title=${docTitle}`);
-    }
-    else if(content === "역사"){
-      // router.push(`/docHistory?title=${docTitle}`);
-    }
-    else if(content === "역링크"){
-      // router.push(`/viewer?title=${docTitle}`);
-    }
-  }
->>>>>>> 8cfc002caeca41df85c9f6037f660f21e09f6366
-
   const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
   const [viewerContentsLists, setViewerContentsLists] = useState<{ id: number, contents: string }[]>([]);
@@ -162,7 +147,7 @@ const ViewerMain = () => {
                 {openList &&
                 <ListBox>
                   {viewerContentsLists.map((list)=>(
-                    <List key={list.id}>{list.id}. {list.contents}</List>
+                    <List key={list.id}>{list.contents}</List>
                   ))}
                 </ListBox>
                 }
@@ -170,7 +155,7 @@ const ViewerMain = () => {
               {contents.map((list)=>{
                 return(
                   <>
-                    <ContentTitle>{list.id}. {list.title}</ContentTitle>
+                    <ContentTitle>{list.title}</ContentTitle>
                     <Content>{list.content}</Content>
                   </>
                 )
@@ -180,12 +165,7 @@ const ViewerMain = () => {
           <div style={{backgroundColor:"black", width: "100%", height:"15px",marginLeft:"15px"}}/>
         </Viewer>
         <div className="lionwrap">
-        {
-          // depthOne?
-          // <StyledImage src="/img/cloud.png" alt="문서역사 하단" fill priority />
-          // :
-          <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
-        }
+        <StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
 			</div>
     </Main>
     
