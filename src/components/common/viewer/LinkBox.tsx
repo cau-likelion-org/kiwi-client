@@ -20,7 +20,7 @@ const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text, do
     if(text === "편집"){
       if (!token) {
         alert('🦁로그인을 먼저 해주세요🦁');
-        router.push('/signup');
+        router.push('/login');
       }
       else{
         router.push(`/edit?title=${docTitle}`);
