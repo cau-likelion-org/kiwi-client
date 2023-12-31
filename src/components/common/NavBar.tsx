@@ -4,9 +4,13 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import SearchForm from '../search/SearchForm';
 import { useRouter } from 'next/navigation';
+import { isLoginAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { useRecoilValue } from 'recoil';
 
 const NavBar = () => {
 	const router = useRouter();
+	const isLogin = useRecoilValue(isLoginAtom);
+	const userName = useRecoilValue(userNameAtom);
 	let token: string | null;
 	if (typeof window !== 'undefined') {
 		token = localStorage.getItem('access');
@@ -33,7 +37,12 @@ const NavBar = () => {
 					<ButtonWrapper>
 						<Image
 							onClick={() => {
-								router.push('/post');
+								if (!isLogin||!token) {
+									alert('🦁 로그인을 먼저 해주세요 🦁');
+									router.push('/login');
+								} else {
+									router.push('/post');
+								}
 							}}
 							src="/img/newPost.png"
 							alt={'newPost'}
@@ -44,11 +53,11 @@ const NavBar = () => {
 						<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
 						<Image
 							onClick={() => {
-								if (!token) {
-									alert('🦁로그인을 먼저 해주세요🦁');
-									router.push('/signup');
-								}
+								if (isLogin&&token) {
+									alert(`🦁 ${userName}님의 로그인이 이미 완료되었습니다 🦁`);
+								} else {
 								router.push('/login');
+							}
 							}}
 							src="/img/login.png"
 							alt={'login'}
