@@ -7,7 +7,10 @@ import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
 	const router = useRouter();
-	const token = localStorage.getItem('access');
+	let token: string | null;
+	if (typeof window !== 'undefined') {
+		token = localStorage.getItem('access');
+	}
 	return (
 		<>
 			<Margin />
