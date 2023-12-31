@@ -6,6 +6,7 @@ import LandingSection2 from './LandingSection2';
 import LandingSection3 from './LandingSection3';
 import { styled } from 'styled-components';
 import { getRecentDocs } from '@/apis/docs';
+import Image from 'next/image';
 
 const Landing = () => {
 	const [docs, setDocs] = useState([]);
@@ -21,6 +22,54 @@ const Landing = () => {
 		<ScrollContainer>
 			<Section1>
 				<LandingSection1 />
+				<div className="mini animate1" id="mini1">
+					<Image src="/img/crylion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate3" id="mini2">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate2" id="mini3">
+					<Image src="/img/minilion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate2" id="mini4">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini5">
+					<Image src="/img/minilion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate3" id="mini6">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate2" id="mini7">
+					<Image src="/img/minilion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate3" id="mini8">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini9">
+					<Image src="/img/crylion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini10">
+					<Image src="/img/crylion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate3" id="mini11">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini12">
+					<Image src="/img/minilion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini13">
+					<Image src="/img/crylion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini14">
+					<Image src="/img/minilion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate1" id="mini15">
+					<Image src="/img/crylion.png" alt="" width={30} height={30} />
+				</div>
+				<div className="mini animate3" id="mini16">
+					<Image src="/img/heart.png" alt="" width={30} height={30} />
+				</div>
 			</Section1>
 			<Section2>
 				<LandingSection2 data={docs} />
@@ -44,6 +93,93 @@ const ScrollContainer = styled.div`
 const Section1 = styled.section`
 	height: 100vh;
 	scroll-snap-align: start;
+	.mini {
+		position: absolute;
+		z-index: 1;
+		/* @media (max-width: 1000px) {
+			display: none;
+		} */
+		&.animate1 {
+			animation: moveUpDown 1s infinite alternate ease-in-out;
+		}
+
+		&.animate2 {
+			animation: moveUpDown 1s 0.5s infinite alternate ease-in-out;
+		}
+
+		&.animate3 {
+			animation: moveUpDown 1s 1s infinite alternate ease-in-out;
+		}
+		@keyframes moveUpDown {
+			to {
+				transform: translateY(10px);
+			}
+		}
+	}
+	#mini1 {
+		top: 30%;
+		left: 15%;
+	}
+	#mini2 {
+		bottom: 40%;
+		left: 7%;
+	}
+	#mini3 {
+		bottom: 10%;
+		left: 16%;
+	}
+	#mini4 {
+		top: 30%;
+		right: 14%;
+	}
+	#mini5 {
+		top: 55%;
+		right: 28%;
+	}
+	#mini6 {
+		bottom: 20%;
+		right: 10%;
+	}
+	#mini7 {
+		top: 12%;
+		left: 34%;
+	}
+	#mini8 {
+		top: 17%;
+		left: 12%;
+	}
+	#mini9 {
+		top: 24%;
+		right: 30%;
+	}
+	#mini10 {
+		top: 48%;
+		left: 30%;
+	}
+	#mini11 {
+		bottom: 14%;
+		right: 50%;
+	}
+	#mini12 {
+		top: 12%;
+		right: 8%;
+	}
+	#mini13 {
+		bottom: 8%;
+		right: 24%;
+	}
+	#mini14 {
+		bottom: 50%;
+		left: 2%;
+	}
+	#mini15 {
+		bottom: 51%;
+		right: 9%;
+	}
+	#mini16 {
+		bottom: 30%;
+		left: 38%;
+	}
 `;
 
 const Section2 = styled.section`

@@ -46,6 +46,7 @@ const Title = styled.div`
 
 const Game = styled.div`
 	width: 70rem;
+	z-index: 25;
 `;
 
 const StyledImage = styled(Image)`
