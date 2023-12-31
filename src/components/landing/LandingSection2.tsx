@@ -73,7 +73,7 @@ export default LandingSection2;
 const ImageWrapper = styled.div`
 	width: 100%;
 	height: fit-content;
-	min-height: 90vh;
+	min-height: 100vh;
 	overflow:hidden;
 	display: flex;
 	justify-content: center;
@@ -121,6 +121,9 @@ const Box = styled.div`
 	z-index: 2;
 	@media (max-width: 1000px) {
 		width: 60%;
+	}
+	@media (max-width: 576px) {
+		margin-bottom: 40%;
 	}
 `;
 
@@ -226,6 +229,10 @@ const Left = styled.div`
 	@media (max-width: 1200px) {
 		margin-bottom: -8%;
 	}
+	@media (max-width: 640px) {
+		margin-bottom: -9%;
+		margin-left: -5%;
+	}
 `;
 
 const Middle = styled.div`
@@ -247,6 +254,10 @@ const Right = styled.div`
 	right:0;
 	@media (max-width: 1200px) {
 		margin-bottom: -8%;
+	}
+	@media (max-width: 640px) {
+		margin-bottom: -9%;
+		margin-right: -5%;
 	}
 `;
 
