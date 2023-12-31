@@ -171,6 +171,7 @@ const ImageWrapper2 = styled.div`
 	width: 97%;
 	height: 15rem;
 	bottom: 17rem;
+	z-index: 2;
 	@media screen and (min-width: 1024px) {
 		width: 98%;
 		bottom: 23.5rem;
@@ -249,6 +250,7 @@ const LionWrapper = styled.div`
 	align-items: center;
 	position: relative;
 	bottom: 15rem;
+	z-index: 2;
 	@media screen and (min-width: 1024px) {
 		bottom: 32rem;
 	}
