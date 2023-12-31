@@ -96,9 +96,9 @@ const Section1 = styled.section`
 	.mini {
 		position: absolute;
 		z-index: 1;
-		/* @media (max-width: 1000px) {
+		@media (max-width: 1000px) {
 			display: none;
-		} */
+		}
 		&.animate1 {
 			animation: moveUpDown 1s infinite alternate ease-in-out;
 		}
