@@ -5,7 +5,7 @@ const baseURL = `http://llwiki.p-e.kr:8000/`;
 // 역링크 리스트 불러오기
 export const getReverseList = async (title : string) => {
     try{
-        const response = await axios.get(`${baseURL}/docs/recent/${title}/backlink/`);
+        const response = await axios.get(`${baseURL}/docs/backlink/${title}/`);
         if(response.status === 200){
             return response.data;
         }

@@ -15,7 +15,6 @@ export const getDocsContent = async (title : string) => {
         }
     }
     catch(error){
-        console.log("404에러뜸");
         console.error(error);
     }
 };

@@ -30,6 +30,7 @@ const BackLink = () => {
         }
       }
       catch(error){
+        alert("🦁문서를 찾을 수 없습니다🦁");
         console.error('Error : ', error);
       }
     };

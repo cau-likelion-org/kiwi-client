@@ -17,20 +17,20 @@ const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text, do
 	}
 
   const handleClick = () => {
-    if (!token) {
-      alert('🦁로그인을 먼저 해주세요🦁');
-      router.push('/signup');
-    }
-    else{
-      if(text === "편집"){
+    if(text === "편집"){
+      if (!token) {
+        alert('🦁로그인을 먼저 해주세요🦁');
+        router.push('/signup');
+      }
+      else{
         router.push(`/edit?title=${docTitle}`);
       }
-      else if(text === "역사"){
-        router.push(`/docHistory?title=${docTitle}`);
-      }
-      else if(text === "역링크"){
-        router.push(`/backlink?title=${docTitle}`);
-      }
+    }
+    else if(text === "역사"){
+      router.push(`/docHistory?title=${docTitle}`);
+    }
+    else if(text === "역링크"){
+      router.push(`/backlink?title=${docTitle}`);
     }
   };
   
