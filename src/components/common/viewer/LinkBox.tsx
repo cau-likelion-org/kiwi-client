@@ -11,15 +11,26 @@ interface LinkBoxProps {
 
 const LinkBox: React.FC<LinkBoxProps> = ({ width = "51", height = "34", text, docTitle=""}) => {
   const router = useRouter();
+  let token: string | null;
+	if (typeof window !== 'undefined') {
+		token = localStorage.getItem('access');
+	}
+
   const handleClick = () => {
-    if(text === "편집"){
-      router.push(`/edit?title=${docTitle}`);
+    if (!token) {
+      alert('🦁로그인을 먼저 해주세요🦁');
+      router.push('/signup');
     }
-    else if(text === "역사"){
-      router.push(`/docHistory?title=${docTitle}`);
-    }
-    else if(text === "역링크"){
-      router.push(`/backlink?title=${docTitle}`);
+    else{
+      if(text === "편집"){
+        router.push(`/edit?title=${docTitle}`);
+      }
+      else if(text === "역사"){
+        router.push(`/docHistory?title=${docTitle}`);
+      }
+      else if(text === "역링크"){
+        router.push(`/backlink?title=${docTitle}`);
+      }
     }
   };
   
