@@ -3,24 +3,19 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import { Depth } from '../common/post/Modal';
-
-interface DataType extends Depth {
-	author: string;
-	content: string;
-	created_at: string;
-	id: number;
-	title: string;
-	titleMatched: boolean;
-	updated_at: string;
-}
+import { DataType } from '@/types/request';
+import { useRouter } from 'next/navigation';
 
 const LandingSection2 = ({ data }: { data: DataType[] }) => {
+	const router = useRouter();
 	function formatDate(update: string) {
 		const date = update.split('T')[0];
 		const formattedDate = date.split('-').join('.');
 		return formattedDate;
 	}
+	const handleClick = (title: string) => {
+		router.push(`/viewer?title=${title}`);
+	};
 	return (
 		<ImageWrapper>
 			<Title>
@@ -31,7 +26,7 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 				<Content>
 					{data.map((result, idx) => (
 						<>
-							<div className="list" key={idx}>
+							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
 								<div>{result.title}</div>
 								<div>{formatDate(result.updated_at)}</div>
 							</div>
@@ -148,6 +143,7 @@ const Content = styled.div`
 		font-weight: 500;
 		font-family: NeoDunggeunmo Pro;
 		padding: 5px 0rem;
+		cursor: pointer;
 	}
 `;
 

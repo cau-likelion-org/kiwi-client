@@ -21,7 +21,6 @@ const Edit = () => {
 							<Editor />
 						</ContentSection>
 					</Boder>
-					<StyledImage src="/img/sketchbookbottom.png" alt="문서역사" fill priority />
 				</Docs>
 				<div className="lionwrap">
 					<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
