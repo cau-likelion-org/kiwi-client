@@ -5,7 +5,7 @@ const baseURL = `http://llwiki.p-e.kr:8000/`;
 // 문서 내용 불러오기
 export const getDocsContent = async (title : string) => {
     try{
-        const response = await axios.get(`${baseURL}/recent/docs/${title}/`);
+        const response = await axios.get(`${baseURL}/docs/recent/${title}/`);
         console.log(response);
         if(response.status === 200){
             return response.data;

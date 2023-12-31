@@ -2,8 +2,7 @@
 import { getDocsContent } from '@/apis/viewer';
 import LinkBox from '@/components/common/viewer/LinkBox';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
@@ -35,17 +34,6 @@ const ViewerMain = () => {
     //여기에 링크로 이동하는 코드 작성
   };
 
-  const isClickedButton = (content: string)=>{
-    if(content === "편집"){
-      router.push(`/edit?title=${docTitle}`);
-    }
-    else if(content === "역사"){
-      router.push(`/docHistory?title=${docTitle}`);
-    }
-    else if(content === "역링크"){
-      router.push(`/viewer?title=${docTitle}`);
-    }
-  }
 
   const [sortLinks, setSortLinks] = useState<{ id: number, title: string, link: string }[]>([])
 
@@ -56,55 +44,34 @@ const ViewerMain = () => {
   function transformDepth(data :{ generation: string }[]) {
   return data.map((generation, index) => ({
     id: index + 1,
-    title: `${generation.generation}기`,
+    title: `${generation.generation}`,
     link: '',
   }));
 }
 
-  const parseMarkdown = (text: string) => {
-    const lines = text.split("\n");
-    const viewerContentsLists :{ id: number, contents: string }[] = [];
-    const contents : { id: number, title:string, content: string }[]= [];
+  const processInput = (input: string) => {
+    const lines = input.split('\n');
     let id = 1;
-    let contentId = 1;
-    let contentTitle = "";
-    let contentBody = "";
-
+    const lists: { id: number, contents: string }[] = [];
+    const docContents: { id: number, title: string, content: string }[] = [];
+  
     lines.forEach((line, index) => {
-      const match = line.match(/^(#+) (.+)/);
-      if (match) {
-        const level = match[1].length; // '#'의 개수
-        const title = match[2]; // 제목 텍스트
-
-        viewerContentsLists.push({ id: id++, contents: title });
-
-        if (level === 1) {
-          if (contentTitle) {
-            contents.push({
-              id: contentId++,
-              title: contentTitle,
-              content: contentBody,
-            });
-            contentTitle = title;
-            contentBody = "";
-          } else {
-            contentTitle = title;
-          }
-        }
-      } else {
-        contentBody += line + "\n";
-      }
-
-      if (index === lines.length - 1) {
-        contents.push({
-          id: contentId++,
-          title: contentTitle,
-          content: contentBody,
+      const level = line.match(/#/g)?.length;
+      const text = line.replace(/#+\s?/, '');
+  
+      if(level !== undefined && level > 0){
+        const title = `${id}. ${text.trim()}`;
+        lists.push({ id, contents: title });
+        docContents.push({
+          id,
+          title,
+          content: '',
         });
+        id += 1;
       }
     });
-
-    return { viewerContentsLists, contents };
+  
+    return { lists, docContents };
   };
 
   useEffect(()=>{
@@ -114,9 +81,10 @@ const ViewerMain = () => {
         // console.log("데이터");
         // console.log(data);
         if(data !== undefined){
-          const { viewerContentsLists, contents } = parseMarkdown(data.content);
-          setViewerContentsLists(viewerContentsLists);
-          setContents(contents);
+          const { lists, docContents } = processInput(data.content);
+          setViewerContentsLists(lists);
+          setContents(docContents);
+          
 
           const sortLinks = transformDepth(data.generations);
           setSortLinks(sortLinks);
@@ -144,9 +112,9 @@ const ViewerMain = () => {
             <ContentsHeader>
               <Title>{docTitle}</Title>
               <Links>
-                <LinkBox text="편집" onClick={()=>isClickedButton("편집")}/>
-                <LinkBox text="역사"/>
-                <LinkBox text="역링크"/>
+                <LinkBox text="편집" docTitle={docTitle || ''}/>
+                <LinkBox text="역사" docTitle={docTitle || ''}/>
+                <LinkBox text="역링크" docTitle={docTitle || ''}/>
               </Links>
             </ContentsHeader>
             <ContentsBody>
