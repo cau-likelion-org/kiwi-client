@@ -7,7 +7,6 @@ export const getDocHistories = async (title : string) => {
     console.log(title);
 	try {
 		const response = await axios.get(`${baseURL}history/${title}/`);
-		// const response = await axios.get(`${baseURL}history/강호동/`);
 		return response.data;
 	} catch (error) {
 		console.log(error);
