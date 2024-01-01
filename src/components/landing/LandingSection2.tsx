@@ -176,7 +176,7 @@ const ShortCutWrapper = styled.div`
 	position: relative;
 	width: 100%;
 	height: 15rem;
-	bottom: 7.5rem;
+	bottom: 9rem;
 	@media screen and (min-width: 1024px) {
 		width: 98%;
 		bottom: 18.5rem;
