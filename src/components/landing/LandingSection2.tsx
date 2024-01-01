@@ -179,7 +179,7 @@ const ShortCutWrapper = styled.div`
 	bottom: 7.5rem;
 	@media screen and (min-width: 1024px) {
 		width: 98%;
-		bottom: 16rem;
+		bottom: 18.5rem;
 	}
 `;
 
@@ -194,6 +194,7 @@ const ShortCuts1 = styled.div`
 	margin-left: 1rem;
 	margin-top: 4rem;
 	z-index: 3;
+	cursor: pointer;
 	.overlay {
 		z-index: 1;
 		position: absolute;
@@ -233,6 +234,7 @@ const ShortCuts2 = styled.div`
 	margin-right: 1.2rem;
 	margin-top: 5rem;
 	z-index: 3;
+	cursor: pointer;
 	.overlay {
 		z-index: 1;
 		position: absolute;
