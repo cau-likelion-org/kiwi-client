@@ -80,21 +80,23 @@ const processInput = (input: string) => {
 
     if(level !== undefined && level > 0){
       hasTitle = true;
-      if(level === 1){
-        title = `${id}. ${text.trim()}`;
-        subId = 1;
-        subSubId = 1;
-        id += 1;
-      } else if(level === 2) {
-        title = `${id - 1}.${subId}. ${text.trim()}`;
-        subSubId = 1;
-        subId += 1;
-      } else if(level === 3) {
-        console.log("레벨");
-        console.log(level);
-        title = `${id - 1}.${subId - 1}.${subSubId}. ${text.trim()}`;
-        subSubId += 1;
-      }
+      // if(level === 1){
+      //   title = `${id}. ${text.trim()}`;
+      //   subId = 1;
+      //   subSubId = 1;
+      //   id += 1;
+      // } else if(level === 2) {
+      //   title = `${id - 1}.${subId}. ${text.trim()}`;
+      //   subSubId = 1;
+      //   subId += 1;
+      // } else if(level === 3) {
+      //   console.log("레벨");
+      //   console.log(level);
+      //   title = `${id - 1}.${subId - 1}.${subSubId}. ${text.trim()}`;
+      //   subSubId += 1;
+      // }
+      title = `${id}. ${text.trim()}`;
+      id += 1;
 
       // title이 undefined가 아닐 때만 lists와 docContents에 추가
       if (title !== undefined) {
@@ -113,8 +115,8 @@ const processInput = (input: string) => {
 
           // '#'로 시작하는 라인이 없는 경우 '0. 소개'를 목차에 추가
       if (!hasTitle) {
-        lists.unshift({ id: "0", contents: '0. 소개' });
-        docContents.unshift({ id: "0", title: '0. 소개', content: input });
+        lists.unshift({ id: "1", contents: '1. 소개' });
+        docContents.unshift({ id: "1", title: '1. 소개', content: input });
       }
   });
 
@@ -342,9 +344,8 @@ line-height: normal;
 const ListBox = styled.div`
 width: 241px;
 display: inline-flex;
-padding: 30px 50px 30px 16px;
 align-items: center;
-gap: 8px;
+// gap: 8px;
 border: 3px solid #000;
 flex-direction: column;
 padding: 30px 50px 30px 16px;
@@ -371,7 +372,7 @@ margin-bottom: 15px;
 `
 const ContentTitle = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row;
 align-items: flex-start;
 color: #000;
 text-align: center;
