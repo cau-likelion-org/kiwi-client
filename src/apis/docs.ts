@@ -2,7 +2,7 @@ import { CreateDocs, ISearchResult } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
 
-const baseURL = 'process.env.NEXT_PUBLIC_SERVER_URL';
+const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const getSearchResult = async (keyword: string) => {
 	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${keyword}/`);

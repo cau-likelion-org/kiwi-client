@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'process.env.NEXT_PUBLIC_SERVER_URL';
+const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 // 문서 내용 불러오기
 export const getDocsContent = async (title: string) => {
