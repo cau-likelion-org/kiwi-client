@@ -40,7 +40,7 @@ export default LandingSection1;
 const ImageWrapper = styled.div`
 	width: 100%;
 	height: fit-content;
-	min-height: 100vh;
+	min-height: 93vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -74,13 +74,18 @@ const Wrapper = styled.div`
 const Title = styled.div`
 	width: 25%;
 	#title {
-		margin-top: 3rem;
+		margin-top: 2rem;
 	}
 `;
 
 const Game = styled.div`
-	width: 50%;
+	width: 55%;
+	margin-top: 5rem;
 	z-index: 3;
+	@media screen and (min-width: 1024px) {
+		margin-top: 1rem;
+		width: 45%;
+	}
 `;
 
 const StyledImage = styled(Image)`

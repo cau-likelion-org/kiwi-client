@@ -2,7 +2,7 @@ import { CreateDocs, ISearchResult } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
 
-const baseURL = 'http://llwiki.p-e.kr:8000';
+const baseURL = 'process.env.NEXT_PUBLIC_SERVER_URL';
 
 export const getSearchResult = async (keyword: string) => {
 	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${keyword}/`);
@@ -12,7 +12,7 @@ export const getSearchResult = async (keyword: string) => {
 export const newDocs = async (body: CreateDocs) => {
 	try {
 		const token = localStorage.getItem('access');
-		const result = await axios.post(`${baseURL}/docs/`, body, {
+		const result = await axios.post(`${baseURL}docs/`, body, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
@@ -41,7 +41,7 @@ export const uploadImageToServer = async (blobUrl: string) => {
 				'Content-Type': 'multipart/form-data',
 			},
 		};
-		const result = await axios.post(`${baseURL}/docs/image/`, formData, config);
+		const result = await axios.post(`${baseURL}docs/image/`, formData, config);
 		return result.data.image;
 	} catch (error) {
 		console.error('이미지 업로드 불가', error);
