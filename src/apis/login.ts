@@ -1,7 +1,7 @@
 import { postCodeBody } from '@/types/request';
 import axios from 'axios';
 
-const baseURL = `http://llwiki.p-e.kr:8000/`;
+const baseURL = 'process.env.NEXT_PUBLIC_SERVER_URL';
 
 export const postCode = async (body: postCodeBody) => {
 	try {
@@ -14,7 +14,7 @@ export const postCode = async (body: postCodeBody) => {
 
 			localStorage.setItem('access', accessToken);
 			localStorage.setItem('refresh', refreshToken);
-		} 
+		}
 		return response.data;
 	} catch (error) {
 		console.error('에러 발생', error);
@@ -54,7 +54,7 @@ export const signUp = async (emailInput: string, nameInput: string) => {
 
 			localStorage.setItem('access', accessToken);
 			localStorage.setItem('refresh', refreshToken);
-		} 
+		}
 		return response.data;
 	} catch (error) {
 		console.log(error);
