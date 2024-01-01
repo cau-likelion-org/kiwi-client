@@ -50,6 +50,11 @@ export const uploadImageToServer = async (blobUrl: string) => {
 };
 
 export const getRecentDocs = async () => {
-	const result = await Server.get(`history/recent/`);
-	return result.data.data;
+	try {
+		const result = await axios.get(`${baseURL}history/recent/`);
+		return result.data.data;
+	} catch (error) {
+		console.error(`${error}`);
+		throw error;
+	}
 };
