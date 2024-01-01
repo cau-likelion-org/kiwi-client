@@ -1,6 +1,7 @@
 import { CreateDocs, ISearchResult } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
+import { error } from 'console';
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -50,6 +51,10 @@ export const uploadImageToServer = async (blobUrl: string) => {
 };
 
 export const getRecentDocs = async () => {
-	const result = await Server.get(`history/recent/`);
-	return result.data.data;
+	try {
+		const result = await axios.get(`${baseURL}history/recent/`);
+		return result.data.data;
+	} catch {
+		console.error(error);
+	}
 };
