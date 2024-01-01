@@ -27,12 +27,12 @@ const LandingSection3 = () => {
 						<StyledImage src="/img/guideSection.png" alt={'랜딩'} fill priority></StyledImage>
 					</Box>
 				</Wrapper>
-					<Lion1>
-						<StyledImage2 src="/img/heartlion.png" alt={'랜딩'} fill priority></StyledImage2>
-					</Lion1>
-					<Lion2>
-						<StyledImage2 src="/img/glasslion.png" alt={'랜딩'} fill priority></StyledImage2>
-					</Lion2>
+				<Lion1>
+					<StyledImage2 src="/img/heartlion.png" alt={'랜딩'} fill priority></StyledImage2>
+				</Lion1>
+				<Lion2>
+					<StyledImage2 src="/img/glasslion.png" alt={'랜딩'} fill priority></StyledImage2>
+				</Lion2>
 			</ImageWrapper>
 		</>
 	);
@@ -48,7 +48,7 @@ const ImageWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* overflow-y: hidden; */
+	overflow-y: hidden;
 `;
 
 const Wrapper = styled.div`
@@ -108,7 +108,7 @@ const Box = styled.div`
 	height: max-content;
 	margin-left: 3rem;
 	gap: 1rem;
-	z-index: 1;
+	z-index: 2;
 	font-size: 2rem;
 	@media screen and (min-width: 1024px) {
 		width: 60%;
@@ -121,32 +121,27 @@ const StyledImage = styled(Image)`
 	height: fit-content;
 `;
 
-const LionWrapper = styled.div`
-	position: relative;
-	width: 100%;
-	bottom:0;
-`;
-
 const Lion1 = styled.div`
 	position: absolute;
 	z-index: 0;
 	width: 20%;
-	left: 3rem;
-	bottom: 7%;
+	left: 5rem;
+	bottom: 7.2rem;
 	@media screen and (min-width: 1024px) {
-		width: 14%;
+		width: 11%;
+		bottom: 7.6rem;
 	}
 `;
 
 const Lion2 = styled.div`
 	position: absolute;
 	width: 15%;
-	bottom: 10%;
+	bottom: 15%;
 	right: 0;
-	z-index: 2;
+	z-index: 1;
 	@media screen and (min-width: 1024px) {
-		bottom: 30%;
-			width: 14%;
+		bottom: 25%;
+		width: 10%;
 	}
 `;
 
@@ -158,7 +153,7 @@ const StyledImage2 = styled(Image)`
 const Content = styled.div`
 	z-index: 2;
 	position: absolute;
-	margin-top: 4rem;
+	margin-top: 2rem;
 	height: 60%;
 	width: 90%;
 	display: flex;
@@ -167,7 +162,6 @@ const Content = styled.div`
 	justify-content: space-around;
 	flex-direction: column;
 	font-family: 'NeoDunggeunmo Pro';
-	margin-bottom: 1.5rem;
 `;
 
 const TextWrapper = styled.div`

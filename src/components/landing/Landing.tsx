@@ -77,7 +77,7 @@ const ScrollContainer = styled.div`
 
 const Section1 = styled.section`
 	height: fit-content;
-	scroll-snap-align: start;
+	scroll-snap-align: center;
 	.mini {
 		position: absolute;
 		z-index: 1;
@@ -153,6 +153,6 @@ const Section2 = styled.section`
 `;
 
 const Section3 = styled.section`
-	height: fit-content;
+	height: 98vh;
 	scroll-snap-align: end;
 `;
