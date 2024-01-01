@@ -52,15 +52,21 @@ const ViewerMain = () => {
 
 function parseLinks(text:string) {
   // text = text || '';
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const boldRegex = /\*\*(.*?)\*\*/g;
 
-  return text.replace(regex, (match, linkText, linkUrl) => {
+  text = text.replace(linkRegex, (match, linkText, linkUrl) => {
     if(linkText === "image"){
       return `<img src="${linkUrl}" alt="image" width="60%">`
     }
     return `<a href="${linkUrl}">${linkText}</a>`;
   });
+
+  text = text.replace(boldRegex, "<strong>$1</strong>");
+
+  return text;
 }
+
 
 const processInput = (input: string) => {
   const lines = input.split('\n');
@@ -70,35 +76,24 @@ const processInput = (input: string) => {
   const lists: { id: string, contents: string }[] = [];
   const docContents: { id: string, title: string, content: string }[] = [];
 
-  // #로 시작하는 목차가 없을 경우를 대비
-  let hasTitle = false;
+  // '#'로 시작하는 라인이 있는지 확인
+  const hasTitle = lines.some(line => line.startsWith('#'));
+
+  // '#'로 시작하는 라인이 없는 경우 '1. 소개'를 추가
+  if (!hasTitle) {
+    lists.push({ id: "1", contents: '1. 소개' });
+    docContents.push({ id: "1", title: '1. 소개', content: input });
+  }
 
   lines.forEach((line, index) => {
     const level = line.match(/(#+)\s?/g)?.[0].trim().length;
     const text = line.replace(/#+\s?/, '');
-    let title;  // title을 미리 undefined로 초기화
+    let title;
 
     if(level !== undefined && level > 0){
-      hasTitle = true;
-      // if(level === 1){
-      //   title = `${id}. ${text.trim()}`;
-      //   subId = 1;
-      //   subSubId = 1;
-      //   id += 1;
-      // } else if(level === 2) {
-      //   title = `${id - 1}.${subId}. ${text.trim()}`;
-      //   subSubId = 1;
-      //   subId += 1;
-      // } else if(level === 3) {
-      //   console.log("레벨");
-      //   console.log(level);
-      //   title = `${id - 1}.${subId - 1}.${subSubId}. ${text.trim()}`;
-      //   subSubId += 1;
-      // }
       title = `${id}. ${text.trim()}`;
       id += 1;
 
-      // title이 undefined가 아닐 때만 lists와 docContents에 추가
       if (title !== undefined) {
         lists.push({ id: title.split('. ')[0], contents: title });
         docContents.push({
@@ -108,20 +103,15 @@ const processInput = (input: string) => {
         });
       }
     } else {
-      if (docContents.length > 0) {
+      if (hasTitle && docContents.length > 0) {
         docContents[docContents.length - 1].content += line;
       }
     }
-
-          // '#'로 시작하는 라인이 없는 경우 '0. 소개'를 목차에 추가
-      if (!hasTitle) {
-        lists.unshift({ id: "1", contents: '1. 소개' });
-        docContents.unshift({ id: "1", title: '1. 소개', content: input });
-      }
   });
 
   return { lists, docContents };
 };
+
 
   useEffect(()=>{
     const fetchData = async ()=>{
