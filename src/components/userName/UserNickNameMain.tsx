@@ -13,8 +13,8 @@ const UserNickNameMain = () => {
 	const handleModal = async () => {
 		try {
 			const result = await checkNickName(userNickname);
-			if(!userNickname){
-				alert('닉네임을 입력해주세요')
+			if (!userNickname) {
+				alert('닉네임을 입력해주세요');
 				return false;
 			}
 			if (result.status === '200') {
@@ -82,7 +82,11 @@ const UserNickNameMain = () => {
 									/>
 								</div>
 							</div>
-							{isAvailable === false ? <div className="checkText">이미 사용 중인 닉네임 입니다</div> : <div className="checkText"></div>}
+							{isAvailable === false ? (
+								<div className="checkText">이미 사용 중인 닉네임 입니다</div>
+							) : (
+								<div className="checkText"></div>
+							)}
 						</div>
 					</div>
 					<SubmitBtn onClick={handleModal}>다음</SubmitBtn>
@@ -90,11 +94,11 @@ const UserNickNameMain = () => {
 				<StyledImage src="/img/windowDesign.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
 			<div className="lionwrap">
-				<StyledImage src="/img/lionred.png" alt="닉네임 박스 이미지" fill priority />
-				<StyledImage src="/img/lionorange.png" alt="닉네임 박스 이미지" fill priority />
-				<StyledImage src="/img/liongreen.png" alt="닉네임 박스 이미지" fill priority />
-				<StyledImage src="/img/lionblue.png" alt="닉네임 박스 이미지" fill priority />
-				<StyledImage src="/img/lionpurple.png" alt="닉네임 박스 이미지" fill priority />
+				<LionImage src="/img/lionred.png" alt="닉네임 박스 이미지" fill priority />
+				<LionImage src="/img/lionorange.png" alt="닉네임 박스 이미지" fill priority />
+				<LionImage src="/img/liongreen.png" alt="닉네임 박스 이미지" fill priority />
+				<LionImage src="/img/lionblue.png" alt="닉네임 박스 이미지" fill priority />
+				<LionImage src="/img/lionpurple.png" alt="닉네임 박스 이미지" fill priority />
 			</div>
 		</Main>
 	);
@@ -103,33 +107,43 @@ const UserNickNameMain = () => {
 export default UserNickNameMain;
 
 const Main = styled.div`
-	height: fit-content;
-	padding-top: 10rem;
+	height: 90vh;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	font-family: NeoDunggeunmo Pro;
+	overflow-y: hidden;
 	.lionwrap {
 		position: relative;
-		width: 90%;
+		width: 30%;
+		height: 29%;
 		display: flex;
 		margin-top: 10rem;
-		gap: 3rem;
+		gap: 0rem;
 		bottom: 0;
+		right: 26rem;
+		@media screen and (min-width: 1024px) {
+			width: 90%;
+			height: 45%;
+			margin-top: 10rem;
+			gap: 5rem;
+			bottom: 7rem;
+			right: 0rem;
+		}
 	}
 `;
 
 const Title = styled.div`
 	position: relative;
 	width: 40%;
-	min-width: 400px;
+	min-width: 350px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: max-content;
-	margin-bottom: 5rem;
+	top: 4rem;
 	.overlay {
 		z-index: 1;
 		position: absolute;
@@ -139,11 +153,18 @@ const Title = styled.div`
 		align-items: center;
 		justify-content: center;
 		color: #000;
-		font-size: 2.5rem;
+		font-size: 2rem;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 		letter-spacing: 0.3125rem;
+		@media screen and (min-width: 1024px) {
+			font-size: 2.5rem;
+		}
+	}
+	@media screen and (min-width: 1024px) {
+		width: 30%;
+		top: 12rem;
 	}
 `;
 
@@ -156,19 +177,24 @@ const Box = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: max-content;
+	z-index: 2;
+	top: 5rem;
+	@media screen and (min-width: 1024px) {
+		top: 13rem;
+	}
 `;
 
 const Content = styled.div`
 	z-index: 1;
 	position: absolute;
 	margin-top: 4rem;
-	height: 70%;
+	height: 50%;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	gap: 3rem;
+	gap: 2rem;
 	.content {
 		display: flex;
 		align-items: center;
@@ -197,10 +223,11 @@ const Content = styled.div`
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
-		margin-bottom: 2rem;
+		margin-left: 1.5rem;
 	}
 	.barimg {
-		width: 60%;
+		width: 65%;
+		margin-top: 2rem;
 	}
 	.bottom {
 		width: 100%;
@@ -236,14 +263,21 @@ const Content = styled.div`
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
+		@media screen and (min-width: 1024px) {
+			height: 5rem;
+			width: 2rem;
+		}
 	}
 	.checkText {
 		width: 80%;
 		color: #ff4e4e;
-		min-height : 1.5rem;
+		min-height: 1.5rem;
 		margin-top: 0.5rem;
 		font-size: 1rem;
 		text-align: center;
+	}
+	.text {
+		margin-top: 2rem;
 	}
 `;
 
@@ -251,6 +285,11 @@ const StyledImage = styled(Image)`
 	position: relative !important;
 	height: unset !important;
 	object-fit: cover;
+`;
+
+const LionImage = styled(Image)`
+	position: relative !important;
+	height: fit-content;
 `;
 
 const SubmitBtn = styled.button`
@@ -268,7 +307,6 @@ const SubmitBtn = styled.button`
 	padding: 1rem 2rem;
 	justify-content: center;
 	align-items: center;
-	gap: 0.8rem;
 	border-radius: 1rem;
 	background: #4c4df5;
 	color: white;
