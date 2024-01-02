@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+// import MDEditor from '@uiw/react-md-editor';
+// import ReactMarkdown from 'react-markdown';
+// import { renderToStaticMarkup } from 'react-dom/server';
 
 interface LinkProps{
   link?: string;
@@ -39,7 +42,6 @@ const ViewerMain = () => {
   const [viewerContentsLists, setViewerContentsLists] = useState<{ id: string, contents: string }[]>([]);
 
   const [contents, setContents] = useState<{ id: string, title: string, content: string }[]>([]);
-  // const [linkReplacements, setLinkReplacements] = useState< { displayText: string, url: string }[]>([]);
 
 
   function transformDepth(data :{ generation: string }[]) {
@@ -51,9 +53,12 @@ const ViewerMain = () => {
 }
 
 function parseLinks(text:string) {
-  // text = text || '';
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const boldRegex = /\*\*(.*?)\*\*/g;
+  const newlineRegex = /\n/g;
+  const bulletPointRegex = /^\*\s/gm; // 문자열 시작이 '* '인 경우를 찾는 정규표현식
+  const bulletPointRegex2 = /^\-\s/gm;
+  const endWithNewlineRegex = /(.+\n)/g; // 문자열 끝이 '\n'으로 끝나는 경우를 찾는 정규표현식
 
   text = text.replace(linkRegex, (match, linkText, linkUrl) => {
     if(linkText === "image"){
@@ -64,8 +69,22 @@ function parseLinks(text:string) {
 
   text = text.replace(boldRegex, "<strong>$1</strong>");
 
+  // 줄바꿈 문자를 <p></p>로 바꾸는 코드
+  // text = text.split(newlineRegex).map(line => `<p>${line}</p>`).join('');
+
+  // 문자열 시작이 '* '인 경우 '-'로 바꾸는 코드
+  text = text.replace(bulletPointRegex, "●  ");
+  text = text.replace(bulletPointRegex2, "●  ");
+
+  // 문자열 끝이 '\n'으로 끝나는 경우 해당 문자열을 <b>로 감싸는 코드
+  // text = text.replace(endWithNewlineRegex, "<b>$1</b>");
+  console.log(text);
+
   return text;
 }
+
+
+
 
 
 const processInput = (input: string) => {
@@ -204,6 +223,10 @@ const processInput = (input: string) => {
                   <>
                     <ContentTitle dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }} />
                     <Content dangerouslySetInnerHTML={{ __html: parseLinks(list.content) }} />
+                    {/* <MDEditor.Markdown source={list.content} />
+                    <ReactMarkdown>{parseLinks(list.content)}</ReactMarkdown> */}
+                    {/* <ReactMarkdown>{list.content}</ReactMarkdown> */}
+                    
                   </>
                 )
               })}
