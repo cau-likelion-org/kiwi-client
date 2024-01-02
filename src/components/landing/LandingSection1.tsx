@@ -57,6 +57,9 @@ const Wrapper = styled.div`
 	gap: 10%;
 	padding-bottom: 1%;
 	.motion {
+		position: absolute;
+		bottom: 5.5rem;
+		left: 11rem;
 		gap: 1.5rem;
 		z-index: 1;
 		@media (min-width: 0px) {
@@ -72,9 +75,12 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-	width: 25%;
+	width: 27%;
 	#title {
 		margin-top: 2rem;
+	}
+	@media screen and (min-width: 1024px) {
+		width: 25%;
 	}
 `;
 
