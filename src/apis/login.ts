@@ -1,7 +1,7 @@
 import { postCodeBody } from '@/types/request';
 import axios from 'axios';
 
-const baseURL = 'process.env.NEXT_PUBLIC_SERVER_URL';
+const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const postCode = async (body: postCodeBody) => {
 	try {
