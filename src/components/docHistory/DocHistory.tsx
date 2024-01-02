@@ -7,32 +7,22 @@ import { getDocHistories } from '@/apis/history';
 import { useSearchParams } from 'next/navigation';
 
 interface HistoryData {
-	title: string,
-	author: string,
-	created_at: string,
-	content: string,
-	change: string,
+	title: string;
+	author: string;
+	created_at: string;
+	content: string;
+	change: string;
 }
-// const sampleData = [
-// 	{
-// 		user: '떠나요제주도🌴',
-// 		date: '2023.12.01 금요일 2:57',
-// 		change:
-// 			'I like cats. I like <modified_from> dogs and apple fruit pies. </modified_from> <modified_to> kiwis. bye! Hello </modified_to> Mutsa <deleted> is the best </deleted>',
-// 	},
-// 	{
-// 		user: '머싸머싸',
-// 		date: '2023.11.25 토요일 5:57',
-// 		change:
-// 			'<modified_from> 11기 </modified_from> <modified_to> 12기 </modified_to> 정준하 백엔드 <modified_from> 아기사자 </modified_from> <modified_to> 운영진 </modified_to>',
-// 	},
-// ];
+
 const DocHistory = () => {
 	const params = useSearchParams();
 	const title = params.get('title');
 	const [dataList, setDataList] = useState<HistoryData[]>();
 
 	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.scrollTo(0, 0);
+		}
 		const getHistory = async () => {
 			if (title) {
 				const result = await getDocHistories(title);
@@ -52,28 +42,51 @@ const DocHistory = () => {
 			},
 		);
 
+		oldStr = oldStr.replace(/<added>/g, ' ' + "<span class='none'>");
+		oldStr = oldStr.replace(/<\/added>/g, '</span>');
+		oldStr = oldStr.replace(/<modified_to>/g, ' ' + "<span class='none'>");
+		oldStr = oldStr.replace(/<\/modified_to>/g, '</span>');
+
 		oldStr = oldStr.replace(/<deleted>/g, ' ' + "<span class='delete'>");
 		oldStr = oldStr.replace(/<\/deleted>/g, '</span>');
 		oldStr = oldStr.replace(/<modified_from>/g, ' ' + "<span class='from'>");
 		oldStr = oldStr.replace(/<\/modified_from>/g, '</span>');
 
+		oldStr = oldStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
+
 		return { __html: oldStr };
 	};
 	const renderNewStr = (change: any) => {
-		var newStr = change.replace(
+		let newStr = change.replace(
 			/<modified_from>(.*?)<\/modified_from>|<deleted>(.*?)<\/deleted>/g,
-			function ([match, p1, p2]: any) {
-				return p1 ? ' ' : p2 ? ' ' : '';
+			function (): string {
+				return '';
 			},
 		);
+
+		newStr = newStr.replace(/<deleted>/g, ' ' + "<span class='none'>");
+		newStr = newStr.replace(/<\/deleted>/g, '</span>');
+		newStr = newStr.replace(/<modified_from>/g, ' ' + "<span class='none'>");
+		newStr = newStr.replace(/<\/modified_from>/g, '</span>');
 
 		newStr = newStr.replace(/<added>/g, ' ' + "<span class='add'>");
 		newStr = newStr.replace(/<\/added>/g, '</span>');
 		newStr = newStr.replace(/<modified_to>/g, ' ' + "<span class='to'>");
 		newStr = newStr.replace(/<\/modified_to>/g, '</span>');
 
+		newStr = newStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
+
 		return { __html: newStr };
 	};
+	const renderFirstStr = (content: any) => {
+		let firstStr = content;
+
+		firstStr = firstStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
+		firstStr = "<span class='add'>" + firstStr + '</span>';
+
+		return { __html: firstStr };
+	};
+
 	return (
 		<Main>
 			<div className="heart">
@@ -114,11 +127,11 @@ const DocHistory = () => {
 								) : (
 									<>
 										<OriginalContent>
-										<span className='first'>{`{${data.title}}`} 문서가 생성되었어요</span>
+											<div className="first">{`{${data.title}}`} 문서가 생성되었어요</div>
 										</OriginalContent>
 										<VscTriangleDown size="4rem" color="rgba(76, 77, 245, 0.8)" />
 										<ModifyContent>
-											<span className='add'>{data.content}</span>
+											<div dangerouslySetInnerHTML={renderFirstStr(data.content)} />
 										</ModifyContent>
 									</>
 								)}
@@ -258,7 +271,7 @@ const OriginalContent = styled.div`
 	width: 100%;
 	border-radius: 1rem;
 	border: 3px solid #000;
-	max-height: 12rem;
+	max-height: 30rem;
 	overflow: scroll;
 	font-family: Pretendard;
 	font-size: 1.5rem;
@@ -267,14 +280,25 @@ const OriginalContent = styled.div`
 	div {
 		padding: 2rem;
 	}
-	.first{
+	.first {
 		color: #4c4df5;
 	}
 	.from {
 		background-color: #ff7;
+		img {
+			background-color: #ff7;
+			height: fit-content;
+		}
 	}
 	.delete {
 		background-color: #faa;
+		img {
+			background-color: #faa;
+			height: fit-content;
+		}
+	}
+	.none {
+		display: none;
 	}
 `;
 const ModifyContent = styled.div`
@@ -282,7 +306,7 @@ const ModifyContent = styled.div`
 	border-radius: 1rem;
 	border: 3px solid #4c4df5;
 	background: #fff;
-	max-height: 12rem;
+	max-height: 30rem;
 	overflow: scroll;
 	font-family: Pretendard;
 	font-size: 1.5rem;
@@ -292,9 +316,20 @@ const ModifyContent = styled.div`
 	}
 	.to {
 		background-color: #ff7;
+		img {
+			background-color: #ff7;
+			height: fit-content;
+		}
 	}
 	.add {
 		background-color: #afa;
+		img {
+			background-color: #afa;
+			height: fit-content;
+		}
+	}
+	.none {
+		display: none;
 	}
 `;
 
