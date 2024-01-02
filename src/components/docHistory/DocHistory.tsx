@@ -87,6 +87,19 @@ const DocHistory = () => {
 		return { __html: firstStr };
 	};
 
+	const parseAndFormatDate = (dateString: string) => {
+		const date = new Date(dateString);
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric',
+			weekday: 'short',
+			hour: 'numeric',
+			minute: 'numeric',
+		};
+		return date.toLocaleString('ko-KR', options);
+	};
+
 	return (
 		<Main>
 			<div className="heart">
@@ -102,7 +115,7 @@ const DocHistory = () => {
 					</HeaderShadow>
 				</ViewerHeaderSection>
 				<ContentSection>
-					{dataList &&
+					{dataList ? (
 						dataList.map((data, index) => (
 							<EditInfo key={index}>
 								<div className="profile">
@@ -113,7 +126,7 @@ const DocHistory = () => {
 									</div>
 									<div>{`{${data.author}}`}님이 편집했어요</div>
 								</div>
-								<div className="date">{data.created_at}</div>
+								<div className="date">{parseAndFormatDate(data.created_at)}</div>
 								{data.change ? (
 									<>
 										<OriginalContent>
@@ -136,7 +149,18 @@ const DocHistory = () => {
 									</>
 								)}
 							</EditInfo>
-						))}
+						))
+					) : (
+						<Loading>
+							<div>
+							로딩중
+							</div>
+							
+							<div className="loading" id='lion1'>
+								<Image src="/img/modallion.png" alt="" width={30} height={40} />
+							</div>
+						</Loading>
+					)}
 					<ColorChip>
 						<Color>
 							<div className="color-circle1" />
@@ -388,4 +412,31 @@ const HeaderShadow = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+`;
+
+const Loading = styled.div`
+	width: 100%;
+	height: 30vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: NeoDunggeunmo Pro;
+	font-size: 3rem;
+	font-style: normal;
+	font-weight: 400;
+	gap: 1rem;
+	.loading {
+		width: fit-content;
+		height: fit-content;
+		animation: rotate 1s linear infinite;
+	}
+
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
 `;
