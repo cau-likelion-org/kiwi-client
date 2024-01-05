@@ -6,11 +6,17 @@ import SearchForm from '../search/SearchForm';
 import { useRouter } from 'next/navigation';
 import { isLoginAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
+import { getRandomDoc } from '@/apis/viewer';
 
 const NavBar = () => {
 	const router = useRouter();
 	const isLogin = useRecoilValue(isLoginAtom);
 	const userName = useRecoilValue(userNameAtom);
+	const gotoRandomDoc = async () => {
+		const response = await getRandomDoc();
+		const title = response.title;
+		router.push(`/viewer?title=${title}`);
+	}
 	let token: string | null;
 	if (typeof window !== 'undefined') {
 		token = localStorage.getItem('access');
@@ -50,7 +56,10 @@ const NavBar = () => {
 							height={40}
 							style={{ cursor: 'pointer' }}
 						/>
-						<Image src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
+						<Image 
+							onClick={gotoRandomDoc}
+							
+						src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
 						<Image
 							onClick={() => {
 								if (isLogin&&token) {
