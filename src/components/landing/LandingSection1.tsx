@@ -57,9 +57,7 @@ const Wrapper = styled.div`
 	gap: 10%;
 	padding-bottom: 1%;
 	.motion {
-		position: absolute;
-		bottom: 5.5rem;
-		left: 11rem;
+		position: relative;
 		gap: 1.5rem;
 		z-index: 1;
 		@media (min-width: 0px) {
