@@ -8,10 +8,12 @@ import Modal from '../common/post/Modal';
 import MDEditor from '@uiw/react-md-editor';
 import { IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
+import { useRouter } from 'next/navigation';
 
 const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
 
 const Upload: React.FC = () => {
+	const router = useRouter();
 	const [modal, setModal] = useState(false);
 	const [title, setTitle] = useState<string>('');
 	const [md, setMd] = useState<string>('');
@@ -22,6 +24,12 @@ const Upload: React.FC = () => {
 			alert('🦁제목 및 내용을 입력해주세요!🦁');
 		} else {
 			setModal(true);
+		}
+	};
+
+	const cancelPost = () => {
+		if (confirm('작성한 내용은 저장되지 않습니다. 작성을 취소할까요?')) {
+			router.push('/');
 		}
 	};
 
@@ -76,7 +84,7 @@ const Upload: React.FC = () => {
 		<>
 			<Wrapper>
 				<BtnWrapper>
-					<Btn>취소</Btn>
+					<Btn onClick={cancelPost}>취소</Btn>
 					<Btn onClick={onModal}>완료</Btn>
 				</BtnWrapper>
 				<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
