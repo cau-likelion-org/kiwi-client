@@ -81,15 +81,13 @@ const Upload: React.FC = () => {
 				</BtnWrapper>
 				<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
 				<div className="markarea">
-					<div data-color-mode="dark">
-						<MDEditor
-							commands={[...customCommands, imageUploadCommand]}
-							value={md}
-							onChange={handleEditorChange}
-							height={500}
-							className="md-editor"
-						/>
-					</div>
+					<MDEditor
+						commands={[...customCommands, imageUploadCommand]}
+						value={md}
+						onChange={handleEditorChange}
+						height={500}
+						className="md-editor"
+					/>
 				</div>
 			</Wrapper>
 			{modal && (
