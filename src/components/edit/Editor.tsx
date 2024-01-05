@@ -6,7 +6,7 @@ import { ICommand, commands } from '@uiw/react-md-editor';
 import MDEditor from '@uiw/react-md-editor';
 import { Generations, IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { getDocsContent } from '@/apis/viewer';
 import Modal from '../common/post/Modal';
 
@@ -18,6 +18,7 @@ const Editor: React.FC = () => {
 	const [selectedGenerations, setSelectedGenerations] = useState<readonly IOption[] | null>([]);
 	const params = useSearchParams();
 	const title: string = params.get('title') || '';
+	const router = useRouter();
 	useEffect(() => {
 		const getDocument = async (docsTitle: string) => {
 			if (title) {
@@ -32,6 +33,12 @@ const Editor: React.FC = () => {
 		};
 		getDocument(title);
 	}, [title]);
+
+	const cancelEdit = () => {
+		if (confirm('작성한 내용은 저장되지 않습니다. 편집을 취소할까요?')) {
+			router.push(`/viewer?title=${title}`);
+		}
+	};
 
 	const onModal = () => {
 		if (md == '' || title == '') {
@@ -87,7 +94,7 @@ const Editor: React.FC = () => {
 		<>
 			<Wrapper>
 				<BtnWrapper>
-					<Btn>취소</Btn>
+					<Btn onClick={cancelEdit}>취소</Btn>
 					<Btn onClick={onModal}>완료</Btn>
 				</BtnWrapper>
 				<Input value={title} />
