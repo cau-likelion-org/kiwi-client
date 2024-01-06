@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { signUp } from '@/apis/login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { token, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { useRouter } from 'next/navigation';
+import LocalStorage from '@/utils/localStorage';
 
 const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>; nickname: string }) => {
 	const route = useRouter();
@@ -13,6 +14,7 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 	const [userConfirm, setUserConfirm] = useState(false);
 	const setUserEmail = useSetRecoilState(userEmailAtom);
 	const setUserName = useSetRecoilState(userNameAtom);
+	const setToken = useSetRecoilState(token)
 
 	const handleConfirm = async () => {
 		setUserConfirm(true);
@@ -21,6 +23,7 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 			console.log(result);
 			setUserEmail(result.data.email);
 			setUserName(result.data.name);
+			setToken({access: LocalStorage.getItem('access'), refresh: LocalStorage.getItem('refresh')})
 		} catch (error) {
 			console.log('error');
 			alert('회원가입 과정에서 에러가 발생했습니다. 다시 시도해 주세요.');
