@@ -52,7 +52,7 @@ const NavBar = () => {
 							}}
 							src="/img/newPost.png"
 							alt={'newPost'}
-							width={32}
+							width={37}
 							height={40}
 							style={{ cursor: 'pointer' }}
 						/>
@@ -60,8 +60,8 @@ const NavBar = () => {
 							onClick={gotoRandomDoc}
 							src="/img/random.png"
 							alt={'random'}
-							width={42}
-							height={42}
+							width={52}
+							height={40}
 							style={{ cursor: 'pointer' }}
 						/>
 						<Image
@@ -70,11 +70,11 @@ const NavBar = () => {
 									router.push('/login');
 								}
 							}}
-							src={isLogin ? '/img/login.png' : '/img/isLogin.png'}
+							src={isLogin ? '/img/isLogin.png' : '/img/login.png'}
 							alt={'login'}
 							width={33}
 							height={40}
-							style={isLogin ? { cursor: 'pointer' } : {}}
+							style={isLogin ? {} : { cursor: 'pointer' }}
 						/>
 					</ButtonWrapper>
 				</RightWrapper>
