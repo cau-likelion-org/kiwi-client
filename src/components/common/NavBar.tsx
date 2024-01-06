@@ -32,8 +32,6 @@ const NavBar = () => {
 
 	const loginButton = (): IMenu[] => {
 		const resultArray = [
-			// { src: "/img/newPost.png", routing: isLogin ? '/post':'/login' },
-			// { src: "/img/random.png", routing: 'https://blog.cau-likelion.org' },
 			{ src: isLogin ? '/img/welcome.png' : '/img/login.png', routing: isLogin ? '/' : '/login' },
 		];
 		return resultArray;
