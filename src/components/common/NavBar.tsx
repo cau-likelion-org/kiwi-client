@@ -30,12 +30,6 @@ const NavBar = () => {
 		if (tokenState) setIsLogin(true);
 	}, [tokenState]);
 
-	const loginButton = (): IMenu[] => {
-		const resultArray = [
-			{ src: isLogin ? '/img/welcome.png' : '/img/login.png', routing: isLogin ? '/' : '/login' },
-		];
-		return resultArray;
-	};
 	return (
 		<>
 			<Margin />
@@ -79,19 +73,25 @@ const NavBar = () => {
 							height={44}
 							style={{ cursor: 'pointer' }}
 						/>
-						{loginButton().map(({ src, routing }, index) => (
+						{isLogin ? (
 							<Image
-								key={index + routing}
-								src={src}
+								src="/img/welcome.png"
+								width={44}
+								height={44}
+								alt={'로그인버튼'}
+							/>
+						) : (
+							<Image
+								src="/img/login.png"
 								onClick={() => {
-									router.push(`${routing}`);
+									router.push(`/login`);
 								}}
 								width={44}
 								height={44}
 								alt={'로그인버튼'}
 								style={{ cursor: 'pointer' }}
 							/>
-						))}
+						)}
 					</ButtonWrapper>
 				</RightWrapper>
 			</Wrapper>
