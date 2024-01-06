@@ -55,10 +55,16 @@ const ViewerMain = () => {
 function parseLinks(text:string) {
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const boldRegex = /\*\*(.*?)\*\*/g;
-  const newlineRegex = /\n/g;
-  const bulletPointRegex = /^\*\s/gm; // 문자열 시작이 '* '인 경우를 찾는 정규표현식
-  const bulletPointRegex2 = /^\-\s/gm;
-  const endWithNewlineRegex = /(.+\n)/g; // 문자열 끝이 '\n'으로 끝나는 경우를 찾는 정규표현식
+  const bulletPointRegex = /^\*\s/gm;
+  const bulletPointRegex2 = /^-\s/gm;
+  const quoteRegex = /^>\s?(.*)$/gm;   // 인용문
+  const strikethroughRegex = /~~(.*?)~~/g; 
+  const codeRegex = /`(.*?)`/g;   // 코드
+  const codeBlockRegex = /```([^`]+)```/gs;  //코드박스
+  const tableRegex = /\n\|(.+\n)*.*\|/g;  // 표
+  const hrRegex = /^---$/gm;
+  const checklistRegex = /-\s\[\s\]/g;
+  console.log(text);
 
   text = text.replace(linkRegex, (match, linkText, linkUrl) => {
     if(linkText === "image"){
@@ -67,21 +73,40 @@ function parseLinks(text:string) {
     return `<a href="${linkUrl}">${linkText}</a>`;
   });
 
+// 표 변환
+text = text.replace(tableRegex, function (match) {
+  let html = '<table>';
+  const rows = match.trim().split('\n');  // 개행 문자로 행을 구분
+  rows.forEach((row, rowIndex) => {
+    html += '<tr>';
+    const cells = row.split('|').slice(1, -1);  // '|' 문자로 셀을 구분
+    cells.forEach((cell) => {
+      const tag = rowIndex === 0 ? 'th' : 'td';  // 첫 번째 행을 헤더로 간주
+      html += `<${tag}>${cell.trim()}</${tag}>`;
+    });
+    html += '</tr>';
+  });
+  html += '</table>';
+  return html;
+});
+  
+  text = text.replace(checklistRegex, '<input type="checkbox" disabled>');
+  text = text.replace(codeBlockRegex, "<pre><code>$1</code></pre>");
   text = text.replace(boldRegex, "<strong>$1</strong>");
-
-  // 줄바꿈 문자를 <p></p>로 바꾸는 코드
-  // text = text.split(newlineRegex).map(line => `<p>${line}</p>`).join('');
-
-  // 문자열 시작이 '* '인 경우 '-'로 바꾸는 코드
   text = text.replace(bulletPointRegex, "●  ");
   text = text.replace(bulletPointRegex2, "●  ");
+  text = text.replace(quoteRegex, "<blockquote>$1</blockquote>");
+  text = text.replace(strikethroughRegex, "<del>$1</del>");
+  text = text.replace(codeRegex, "<code>$1</code>");
+  text = text.replace(hrRegex, '<hr>');
 
-  // 문자열 끝이 '\n'으로 끝나는 경우 해당 문자열을 <b>로 감싸는 코드
-  // text = text.replace(endWithNewlineRegex, "<b>$1</b>");
+
+
   console.log(text);
 
   return text;
 }
+
 
 
 
@@ -123,7 +148,7 @@ const processInput = (input: string) => {
       }
     } else {
       if (hasTitle && docContents.length > 0) {
-        docContents[docContents.length - 1].content += line;
+        docContents[docContents.length - 1].content += line + '\n';
       }
     }
   });
@@ -141,10 +166,11 @@ const processInput = (input: string) => {
           const parsed = parseLinks(data.content);
           console.log(parsed);
           if(data !== undefined){
-            const { lists, docContents } = processInput(data.content);
+            const { lists, docContents } = processInput(parsed);
             setViewerContentsLists(lists);
             setContents(docContents);
             
+            // console.log(docContents);
   
             const sortLinks = transformDepth(data.generations);
             setSortLinks(sortLinks);
@@ -396,6 +422,7 @@ font-weight: 400;
 line-height: normal;
 border-bottom: 0.5px solid black;
 padding-bottom: 20px;
+margin-top: 20px;
 `
 const Content = styled.div`
 white-space: pre-line;
@@ -405,8 +432,10 @@ font-size: 15px;
 font-style: normal;
 font-weight: 400;
 line-height: 150%;
+margin-bottom: 50px;
 // width: 75%;
-margin-top: 40px;
+margin-top: 30px;
+white-space: pre-wrap;
 `
 const HeaderShadow = styled.div`
 width: 15px;
