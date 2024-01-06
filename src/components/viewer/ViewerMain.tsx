@@ -29,7 +29,6 @@ const ViewerMain = () => {
   const isClickedArrow = () => {
     if(openList)setOpenList(false);
     else setOpenList(true);
-    console.log(1);
   }
 
   const isClickedLink = (link : string) => {
@@ -64,7 +63,7 @@ function parseLinks(text:string) {
   const tableRegex = /\n\|(.+\n)*.*\|/g;  // 표
   const hrRegex = /^---$/gm;
   const checklistRegex = /-\s\[\s\]/g;
-  console.log(text);
+  // console.log(text);
 
   text = text.replace(linkRegex, (match, linkText, linkUrl) => {
     if(linkText === "image"){
@@ -99,10 +98,6 @@ text = text.replace(tableRegex, function (match) {
   text = text.replace(strikethroughRegex, "<del>$1</del>");
   text = text.replace(codeRegex, "<code>$1</code>");
   text = text.replace(hrRegex, '<hr>');
-
-
-
-  console.log(text);
 
   return text;
 }
@@ -162,9 +157,7 @@ const processInput = (input: string) => {
       if(typeof docTitle === 'string'){
         try{
           const data = await getDocsContent(docTitle);
-          console.log(data);
           const parsed = parseLinks(data.content);
-          console.log(parsed);
           if(data !== undefined){
             const { lists, docContents } = processInput(parsed);
             setViewerContentsLists(lists);
