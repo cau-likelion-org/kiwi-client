@@ -64,18 +64,20 @@ const NavBar = () => {
 							height={40}
 							style={{ cursor: 'pointer' }}
 						/>
-						<Image
-							onClick={() => {
-								if (!(isLogin && token)) {
+						{isLogin ? (
+							<Image src="/img/isLogin.png" alt="login" width={33} height={40} />
+						) : (
+							<Image
+								onClick={() => {
 									router.push('/login');
-								}
-							}}
-							src={isLogin ? '/img/isLogin.png' : '/img/login.png'}
-							alt={'login'}
-							width={33}
-							height={40}
-							style={isLogin ? {} : { cursor: 'pointer' }}
-						/>
+								}}
+								src="/img/login.png"
+								alt="login"
+								width={33}
+								height={40}
+								style={{ cursor: 'pointer' }}
+							/>
+						)}
 					</ButtonWrapper>
 				</RightWrapper>
 			</Wrapper>
