@@ -91,6 +91,7 @@ const NavBar = () => {
 								width={44}
 								height={44}
 								alt={'로그인버튼'}
+								style={{ cursor: 'pointer' }}
 							/>
 						))}
 					</ButtonWrapper>
