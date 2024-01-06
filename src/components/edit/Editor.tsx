@@ -99,15 +99,13 @@ const Editor: React.FC = () => {
 				</BtnWrapper>
 				<Input value={title} />
 				<div className="markarea">
-					<div data-color-mode="dark">
-						<MDEditor
-							commands={[...customCommands, imageUploadCommand]}
-							value={md}
-							onChange={handleEditorChange}
-							height={500}
-							className="md-editor"
-						/>
-					</div>
+					<MDEditor
+						commands={[...customCommands, imageUploadCommand]}
+						value={md}
+						onChange={handleEditorChange}
+						height={500}
+						className="md-editor"
+					/>
 				</div>
 			</Wrapper>
 			{modal && (
