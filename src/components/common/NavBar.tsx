@@ -16,7 +16,7 @@ const NavBar = () => {
 		const response = await getRandomDoc();
 		const title = response.title;
 		router.push(`/viewer?title=${title}`);
-	}
+	};
 	let token: string | null;
 	if (typeof window !== 'undefined') {
 		token = localStorage.getItem('access');
@@ -43,7 +43,7 @@ const NavBar = () => {
 					<ButtonWrapper>
 						<Image
 							onClick={() => {
-								if (!isLogin||!token) {
+								if (!isLogin || !token) {
 									alert('🦁 로그인을 먼저 해주세요 🦁');
 									router.push('/login');
 								} else {
@@ -56,23 +56,25 @@ const NavBar = () => {
 							height={40}
 							style={{ cursor: 'pointer' }}
 						/>
-						<Image 
+						<Image
 							onClick={gotoRandomDoc}
-							
-						src="/img/random.png" alt={'random'} width={42} height={42} style={{ cursor: 'pointer' }} />
+							src="/img/random.png"
+							alt={'random'}
+							width={42}
+							height={42}
+							style={{ cursor: 'pointer' }}
+						/>
 						<Image
 							onClick={() => {
-								if (isLogin&&token) {
-									alert(`🦁 ${userName}님의 로그인이 이미 완료되었습니다 🦁`);
-								} else {
-								router.push('/login');
-							}
+								if (!(isLogin && token)) {
+									router.push('/login');
+								}
 							}}
-							src="/img/login.png"
+							src={isLogin ? '/img/login.png' : '/img/isLogin.png'}
 							alt={'login'}
 							width={33}
 							height={40}
-							style={{ cursor: 'pointer' }}
+							style={isLogin ? { cursor: 'pointer' } : {}}
 						/>
 					</ButtonWrapper>
 				</RightWrapper>
@@ -129,6 +131,7 @@ const ButtonWrapper = styled.div`
 	display: flex;
 	width: 40%;
 	margin-top: 6px;
+	margin-right: 1.5rem;
 	justify-content: space-between;
 	align-items: center;
 `;
