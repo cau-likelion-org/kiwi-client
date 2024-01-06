@@ -52,20 +52,20 @@ const NavBar = () => {
 							}}
 							src="/img/newPost.png"
 							alt={'newPost'}
-							width={37}
-							height={40}
+							width={38}
+							height={42}
 							style={{ cursor: 'pointer' }}
 						/>
 						<Image
 							onClick={gotoRandomDoc}
 							src="/img/random.png"
 							alt={'random'}
-							width={52}
-							height={40}
+							width={50}
+							height={44}
 							style={{ cursor: 'pointer' }}
 						/>
 						{isLogin ? (
-							<Image src="/img/isLogin.png" alt="login" width={37} height={42} />
+							<Image src="/img/isLogin.png" alt="login" width={40} height={45} />
 						) : (
 							<Image
 								onClick={() => {
@@ -74,7 +74,7 @@ const NavBar = () => {
 								src="/img/login.png"
 								alt="login"
 								width={33}
-								height={40}
+								height={42}
 								style={{ cursor: 'pointer' }}
 							/>
 						)}
