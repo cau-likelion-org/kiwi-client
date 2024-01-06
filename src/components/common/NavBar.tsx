@@ -7,10 +7,11 @@ import { useRouter } from 'next/navigation';
 import { isLoginAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
+import { useState } from 'react';
 
 const NavBar = () => {
 	const router = useRouter();
-	const isLogin = useRecoilValue(isLoginAtom);
+	const [isLogin, setIsLogin] = useState(false);
 	const userName = useRecoilValue(userNameAtom);
 	const gotoRandomDoc = async () => {
 		const response = await getRandomDoc();
@@ -20,7 +21,11 @@ const NavBar = () => {
 	let token: string | null;
 	if (typeof window !== 'undefined') {
 		token = localStorage.getItem('access');
+		if (token) {
+			setIsLogin(true);
+		}
 	}
+
 	return (
 		<>
 			<Margin />
