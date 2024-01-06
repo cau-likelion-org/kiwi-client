@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 const NavBar = () => {
 	const router = useRouter();
-	const [isLogin, setIsLogin] = useState(false);
+	const isLogin = useRecoilValue(isLoginAtom);
 	const userName = useRecoilValue(userNameAtom);
 	const gotoRandomDoc = async () => {
 		const response = await getRandomDoc();
@@ -21,9 +21,6 @@ const NavBar = () => {
 	let token: string | null;
 	if (typeof window !== 'undefined') {
 		token = localStorage.getItem('access');
-		if (token) {
-			setIsLogin(true);
-		}
 	}
 
 	return (
