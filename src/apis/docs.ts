@@ -1,6 +1,7 @@
 import { CreateDocs, ISearchResult } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
+import LocalStorage from '@/utils/localStorage';
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -11,7 +12,7 @@ export const getSearchResult = async (keyword: string) => {
 
 export const newDocs = async (body: CreateDocs) => {
 	try {
-		const token = localStorage.getItem('access');
+		const token = LocalStorage.getItem('access');
 		const result = await axios.post(`${baseURL}docs/`, body, {
 			headers: {
 				Authorization: `Bearer ${token}`,

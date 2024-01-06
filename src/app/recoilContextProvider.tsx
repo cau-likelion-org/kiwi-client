@@ -2,15 +2,29 @@
 
 import { RecoilRoot, atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import { v1 } from 'uuid';
+import LocalStorage from '@utils/localStorage';
 
 const { persistAtom } = recoilPersist();
+
+export interface IToken {
+	access: string | null;
+	refresh: string | null;
+}
+
+export const token = atom<IToken>({
+	key: `token/${v1()}`,
+	default: {
+		access: LocalStorage.getItem('access'),
+		refresh: LocalStorage.getItem('refresh'),
+	},
+});
 
 export const isLoginAtom = atom({
 	key: 'isLogin',
 	default: false,
 	effects_UNSTABLE: [persistAtom],
 });
-
 
 export const userEmailAtom = atom({
 	key: 'userEmail',

@@ -4,24 +4,26 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import SearchForm from '../search/SearchForm';
 import { useRouter } from 'next/navigation';
-import { isLoginAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { token, userNameAtom } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
 	const router = useRouter();
-	const isLogin = useRecoilValue(isLoginAtom);
-	const userName = useRecoilValue(userNameAtom);
+
+	const { access: tokenState } = useRecoilValue(token);
+	const [isLogin, setIsLogin] = useState(false);
+
 	const gotoRandomDoc = async () => {
 		const response = await getRandomDoc();
 		const title = response.title;
 		router.push(`/viewer?title=${title}`);
 	};
-	let token: string | null;
-	if (typeof window !== 'undefined') {
-		token = localStorage.getItem('access');
-	}
+
+	useEffect(() => {
+		if (tokenState) setIsLogin(true);
+	  }, [tokenState]);
 
 	return (
 		<>

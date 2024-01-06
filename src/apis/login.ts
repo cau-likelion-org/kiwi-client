@@ -1,4 +1,5 @@
 import { postCodeBody } from '@/types/request';
+import LocalStorage from '@/utils/localStorage';
 import axios from 'axios';
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -12,8 +13,8 @@ export const postCode = async (body: postCodeBody) => {
 			const accessToken = response.data.data.token.access_token;
 			const refreshToken = response.data.data.token.refresh_token;
 
-			localStorage.setItem('access', accessToken);
-			localStorage.setItem('refresh', refreshToken);
+			LocalStorage.setItem('access', accessToken);
+			LocalStorage.setItem('refresh', refreshToken);
 		}
 		return response.data;
 	} catch (error) {
@@ -52,8 +53,8 @@ export const signUp = async (emailInput: string, nameInput: string) => {
 			const accessToken = response.data.data.token.access_token;
 			const refreshToken = response.data.data.token.refresh_token;
 
-			localStorage.setItem('access', accessToken);
-			localStorage.setItem('refresh', refreshToken);
+			LocalStorage.setItem('access', accessToken);
+			LocalStorage.setItem('refresh', refreshToken);
 		}
 		return response.data;
 	} catch (error) {
