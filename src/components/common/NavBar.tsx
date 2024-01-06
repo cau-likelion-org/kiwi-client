@@ -65,7 +65,7 @@ const NavBar = () => {
 							style={{ cursor: 'pointer' }}
 						/>
 						{isLogin ? (
-							<Image src="/img/isLogin.png" alt="login" width={33} height={40} />
+							<Image src="/img/isLogin.png" alt="login" width={37} height={42} />
 						) : (
 							<Image
 								onClick={() => {
