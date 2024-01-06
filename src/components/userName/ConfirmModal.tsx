@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { signUp } from '@/apis/login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginAtom, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
+import { userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { useRouter } from 'next/navigation';
 
 const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>; nickname: string }) => {
@@ -11,7 +11,6 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 	const totalHeight = document.documentElement.scrollHeight;
 	const userEmail = useRecoilValue(userEmailAtom);
 	const [userConfirm, setUserConfirm] = useState(false);
-	const setIsLogin = useSetRecoilState(isLoginAtom);
 	const setUserEmail = useSetRecoilState(userEmailAtom);
 	const setUserName = useSetRecoilState(userNameAtom);
 
@@ -20,7 +19,6 @@ const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateActi
 		try {
 			const result = await signUp(userEmail, props.nickname);
 			console.log(result);
-			setIsLogin(true);
 			setUserEmail(result.data.email);
 			setUserName(result.data.name);
 		} catch (error) {

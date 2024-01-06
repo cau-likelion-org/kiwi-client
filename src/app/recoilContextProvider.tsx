@@ -20,12 +20,6 @@ export const token = atom<IToken>({
 	},
 });
 
-export const isLoginAtom = atom({
-	key: 'isLogin',
-	default: false,
-	effects_UNSTABLE: [persistAtom],
-});
-
 export const userEmailAtom = atom({
 	key: 'userEmail',
 	default: '',

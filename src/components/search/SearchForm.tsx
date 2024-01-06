@@ -33,7 +33,7 @@ const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {
 				<FormWrapper name="searchHeaderInput" onSubmit={handleSearchSubmit}>
 					<SearchWrapper>
 						<ImageButtonWrapper>
-							<Image src="/img/searchIcon.png" alt={'search'} width={25} height={25} style={{ cursor: 'pointer' }} />
+							<Image src="/img/searchIcon.png" alt={'search'} width={20} height={20} style={{ cursor: 'pointer' }} />
 						</ImageButtonWrapper>
 						<SearchHeaderInput
 							name="searchHeaderInput"
@@ -78,7 +78,7 @@ const SearchHeaderInput = styled.input`
 	font-family: NeoDunggeunmo Pro;
 	width: 100%;
 	height: 100%;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	border: none;
 	outline: none;
 	padding-left: 1rem;

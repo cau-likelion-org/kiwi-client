@@ -4,10 +4,15 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import SearchForm from '../search/SearchForm';
 import { useRouter } from 'next/navigation';
-import { token, userNameAtom } from '@/app/recoilContextProvider';
+import { token } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
+
+export interface IMenu {
+	src: string;
+	routing: string;
+}
 
 const NavBar = () => {
 	const router = useRouter();
@@ -23,8 +28,16 @@ const NavBar = () => {
 
 	useEffect(() => {
 		if (tokenState) setIsLogin(true);
-	  }, [tokenState]);
+	}, [tokenState]);
 
+	const loginButton = (): IMenu[] => {
+		const resultArray = [
+			// { src: "/img/newPost.png", routing: isLogin ? '/post':'/login' },
+			// { src: "/img/random.png", routing: 'https://blog.cau-likelion.org' },
+			{ src: isLogin ? '/img/welcome.png' : '/img/login.png', routing: isLogin ? '/login' : '/' },
+		];
+		return resultArray;
+	};
 	return (
 		<>
 			<Margin />
@@ -36,8 +49,8 @@ const NavBar = () => {
 						}}
 						src="/img/logo.png"
 						alt={'logo'}
-						width={190}
-						height={45}
+						width={140}
+						height={34}
 					/>
 				</LeftWrapper>
 				<RightWrapper>
@@ -47,7 +60,7 @@ const NavBar = () => {
 					<ButtonWrapper>
 						<Image
 							onClick={() => {
-								if (!isLogin || !token) {
+								if (!isLogin) {
 									alert('🦁 로그인을 먼저 해주세요 🦁');
 									router.push('/login');
 								} else {
@@ -56,32 +69,30 @@ const NavBar = () => {
 							}}
 							src="/img/newPost.png"
 							alt={'newPost'}
-							width={38}
-							height={42}
+							width={44}
+							height={44}
 							style={{ cursor: 'pointer' }}
 						/>
 						<Image
 							onClick={gotoRandomDoc}
 							src="/img/random.png"
 							alt={'random'}
-							width={50}
+							width={44}
 							height={44}
 							style={{ cursor: 'pointer' }}
 						/>
-						{isLogin ? (
-							<Image src="/img/isLogin.png" alt="login" width={40} height={45} />
-						) : (
+						{loginButton().map(({ src, routing }, index) => (
 							<Image
+								key={index + routing}
+								src={src}
 								onClick={() => {
-									router.push('/login');
+									router.push(`${routing}`);
 								}}
-								src="/img/login.png"
-								alt="login"
-								width={33}
-								height={42}
-								style={{ cursor: 'pointer' }}
+								width={44}
+								height={44}
+								alt={'로그인버튼'}
 							/>
-						)}
+						))}
 					</ButtonWrapper>
 				</RightWrapper>
 			</Wrapper>
@@ -123,14 +134,14 @@ const RightWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	@media screen and (min-width: 1024px) {
-		width: 40%;
+		width: 30%;
 	}
 `;
 
 const SearchWrapper = styled.div`
 	display: flex;
 	position: relative;
-	width: 45%;
+	width: 50%;
 `;
 
 const ButtonWrapper = styled.div`
