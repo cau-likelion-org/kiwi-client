@@ -5,9 +5,6 @@ import type { Metadata } from 'next';
 import RecoidContextProvider from './recoilContextProvider';
 
 export const metadata: Metadata = {
-	// verification: {
-	// 	google: 'EOz8bF08VwtMDtyyB7n5kcMxUo5ARoeoIqnIeC8_haM',
-	// },
 	title: '멋사 중앙대 위키',
 	description: '멋쟁이 사자처럼 중앙대학교의 위키 입니다',
 	authors: [{ name: '중하하 2기' }],

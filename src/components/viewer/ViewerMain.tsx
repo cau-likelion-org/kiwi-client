@@ -401,7 +401,6 @@ const ContentsBody = styled.div`
 
 	a {
 		text-decoration: none;
-		font-size: 2rem;
 		color: #0968da;
 	}
 
