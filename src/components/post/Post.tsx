@@ -15,15 +15,18 @@ const Post = () => {
 				<Docs>
 					<TopWrapper>
 						<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
+						<TopShadow>
+							<div style={{ height: '60%', width: '100%' }}></div>
+							<div style={{ height: '60%', width: '100%', backgroundColor: 'black' }}></div>
+						</TopShadow>
 					</TopWrapper>
-					<Boder>
-						<ContentSection>
-							<Upload />
-						</ContentSection>
-					</Boder>
+					<ContentSection>
+						<Upload />
+					</ContentSection>
+					<div style={{ backgroundColor: 'black', width: '100%', height: '15px', marginLeft: '15px' }} />
 				</Docs>
 				<div className="lionwrap">
-					<StyledImage src="/img/one-right-lionground.png" alt="문서역사 하단" fill priority />
+					<StyledImage src="/img/one-right-lionground.png" alt="문서작성 하단" fill priority />
 				</div>
 			</Main>
 		</>
@@ -65,88 +68,42 @@ const StyledImage = styled(Image)`
 `;
 
 const Docs = styled.div`
-	width: 85%;
+	width: 84%;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
+	@media screen and (min-width: 1024px) {
+		width: 80%;
+	}
 `;
 
 const TopWrapper = styled.div`
+	position: relative;
+	top: 35px;
+	/* width: calc(100% + 15px); */
 	width: 100%;
+	margin-right: 1.4rem;
+	height: 100px;
+	display: flex;
 `;
 
-const Boder = styled.div`
-	z-index: 3;
-	width: 100%;
-	position: relative;
+const TopShadow = styled.div`
+	width: 15px;
+	height: 80%;
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
-	border-right: 0.8rem black solid;
-	border-bottom: 0.8rem black solid;
-	margin-top: -7.3%;
-	background-color: none;
-	margin-left: 7.7px;
-	@media (min-width: 1600px) {
-		margin-top: -7%;
-		width: 99%;
-	}
 `;
 
 const ContentSection = styled.div`
 	width: 100%;
-	min-height: 80vh;
+	min-height: 85vh;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	flex-direction: column;
-	z-index: 10;
+	z-index: 1;
 	padding-bottom: 1rem;
-	margin-top: 50px;
-	background-color: white;
-	@media (max-width: 795px) {
-		margin-top: 30px;
-	}
-	@media (max-width: 494px) {
-		margin-top: 1.5rem;
-	}
-`;
-
-const BtnWrapper = styled.div`
-	width: 100%;
-	display: flex;
-	align-items: flex-end;
-	justify-content: end;
-	padding: 1rem;
-	margin-top: 1rem;
-	margin-right: 4rem;
-	gap: 1rem;
-`;
-
-const Btn = styled.div`
-	border-radius: 1.25rem;
-	background: #4c4df5;
-	display: flex;
-	padding: 1rem 2rem;
-	justify-content: center;
-	align-items: center;
-	color: #fff;
-	text-align: center;
-	font-family: Pretendard;
-	font-size: 1.3rem;
-	font-style: normal;
-	font-weight: 600;
-	line-height: normal;
-`;
-
-const Input = styled.input`
-	width: 93%;
-	font-size: 2.5rem;
-	border: none;
-	border-bottom: 2px solid #d9d9d9;
-	margin-bottom: 1rem;
-	&:focus {
-		outline: none;
-	}
+	background: white;
+	border-right: 15px solid black;
 `;
