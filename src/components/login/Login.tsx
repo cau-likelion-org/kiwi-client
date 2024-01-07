@@ -154,7 +154,7 @@ const BtnWrapper = styled.div`
 `;
 const Box = styled.div`
 	z-index: 1;
-	width: 50%;
+	width: 40%;
 	min-height: 80vh;
 	min-width: 400px;
 	height: fit-content;
@@ -164,7 +164,7 @@ const Box = styled.div`
 	justify-content: center;
 	height: max-content;
 	@media (max-width: 1000px) {
-		width: 70%;
+		width: 60%;
 	}
 	@media (max-width: 640px) {
 		width: 90%;
