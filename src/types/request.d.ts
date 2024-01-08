@@ -47,6 +47,5 @@ export interface DataType extends Depth {
 
 export interface CreateDocs extends Depth {
 	title: string;
-	author: string;
 	content: string;
 }
