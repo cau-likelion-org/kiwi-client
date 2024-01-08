@@ -32,7 +32,6 @@ const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps)
 		if (generation && generation.length > 0) {
 			const body: CreateDocs = {
 				title: title,
-				author: author,
 				content: md,
 				generations: generation.map((item) => ({ generation: item.value })),
 			};
