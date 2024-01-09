@@ -11,6 +11,9 @@ import Image from 'next/image';
 const Landing = () => {
 	const [docs, setDocs] = useState([]);
 	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			window.scrollTo(0, 0);
+		}
 		const getDocs = async () => {
 			const result = await getRecentDocs();
 			setDocs(result);

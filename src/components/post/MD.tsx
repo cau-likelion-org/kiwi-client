@@ -9,7 +9,9 @@ import { IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
 import { useRouter } from 'next/navigation';
 
-const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
+const customCommands = commands
+	.getCommands()
+	.filter((cmd) => cmd.keyCommand !== 'image' && cmd.keyCommand !== 'comment');
 
 const Upload: React.FC = () => {
 	const router = useRouter();

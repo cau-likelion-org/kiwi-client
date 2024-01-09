@@ -67,6 +67,7 @@ const UserNickNameMain = () => {
 									name="user"
 									placeholder="닉네임을 써주세요"
 									value={userNickname}
+									readOnly
 									onChange={(e) => {
 										setUserNickname(e.target.value);
 										setIsAvailable(true);
