@@ -10,7 +10,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { getDocsContent } from '@/apis/viewer';
 import Modal from '../common/post/Modal';
 
-const customCommands = commands.getCommands().filter((cmd) => cmd.keyCommand !== 'image');
+const customCommands = commands
+	.getCommands()
+	.filter((cmd) => cmd.keyCommand !== 'image' && cmd.keyCommand !== 'comment');
 
 const Editor: React.FC = () => {
 	const [modal, setModal] = useState(false);
