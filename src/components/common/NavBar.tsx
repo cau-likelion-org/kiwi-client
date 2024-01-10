@@ -23,7 +23,8 @@ const NavBar = () => {
 	const gotoRandomDoc = async () => {
 		const response = await getRandomDoc();
 		const title = response.title;
-		router.push(`/viewer?title=${title}`);
+		let encodedTitle = encodeURIComponent(title);
+		router.push(`/viewer?title=${encodedTitle}`);
 	};
 
 	useEffect(() => {
@@ -74,12 +75,7 @@ const NavBar = () => {
 							style={{ cursor: 'pointer' }}
 						/>
 						{isLogin ? (
-							<Image
-								src="/img/welcome.png"
-								width={44}
-								height={44}
-								alt={'로그인버튼'}
-							/>
+							<Image src="/img/welcome.png" width={44} height={44} alt={'로그인버튼'} />
 						) : (
 							<Image
 								src="/img/login.png"

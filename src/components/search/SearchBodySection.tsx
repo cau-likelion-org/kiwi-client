@@ -30,7 +30,8 @@ const SearchBodySection = () => {
 				if (Array.isArray(res)) {
 					setSearchResult(res);
 				} else if (res.titleMatched) {
-					router.push(`viewer?title=${searchKeyword}`);
+					let encodedTitle = encodeURIComponent(searchKeyword);
+					router.push(`viewer?title=${encodedTitle}`);
 				}
 			});
 		}
