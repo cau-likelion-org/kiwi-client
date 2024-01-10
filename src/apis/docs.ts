@@ -6,7 +6,8 @@ import LocalStorage from '@/utils/localStorage';
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const getSearchResult = async (keyword: string) => {
-	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${keyword}/`);
+	let encodedKeyword = encodeURIComponent(keyword);
+	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${encodedKeyword}/`);
 	return result.data;
 };
 
