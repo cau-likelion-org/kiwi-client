@@ -152,11 +152,9 @@ const DocHistory = () => {
 						))
 					) : (
 						<Loading>
-							<div>
-							로딩중
-							</div>
-							
-							<div className="loading" id='lion1'>
+							<div>로딩중</div>
+
+							<div className="loading" id="lion1">
 								<Image src="/img/modallion.png" alt="" width={30} height={40} />
 							</div>
 						</Loading>
