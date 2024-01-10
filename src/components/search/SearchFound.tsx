@@ -10,7 +10,8 @@ const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
 
 	const handleClickSearchResult = (id: number) => {
 		const selectedDocTitle = searchResult.filter((result) => result.id === id)[0].title;
-		router.push(`viewer?title=${selectedDocTitle}`);
+		let encodedTitle = encodeURIComponent(selectedDocTitle);
+		router.push(`viewer?title=${encodedTitle}`);
 	};
 
 	return (

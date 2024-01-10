@@ -32,7 +32,8 @@ const ViewerMain = () => {
 	};
 
 	const isClickedLink = (link: string) => {
-		router.push(`/viewer?title=${link}`);
+		let encodedTitle = encodeURIComponent(link);
+		router.push(`/viewer?title=${encodedTitle}`);
 		//여기에 링크로 이동하는 코드 작성
 	};
 
@@ -159,12 +160,12 @@ const ViewerMain = () => {
 		return { lists, docContents };
 	};
 
-  const scrollToSection = (sectionId : any) => {
-    const element = document.getElementById(`section-${sectionId}`);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
-};
+	const scrollToSection = (sectionId: any) => {
+		const element = document.getElementById(`section-${sectionId}`);
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -252,7 +253,11 @@ const ViewerMain = () => {
 							{openList && (
 								<ListBox>
 									{viewerContentsLists.map((list) => (
-										<List key={list.id} onClick={() => scrollToSection(list.id)} dangerouslySetInnerHTML={{ __html: parseLinks(list.contents) }}></List>
+										<List
+											key={list.id}
+											onClick={() => scrollToSection(list.id)}
+											dangerouslySetInnerHTML={{ __html: parseLinks(list.contents) }}
+										></List>
 									))}
 								</ListBox>
 							)}
@@ -260,7 +265,10 @@ const ViewerMain = () => {
 						{contents.map((list) => {
 							return (
 								<>
-									<ContentTitle id={`section-${list.id}`} dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }} />
+									<ContentTitle
+										id={`section-${list.id}`}
+										dangerouslySetInnerHTML={{ __html: parseLinks(list.title) }}
+									/>
 									<Content dangerouslySetInnerHTML={{ __html: parseLinks(list.content) }} />
 								</>
 							);
@@ -470,7 +478,7 @@ const List = styled.div`
 	font-weight: 400;
 	line-height: normal;
 	margin-bottom: 15px;
-  cursor: pointer;
+	cursor: pointer;
 `;
 const ContentTitle = styled.div`
 	display: flex;

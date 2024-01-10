@@ -38,7 +38,8 @@ const Editor: React.FC = () => {
 
 	const cancelEdit = () => {
 		if (confirm('작성한 내용은 저장되지 않습니다. 편집을 취소할까요?')) {
-			router.push(`/viewer?title=${title}`);
+			let encodedTitle = encodeURIComponent(title);
+			router.push(`/viewer?title=${encodedTitle}`);
 		}
 	};
 

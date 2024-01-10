@@ -36,7 +36,8 @@ const Modal = ({ closeModal, generation, setGeneration, md, title }: ModalProps)
 				generations: generation.map((item) => ({ generation: item.value })),
 			};
 			const result = await newDocs(body);
-			router.push(`/viewer?title=${title}`);
+			let encodedTitle = encodeURIComponent(title);
+			router.push(`/viewer?title=${encodedTitle}`);
 		} else {
 			alert('🦁카테고리 선택은 필수🦁');
 		}

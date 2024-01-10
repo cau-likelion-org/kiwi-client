@@ -14,7 +14,8 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 		return formattedDate;
 	}
 	const handleClick = (title: string) => {
-		router.push(`/viewer?title=${title}`);
+		let encodedTitle = encodeURIComponent(title);
+		router.push(`/viewer?title=${encodedTitle}`);
 	};
 
 	return (
