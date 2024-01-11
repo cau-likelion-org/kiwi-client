@@ -14,7 +14,7 @@ const UserNickNameMain = () => {
 		try {
 			const result = await checkNickName(userNickname);
 			if (!userNickname) {
-				alert('닉네임을 입력해주세요');
+				alert('닉네임을 설정해주세요');
 				return false;
 			}
 			if (result.status === '200') {
@@ -35,6 +35,7 @@ const UserNickNameMain = () => {
 		try {
 			const response = await getRandomNickname();
 			setUserNickname(response.data.name);
+			setIsAvailable(true);
 		} catch (error) {
 			console.log(error);
 		}

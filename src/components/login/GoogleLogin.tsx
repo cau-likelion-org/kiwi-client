@@ -51,7 +51,7 @@ const GoogleLogin = () => {
 			alert('likelion.org 계정으로만 로그인이 가능합니다. 다시 시도해주세요.');
 				setTimeout(() => {
 				  route.push('/login');
-				}, 1000);
+				}, 500);
 		  }
 		};
 	  
