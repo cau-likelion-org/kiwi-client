@@ -24,7 +24,7 @@ const LandingSection3 = () => {
 								<div>타인을 비난하는 내용 작성 시 제재당할 수 있습니다.🚨</div>
 								<br />
 								<a href=" https://kiwi-client.vercel.app/viewer?title=%EC%9C%84%ED%82%A4%20%EC%82%AC%EC%9A%A9%20%EC%84%A4%EB%AA%85%EC%84%9C">
-									멋사 위키가 처음이라면? ⤂ 클릭!
+									멋사 위키가 처음이라면?
 								</a>
 							</TextWrapper>
 						</Content>
@@ -180,7 +180,6 @@ const TextWrapper = styled.div`
 		line-height: 115%;
 	}
 	a {
-		color: black;
-		text-decoration: none;
+		color: #4546f2;
 	}
 `;
