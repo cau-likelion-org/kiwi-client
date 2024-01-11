@@ -239,6 +239,7 @@ const ViewerMain = () => {
 										width={27}
 										height={27}
 										onClick={isClickedArrow}
+										style={{ cursor: 'pointer' }}
 									></StyledImage>
 								) : (
 									<StyledImage
@@ -247,6 +248,7 @@ const ViewerMain = () => {
 										width={27}
 										height={27}
 										onClick={isClickedArrow}
+										style={{ cursor: 'pointer' }}
 									></StyledImage>
 								)}
 							</ListTitle>
