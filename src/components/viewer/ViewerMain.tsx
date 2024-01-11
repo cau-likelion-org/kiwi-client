@@ -67,7 +67,7 @@ const ViewerMain = () => {
 
 		text = text.replace(linkRegex, (match, linkText, linkUrl) => {
 			if (linkText === 'image') {
-				return `<img src="${linkUrl}" alt="image" width="45%">`;
+				return `<img src="${linkUrl}" alt="image" style="width: 30%; min-width: 400px;">`;
 			}
 			return `<a href="${linkUrl}">${linkText}</a>`;
 		});
