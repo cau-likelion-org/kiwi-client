@@ -447,31 +447,25 @@ const ListTitle = styled.div`
 		width: 200px; // 원하는 값으로 수정
 		gap: 130px;
 	}
-	// @media (max-width: 494px) {
-	//   width: 150px; // 원하는 값으로 수정
-	//   gap: 80px;
-	// }
 `;
 const ListBox = styled.div`
-	width: 241px;
+	width: 286px;
 	display: inline-flex;
 	align-items: center;
-	// gap: 8px;
 	border: 3px solid #000;
 	flex-direction: column;
-	padding: 30px 50px 30px 16px;
+	padding: 30px 51.5px 30px 16px;
 
 	@media (max-width: 795px) {
-		width: 157px; // 원하는 값으로 수정
-		// gap: 5px;
+		width: 157px;
 	}
-	// @media (max-width: 494px) {
-	//   width: 100px; // 원하는 값으로 수정
-	// }
+	@media screen and (min-width: 1024px) {
+		width: 241px;
+	}
 `;
 const List = styled.div`
-	width: 175px;
-	height: 19.313px;
+	width: 100%;
+	height: 25px;
 	flex-shrink: 0;
 	color: #000;
 	font-family: NeoDunggeunmo Pro;
@@ -505,7 +499,6 @@ const Content = styled.div`
 	font-weight: 400;
 	line-height: 150%;
 	margin-bottom: 50px;
-	// width: 75%;
 	margin-top: 30px;
 	white-space: pre-wrap;
 `;
