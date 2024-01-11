@@ -44,7 +44,6 @@ const Upload: React.FC = () => {
 
 	const handleEditorChange = (value?: string | undefined) => {
 		if (value !== undefined) {
-			// let newValue = value.replace(/[-*]/g, '•');
 			setMd(value);
 		}
 	};
