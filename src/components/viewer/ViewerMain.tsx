@@ -429,11 +429,11 @@ const ContentsLists = styled.div`
 	margin-bottom: 40px;
 `;
 const ListTitle = styled.div`
-	width: 284px;
+	width: 200px;
 	display: inline-flex;
 	padding: 16px 8px 16px 21px;
 	align-items: flex-end;
-	gap: 200px;
+	gap: 130px;
 	background-color: black;
 	color: #fff;
 	text-align: center;
@@ -442,26 +442,21 @@ const ListTitle = styled.div`
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-
-	@media (max-width: 795px) {
-		width: 200px;
-		gap: 130px;
+	@media screen and (min-width: 1024px) {
+		width: 281.5px;
+		gap: 210px;
 	}
 `;
 const ListBox = styled.div`
-	width: 290px;
+	width: 173px;
 	display: inline-flex;
 	align-items: center;
 	border: 3px solid #000;
 	flex-direction: column;
 	padding: 30px 51.5px 30px 0px;
 
-	@media (max-width: 795px) {
-		width: 173px;
-	}
-
-	@media screen and (min-width: 796px) {
-		width: 257px;
+	@media screen and (min-width: 1024px) {
+		width: 254px;
 	}
 `;
 const List = styled.div`
@@ -476,7 +471,7 @@ const List = styled.div`
 	line-height: normal;
 	margin-bottom: 15px;
 	cursor: pointer;
-	@media screen and (min-width: 796px) {
+	@media screen and (min-width: 1024px) {
 		width: 100%;
 		height: 25px;
 		font-size: 18px;
