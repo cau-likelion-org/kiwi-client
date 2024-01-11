@@ -444,7 +444,7 @@ const ListTitle = styled.div`
 	line-height: normal;
 
 	@media (max-width: 795px) {
-		width: 200px; // 원하는 값으로 수정
+		width: 200px;
 		gap: 130px;
 	}
 `;
@@ -459,7 +459,8 @@ const ListBox = styled.div`
 	@media (max-width: 795px) {
 		width: 173px;
 	}
-	@media screen and (min-width: 1024px) {
+
+	@media screen and (min-width: 796px) {
 		width: 257px;
 	}
 `;
@@ -475,7 +476,7 @@ const List = styled.div`
 	line-height: normal;
 	margin-bottom: 15px;
 	cursor: pointer;
-	@media screen and (min-width: 1024px) {
+	@media screen and (min-width: 796px) {
 		width: 100%;
 		height: 25px;
 		font-size: 18px;
