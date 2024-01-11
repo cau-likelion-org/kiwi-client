@@ -26,34 +26,38 @@ const GoogleLogin = () => {
 
 	useEffect(() => {
 		const login = async () => {
+		  try {
 			if (code !== null) {
-				const result = await postCode(body);
-				// 로그인 성공
-				if(result.status==='200'){
-					setUserEmail(result.data.email);
-					setUserName(result.data.name);
-					setToken({access: LocalStorage.getItem('access'), refresh: LocalStorage.getItem('refresh')})
-					setTimeout(() => {
-						route.push('/');
-					}, 1000);
-				} else if(result.status==='202'){
-					// 회원가입 필요
-					setUserEmail(result.data.email);
-					setTimeout(() => {
-						route.push('/signup');
-					}, 1000);
-				}else{
-					// 로그인 과정 중에 문제 발생
-					alert('로그인 과정에서 문제가 발생했습니다. 다시 시도해주세요.')
-					setTimeout(() => {
-						route.push('/');
-					}, 1000);
-				}
-				
+			  const result = await postCode(body);
+			  
+			  // 로그인 성공
+			  if (result.status === '200') {
+				setUserEmail(result.data.email);
+				setUserName(result.data.name);
+				setToken({ access: LocalStorage.getItem('access'), refresh: LocalStorage.getItem('refresh') });
+				setTimeout(() => {
+				  route.push('/');
+				}, 1000);
+			  } else if (result.status === '202') {
+				// 회원가입 필요
+				setUserEmail(result.data.email);
+				setTimeout(() => {
+				  route.push('/signup');
+				}, 1000);
+			  }
 			}
+		  } catch (error) {
+			// console.error('An error occurred during login:', error);
+			alert('likelion.org 계정으로만 로그인이 가능합니다. 다시 시도해주세요.');
+				setTimeout(() => {
+				  route.push('/');
+				}, 1000);
+		  }
 		};
+	  
 		login();
-	}, []);
+	  }, []);
+	  
 
 	return <Loading />;
 };
