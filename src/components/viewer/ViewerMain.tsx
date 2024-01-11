@@ -449,32 +449,37 @@ const ListTitle = styled.div`
 	}
 `;
 const ListBox = styled.div`
-	width: 286px;
+	width: 290px;
 	display: inline-flex;
 	align-items: center;
 	border: 3px solid #000;
 	flex-direction: column;
-	padding: 30px 51.5px 30px 16px;
+	padding: 30px 51.5px 30px 0px;
 
 	@media (max-width: 795px) {
-		width: 157px;
+		width: 173px;
 	}
 	@media screen and (min-width: 1024px) {
-		width: 241px;
+		width: 257px;
 	}
 `;
 const List = styled.div`
-	width: 100%;
-	height: 25px;
+	width: 115%;
+	height: 30px;
 	flex-shrink: 0;
 	color: #000;
 	font-family: NeoDunggeunmo Pro;
-	font-size: 18px;
+	font-size: 15px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
 	margin-bottom: 15px;
 	cursor: pointer;
+	@media screen and (min-width: 1024px) {
+		width: 100%;
+		height: 25px;
+		font-size: 18px;
+	}
 `;
 const ContentTitle = styled.div`
 	display: flex;
