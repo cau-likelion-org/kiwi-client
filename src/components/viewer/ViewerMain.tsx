@@ -350,6 +350,9 @@ const Title = styled.div`
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+	@media screen and (max-width: 540px) {
+		font-size: 23px;
+	}
 `;
 const Links = styled.div`
 	display: flex;

@@ -154,7 +154,7 @@ const ButtonWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	@media screen and (max-width: 540px) {
-		width: 52%;
-		gap: 1rem;
+		width: 54%;
+		gap: 0.5rem;
 	}
 `;
