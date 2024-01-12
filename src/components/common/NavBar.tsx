@@ -120,6 +120,9 @@ const LeftWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-left: 3%;
+	@media screen and (max-width: 540px) {
+		margin-left: 1%;
+	}
 `;
 
 const RightWrapper = styled.div`
@@ -129,7 +132,7 @@ const RightWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	@media screen and (min-width: 1024px) {
-		width: 30%;
+		width: 40%;
 	}
 `;
 
@@ -137,6 +140,10 @@ const SearchWrapper = styled.div`
 	display: flex;
 	position: relative;
 	width: 50%;
+	@media screen and (max-width: 540px) {
+		width: 40%;
+		margin-top: 1rem;
+	}
 `;
 
 const ButtonWrapper = styled.div`
@@ -146,4 +153,8 @@ const ButtonWrapper = styled.div`
 	margin-right: 1.5rem;
 	justify-content: space-between;
 	align-items: center;
+	@media screen and (max-width: 540px) {
+		width: 52%;
+		gap: 1rem;
+	}
 `;
