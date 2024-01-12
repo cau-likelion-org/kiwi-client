@@ -100,6 +100,11 @@ const Title = styled.div`
 			font-size: 2.5rem;
 		}
 	}
+	@media screen and (max-width: 540px) {
+		width: 60%;
+		font-size: 1rem;
+		margin-bottom: 2rem;
+	}
 `;
 
 const Box = styled.div`
@@ -114,9 +119,14 @@ const Box = styled.div`
 	gap: 1rem;
 	z-index: 2;
 	font-size: 2rem;
+	font-weight: bold;
 	@media screen and (min-width: 1024px) {
 		width: 60%;
 		font-size: 2rem;
+	}
+	@media screen and (max-width: 540px) {
+		width: 94%;
+		margin-left: 0.5rem;
 	}
 `;
 
@@ -135,6 +145,10 @@ const Lion1 = styled.div`
 		width: 11%;
 		bottom: 7.6rem;
 	}
+	@media screen and (max-width: 540px) {
+		width: 40%;
+		bottom: 9rem;
+	}
 `;
 
 const Lion2 = styled.div`
@@ -147,6 +161,9 @@ const Lion2 = styled.div`
 		bottom: 25%;
 		width: 10%;
 	}
+	@media screen and (max-width: 540px) {
+		width: 30%;
+	}
 `;
 
 const StyledImage2 = styled(Image)`
@@ -158,14 +175,17 @@ const Content = styled.div`
 	z-index: 2;
 	position: absolute;
 	margin-top: 2rem;
-	height: 60%;
-	width: 90%;
+	height: 50%;
+	width: 95%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
 	flex-direction: column;
 	font-family: 'NeoDunggeunmo Pro';
+	@media screen and (max-width: 540px) {
+		font-size: 1.35rem;
+	}
 `;
 
 const TextWrapper = styled.div`

@@ -101,10 +101,17 @@ const Title = styled.div`
 		font-weight: bold;
 		line-height: normal;
 		letter-spacing: 0.3125rem;
+		@media screen and (max-width: 540px) {
+			font-size: 120%;
+		}
 	}
 	@media screen and (min-width: 1024px) {
 		top: 14rem;
 		width: 25%;
+	}
+	@media screen and (max-width: 540px) {
+		min-width: 200px;
+		top: 5rem;
 	}
 `;
 
@@ -124,6 +131,10 @@ const Box = styled.div`
 		top: 16rem;
 		width: 38%;
 		font-size: 1.3rem;
+	}
+	@media screen and (max-width: 540px) {
+		width: 70%;
+		top: 6rem;
 	}
 `;
 
@@ -148,9 +159,16 @@ const Content = styled.div`
 		font-family: NeoDunggeunmo Pro;
 		padding: 5px 0rem;
 		cursor: pointer;
+		@media screen and (max-width: 540px) {
+			font-size: 150%;
+			letter-spacing: 0rem;
+		}
 	}
 	@media screen and (min-width: 1024px) {
 		margin-top: 5rem;
+	}
+	@media screen and (max-width: 540px) {
+		margin-top: 2.3rem;
 	}
 `;
 
@@ -181,6 +199,10 @@ const ShortCutWrapper = styled.div`
 	@media screen and (min-width: 1024px) {
 		width: 98%;
 		bottom: 18.5rem;
+	}
+	@media screen and (max-width: 540px) {
+		width: 100%;
+		top: 0rem;
 	}
 `;
 
@@ -214,6 +236,11 @@ const ShortCuts1 = styled.div`
 		@media screen and (min-width: 1024px) {
 			width: 90%;
 			font-size: 1.7rem;
+			letter-spacing: 0rem;
+		}
+		@media screen and (max-width: 540px) {
+			width: 70%;
+			font-size: 1.3rem;
 			letter-spacing: 0rem;
 		}
 	}
@@ -255,6 +282,11 @@ const ShortCuts2 = styled.div`
 			font-size: 1.7rem;
 			letter-spacing: 0rem;
 		}
+		@media screen and (max-width: 540px) {
+			width: 70%;
+			font-size: 1.3rem;
+			letter-spacing: 0rem;
+		}
 	}
 	@media screen and (min-width: 1024px) {
 		width: 12%;
@@ -273,6 +305,12 @@ const LionWrapper = styled.div`
 	z-index: 3;
 	@media screen and (min-width: 1024px) {
 		bottom: 16rem;
+	}
+	@media screen and (max-width: 540px) {
+		object-fit: cover;
+		height: fit-content;
+		overflow: hidden;
+		margin-top: 5rem;
 	}
 `;
 
