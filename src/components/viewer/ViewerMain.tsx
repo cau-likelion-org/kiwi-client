@@ -31,10 +31,14 @@ const ViewerMain = () => {
 		else setOpenList(true);
 	};
 
+	const isClickedSort = (link: string) => {
+		let encodedTitle = encodeURIComponent(link);
+		router.push(`/sort?title=${encodedTitle}`);
+	}
+
 	const isClickedLink = (link: string) => {
 		let encodedTitle = encodeURIComponent(link);
 		router.push(`/viewer?title=${encodedTitle}`);
-		//여기에 링크로 이동하는 코드 작성
 	};
 
 	const [sortLinks, setSortLinks] = useState<{ id: number; title: string; link: string }[]>([]);
@@ -219,7 +223,7 @@ const ViewerMain = () => {
 								<div className="sortTitle">분류</div>
 								<div className="line">|</div>
 								{sortLinks.map((sortLink, index) => (
-									<div className="sortContent" key={index} onClick={() => isClickedLink(sortLink.title)}>
+									<div className="sortContent" key={index} onClick={() => isClickedSort(sortLink.title)}>
 										{' '}
 										{sortLink.title}
 									</div>
