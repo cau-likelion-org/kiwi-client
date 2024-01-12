@@ -9,7 +9,6 @@ export const getSortContent = async (title: string) => {
         console.log(encodedTitle);
 		const response = await axios.get(`${baseURL}docs/${encodedTitle}/`);
 		if (response.status === 200) {
-            console.log(response.data);
 			return response.data;
 		} else {
 			console.log('Error occurred while fetching sort content');

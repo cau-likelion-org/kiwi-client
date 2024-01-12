@@ -164,7 +164,7 @@ const ContentsBody = styled.div`
 	padding-bottom: 100px;
 `;
 const List = styled.div`
-	width: 80%;
+	width: 90%;
 	height: 19.313px;
 	flex-shrink: 0;
 	color: #000;
