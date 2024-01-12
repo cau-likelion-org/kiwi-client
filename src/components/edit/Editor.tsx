@@ -170,7 +170,4 @@ const Input = styled.input`
 	&:focus {
 		outline: none;
 	}
-	/* &[readonly] {
-		background-color: #7c7b7b;
-	} */
 `;
