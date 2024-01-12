@@ -148,8 +148,7 @@ const Lion1 = styled.div`
 		bottom: 7.6rem;
 	}
 	@media screen and (max-width: 540px) {
-		width: 40%;
-		bottom: 15rem;
+		display: none;
 	}
 `;
 
@@ -165,7 +164,7 @@ const Lion2 = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		width: 30%;
-		bottom: 20rem;
+		bottom: 28rem;
 	}
 `;
 

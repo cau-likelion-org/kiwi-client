@@ -5,8 +5,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { DataType } from '@/types/request';
 import { useRouter } from 'next/navigation';
+import { useMediaQuery } from 'react-responsive';
 
 const LandingSection2 = ({ data }: { data: DataType[] }) => {
+	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
 	const router = useRouter();
 	function formatDate(update: string) {
 		const date = update.split('T')[0];
@@ -47,16 +49,22 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 					<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
 				</ShortCuts2>
 			</ShortCutWrapper>
-			<LionWrapper>
-				<Lions>
-					<StyledImage src="/img/landingblue.png" alt="파랑 사자" fill priority />
-					<StyledImage src="/img/landinggreen.png" alt="초록 사자" fill priority />
-				</Lions>
-				<Lions>
-					<StyledImage src="/img/landingorange.png" alt="주황 사자" fill priority />
-					<StyledImage src="/img/landingred.png" alt="빨강 사자" fill priority />
-				</Lions>
-			</LionWrapper>
+			{isMobile ? (
+				<LionWrapper>
+					<StyledImage src="/img/lionking.png" alt="사자들" fill priority />
+				</LionWrapper>
+			) : (
+				<LionWrapper>
+					<Lions>
+						<StyledImage src="/img/landingblue.png" alt="파랑 사자" fill priority />
+						<StyledImage src="/img/landinggreen.png" alt="초록 사자" fill priority />
+					</Lions>
+					<Lions>
+						<StyledImage src="/img/landingorange.png" alt="주황 사자" fill priority />
+						<StyledImage src="/img/landingred.png" alt="빨강 사자" fill priority />
+					</Lions>
+				</LionWrapper>
+			)}
 		</ImageWrapper>
 	);
 };
