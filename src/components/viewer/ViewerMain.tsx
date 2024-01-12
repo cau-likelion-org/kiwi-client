@@ -405,6 +405,9 @@ const ContentsBody = styled.div`
 		padding: 2rem;
 		border-radius: 4px;
 		color: #333;
+		overflow-x: auto;
+		white-space: pre-wrap; 
+		word-wrap: break-word;
 	}
 
 	blockquote {
@@ -572,4 +575,9 @@ const SortBox = styled.div`
 			border-color: #0757f1;
 		}
 	}
+`;
+const Pre = styled.pre`
+  overflow-x: auto;
+  white-space: pre-wrap; /* 줄바꿈을 유지하면서, 필요한 경우에만 줄을 바꿉니다. */
+  word-wrap: break-word; /* 단어가 너무 길어질 경우 단어를 자르는 속성입니다. */
 `;
