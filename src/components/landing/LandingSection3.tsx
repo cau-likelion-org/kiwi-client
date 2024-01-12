@@ -103,6 +103,7 @@ const Title = styled.div`
 	@media screen and (max-width: 540px) {
 		width: 60%;
 		font-size: 1rem;
+		bottom: 5rem;
 		margin-bottom: 2rem;
 	}
 `;
@@ -126,6 +127,7 @@ const Box = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		width: 94%;
+		bottom: 6rem;
 		margin-left: 0.5rem;
 	}
 `;
@@ -147,7 +149,7 @@ const Lion1 = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		width: 40%;
-		bottom: 9rem;
+		bottom: 15rem;
 	}
 `;
 
@@ -163,6 +165,7 @@ const Lion2 = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		width: 30%;
+		bottom: 20rem;
 	}
 `;
 

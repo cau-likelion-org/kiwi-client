@@ -240,7 +240,7 @@ const ShortCuts1 = styled.div`
 		}
 		@media screen and (max-width: 540px) {
 			width: 70%;
-			font-size: 1.3rem;
+			font-size: 1.19rem;
 			letter-spacing: 0rem;
 		}
 	}
@@ -284,7 +284,7 @@ const ShortCuts2 = styled.div`
 		}
 		@media screen and (max-width: 540px) {
 			width: 70%;
-			font-size: 1.3rem;
+			font-size: 1.19rem;
 			letter-spacing: 0rem;
 		}
 	}
@@ -307,7 +307,8 @@ const LionWrapper = styled.div`
 		bottom: 16rem;
 	}
 	@media screen and (max-width: 540px) {
-		object-fit: cover;
+		/* object-fit: cover; */
+		width: 100%;
 		height: fit-content;
 		overflow: hidden;
 		margin-top: 5rem;
