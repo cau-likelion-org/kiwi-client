@@ -67,7 +67,7 @@ const ViewerMain = () => {
 
 		text = text.replace(linkRegex, (match, linkText, linkUrl) => {
 			if (linkText === 'image') {
-				return `<img src="${linkUrl}" alt="image" style="width: 30%; min-width: 400px;">`;
+				return `<img src="${linkUrl}" alt="image" style="width: 30%;">`;
 			}
 			return `<a href="${linkUrl}">${linkText}</a>`;
 		});
@@ -93,8 +93,6 @@ const ViewerMain = () => {
 		text = text.replace(checklistRegex, '<input type="checkbox" disabled>');
 		text = text.replace(codeBlockRegex, '<pre>$1</pre>');
 		text = text.replace(boldRegex, '<strong>$1</strong>');
-		// text = text.replace(bulletPointRegex, '•  ');
-		// text = text.replace(bulletPointRegex2, '•  ');
 		text = text.replace(quoteRegex, '<blockquote>$1</blockquote>');
 		text = text.replace(strikethroughRegex, '<del>$1</del>');
 		text = text.replace(codeRegex, '<code>$1</code>');

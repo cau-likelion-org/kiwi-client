@@ -86,7 +86,7 @@ const Editor: React.FC = () => {
 				const [file] = Array.from(fileInput.files);
 				const blobUrl = createBlobUrl(file);
 				const imageUrl = await uploadImageToServer(blobUrl);
-				const imageMarkdown = `<img src="${imageUrl}" alt="image" style="width: 30%; min-width: 400px;"/>`;
+				const imageMarkdown = `<img src="${imageUrl}" alt="image" style="width: 30%;"/>`;
 				api.replaceSelection(imageMarkdown);
 			};
 			fileInput.click();
