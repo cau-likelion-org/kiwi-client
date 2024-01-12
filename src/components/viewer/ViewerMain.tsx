@@ -31,10 +31,14 @@ const ViewerMain = () => {
 		else setOpenList(true);
 	};
 
+	const isClickedSort = (link: string) => {
+		let encodedTitle = encodeURIComponent(link);
+		router.push(`/sort?title=${encodedTitle}`);
+	}
+
 	const isClickedLink = (link: string) => {
 		let encodedTitle = encodeURIComponent(link);
 		router.push(`/viewer?title=${encodedTitle}`);
-		//여기에 링크로 이동하는 코드 작성
 	};
 
 	const [sortLinks, setSortLinks] = useState<{ id: number; title: string; link: string }[]>([]);
@@ -219,7 +223,7 @@ const ViewerMain = () => {
 								<div className="sortTitle">분류</div>
 								<div className="line">|</div>
 								{sortLinks.map((sortLink, index) => (
-									<div className="sortContent" key={index} onClick={() => isClickedLink(sortLink.title)}>
+									<div className="sortContent" key={index} onClick={() => isClickedSort(sortLink.title)}>
 										{' '}
 										{sortLink.title}
 									</div>
@@ -401,6 +405,9 @@ const ContentsBody = styled.div`
 		padding: 2rem;
 		border-radius: 4px;
 		color: #333;
+		overflow-x: auto;
+		white-space: pre-wrap; 
+		word-wrap: break-word;
 	}
 
 	blockquote {
@@ -568,4 +575,9 @@ const SortBox = styled.div`
 			border-color: #0757f1;
 		}
 	}
+`;
+const Pre = styled.pre`
+  overflow-x: auto;
+  white-space: pre-wrap; /* 줄바꿈을 유지하면서, 필요한 경우에만 줄을 바꿉니다. */
+  word-wrap: break-word; /* 단어가 너무 길어질 경우 단어를 자르는 속성입니다. */
 `;
