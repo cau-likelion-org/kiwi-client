@@ -100,7 +100,7 @@ const Editor: React.FC = () => {
 					<Btn onClick={cancelEdit}>취소</Btn>
 					<Btn onClick={onModal}>완료</Btn>
 				</BtnWrapper>
-				<Input value={title} onChange={(e) => setTitle(e.target.value)} />
+				<Input value={title} onChange={(e) => setTitle(e.target.value)} readOnly />
 				<div className="markarea">
 					<MDEditor
 						commands={[...customCommands, imageUploadCommand]}
