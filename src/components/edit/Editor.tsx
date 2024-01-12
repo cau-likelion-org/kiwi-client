@@ -19,7 +19,7 @@ const Editor: React.FC = () => {
 	const [md, setMd] = useState<string>('');
 	const [selectedGenerations, setSelectedGenerations] = useState<readonly IOption[] | null>([]);
 	const params = useSearchParams();
-	const title: string = params.get('title') || '';
+	const [title, setTitle] = useState<string>(params.get('title') || '');
 	const router = useRouter();
 	useEffect(() => {
 		const getDocument = async (docsTitle: string) => {
@@ -100,7 +100,7 @@ const Editor: React.FC = () => {
 					<Btn onClick={cancelEdit}>취소</Btn>
 					<Btn onClick={onModal}>완료</Btn>
 				</BtnWrapper>
-				<Input value={title} />
+				<Input value={title} onChange={(e) => setTitle(e.target.value)} />
 				<div className="markarea">
 					<MDEditor
 						commands={[...customCommands, imageUploadCommand]}
