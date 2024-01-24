@@ -19,11 +19,9 @@ const SearchBodySection = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const searchParams = params.get('search');
-		if (typeof searchParams === 'string') {
-			setIsLoading(true);
-			setSearchKeyword(searchParams);
-		}
+		const searchParams = params.get('search')!;
+		setIsLoading(true);
+		setSearchKeyword(searchParams);
 	}, [params]);
 
 	// 검색어와 문서 제목이 100% 일치 : 리다이렉트, 일치 X -> 검색 결과
