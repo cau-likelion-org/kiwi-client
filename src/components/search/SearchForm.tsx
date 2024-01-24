@@ -54,13 +54,13 @@ const FormWrapper = styled.form``;
 const SearchBarInput = styled.input`
 	background: url('/img/search_bar.png');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 	border: none;
 	font-size: 2rem;
 	font-family: Pretendard;
 	padding: 10px;
 	padding-left: 30px;
-	width: 550px;
+	width: 55rem;
 	min-height: 53px;
 	&:focus {
 		outline: none;

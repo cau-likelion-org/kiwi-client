@@ -23,13 +23,11 @@ const SearchHeadWrapper = styled.div`
 const StyledImage = styled(Image)`
 	position: relative !important;
 	height: unset !important;
-	object-fit: cover;
 `;
 
 const HeartImageWrapper = styled.div`
 	position: relative;
-	width: 310px;
-	height: 98px;
+	width: 25rem;
 `;
 
 export default SearchHeadSection;

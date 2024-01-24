@@ -54,9 +54,7 @@ const SearchBodySection = () => {
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
 			{isLoading ? (
-				<LoadingWrapper>
-					<Loading />
-				</LoadingWrapper>
+				<Loading />
 			) : searchResult.length > 0 ? (
 				<SearchFound searchResult={searchResult} />
 			) : (
@@ -66,29 +64,21 @@ const SearchBodySection = () => {
 	);
 };
 
-const LoadingWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
 const SearchBarWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-left: 18%;
+	margin-left: 10%;
 `;
 
 const TextImageWrapper = styled.div`
 	position: relative;
-	width: 300px;
-	height: 40px;
+	width: 30rem;
 `;
 
 const StyledImage = styled(Image)`
 	position: relative !important;
 	height: unset !important;
-	object-fit: cover;
 `;
 
 export default SearchBodySection;
