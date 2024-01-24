@@ -50,12 +50,13 @@ const SearchFoundWrapper = styled.div`
 const SearchResult = styled.div`
 	display: flex;
 	align-items: end;
+	justify-content: center;
 	gap: 20px;
 	margin: 30px;
 `;
 
 const LionImageWrapper = styled.div`
-	width: 10rem;
+	width: 13rem;
 	display: flex;
 	align-items: center;
 `;
@@ -66,8 +67,7 @@ const StyledImage = styled(Image)`
 `;
 
 const SearchResultBox = styled.div`
-	width: 65vw;
-	height: 12rem;
+	width: 65%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
