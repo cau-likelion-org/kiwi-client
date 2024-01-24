@@ -13,17 +13,11 @@ export const metadata: Metadata = {
 	icons: {
 		icon: '/img/icon.png',
 	},
-	keywords: [
-		'중앙대학교',
-		'멋쟁이 사자처럼',
-		'멋사',
-		'멋사 위키',
-		'중앙대학교 멋사'
-	],
+	keywords: ['중앙대학교', '멋쟁이 사자처럼', '멋사', '멋사 위키', '중앙대학교 멋사'],
 	openGraph: {
 		title: '멋사 중앙대 위키',
 		description: '멋쟁이 사자처럼 중앙대학교의 위키 입니다',
-		url: 'https://kiwi-client.vercel.app/',
+		url: 'https://wiki.cau-likelion.org/',
 		siteName: '멋사 중앙대 위키',
 		// images: [
 		// 	{
@@ -31,6 +25,10 @@ export const metadata: Metadata = {
 		// 	},
 		// ],
 		type: 'website',
+	},
+	viewport: {
+		width: 'device-width',
+		initialScale: 1,
 	},
 };
 

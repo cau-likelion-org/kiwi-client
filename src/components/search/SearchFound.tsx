@@ -66,15 +66,15 @@ const StyledImage = styled(Image)`
 `;
 
 const SearchResultBox = styled.div`
-	width: 70vw;
-	height: 18vh;
+	width: 65vw;
+	height: 12rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	background-color: white;
 	border: 3px solid black;
 	border-radius: 10px;
-	padding: 15px;
+	padding: 30px;
 	cursor: pointer;
 `;
 
@@ -84,9 +84,9 @@ const SearchResultTitle = styled.div`
 `;
 
 const SearchResultContent = styled.div`
-	height: 9vh;
+	height: 6rem;
 	overflow: hidden;
-	line-height: 1.4;
+	line-height: 2rem;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	font-size: 1.4rem;
