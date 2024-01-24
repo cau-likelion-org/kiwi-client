@@ -16,24 +16,25 @@ const SearchNotFound = ({ searchKeyword }: { searchKeyword: string }) => {
 
 const SearchNotFoundWrapper = styled.div`
 	margin-top: 10px;
-	margin-left: 20%;
 `;
 
 const NotFoundSearchText = styled.div`
 	font-size: 1.5rem;
 	font-weight: bold;
 	color: red;
+	margin-left: 20%;
 `;
 
 const BottomImageWrapper = styled.div`
-	height: 48vh;
 	display: flex;
+	justify-content: center;
 	align-items: flex-end;
 `;
 
 const LionImageWrapper = styled.div`
-	position: relative;
-	width: 800px;
+	width: 65vw;
+	position: absolute;
+	bottom: 0;
 `;
 
 const StyledImage = styled(Image)`

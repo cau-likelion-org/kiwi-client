@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+type SearchInputType = 'searchInput' | 'searchHeaderInput';
 interface useFormProps {
 	initialValue: {
-		searchInput: string;
-		searchHeaderInput: string;
+		[k in SearchInputType]: string;
 	};
 	searchKeyword?: string;
 }
@@ -31,7 +31,12 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 		e.preventDefault();
 		setIsFocused(false);
 		const { name } = e.target;
+
 		if (name === 'searchInput' || name === 'searchHeaderInput') {
+			if (values[name].length === 0) {
+				alert('검색어를 입력해주세요');
+				return;
+			}
 			setValues({ ...values, searchInput: values[name], searchHeaderInput: '' });
 			router.push(`search/?search=${values[name]}`);
 		}

@@ -44,7 +44,7 @@ const SearchFoundWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 15px;
+	margin-top: 20px;
 `;
 
 const SearchResult = styled.div`
@@ -55,8 +55,7 @@ const SearchResult = styled.div`
 `;
 
 const LionImageWrapper = styled.div`
-	width: 128px;
-	height: 137px;
+	width: 10rem;
 	display: flex;
 	align-items: center;
 `;
@@ -64,19 +63,18 @@ const LionImageWrapper = styled.div`
 const StyledImage = styled(Image)`
 	position: relative !important;
 	height: unset !important;
-	object-fit: cover;
 `;
 
 const SearchResultBox = styled.div`
-	width: 50vw;
-	height: 18vh;
+	width: 65vw;
+	height: 12rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	background-color: white;
 	border: 3px solid black;
 	border-radius: 10px;
-	padding: 15px;
+	padding: 30px;
 	cursor: pointer;
 `;
 
@@ -86,9 +84,9 @@ const SearchResultTitle = styled.div`
 `;
 
 const SearchResultContent = styled.div`
-	height: 9vh;
+	height: 6rem;
 	overflow: hidden;
-	line-height: 1.4;
+	line-height: 2rem;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	font-size: 1.4rem;
