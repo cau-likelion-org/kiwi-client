@@ -61,7 +61,7 @@ const SearchBarInput = styled.input`
 	padding: 10px;
 	padding-left: 30px;
 	width: 55rem;
-	min-height: 53px;
+	min-height: 4rem;
 	&:focus {
 		outline: none;
 	}
