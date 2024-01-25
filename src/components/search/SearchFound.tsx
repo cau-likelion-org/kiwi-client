@@ -1,16 +1,17 @@
 'use client';
 
-import { IGenerations, ISearchResult } from '@/types/request';
+import { IGenerations } from '@/types/request';
+import { SearchResult } from '@/types/search';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-const SearchFound = ({ searchResult }: { searchResult: ISearchResult[] }) => {
+const SearchFound = ({ searchResult }: { searchResult: SearchResult[] }) => {
 	const router = useRouter();
 
 	const handleClickSearchResult = (id: number) => {
 		const selectedDocTitle = searchResult.filter((result) => result.id === id)[0].title;
-		let encodedTitle = encodeURIComponent(selectedDocTitle);
+		const encodedTitle = encodeURIComponent(selectedDocTitle);
 		router.push(`viewer?title=${encodedTitle}`);
 	};
 

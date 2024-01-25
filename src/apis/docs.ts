@@ -1,14 +1,22 @@
-import { CreateDocs, ISearchResult } from '@/types/request';
+import { CreateDocs } from '@/types/request';
 import axios from 'axios';
 import { Server } from './settings';
 import LocalStorage from '@/utils/localStorage';
+import { ISearchResult, ISearchResultList, SearchResult } from '@/types/search';
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-export const getSearchResult = async (keyword: string) => {
-	let encodedKeyword = encodeURIComponent(keyword);
-	const result = await Server.get<ISearchResult[] | ISearchResult>(`docs/search/${encodedKeyword}/`);
-	return result.data;
+export const getSearchResult = async (keyword: string): Promise<ISearchResult | ISearchResultList> => {
+	const encodedKeyword = encodeURIComponent(keyword);
+	const { data } = await Server.get<SearchResult | SearchResult[]>(`docs/search/${encodedKeyword}/`);
+	if (Array.isArray(data)) {
+		const searchResultList: ISearchResultList = {
+			kind: 'searchResultList',
+			data: data.map((result) => ({ ...result })),
+		};
+		return searchResultList;
+	}
+	return { kind: 'searchResult', data };
 };
 
 export const newDocs = async (body: CreateDocs) => {

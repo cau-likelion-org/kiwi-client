@@ -8,36 +8,31 @@ import SearchFound from './SearchFound';
 import SearchNotFound from './SearchNotFound';
 import Image from 'next/image';
 import { getSearchResult } from '@/apis/docs';
-import { ISearchResult } from '@/types/request';
+
 import Loading from '../common/Loading';
+import { useQuery } from '@tanstack/react-query';
 
 const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
-	const [searchKeyword, setSearchKeyword] = useState<string>('');
-	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const [searchKeyword, setSearchKeyword] = useState('');
+	const { data: searchResult } = useQuery({
+		queryKey: ['search', searchKeyword],
+		queryFn: () => getSearchResult(searchKeyword),
+		enabled: !!searchKeyword,
+	});
 
 	useEffect(() => {
 		const searchParams = params.get('search')!;
-		setIsLoading(true);
 		setSearchKeyword(searchParams);
 	}, [params]);
 
-	// 검색어와 문서 제목이 100% 일치 : 리다이렉트, 일치 X -> 검색 결과
 	useEffect(() => {
-		if (searchKeyword) {
-			getSearchResult(searchKeyword).then((res) => {
-				if (Array.isArray(res)) {
-					setSearchResult(res);
-				} else if (res.titleMatched) {
-					let encodedTitle = encodeURIComponent(searchKeyword);
-					router.push(`viewer?title=${encodedTitle}`);
-				}
-				setIsLoading(false);
-			});
+		if (searchResult && searchResult.kind === 'searchResult') {
+			const encodedTitle = encodeURIComponent(searchKeyword);
+			router.push(`viewer?title=${encodedTitle}`);
 		}
-	}, [router, searchKeyword]);
+	}, [searchResult]);
 
 	return (
 		<>
@@ -53,12 +48,14 @@ const SearchBodySection = () => {
 				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
-			{isLoading ? (
-				<Loading />
-			) : searchResult.length > 0 ? (
-				<SearchFound searchResult={searchResult} />
+			{searchResult ? (
+				searchResult.kind === 'searchResultList' && searchResult.data.length > 0 ? (
+					<SearchFound searchResult={searchResult.data} />
+				) : (
+					<SearchNotFound searchKeyword={searchKeyword} />
+				)
 			) : (
-				<SearchNotFound searchKeyword={searchKeyword} />
+				<Loading />
 			)}
 		</>
 	);
