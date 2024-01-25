@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SearchHeaderForm = ({ searchKeyword }: { searchKeyword: string }) => {
-	const { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur } = useSearchForm({
+	const { values, handleChange, handleSearchSubmit } = useSearchForm({
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
 	});

@@ -1,8 +1,13 @@
 import { useSearchAutoCompleteQuery } from '@/hooks/useSearchAutoCompleteQuery';
 import { useRouter } from 'next/navigation';
+import { forwardRef, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
+interface AutoProps {
+	searchInput: string;
+}
+
+const AutoCompleteBox = ({ searchInput }: AutoProps) => {
 	const router = useRouter();
 	const dropdownList = useSearchAutoCompleteQuery(searchInput);
 
@@ -11,7 +16,7 @@ const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
 			{dropdownList ? (
 				dropdownList.length > 0 ? (
 					dropdownList.map((title, idx) => (
-						<ItemWrapper key={idx} onClick={() => router.push(`search/?search=${title}`)}>
+						<ItemWrapper id="complete" key={idx} onClick={() => router.push(`search/?search=${title}`)}>
 							{title}
 						</ItemWrapper>
 					))

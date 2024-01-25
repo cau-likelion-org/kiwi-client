@@ -1,17 +1,32 @@
 import useSearchForm from '@/hooks/useSearchForm';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import AutoCompleteBox from './AutoCompleteBox';
 
 const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
-	const { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur } = useSearchForm({
-		initialValue: { searchInput: '' },
+	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
+		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
 	});
+
+	useEffect(() => {
+		const body = document.querySelector('body')!;
+		body.addEventListener('click', (e: MouseEvent) => {
+			if (e.target instanceof HTMLDivElement && e.target.id !== 'complete') {
+				handleBlur();
+			}
+		});
+		return body.removeEventListener('click', (e) => {
+			if (e.target instanceof HTMLDivElement && e.target.id !== 'complete') {
+				handleBlur();
+			}
+		});
+	}, []);
 
 	return (
 		<FormWrapper name="searchInput" onSubmit={handleSearchSubmit}>
 			<SearchBarInput
+				id="complete"
 				name="searchInput"
 				placeholder="검색어를 입력하세요..."
 				value={values.searchInput}
