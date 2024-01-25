@@ -6,17 +6,13 @@ const AutoCompleteBox = ({ searchInput }: { searchInput: string }) => {
 	const router = useRouter();
 	const dropdownList = useSearchAutoCompleteQuery(searchInput);
 
-	const handleClickItem = (title: string) => {
-		router.push(`search/?search=${title}`);
-	};
-
 	return (
 		<BoxWrapper>
 			{dropdownList ? (
 				dropdownList.length > 0 ? (
-					dropdownList.map((item, idx) => (
-						<ItemWrapper key={idx} onClick={() => handleClickItem(item)}>
-							{item}
+					dropdownList.map((title, idx) => (
+						<ItemWrapper key={idx} onClick={() => router.push(`search/?search=${title}`)}>
+							{title}
 						</ItemWrapper>
 					))
 				) : (
