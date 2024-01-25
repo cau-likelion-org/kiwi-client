@@ -22,7 +22,7 @@ const NotFoundSearchText = styled.div`
 	font-size: 1.5rem;
 	font-weight: bold;
 	color: red;
-	margin-left: 20%;
+	margin-left: 10%;
 `;
 
 const BottomImageWrapper = styled.div`

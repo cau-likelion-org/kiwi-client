@@ -67,7 +67,7 @@ const StyledImage = styled(Image)`
 `;
 
 const SearchResultBox = styled.div`
-	width: 65%;
+	width: 65vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
