@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-query-devtools": "^5.17.21",
     "@types/react-dom": "18.2.7",
     "@uiw/react-md-editor": "^3.25.6",
     "axios": "^1.5.0",
