@@ -7,20 +7,15 @@ import SearchForm from './SearchForm';
 import SearchFound from './SearchFound';
 import SearchNotFound from './SearchNotFound';
 import Image from 'next/image';
-import { getSearchResult } from '@/apis/docs';
 
 import Loading from '../common/Loading';
-import { useQuery } from '@tanstack/react-query';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 
 const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const [searchKeyword, setSearchKeyword] = useState('');
-	const { data: searchResult } = useQuery({
-		queryKey: ['search', searchKeyword],
-		queryFn: () => getSearchResult(searchKeyword),
-		enabled: !!searchKeyword,
-	});
+	const searchResult = useSearchQuery(searchKeyword);
 
 	useEffect(() => {
 		const searchParams = params.get('search')!;
