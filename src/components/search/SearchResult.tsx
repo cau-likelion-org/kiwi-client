@@ -9,7 +9,7 @@ interface SearchResultProps {
 	searchKeyword: string;
 }
 
-const SearchResult = ({ searchResult, searchKeyword }: SearchResultProps) => {
+const SearchResultContainer = ({ searchResult, searchKeyword }: SearchResultProps) => {
 	if (!searchResult) return <Loading />;
 
 	return (
@@ -23,4 +23,4 @@ const SearchResult = ({ searchResult, searchKeyword }: SearchResultProps) => {
 	);
 };
 
-export default SearchResult;
+export default SearchResultContainer;

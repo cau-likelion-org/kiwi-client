@@ -7,7 +7,7 @@ import SearchForm from './SearchForm';
 import Image from 'next/image';
 
 import { useSearchQuery } from '@/hooks/useSearchQuery';
-import SearchResult from './SearchResult';
+import SearchResultContainer from './SearchResult';
 
 const SearchBodySection = () => {
 	const router = useRouter();
@@ -41,7 +41,7 @@ const SearchBodySection = () => {
 				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
-			<SearchResult searchResult={searchResult} searchKeyword={searchKeyword} />
+			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>
 	);
 };
