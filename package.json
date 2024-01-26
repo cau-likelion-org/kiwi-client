@@ -11,11 +11,8 @@
   "dependencies": {
     "@tanstack/react-query": "^5.17.19",
     "@tanstack/react-query-devtools": "^5.17.21",
-    "@types/react-dom": "18.2.7",
     "@uiw/react-md-editor": "^3.25.6",
     "axios": "^1.5.0",
-    "eslint": "8.49.0",
-    "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.16",
     "next": "^13.5.6",
     "next-images": "^1.8.5",
@@ -38,7 +35,10 @@
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.7",
     "@types/uuid": "^9.0.7",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "^13.4.19",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.3",
