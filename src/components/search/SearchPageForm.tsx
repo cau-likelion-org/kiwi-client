@@ -1,7 +1,7 @@
 import useSearchForm from '@/hooks/useSearchForm';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import AutoCompleteBox from './AutoCompleteBox';
+import AutoCompleteContainer from './AutoCompleteContainer';
 
 const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
 	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
@@ -34,7 +34,7 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
 				onFocus={handleFocus}
 				autoComplete="off"
 			/>
-			{isFocused && values.searchInput.length > 0 && <AutoCompleteBox searchInput={values.searchInput} />}
+			{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={values.searchInput} />}
 		</FormWrapper>
 	);
 };
