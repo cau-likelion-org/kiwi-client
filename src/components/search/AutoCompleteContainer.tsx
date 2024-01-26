@@ -34,12 +34,12 @@ const AutoCompleteContainer = ({ searchInput }: AutoProps) => {
 };
 
 const BoxWrapper = styled.div`
-	position: absolute;
+	// position: absolute;
 	display: flex;
 	flex-direction: column;
-	width: 35vw;
+	width: 40vw;
 	background-color: white;
-	margin-left: 2vw;
+	margin-left: 2%;
 	gap: 10px;
 	box-shadow: 2px 2px 2px black;
 	z-index: 1;

@@ -2,7 +2,7 @@ import { getSearchResult } from '@/apis/docs';
 import { useQuery } from '@tanstack/react-query';
 
 export const useSearchAutoCompleteQuery = (searchInput: string) => {
-	const { data: searchResult } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ['autoComplete', searchInput],
 		queryFn: () => getSearchResult(searchInput),
 		select: (search) => {
@@ -14,9 +14,8 @@ export const useSearchAutoCompleteQuery = (searchInput: string) => {
 				return titleList;
 			} else if (search.kind === 'searchResult') {
 				return [search.data.title];
-			} else return [];
+			}
 		},
-		gcTime: 0,
 	});
-	return searchResult;
+	return { data, isLoading };
 };

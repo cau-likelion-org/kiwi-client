@@ -1,3 +1,4 @@
+import useDebounceValue from '@/hooks/useDebounce';
 import useSearchForm from '@/hooks/useSearchForm';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
 	});
+	const debounceSearchInput = useDebounceValue(values.searchInput, 300);
 
 	useEffect(() => {
 		const body = document.querySelector('body')!;
@@ -34,7 +36,7 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
 				onFocus={handleFocus}
 				autoComplete="off"
 			/>
-			{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={values.searchInput} />}
+			{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
 		</FormWrapper>
 	);
 };

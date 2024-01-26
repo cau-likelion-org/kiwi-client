@@ -1,6 +1,5 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import useDebounceValue from './useDebounce';
 
 type SearchInputType = 'searchInput' | 'searchHeaderInput';
 interface useFormProps {
@@ -13,8 +12,6 @@ interface useFormProps {
 const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 	const router = useRouter();
 	const [values, setValues] = useState(initialValue);
-	// const searchHeadValue = useDebounceValue<string>(initialValue.searchHeaderInput, 500);
-	// const searchValue = useDebounceValue<string>(initialValue.searchInput, 500);
 
 	const [isFocused, setIsFocused] = useState(false);
 
