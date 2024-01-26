@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import AutoCompleteContainer from './AutoCompleteContainer';
 
-const SearchPageForm = ({ searchKeyword }: { searchKeyword: string }) => {
+const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,

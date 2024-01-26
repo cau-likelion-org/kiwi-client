@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchHeaderForm = ({ searchKeyword }: { searchKeyword: string }) => {
+const SearchHeaderForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	const { values, handleChange, handleSearchSubmit } = useSearchForm({
 		initialValue: { searchInput: '', searchHeaderInput: '' },
 		searchKeyword,
