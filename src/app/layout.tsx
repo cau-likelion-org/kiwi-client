@@ -3,6 +3,7 @@ import StyledComponentsRegistry from './lib/registry';
 import NavBar from '@/components/common/NavBar';
 import type { Metadata } from 'next';
 import RecoidContextProvider from './recoilContextProvider';
+import ReactQueryProvider from './ReactQueryProvider';
 
 export const metadata: Metadata = {
 	title: '멋사 중앙대 위키',
@@ -37,10 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html>
 			<body>
 				<RecoidContextProvider>
-					<StyledComponentsRegistry>
-						<NavBar />
-						{children}
-					</StyledComponentsRegistry>
+					<ReactQueryProvider>
+						<StyledComponentsRegistry>
+							<NavBar />
+							{children}
+						</StyledComponentsRegistry>
+					</ReactQueryProvider>
 				</RecoidContextProvider>
 			</body>
 		</html>

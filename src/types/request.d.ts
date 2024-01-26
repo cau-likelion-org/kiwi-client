@@ -11,17 +11,6 @@ export interface postCodeBody {
 	code: string | null;
 }
 
-export interface ISearchResult {
-	id: number;
-	title: string;
-	updated_at: string;
-	created_at: string;
-	author: string;
-	generations: IGenerations[];
-	content: string;
-	titleMatched: boolean;
-}
-
 export interface IGenerations {
 	[key: string]: Generation;
 }
