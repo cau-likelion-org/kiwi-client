@@ -3,7 +3,7 @@ import SearchPageForm from './SearchPageForm';
 
 interface SearchFormProps {
 	type: string;
-	searchKeyword: string;
+	searchKeyword?: string;
 }
 
 const SearchForm = ({ type, searchKeyword }: SearchFormProps) => {

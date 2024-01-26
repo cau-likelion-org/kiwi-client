@@ -4,12 +4,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
-import SearchFound from './SearchFound';
-import SearchNotFound from './SearchNotFound';
 import Image from 'next/image';
 
-import Loading from '../common/Loading';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
+import SearchResult from './SearchResult';
 
 const SearchBodySection = () => {
 	const router = useRouter();
@@ -43,15 +41,7 @@ const SearchBodySection = () => {
 				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
-			{searchResult ? (
-				searchResult.kind === 'searchResultList' && searchResult.data.length > 0 ? (
-					<SearchFound searchResult={searchResult.data} />
-				) : (
-					<SearchNotFound searchKeyword={searchKeyword} />
-				)
-			) : (
-				<Loading />
-			)}
+			<SearchResult searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>
 	);
 };
