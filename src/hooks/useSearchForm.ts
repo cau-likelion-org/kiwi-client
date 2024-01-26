@@ -12,6 +12,7 @@ interface useFormProps {
 const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 	const router = useRouter();
 	const [values, setValues] = useState(initialValue);
+
 	const [isFocused, setIsFocused] = useState(false);
 
 	const handleFocus = () => {

@@ -4,40 +4,28 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
-import SearchFound from './SearchFound';
-import SearchNotFound from './SearchNotFound';
 import Image from 'next/image';
-import { getSearchResult } from '@/apis/docs';
-import { ISearchResult } from '@/types/request';
-import Loading from '../common/Loading';
+
+import { useSearchQuery } from '@/hooks/useSearchQuery';
+import SearchResultContainer from './SearchResult';
 
 const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
-	const [searchKeyword, setSearchKeyword] = useState<string>('');
-	const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const [searchKeyword, setSearchKeyword] = useState('');
+	const searchResult = useSearchQuery(searchKeyword);
 
 	useEffect(() => {
 		const searchParams = params.get('search')!;
-		setIsLoading(true);
 		setSearchKeyword(searchParams);
 	}, [params]);
 
-	// 검색어와 문서 제목이 100% 일치 : 리다이렉트, 일치 X -> 검색 결과
 	useEffect(() => {
-		if (searchKeyword) {
-			getSearchResult(searchKeyword).then((res) => {
-				if (Array.isArray(res)) {
-					setSearchResult(res);
-				} else if (res.titleMatched) {
-					let encodedTitle = encodeURIComponent(searchKeyword);
-					router.push(`viewer?title=${encodedTitle}`);
-				}
-				setIsLoading(false);
-			});
+		if (searchResult && searchResult.kind === 'searchResult') {
+			const encodedTitle = encodeURIComponent(searchKeyword);
+			router.push(`viewer?title=${encodedTitle}`);
 		}
-	}, [router, searchKeyword]);
+	}, [searchResult]);
 
 	return (
 		<>
@@ -53,13 +41,7 @@ const SearchBodySection = () => {
 				</TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</SearchBarWrapper>
-			{isLoading ? (
-				<Loading />
-			) : searchResult.length > 0 ? (
-				<SearchFound searchResult={searchResult} />
-			) : (
-				<SearchNotFound searchKeyword={searchKeyword} />
-			)}
+			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>
 	);
 };
