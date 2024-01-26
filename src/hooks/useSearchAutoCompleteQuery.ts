@@ -10,6 +10,7 @@ export const useSearchAutoCompleteQuery = (searchInput: string) => {
 				const titleList: string[] = [];
 				search.data.forEach((data) => {
 					if (data.title.includes(searchInput)) titleList.push(data.title);
+					else if (data.content.includes(searchInput)) titleList.push(data.title);
 				});
 				return titleList;
 			} else if (search.kind === 'searchResult') {
