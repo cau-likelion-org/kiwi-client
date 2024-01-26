@@ -17,6 +17,7 @@ export const useSearchAutoCompleteQuery = (searchInput: string) => {
 				return [search.data.title];
 			}
 		},
+		staleTime: 30 * 1000,
 	});
 	return { data, isLoading };
 };
