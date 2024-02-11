@@ -7,28 +7,28 @@ import { getDocHistories } from '@/apis/history';
 import { useSearchParams } from 'next/navigation';
 import { IHistoryData } from '@/types/request';
 import { parseAndFormatDate, renderFirstStr, renderNewStr, renderOldStr } from '@/utils/historyUtils';
+import { useHistoryQuery } from '@/hooks/useHistoryQuery';
 
 
 const DocHistory = () => {
 	const params = useSearchParams();
-	const title = params.get('title');
-	const [dataList, setDataList] = useState<IHistoryData[]>();
+	const [title, setTitle] = useState('');
+	const dataList = useHistoryQuery(title).data;
+
+	useEffect(() => {
+		const titleKeyword = params.get('title')!;
+		setTitle(titleKeyword);
+	}, [params]);
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.scrollTo(0, 0);
 		}
-		const getHistory = async () => {
-			if (title) {
-				const result = await getDocHistories(title);
-				console.log(result);
-				setDataList(result.data);
-			}
-		};
-		getHistory();
-		console.log(dataList);
-	}, [title]);
+	}, []);
 
+	useEffect(() => {
+		console.log("Data List Updated:", dataList);
+	}, [dataList]);
 
 	return (
 		<Main>
@@ -38,7 +38,6 @@ const DocHistory = () => {
 			<Docs>
 				<ViewerHeaderSection>
 					<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
-					{/* <img src="/sketchBookHeader.png" alt="sketchbook" style={{width: "calc(100% - 15px)", height: "100px"}}/> */}
 					<HeaderShadow>
 						<div style={{ height: '50%', width: '100%' }}></div>
 						<div style={{ height: '50%', width: '100%', backgroundColor: 'black' }}></div>
@@ -46,7 +45,7 @@ const DocHistory = () => {
 				</ViewerHeaderSection>
 				<ContentSection>
 					{dataList ? (
-						dataList.map((data, index) => (
+						dataList.data.map((data : IHistoryData, index :number) => (
 							<EditInfo key={index}>
 								<div className="profile">
 									<div className="profile-circle">
