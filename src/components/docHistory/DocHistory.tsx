@@ -5,100 +5,30 @@ import styled from 'styled-components';
 import { VscTriangleDown } from 'react-icons/vsc';
 import { getDocHistories } from '@/apis/history';
 import { useSearchParams } from 'next/navigation';
+import { IHistoryData } from '@/types/request';
+import { parseAndFormatDate, renderFirstStr, renderNewStr, renderOldStr } from '@/utils/historyUtils';
+import { useHistoryQuery } from '@/hooks/useHistoryQuery';
 
-interface HistoryData {
-	title: string;
-	author: string;
-	created_at: string;
-	content: string;
-	change: string;
-}
 
 const DocHistory = () => {
 	const params = useSearchParams();
-	const title = params.get('title');
-	const [dataList, setDataList] = useState<HistoryData[]>();
+	const [title, setTitle] = useState('');
+	const dataList = useHistoryQuery(title).data;
+
+	useEffect(() => {
+		const titleKeyword = params.get('title')!;
+		setTitle(titleKeyword);
+	}, [params]);
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.scrollTo(0, 0);
 		}
-		const getHistory = async () => {
-			if (title) {
-				const result = await getDocHistories(title);
-				console.log(result);
-				setDataList(result.data);
-			}
-		};
-		getHistory();
-		console.log(dataList);
-	}, [title]);
+	}, []);
 
-	const renderOldStr = (change: any) => {
-		var oldStr = change.replace(
-			/<modified_to>(.*?)<\/modified_to>|<added>(.*?)<\/added>/g,
-			function ([match, p1, p2]: any) {
-				return p1 ? ' ' : p2 ? ' ' : '';
-			},
-		);
-
-		oldStr = oldStr.replace(/<added>/g, ' ' + "<span class='none'>");
-		oldStr = oldStr.replace(/<\/added>/g, '</span>');
-		oldStr = oldStr.replace(/<modified_to>/g, ' ' + "<span class='none'>");
-		oldStr = oldStr.replace(/<\/modified_to>/g, '</span>');
-
-		oldStr = oldStr.replace(/<deleted>/g, ' ' + "<span class='delete'>");
-		oldStr = oldStr.replace(/<\/deleted>/g, '</span>');
-		oldStr = oldStr.replace(/<modified_from>/g, ' ' + "<span class='from'>");
-		oldStr = oldStr.replace(/<\/modified_from>/g, '</span>');
-
-		oldStr = oldStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
-
-		return { __html: oldStr };
-	};
-	const renderNewStr = (change: any) => {
-		let newStr = change.replace(
-			/<modified_from>(.*?)<\/modified_from>|<deleted>(.*?)<\/deleted>/g,
-			function (): string {
-				return '';
-			},
-		);
-
-		newStr = newStr.replace(/<deleted>/g, ' ' + "<span class='none'>");
-		newStr = newStr.replace(/<\/deleted>/g, '</span>');
-		newStr = newStr.replace(/<modified_from>/g, ' ' + "<span class='none'>");
-		newStr = newStr.replace(/<\/modified_from>/g, '</span>');
-
-		newStr = newStr.replace(/<added>/g, ' ' + "<span class='add'>");
-		newStr = newStr.replace(/<\/added>/g, '</span>');
-		newStr = newStr.replace(/<modified_to>/g, ' ' + "<span class='to'>");
-		newStr = newStr.replace(/<\/modified_to>/g, '</span>');
-
-		newStr = newStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
-
-		return { __html: newStr };
-	};
-	const renderFirstStr = (content: any) => {
-		let firstStr = content;
-
-		firstStr = firstStr.replace(/\r\n|\n|\r|\\r\\n|\\n|\\r/g, '<br/>');
-		firstStr = "<span class='add'>" + firstStr + '</span>';
-
-		return { __html: firstStr };
-	};
-
-	const parseAndFormatDate = (dateString: string) => {
-		const date = new Date(dateString);
-		const options: Intl.DateTimeFormatOptions = {
-			year: 'numeric',
-			month: 'numeric',
-			day: 'numeric',
-			weekday: 'short',
-			hour: 'numeric',
-			minute: 'numeric',
-		};
-		return date.toLocaleString('ko-KR', options);
-	};
+	useEffect(() => {
+		console.log("Data List Updated:", dataList);
+	}, [dataList]);
 
 	return (
 		<Main>
@@ -108,7 +38,6 @@ const DocHistory = () => {
 			<Docs>
 				<ViewerHeaderSection>
 					<StyledImage src="/img/sketchbooktop.png" alt="문서역사" fill priority />
-					{/* <img src="/sketchBookHeader.png" alt="sketchbook" style={{width: "calc(100% - 15px)", height: "100px"}}/> */}
 					<HeaderShadow>
 						<div style={{ height: '50%', width: '100%' }}></div>
 						<div style={{ height: '50%', width: '100%', backgroundColor: 'black' }}></div>
@@ -116,7 +45,7 @@ const DocHistory = () => {
 				</ViewerHeaderSection>
 				<ContentSection>
 					{dataList ? (
-						dataList.map((data, index) => (
+						dataList.data.map((data : IHistoryData, index :number) => (
 							<EditInfo key={index}>
 								<div className="profile">
 									<div className="profile-circle">
