@@ -26,10 +26,6 @@ const DocHistory = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log("Data List Updated:", dataList);
-	}, [dataList]);
-
 	return (
 		<Main>
 			<div className="heart">
