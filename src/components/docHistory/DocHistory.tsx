@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { VscTriangleDown } from 'react-icons/vsc';
-import { getDocHistories } from '@/apis/history';
 import { useSearchParams } from 'next/navigation';
 import { IHistoryData } from '@/types/request';
 import { parseAndFormatDate, renderFirstStr, renderNewStr, renderOldStr } from '@/utils/historyUtils';
@@ -13,7 +12,7 @@ import { useHistoryQuery } from '@/hooks/useHistoryQuery';
 const DocHistory = () => {
 	const params = useSearchParams();
 	const [title, setTitle] = useState('');
-	const dataList = useHistoryQuery(title).data;
+	const docHistoryList = useHistoryQuery(title);
 
 	useEffect(() => {
 		const titleKeyword = params.get('title')!;
@@ -40,8 +39,8 @@ const DocHistory = () => {
 					</HeaderShadow>
 				</ViewerHeaderSection>
 				<ContentSection>
-					{dataList ? (
-						dataList.data.map((data : IHistoryData, index :number) => (
+					{docHistoryList ? (
+						docHistoryList.data.map((data : IHistoryData, index :number) => (
 							<EditInfo key={index}>
 								<div className="profile">
 									<div className="profile-circle">
