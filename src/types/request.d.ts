@@ -11,17 +11,6 @@ export interface postCodeBody {
 	code: string | null;
 }
 
-export interface ISearchResult {
-	id: number;
-	title: string;
-	updated_at: string;
-	created_at: string;
-	author: string;
-	generations: IGenerations[];
-	content: string;
-	titleMatched: boolean;
-}
-
 export interface IGenerations {
 	[key: string]: Generation;
 }
@@ -48,4 +37,12 @@ export interface DataType extends Depth {
 export interface CreateDocs extends Depth {
 	title: string;
 	content: string;
+}
+
+export interface IHistoryData {
+	title: string;
+	author: string;
+	created_at: string;
+	content: string;
+	change: string;
 }

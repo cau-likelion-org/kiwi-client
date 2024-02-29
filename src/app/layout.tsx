@@ -3,6 +3,7 @@ import StyledComponentsRegistry from './lib/registry';
 import NavBar from '@/components/common/NavBar';
 import type { Metadata } from 'next';
 import RecoidContextProvider from './recoilContextProvider';
+import ReactQueryProvider from './ReactQueryProvider';
 
 export const metadata: Metadata = {
 	title: '멋사 중앙대 위키',
@@ -13,17 +14,11 @@ export const metadata: Metadata = {
 	icons: {
 		icon: '/img/icon.png',
 	},
-	keywords: [
-		'중앙대학교',
-		'멋쟁이 사자처럼',
-		'멋사',
-		'멋사 위키',
-		'중앙대학교 멋사'
-	],
+	keywords: ['중앙대학교', '멋쟁이 사자처럼', '멋사', '멋사 위키', '중앙대학교 멋사'],
 	openGraph: {
 		title: '멋사 중앙대 위키',
 		description: '멋쟁이 사자처럼 중앙대학교의 위키 입니다',
-		url: 'https://kiwi-client.vercel.app/',
+		url: 'https://wiki.cau-likelion.org/',
 		siteName: '멋사 중앙대 위키',
 		// images: [
 		// 	{
@@ -32,6 +27,10 @@ export const metadata: Metadata = {
 		// ],
 		type: 'website',
 	},
+	viewport: {
+		width: 'device-width',
+		initialScale: 1,
+	},
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -39,10 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html>
 			<body>
 				<RecoidContextProvider>
-					<StyledComponentsRegistry>
-						<NavBar />
-						{children}
-					</StyledComponentsRegistry>
+					<ReactQueryProvider>
+						<StyledComponentsRegistry>
+							<NavBar />
+							{children}
+						</StyledComponentsRegistry>
+					</ReactQueryProvider>
 				</RecoidContextProvider>
 			</body>
 		</html>
