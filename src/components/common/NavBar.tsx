@@ -8,6 +8,7 @@ import { token } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 export interface IMenu {
 	src: string;
@@ -15,6 +16,7 @@ export interface IMenu {
 }
 
 const NavBar = () => {
+	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
 	const router = useRouter();
 
 	const { access: tokenState } = useRecoilValue(token);
@@ -35,37 +37,61 @@ const NavBar = () => {
 		<>
 			<Margin />
 			<Wrapper>
-				<LeftWrapper>
-					<Image
-						onClick={() => {
-							router.push('/');
-						}}
-						src="/img/logo.png"
-						alt={'logo'}
-						width={140}
-						height={34}
-					/>
-				</LeftWrapper>
-				<RightWrapper>
-					<SearchWrapper>
-						<SearchForm type="header" />
-					</SearchWrapper>
-					<ButtonWrapper>
+				{isMobile ? (
+					<LeftWrapper>
 						<Image
 							onClick={() => {
-								if (!isLogin) {
-									alert('🦁 로그인을 먼저 해주세요 🦁');
-									router.push('/login');
-								} else {
-									router.push('/post');
-								}
+								router.push('/');
 							}}
-							src="/img/newPost.png"
-							alt={'newPost'}
-							width={44}
-							height={44}
-							style={{ cursor: 'pointer' }}
+							src="/img/mobileLogo.png"
+							alt={'logo'}
+							width={100}
+							height={34}
 						/>
+					</LeftWrapper>
+				) : (
+					<LeftWrapper>
+						<Image
+							onClick={() => {
+								router.push('/');
+							}}
+							src="/img/logo.png"
+							alt={'logo'}
+							width={140}
+							height={34}
+						/>
+					</LeftWrapper>
+				)}
+				<RightWrapper>
+					{isMobile ? (
+						<SearchWrapper>
+							<SearchForm type="header" />
+						</SearchWrapper>
+					) : (
+						<SearchWrapper>
+							<SearchForm type="header" />
+						</SearchWrapper>
+					)}
+					<ButtonWrapper>
+						{isMobile ? (
+							<div></div>
+						) : (
+							<Image
+								onClick={() => {
+									if (!isLogin) {
+										alert('🦁 로그인을 먼저 해주세요 🦁');
+										router.push('/login');
+									} else {
+										router.push('/post');
+									}
+								}}
+								src="/img/newPost.png"
+								alt={'newPost'}
+								width={44}
+								height={44}
+								style={{ cursor: 'pointer' }}
+							/>
+						)}
 						<Image
 							onClick={gotoRandomDoc}
 							src="/img/random.png"
@@ -121,7 +147,7 @@ const LeftWrapper = styled.div`
 	align-items: center;
 	margin-left: 3%;
 	@media screen and (max-width: 540px) {
-		margin-left: 1%;
+		margin-left: 3%;
 	}
 `;
 
@@ -141,8 +167,8 @@ const SearchWrapper = styled.div`
 	position: relative;
 	width: 50%;
 	@media screen and (max-width: 540px) {
-		width: 40%;
-		margin-top: 1rem;
+		width: 60%;
+		margin-top: 0.5rem;
 	}
 `;
 
@@ -154,7 +180,7 @@ const ButtonWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	@media screen and (max-width: 540px) {
-		width: 54%;
+		width: 35%;
 		gap: 0.5rem;
 	}
 `;

@@ -46,6 +46,9 @@ const SearchFoundWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-top: 20px;
+	@media screen and (max-width: 540px) {
+		margin-left: 15rem;
+	}
 `;
 
 const SearchResult = styled.div`

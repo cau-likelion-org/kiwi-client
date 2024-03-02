@@ -32,7 +32,7 @@ const SearchWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid black;
-	padding: 3px 0rem;
+	padding: 2px 0rem;
 `;
 
 const SearchHeaderInput = styled.input`
