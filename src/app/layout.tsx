@@ -20,11 +20,6 @@ export const metadata: Metadata = {
 		description: '멋쟁이 사자처럼 중앙대학교의 위키 입니다',
 		url: 'https://wiki.cau-likelion.org/',
 		siteName: '멋사 중앙대 위키',
-		// images: [
-		// 	{
-		// 		url: 'https://kiwi-client.vercel.app/어쩌구.png',
-		// 	},
-		// ],
 		type: 'website',
 	},
 	viewport: {
@@ -36,6 +31,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html>
+			<head>
+				<link rel="manifest" href="/manifest.json" />
+			</head>
 			<body>
 				<RecoidContextProvider>
 					<ReactQueryProvider>
