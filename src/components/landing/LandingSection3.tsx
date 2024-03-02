@@ -164,7 +164,7 @@ const Lion2 = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		width: 30%;
-		bottom: 28rem;
+		bottom: 20rem;
 	}
 `;
 
