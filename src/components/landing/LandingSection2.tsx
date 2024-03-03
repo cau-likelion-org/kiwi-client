@@ -247,8 +247,8 @@ const ShortCuts1 = styled.div`
 			letter-spacing: 0rem;
 		}
 		@media screen and (max-width: 540px) {
-			width: 70%;
-			font-size: 1.19rem;
+			width: 73.5%;
+			font-size: 1.15rem;
 			letter-spacing: 0rem;
 		}
 	}
@@ -291,8 +291,8 @@ const ShortCuts2 = styled.div`
 			letter-spacing: 0rem;
 		}
 		@media screen and (max-width: 540px) {
-			width: 70%;
-			font-size: 1.19rem;
+			width: 73.5%;
+			font-size: 1.15rem;
 			letter-spacing: 0rem;
 		}
 	}
