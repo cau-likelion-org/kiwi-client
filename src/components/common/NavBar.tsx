@@ -26,8 +26,7 @@ const NavBar = () => {
 		const response = await getRandomDoc();
 		const title = response.title;
 		let encodedTitle = encodeURIComponent(title);
-		// router.push(`/viewer?title=${encodedTitle}`);
-		router.push(`/viewer?title=박재윤`);
+		router.push(`/viewer?title=${encodedTitle}`);
 	};
 
 	useEffect(() => {
