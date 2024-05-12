@@ -22,19 +22,7 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 
 	return (
 		<ImageWrapper>
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
-			<div />
 			<Title>
-				<div />
 				<div className="overlay">{'> 최근 편집 목록 <'}</div>
 				<StyledImage3 src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
 			</Title>
@@ -43,8 +31,8 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 					{data.map((result, idx) => (
 						<>
 							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
-								{/* <div>{result.title}</div>
-								<div>{formatDate(result.updated_at)}</div> */}
+								<div>{result.title}</div>
+								<div>{formatDate(result.updated_at)}</div>
 							</div>
 						</>
 					))}
@@ -52,12 +40,12 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
 			<ShortCutWrapper>
-				<ShortCuts1 onClick={() => handleClick('11기')}>
-					<div className="overlay">{'11기 문서 바로가기'}</div>
+				<ShortCuts1 onClick={() => handleClick('10기')}>
+					<div className="overlay">{'10기 문서 바로가기'}</div>
 					<StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
 				</ShortCuts1>
-				<ShortCuts2 onClick={() => handleClick('12기')}>
-					<div className="overlay">{'12기 문서 바로가기'}</div>
+				<ShortCuts2 onClick={() => handleClick('11기')}>
+					<div className="overlay">{'11기 문서 바로가기'}</div>
 					<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
 				</ShortCuts2>
 			</ShortCutWrapper>
@@ -179,7 +167,6 @@ const Content = styled.div`
 		font-family: NeoDunggeunmo Pro;
 		padding: 5px 0rem;
 		cursor: pointer;
-		background-color: blue;
 		@media screen and (max-width: 540px) {
 			font-size: 150%;
 			letter-spacing: 0rem;
@@ -190,9 +177,6 @@ const Content = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		margin-top: 2.3rem;
-	}
-	div {
-		background-color: black;
 	}
 `;
 
@@ -263,8 +247,8 @@ const ShortCuts1 = styled.div`
 			letter-spacing: 0rem;
 		}
 		@media screen and (max-width: 540px) {
-			width: 73.5%;
-			font-size: 1.15rem;
+			width: 70%;
+			font-size: 1.19rem;
 			letter-spacing: 0rem;
 		}
 	}
@@ -307,8 +291,8 @@ const ShortCuts2 = styled.div`
 			letter-spacing: 0rem;
 		}
 		@media screen and (max-width: 540px) {
-			width: 73.5%;
-			font-size: 1.15rem;
+			width: 70%;
+			font-size: 1.19rem;
 			letter-spacing: 0rem;
 		}
 	}
