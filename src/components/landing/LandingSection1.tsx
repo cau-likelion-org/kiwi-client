@@ -6,6 +6,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const LandingSection1 = () => {
+	const LogOut = () => {
+		window.localStorage.removeItem('access');
+		window.localStorage.removeItem('refresh');
+	};
 	return (
 		<ImageWrapper>
 			<Wrapper>
@@ -28,7 +32,7 @@ const LandingSection1 = () => {
 					<StyledImage id="title" src="/img/landingTitle.png" alt={'제목'} fill priority></StyledImage>
 				</Title>
 				<Game>
-					<StyledImage src="/img/landingGame.png" alt={'화면'} fill priority></StyledImage>
+					<StyledImage onClick={LogOut} src="/img/landingGame.png" alt={'화면'} fill priority></StyledImage>
 				</Game>
 			</Wrapper>
 		</ImageWrapper>

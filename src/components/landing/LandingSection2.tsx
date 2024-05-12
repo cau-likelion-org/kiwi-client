@@ -22,7 +22,19 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 
 	return (
 		<ImageWrapper>
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
+			<div />
 			<Title>
+				<div />
 				<div className="overlay">{'> 최근 편집 목록 <'}</div>
 				<StyledImage3 src="/img/list.png" alt="닉네임 박스 이미지" fill priority />
 			</Title>
@@ -31,8 +43,8 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 					{data.map((result, idx) => (
 						<>
 							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
-								<div>{result.title}</div>
-								<div>{formatDate(result.updated_at)}</div>
+								{/* <div>{result.title}</div>
+								<div>{formatDate(result.updated_at)}</div> */}
 							</div>
 						</>
 					))}
@@ -167,6 +179,7 @@ const Content = styled.div`
 		font-family: NeoDunggeunmo Pro;
 		padding: 5px 0rem;
 		cursor: pointer;
+		background-color: blue;
 		@media screen and (max-width: 540px) {
 			font-size: 150%;
 			letter-spacing: 0rem;
@@ -177,6 +190,9 @@ const Content = styled.div`
 	}
 	@media screen and (max-width: 540px) {
 		margin-top: 2.3rem;
+	}
+	div {
+		background-color: black;
 	}
 `;
 
