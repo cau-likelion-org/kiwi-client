@@ -18,7 +18,7 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 	const handleClick = (title: string) => {
 		let encodedTitle = encodeURIComponent(title);
 		router.push(`/viewer?title=${encodedTitle}`);
-	};
+	}; // 현재는 하드코딩으로 기수 넣어놨는데, 나중에는 말풍선에 있는 텍스트를 잘라서 자동으로 이동하도록 변경해보기!
 
 	return (
 		<ImageWrapper>
@@ -40,12 +40,12 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>
 			<ShortCutWrapper>
-				<ShortCuts1 onClick={() => handleClick('10기')}>
-					<div className="overlay">{'10기 문서 바로가기'}</div>
+				<ShortCuts1 onClick={() => handleClick('11기')}>
+					<div className="overlay">{'11기 문서 바로가기'}</div>
 					<StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
 				</ShortCuts1>
-				<ShortCuts2 onClick={() => handleClick('11기')}>
-					<div className="overlay">{'11기 문서 바로가기'}</div>
+				<ShortCuts2 onClick={() => handleClick('12기')}>
+					<div className="overlay">{'12기 문서 바로가기'}</div>
 					<StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
 				</ShortCuts2>
 			</ShortCutWrapper>
