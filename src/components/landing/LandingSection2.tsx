@@ -7,7 +7,7 @@ import { RecentDocs } from '@/types/request';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
 
-const LandingSection2 = ({ data }: { data: RecentDocs[] }) => {
+const LandingSection2 = ({ data }: { data: RecentDocs[] | undefined }) => {
 	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
 	const router = useRouter();
 	function formatDate(update: string) {
@@ -28,14 +28,15 @@ const LandingSection2 = ({ data }: { data: RecentDocs[] }) => {
 			</Title>
 			<Box>
 				<Content>
-					{data?.map((result, idx) => (
-						<>
-							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
-								<div>{result.title}</div>
-								<div>{formatDate(result.updated_at)}</div>
-							</div>
-						</>
-					))}
+					{data &&
+						data.map((result, idx) => (
+							<>
+								<div className="list" key={idx} onClick={() => handleClick(result.title)}>
+									<div>{result.title}</div>
+									<div>{formatDate(result.updated_at)}</div>
+								</div>
+							</>
+						))}
 				</Content>
 				<StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</Box>

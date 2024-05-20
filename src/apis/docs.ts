@@ -62,7 +62,6 @@ export const uploadImageToServer = async (blobUrl: string): Promise<string> => {
 export const getRecentDocs = async (): Promise<RecentDocs[]> => {
 	try {
 		const result = await Server.get(`${baseURL}history/recent/`);
-		console.log(result.data.data);
 		return result.data.data;
 	} catch (error) {
 		console.error(`${error}`);

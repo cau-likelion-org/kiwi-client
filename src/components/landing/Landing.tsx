@@ -8,20 +8,18 @@ import { styled } from 'styled-components';
 import { getRecentDocs } from '@/apis/docs';
 import Image from 'next/image';
 import { RecentDocs } from '@/types/request';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { useGetRecent } from '@/hooks/useGetRecent';
 
 const Landing = () => {
-	const [docs, setDocs] = useState<RecentDocs[]>([]);
+	const data = useGetRecent();
+	const [docs, setDocs] = useState<RecentDocs[] | undefined>([]);
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.scrollTo(0, 0);
 		}
-		const GetDocs = async () => {
-			const result = await getRecentDocs();
-			setDocs(result);
-		};
-		GetDocs();
-	}, []);
+		setDocs(data);
+	}, [data]);
 
 	return (
 		<ScrollContainer>
