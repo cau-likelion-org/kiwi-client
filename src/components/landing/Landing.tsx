@@ -7,18 +7,20 @@ import LandingSection3 from './LandingSection3';
 import { styled } from 'styled-components';
 import { getRecentDocs } from '@/apis/docs';
 import Image from 'next/image';
+import { RecentDocs } from '@/types/request';
+import { useQuery } from 'react-query';
 
 const Landing = () => {
-	const [docs, setDocs] = useState([]);
+	const [docs, setDocs] = useState<RecentDocs[]>([]);
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.scrollTo(0, 0);
 		}
-		const getDocs = async () => {
+		const GetDocs = async () => {
 			const result = await getRecentDocs();
 			setDocs(result);
 		};
-		getDocs();
+		GetDocs();
 	}, []);
 
 	return (

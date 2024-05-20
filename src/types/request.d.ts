@@ -39,6 +39,11 @@ export interface CreateDocs extends Depth {
 	content: string;
 }
 
+export interface RecentDocs extends Depth {
+	title: string;
+	updated_at: string;
+}
+
 export interface IHistoryData {
 	title: string;
 	author: string;

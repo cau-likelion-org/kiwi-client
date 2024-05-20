@@ -1,5 +1,5 @@
-import { CreateDocs } from '@/types/request';
-import axios from 'axios';
+import { CreateDocs, RecentDocs } from '@/types/request';
+import axios, { AxiosResponse } from 'axios';
 import { Server } from './settings';
 import LocalStorage from '@/utils/localStorage';
 import { ISearchResult, ISearchResultList, SearchResult } from '@/types/search';
@@ -29,19 +29,19 @@ export const newDocs = async (body: CreateDocs) => {
 		});
 		return result.data;
 	} catch (error) {
-		console.error('문서 생성 불가', error);
+		alert('로그아웃 후 다시 시도해주세요!');
 		throw error;
 	}
 };
 
-export const uploadImageToServer = async (blobUrl: string) => {
+export const uploadImageToServer = async (blobUrl: string): Promise<string> => {
 	try {
 		// blob URL로부터 Blob 객체 가져오기
 		const response = await fetch(blobUrl);
-		const blob = await response.blob();
+		const blob: Blob = await response.blob();
 
 		// Blob 객체를 File 객체로 변환
-		const file = new File([blob], 'image.png', { type: 'image/png' });
+		const file: File = new File([blob], 'image.png', { type: 'image/png' });
 
 		// 이미지 파일을 서버에 전송
 		let formData = new FormData();
@@ -51,7 +51,7 @@ export const uploadImageToServer = async (blobUrl: string) => {
 				'Content-Type': 'multipart/form-data',
 			},
 		};
-		const result = await axios.post(`${baseURL}docs/image/`, formData, config);
+		const result: AxiosResponse<{ image: string }> = await axios.post(`${baseURL}docs/image/`, formData, config);
 		return result.data.image;
 	} catch (error) {
 		console.error('이미지 업로드 불가', error);
@@ -59,9 +59,10 @@ export const uploadImageToServer = async (blobUrl: string) => {
 	}
 };
 
-export const getRecentDocs = async () => {
+export const getRecentDocs = async (): Promise<RecentDocs[]> => {
 	try {
-		const result = await axios.get(`${baseURL}history/recent/`);
+		const result = await Server.get(`${baseURL}history/recent/`);
+		console.log(result.data.data);
 		return result.data.data;
 	} catch (error) {
 		console.error(`${error}`);

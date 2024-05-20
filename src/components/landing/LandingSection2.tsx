@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import { DataType } from '@/types/request';
+import { RecentDocs } from '@/types/request';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
 
-const LandingSection2 = ({ data }: { data: DataType[] }) => {
+const LandingSection2 = ({ data }: { data: RecentDocs[] }) => {
 	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
 	const router = useRouter();
 	function formatDate(update: string) {
@@ -28,7 +28,7 @@ const LandingSection2 = ({ data }: { data: DataType[] }) => {
 			</Title>
 			<Box>
 				<Content>
-					{data.map((result, idx) => (
+					{data?.map((result, idx) => (
 						<>
 							<div className="list" key={idx} onClick={() => handleClick(result.title)}>
 								<div>{result.title}</div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { IGenerations } from '@/types/request';
-import { SearchResult } from '@/types/search';
+import type { SearchResult } from '@/types/search';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import { IGenerations } from './request';
 
-interface SearchResult {
+export interface SearchResult {
 	id: number;
 	title: string;
 	updated_at: string;
