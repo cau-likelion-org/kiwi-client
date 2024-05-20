@@ -1,5 +1,4 @@
 import { getRecentDocs } from '@/apis/docs';
-import { RecentDocs } from '@/types/request';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetRecent = () => {
