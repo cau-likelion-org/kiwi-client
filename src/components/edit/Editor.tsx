@@ -93,6 +93,17 @@ const Editor: React.FC = () => {
 		},
 	};
 
+	const toggleCommand: ICommand = {
+		name: 'Toggle',
+		keyCommand: 'Toggle',
+		buttonProps: { 'aria-label': 'Insert expander', title: 'Toggle' },
+		icon: <div>▶</div>,
+		execute: (state, api) => {
+			const expanderHtml = `<details><summary>토글 제목</summary>여기에 글을 입력하세요</details>`;
+			api.replaceSelection(expanderHtml);
+		},
+	};
+
 	return (
 		<>
 			<Wrapper>
@@ -103,7 +114,7 @@ const Editor: React.FC = () => {
 				<Input value={title} onChange={(e) => setTitle(e.target.value)} readOnly />
 				<div className="markarea">
 					<MDEditor
-						commands={[...customCommands, imageUploadCommand]}
+						commands={[...customCommands, imageUploadCommand, toggleCommand]}
 						value={md}
 						onChange={handleEditorChange}
 						height={500}
