@@ -12,7 +12,9 @@ export default function ReactQueryProvider({ children }: PropsWithChildren) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			{children}
-			<ReactQueryDevtools initialIsOpen={false} />
+			<div style={{ fontSize: '25px' }}>
+				<ReactQueryDevtools initialIsOpen={false} />
+			</div>
 		</QueryClientProvider>
 	);
 }
