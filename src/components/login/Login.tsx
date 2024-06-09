@@ -23,7 +23,7 @@ const Login = () => {
 							<div className="text"> 구글로 로그인하기</div>
 						</LoginBtn>
 						<LoginBtn>
-							<div className="info"> LIKE LION 계정으로 로그인이 가능합니다</div>
+							<div className="info">기등록된 멋사 회원만 로그인이 가능합니다</div>
 						</LoginBtn>
 					</BtnWrapper>
 				</Content>
