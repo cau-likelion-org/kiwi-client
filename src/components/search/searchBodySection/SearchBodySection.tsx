@@ -2,12 +2,10 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import SearchForm from './SearchForm';
-import Image from 'next/image';
-
+import SearchForm from '../SearchForm';
+import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
-import SearchResultContainer from './SearchResult';
+import SearchResultContainer from '../SearchResult';
 
 const SearchBodySection = () => {
 	const router = useRouter();
@@ -29,38 +27,21 @@ const SearchBodySection = () => {
 
 	return (
 		<>
-			<SearchBarWrapper>
-				<TextImageWrapper>
-					<StyledImage
+			<S.SearchBarWrapper>
+				<S.TextImageWrapper>
+					<S.StyledImage
 						src="/img/search_text.png"
 						alt="search_text"
 						fill
 						priority
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 					/>
-				</TextImageWrapper>
+				</S.TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
-			</SearchBarWrapper>
+			</S.SearchBarWrapper>
 			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>
 	);
 };
-
-const SearchBarWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-left: 10%;
-`;
-
-const TextImageWrapper = styled.div`
-	position: relative;
-	width: 30rem;
-`;
-
-const StyledImage = styled(Image)`
-	position: relative !important;
-	height: unset !important;
-`;
 
 export default SearchBodySection;

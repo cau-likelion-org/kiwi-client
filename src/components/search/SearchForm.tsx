@@ -1,5 +1,5 @@
-import SearchHeaderForm from './SearchHeaderForm';
-import SearchPageForm from './SearchPageForm';
+import SearchHeaderForm from './searchHeaderForm/SearchHeaderForm';
+import SearchPageForm from './searchPageForm/SearchPageForm';
 
 interface SearchFormProps {
 	type: string;

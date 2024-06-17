@@ -1,8 +1,8 @@
 import { ISearchResult, ISearchResultList } from '@/types/search';
 import React from 'react';
 import Loading from '../common/Loading';
-import SearchFound from './SearchFound';
-import SearchNotFound from './SearchNotFound';
+import SearchFound from './searchFound/SearchFound';
+import SearchNotFound from './searchNotFound/SearchNotFound';
 
 interface SearchResultProps {
 	searchResult: ISearchResult | ISearchResultList | undefined;

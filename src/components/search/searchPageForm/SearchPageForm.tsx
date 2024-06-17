@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import useDebounceValue from '@/hooks/useDebounce';
 import useSearchForm from '@/hooks/useSearchForm';
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import AutoCompleteContainer from './AutoCompleteContainer';
+import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContainer';
+import * as S from './SearchPageForm.styled';
 
 const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
@@ -26,8 +26,8 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	}, []);
 
 	return (
-		<FormWrapper name="searchInput" onSubmit={handleSearchSubmit}>
-			<SearchBarInput
+		<S.FormWrapper name="searchInput" onSubmit={handleSearchSubmit}>
+			<S.SearchBarInput
 				id="complete"
 				name="searchInput"
 				placeholder="검색어를 입력하세요..."
@@ -37,27 +37,8 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 				autoComplete="off"
 			/>
 			{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
-		</FormWrapper>
+		</S.FormWrapper>
 	);
 };
-
-const FormWrapper = styled.form``;
-
-const SearchBarInput = styled.input`
-	background: url('/img/search_bar.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: none;
-	font-size: 2rem;
-	font-family: Pretendard;
-	padding: 10px;
-	padding-left: 30px;
-	width: 55rem;
-	height: 2.5rem;
-
-	&:focus {
-		outline: none;
-	}
-`;
 
 export default SearchPageForm;
