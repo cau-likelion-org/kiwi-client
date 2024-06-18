@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import SearchForm from '../SearchForm';
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
@@ -10,13 +10,9 @@ import SearchResultContainer from '../SearchResult';
 const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
-	const [searchKeyword, setSearchKeyword] = useState('');
-	const { data: searchResult, isPending } = useSearchQuery(searchKeyword);
 
-	useEffect(() => {
-		const searchParams = params.get('search')!;
-		setSearchKeyword(searchParams);
-	}, [params]);
+	const searchKeyword = params.get('search') || '멋쟁이사자처럼';
+	const { data: searchResult } = useSearchQuery(searchKeyword);
 
 	useEffect(() => {
 		if (searchResult && searchResult.kind === 'searchResult') {
@@ -39,7 +35,7 @@ const SearchBodySection = () => {
 				</S.TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</S.SearchBarWrapper>
-			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} isPending={isPending} />
+			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>
 	);
 };
