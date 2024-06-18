@@ -11,7 +11,7 @@ const SearchBodySection = () => {
 	const router = useRouter();
 	const params = useSearchParams();
 	const [searchKeyword, setSearchKeyword] = useState('');
-	const searchResult = useSearchQuery(searchKeyword);
+	const { data: searchResult, isPending } = useSearchQuery(searchKeyword);
 
 	useEffect(() => {
 		const searchParams = params.get('search')!;
@@ -39,7 +39,7 @@ const SearchBodySection = () => {
 				</S.TextImageWrapper>
 				<SearchForm searchKeyword={searchKeyword} type="search" />
 			</S.SearchBarWrapper>
-			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
+			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} isPending={isPending} />
 		</>
 	);
 };
