@@ -36,7 +36,9 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 				onFocus={handleFocus}
 				autoComplete="off"
 			/>
-			{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
+			<S.BoxWrapper>
+				{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
+			</S.BoxWrapper>
 		</S.FormWrapper>
 	);
 };

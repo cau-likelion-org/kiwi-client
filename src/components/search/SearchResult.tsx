@@ -7,20 +7,19 @@ import SearchNotFound from './searchNotFound/SearchNotFound';
 interface SearchResultProps {
 	searchResult: ISearchResult | ISearchResultList | undefined;
 	searchKeyword: string;
+	isPending: boolean;
 }
 
-const SearchResultContainer = ({ searchResult, searchKeyword }: SearchResultProps) => {
-	if (!searchResult) return <Loading />;
+const SearchResultContainer = ({ searchResult, searchKeyword, isPending }: SearchResultProps) => {
+	if (isPending) {
+		return <Loading />;
+	}
 
-	return (
-		<>
-			{searchResult.kind === 'searchResultList' && searchResult.data.length > 0 ? (
-				<SearchFound searchResult={searchResult.data} />
-			) : (
-				searchResult.kind !== 'searchResult' && <SearchNotFound searchKeyword={searchKeyword} />
-			)}
-		</>
-	);
+	if (!searchResult) {
+		return <SearchNotFound searchKeyword={searchKeyword} />;
+	}
+
+	return <>{searchResult.kind === 'searchResultList' && <SearchFound searchResult={searchResult.data} />}</>;
 };
 
 export default SearchResultContainer;

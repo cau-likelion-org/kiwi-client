@@ -18,3 +18,14 @@ export const SearchBarInput = styled.input`
 		outline: none;
 	}
 `;
+
+export const BoxWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 40vw;
+	background-color: white;
+	margin-left: 2%;
+	gap: 10px;
+	box-shadow: 2px 2px 2px black;
+	z-index: 1;
+`;
