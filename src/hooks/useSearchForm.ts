@@ -1,15 +1,13 @@
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type SearchInputType = 'searchInput' | 'searchHeaderInput';
+
 interface useFormProps {
-	initialValue: {
-		[k in SearchInputType]: string;
-	};
-	searchKeyword?: string;
+	initialValue: Record<SearchInputType, string>;
 }
 
-const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
+const useSearchForm = ({ initialValue }: useFormProps) => {
 	const router = useRouter();
 	const [values, setValues] = useState(initialValue);
 
@@ -42,10 +40,6 @@ const useSearchForm = ({ initialValue, searchKeyword }: useFormProps) => {
 			router.push(`search/?search=${values[name]}`);
 		}
 	};
-
-	useEffect(() => {
-		if (searchKeyword) setValues({ searchInput: searchKeyword, searchHeaderInput: '' });
-	}, [searchKeyword]);
 
 	return { values, isFocused, handleChange, handleSearchSubmit, handleFocus, handleBlur };
 };
