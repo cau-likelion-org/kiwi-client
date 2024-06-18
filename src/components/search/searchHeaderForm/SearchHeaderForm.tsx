@@ -5,8 +5,7 @@ import * as S from './SearchHeaderForm.styled';
 
 const SearchHeaderForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	const { values, handleChange, handleSearchSubmit } = useSearchForm({
-		initialValue: { searchInput: '', searchHeaderInput: '' },
-		searchKeyword,
+		initialValue: { searchInput: searchKeyword || '', searchHeaderInput: searchKeyword || '' },
 	});
 
 	return (

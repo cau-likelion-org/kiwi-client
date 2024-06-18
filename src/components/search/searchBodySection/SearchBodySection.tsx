@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { Suspense, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SearchForm from '../SearchForm';
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
@@ -19,7 +19,11 @@ const SearchBodySection = () => {
 			const encodedTitle = encodeURIComponent(searchKeyword);
 			router.push(`viewer?title=${encodedTitle}`);
 		}
-	}, [searchResult]);
+	}, [searchResult, router, searchKeyword]);
+
+	if (searchResult.kind === 'searchResult') {
+		return;
+	}
 
 	return (
 		<>

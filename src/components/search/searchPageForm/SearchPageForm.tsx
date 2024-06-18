@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import useDebounceValue from '@/hooks/useDebounce';
 import useSearchForm from '@/hooks/useSearchForm';
 import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContainer';
@@ -6,8 +6,7 @@ import * as S from './SearchPageForm.styled';
 
 const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
-		initialValue: { searchInput: '', searchHeaderInput: '' },
-		searchKeyword,
+		initialValue: { searchInput: searchKeyword || '', searchHeaderInput: searchKeyword || '' },
 	});
 	const debounceSearchInput = useDebounceValue(values.searchInput, 300);
 
@@ -37,7 +36,9 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 				autoComplete="off"
 			/>
 			<S.BoxWrapper>
-				{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
+				<Suspense fallback={<S.NoResultWrapper>검색중...</S.NoResultWrapper>}>
+					{isFocused && values.searchInput.length > 0 && <AutoCompleteContainer searchInput={debounceSearchInput} />}
+				</Suspense>
 			</S.BoxWrapper>
 		</S.FormWrapper>
 	);

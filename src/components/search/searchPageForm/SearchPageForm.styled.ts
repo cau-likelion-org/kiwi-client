@@ -29,3 +29,9 @@ export const BoxWrapper = styled.div`
 	box-shadow: 2px 2px 2px black;
 	z-index: 1;
 `;
+
+export const NoResultWrapper = styled.span`
+	padding: 15px;
+	font-size: 1.4rem;
+	box-shadow: 2px 2px 2px black;
+`;
