@@ -1,27 +1,29 @@
 import { useSearchAutoCompleteQuery } from '@/hooks/useSearchAutoCompleteQuery';
 import { useRouter } from 'next/navigation';
 import * as S from './AutoCompleteContainer.styled';
+import { RefObject } from 'react';
 
 interface AutoCompleteContainerProps {
 	searchInput: string;
+	autoCompleteRef: RefObject<HTMLDivElement>;
 }
 
-const AutoCompleteContainer = ({ searchInput }: AutoCompleteContainerProps) => {
+const AutoCompleteContainer = ({ searchInput, autoCompleteRef }: AutoCompleteContainerProps) => {
 	const router = useRouter();
-	const { data: dropdownTitleList } = useSearchAutoCompleteQuery(searchInput);
-
-	if (dropdownTitleList.length === 0) {
-		return <S.NoResultWrapper>검색 결과가 없습니다.</S.NoResultWrapper>;
-	}
+	const { data: autoCompleteList } = useSearchAutoCompleteQuery(searchInput);
 
 	return (
-		<>
-			{dropdownTitleList.map((title, idx) => (
-				<S.ItemWrapper id="complete" key={idx} onClick={() => router.push(`search/?search=${title}`)}>
-					{title}
-				</S.ItemWrapper>
-			))}
-		</>
+		<S.AutoCompleteWrapper ref={autoCompleteRef}>
+			{autoCompleteList.length > 0 ? (
+				autoCompleteList.map((title, idx) => (
+					<S.OptionWrapper key={idx} onClick={() => router.push(`search/?search=${title}`)}>
+						{title}
+					</S.OptionWrapper>
+				))
+			) : (
+				<S.NoResultWrapper>검색 결과가 없습니다.</S.NoResultWrapper>
+			)}
+		</S.AutoCompleteWrapper>
 	);
 };
 
