@@ -2,7 +2,7 @@
 
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
-import SearchResultContainer from '../SearchResult';
+import SearchResultContainer from '../SearchResultContainer';
 import SearchInput from '../searchInput/SearchInput';
 import useKeywordParams from '@/hooks/useKeywordParams';
 import useDetermineDirectRouter from '@/hooks/useDetermineDirectRouter';
