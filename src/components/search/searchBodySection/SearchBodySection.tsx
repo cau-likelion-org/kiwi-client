@@ -21,13 +21,7 @@ const SearchBodySection = () => {
 		<>
 			<S.SearchBarWrapper>
 				<S.TextImageWrapper>
-					<S.StyledImage
-						src="/img/search_text.png"
-						alt="search_text"
-						fill
-						priority
-						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-					/>
+					<S.StyledImage src="/img/search_text.png" alt="search_text" fill priority />
 				</S.TextImageWrapper>
 				<SearchInput />
 			</S.SearchBarWrapper>

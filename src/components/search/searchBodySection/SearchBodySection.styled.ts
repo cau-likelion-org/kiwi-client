@@ -5,7 +5,7 @@ export const SearchBarWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-left: 10%;
+	margin-left: 64px;
 `;
 
 export const TextImageWrapper = styled.div`

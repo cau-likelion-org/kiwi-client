@@ -25,7 +25,7 @@ export const AutoCompleteWrapper = styled.div`
 	flex-direction: column;
 	gap: 10px;
 
-	width: 320px;
+	width: 32rem;
 	margin: 0 0 0 20px;
 
 	background-color: white;
