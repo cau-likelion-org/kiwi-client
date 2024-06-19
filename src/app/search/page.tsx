@@ -1,10 +1,10 @@
-import SearchBodySection from '@/components/search/SearchBodySection';
-import SearchHeadSection from '@/components/search/SearchHeadSection';
+import SearchBodySection from '@/components/search/searchBodySection/SearchBodySection';
+import SearchHeaderSection from '@/components/search/searchHeaderSection/SearchHeaderSection';
 
 const SearchPage = () => {
 	return (
 		<>
-			<SearchHeadSection />
+			<SearchHeaderSection />
 			<SearchBodySection />
 		</>
 	);

@@ -11,9 +11,6 @@ export const metadata: Metadata = {
 	authors: [{ name: '중하하 2기' }],
 	creator: '중하하 2기',
 	publisher: '중하하 2기',
-	icons: {
-		icon: '/img/icon.png',
-	},
 	keywords: ['중앙대학교', '멋쟁이 사자처럼', '멋사', '멋사 위키', '중앙대학교 멋사'],
 	openGraph: {
 		title: '멋사 중앙대 위키',
@@ -33,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html>
 			<head>
 				<link rel="manifest" href="/manifest.json" />
+				<link rel="icon" href="/img/icon.png" type="image/png" sizes="32x32" />
 			</head>
 			<body>
 				<RecoidContextProvider>

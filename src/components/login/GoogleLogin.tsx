@@ -48,7 +48,7 @@ const GoogleLogin = () => {
 			}
 		  } catch (error) {
 			// console.error('An error occurred during login:', error);
-			alert('likelion.org 계정으로만 로그인이 가능합니다. 다시 시도해주세요.');
+			alert('로그인 과정에서 문제가 발생했습니다. 다시 시도해주세요.');
 				setTimeout(() => {
 				  route.push('/login');
 				}, 500);

@@ -1,12 +1,14 @@
 import { getSearchResult } from '@/apis/docs';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useSearchQuery = (searchKeyword: string) => {
-	const { data: searchResult } = useQuery({
+	if (!searchKeyword) {
+		throw new Promise(() => {});
+	}
+
+	return useSuspenseQuery({
 		queryKey: ['search', searchKeyword],
 		queryFn: () => getSearchResult(searchKeyword),
-		enabled: !!searchKeyword,
 		staleTime: 60 * 1000,
 	});
-	return searchResult;
 };
