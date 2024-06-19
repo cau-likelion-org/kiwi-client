@@ -1,27 +1,20 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SearchResultContainer from '../SearchResult';
 import SearchInput from '../searchInput/SearchInput';
 import useKeywordParams from '@/hooks/useKeywordParams';
+import useDetermineDirectRouter from '@/hooks/useDetermineDirectRouter';
 
 const SearchBodySection = () => {
-	const router = useRouter();
 	const { searchKeyword } = useKeywordParams();
 	const { data: searchResult } = useSearchQuery(searchKeyword);
 
-	useEffect(() => {
-		if (searchResult && searchResult.kind === 'searchResult') {
-			const encodedTitle = encodeURIComponent(searchKeyword);
-			router.push(`viewer?title=${encodedTitle}`);
-		}
-	}, [searchResult, router, searchKeyword]);
+	useDetermineDirectRouter({ searchKeyword, kind: searchResult.kind });
 
 	if (searchResult.kind === 'searchResult') {
-		return;
+		return null;
 	}
 
 	return (
