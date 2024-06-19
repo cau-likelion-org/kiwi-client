@@ -1,52 +1,44 @@
-import { Suspense, useEffect, useRef } from 'react';
-import useDebounceValue from '@/hooks/useDebounce';
-import useSearchForm from '@/hooks/useSearchForm';
-import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContainer';
+import { Suspense } from 'react';
 import * as S from './SearchPageForm.styled';
+import useDebounceValue from '@/hooks/useDebounce';
+import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContainer';
 import AutoCompleteLoading from '../autoCompleteContainer/AutoCompleteLoading';
+import useFocusSearchInput from '@/hooks/useFocusSearchInput';
+import useInput from '@/hooks/useInput';
 
 const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
-	const { values, isFocused, handleFocus, handleBlur, handleChange, handleSearchSubmit } = useSearchForm({
-		initialValue: { searchInput: searchKeyword || '', searchHeaderInput: searchKeyword || '' },
+	const {
+		value: searchInput,
+		isFocused,
+		handleChange,
+		handleFocus,
+		handleBlur,
+		handleKeydown,
+	} = useInput(searchKeyword || '');
+
+	const debounceSearchInput = useDebounceValue(searchInput, 300);
+
+	const { inputRef, autoCompleteRef, isSearching } = useFocusSearchInput({
+		isFocused,
+		searchInput,
+		handleBlur,
 	});
-	const debounceSearchInput = useDebounceValue(values.searchInput, 300);
-
-	const inputRef = useRef<HTMLInputElement | null>(null);
-	const autoCompleteRef = useRef<HTMLDivElement | null>(null);
-
-	const isSearching = isFocused && values.searchInput.length > 0;
-
-	useEffect(() => {
-		const handleOutsideClose = (e: MouseEvent) => {
-			const isOutsideDropdown =
-				isFocused &&
-				!autoCompleteRef.current?.contains(e.target as Node) &&
-				!inputRef.current?.contains(e.target as Node);
-
-			if (isOutsideDropdown) {
-				handleBlur();
-			}
-		};
-		document.addEventListener('click', handleOutsideClose);
-
-		return () => document.removeEventListener('click', handleOutsideClose);
-	}, [isFocused]);
 
 	return (
-		<S.FormWrapper name="searchInput" onSubmit={handleSearchSubmit}>
+		<S.SearchInputWrapper>
 			<S.SearchBarInput
-				name="searchInput"
+				ref={inputRef}
+				value={searchInput}
 				placeholder="검색어를 입력하세요..."
-				value={values.searchInput}
 				onChange={handleChange}
 				onFocus={handleFocus}
+				onKeyDown={handleKeydown}
 				autoComplete="off"
-				ref={inputRef}
 			/>
 			<Suspense fallback={<AutoCompleteLoading />}>
 				{isSearching && <AutoCompleteContainer searchInput={debounceSearchInput} autoCompleteRef={autoCompleteRef} />}
 			</Suspense>
-		</S.FormWrapper>
+		</S.SearchInputWrapper>
 	);
 };
 
