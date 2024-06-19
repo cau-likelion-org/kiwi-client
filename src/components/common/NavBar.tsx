@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import SearchHeaderForm from '../search/searchHeaderForm/SearchHeaderForm';
+import SearchHeaderInput from '../search/searchHeaderInput/searchHeaderInput';
 
 export interface IMenu {
 	src: string;
@@ -65,11 +65,11 @@ const NavBar = () => {
 				<RightWrapper>
 					{isMobile ? (
 						<SearchWrapper>
-							<SearchHeaderForm />
+							<SearchHeaderInput />
 						</SearchWrapper>
 					) : (
 						<SearchWrapper>
-							<SearchHeaderForm />
+							<SearchHeaderInput />
 						</SearchWrapper>
 					)}
 					<ButtonWrapper>

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import * as S from './SearchPageForm.styled';
+import * as S from './SearchInput.styled';
 import useDebounceValue from '@/hooks/useDebounce';
 import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContainer';
 import AutoCompleteLoading from '../autoCompleteContainer/AutoCompleteLoading';
@@ -7,7 +7,7 @@ import useFocusSearchInput from '@/hooks/useFocusSearchInput';
 import useInput from '@/hooks/useInput';
 import useKeywordParams from '@/hooks/useKeywordParams';
 
-const SearchPageForm = () => {
+const SearchInput = () => {
 	const { searchKeyword } = useKeywordParams();
 	const {
 		value: searchInput,
@@ -43,4 +43,4 @@ const SearchPageForm = () => {
 	);
 };
 
-export default SearchPageForm;
+export default SearchInput;

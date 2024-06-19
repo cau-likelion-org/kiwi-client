@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SearchResultContainer from '../SearchResult';
-import SearchPageForm from '../searchPageForm/SearchPageForm';
+import SearchInput from '../searchInput/SearchInput';
 import useKeywordParams from '@/hooks/useKeywordParams';
 
 const SearchBodySection = () => {
@@ -36,7 +36,7 @@ const SearchBodySection = () => {
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 					/>
 				</S.TextImageWrapper>
-				<SearchPageForm />
+				<SearchInput />
 			</S.SearchBarWrapper>
 			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>

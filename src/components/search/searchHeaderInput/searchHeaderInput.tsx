@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
-import * as S from './SearchHeaderForm.styled';
+import * as S from './searchHeaderInput.styled';
 import useInput from '@/hooks/useInput';
 import useKeywordParams from '@/hooks/useKeywordParams';
 
-const SearchHeaderForm = () => {
+const SearchHeaderInput = () => {
 	const { searchKeyword } = useKeywordParams();
 	const { value: searchHeaderInput, handleChange, handleKeydown } = useInput(searchKeyword);
 
@@ -24,4 +24,4 @@ const SearchHeaderForm = () => {
 	);
 };
 
-export default SearchHeaderForm;
+export default SearchHeaderInput;
