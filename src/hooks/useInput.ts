@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 const useInput = (initialValue: string) => {
 	const router = useRouter();
@@ -24,6 +24,11 @@ const useInput = (initialValue: string) => {
 			router.push(`search/?search=${value}`);
 		}
 	};
+
+	// SearchInput과 HeaderSearchInput 동기화
+	useEffect(() => {
+		setValue(initialValue);
+	}, [initialValue]);
 
 	return { value, isFocused, handleChange, handleFocus, handleBlur, handleKeydown };
 };
