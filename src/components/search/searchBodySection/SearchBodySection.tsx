@@ -1,17 +1,16 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import SearchForm from '../SearchForm';
 import * as S from './SearchBodySection.styled';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SearchResultContainer from '../SearchResult';
+import SearchPageForm from '../searchPageForm/SearchPageForm';
+import useKeywordParams from '@/hooks/useKeywordParams';
 
 const SearchBodySection = () => {
 	const router = useRouter();
-	const params = useSearchParams();
-
-	const searchKeyword = params.get('search') || '멋쟁이사자처럼';
+	const { searchKeyword } = useKeywordParams();
 	const { data: searchResult } = useSearchQuery(searchKeyword);
 
 	useEffect(() => {
@@ -37,7 +36,7 @@ const SearchBodySection = () => {
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 					/>
 				</S.TextImageWrapper>
-				<SearchForm searchKeyword={searchKeyword} type="search" />
+				<SearchPageForm />
 			</S.SearchBarWrapper>
 			<SearchResultContainer searchResult={searchResult} searchKeyword={searchKeyword} />
 		</>

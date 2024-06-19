@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-export const FormWrapper = styled.form``;
-
 export const SearchWrapper = styled.div`
 	display: flex;
 	align-items: center;

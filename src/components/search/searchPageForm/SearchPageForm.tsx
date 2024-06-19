@@ -5,8 +5,10 @@ import AutoCompleteContainer from '../autoCompleteContainer/AutoCompleteContaine
 import AutoCompleteLoading from '../autoCompleteContainer/AutoCompleteLoading';
 import useFocusSearchInput from '@/hooks/useFocusSearchInput';
 import useInput from '@/hooks/useInput';
+import useKeywordParams from '@/hooks/useKeywordParams';
 
-const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
+const SearchPageForm = () => {
+	const { searchKeyword } = useKeywordParams();
 	const {
 		value: searchInput,
 		isFocused,
@@ -14,8 +16,7 @@ const SearchPageForm = ({ searchKeyword }: { searchKeyword?: string }) => {
 		handleFocus,
 		handleBlur,
 		handleKeydown,
-	} = useInput(searchKeyword || '');
-
+	} = useInput(searchKeyword);
 	const debounceSearchInput = useDebounceValue(searchInput, 300);
 
 	const { inputRef, autoCompleteRef, isSearching } = useFocusSearchInput({
