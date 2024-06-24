@@ -5,10 +5,8 @@ import LandingSection1 from './LandingSection1';
 import LandingSection2 from './LandingSection2';
 import LandingSection3 from './LandingSection3';
 import { styled } from 'styled-components';
-import { getRecentDocs } from '@/apis/docs';
 import Image from 'next/image';
 import { RecentDocs } from '@/types/request';
-import { QueryClient, useQuery } from 'react-query';
 import { useGetRecent } from '@/hooks/useGetRecent';
 
 const Landing = () => {

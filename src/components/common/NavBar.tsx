@@ -2,13 +2,13 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import SearchForm from '../search/SearchForm';
 import { useRouter } from 'next/navigation';
 import { token } from '@/app/recoilContextProvider';
 import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import SearchHeaderInput from '../search/searchHeaderInput/searchHeaderInput';
 
 export interface IMenu {
 	src: string;
@@ -65,11 +65,11 @@ const NavBar = () => {
 				<RightWrapper>
 					{isMobile ? (
 						<SearchWrapper>
-							<SearchForm type="header" />
+							<SearchHeaderInput />
 						</SearchWrapper>
 					) : (
 						<SearchWrapper>
-							<SearchForm type="header" />
+							<SearchHeaderInput />
 						</SearchWrapper>
 					)}
 					<ButtonWrapper>

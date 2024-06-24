@@ -16,6 +16,7 @@ export const getSearchResult = async (keyword: string): Promise<ISearchResult | 
 		};
 		return searchResultList;
 	}
+
 	return { kind: 'searchResult', data };
 };
 
