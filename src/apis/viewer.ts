@@ -6,7 +6,7 @@ const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 export const getDocsContent = async (title: string) => {
 	try {
 		let encodedTitle = encodeURIComponent(title);
-		const response = await axios.get(`${baseURL}/docs/recent/${encodedTitle}/`);
+		const response = await axios.get(`${baseURL}docs/recent/${encodedTitle}/`);
 		if (response.status === 200) {
 			return response.data;
 		} else {
@@ -19,7 +19,7 @@ export const getDocsContent = async (title: string) => {
 
 export const getRandomDoc = async () => {
 	try {
-		const response = await axios.get(`${baseURL}/docs/random/`);
+		const response = await axios.get(`${baseURL}docs/random/`);
 		if (response.status === 200) {
 			return response.data;
 		}
