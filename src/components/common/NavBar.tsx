@@ -2,13 +2,12 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { token } from '@/app/recoilContextProvider';
-import { useRecoilValue } from 'recoil';
+import { usePathname, useRouter } from 'next/navigation';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import SearchHeaderInput from '../search/searchHeaderInput/searchHeaderInput';
+import { AuthVerify } from '@/apis/authAxois';
 
 export interface IMenu {
 	src: string;
@@ -18,8 +17,7 @@ export interface IMenu {
 const NavBar = () => {
 	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
 	const router = useRouter();
-
-	const { access: tokenState } = useRecoilValue(token);
+	const pathname = usePathname();
 	const [isLogin, setIsLogin] = useState(false);
 
 	const gotoRandomDoc = async () => {
@@ -29,64 +27,47 @@ const NavBar = () => {
 		router.push(`/viewer?title=${encodedTitle}`);
 	};
 
+	const handlePostClick = () => {
+		if (!isLogin) {
+			alert('🦁 로그인을 먼저 해주세요 🦁');
+			router.push('/login');
+		} else {
+			router.push('/post');
+		}
+	};
+
+	// 유효한 토큰을 가진 경우에만 상태 변경
 	useEffect(() => {
-		if (tokenState) setIsLogin(true);
-	}, [tokenState]);
+		const loginStatus = AuthVerify();
+		setIsLogin(loginStatus === true);
+	}, [pathname]);
 
 	return (
 		<>
 			<Margin />
 			<Wrapper>
-				{isMobile ? (
-					<LeftWrapper>
-						<Image
-							onClick={() => {
-								router.push('/');
-							}}
-							src="/img/mobileLogo.png"
-							alt={'logo'}
-							width={100}
-							height={34}
-						/>
-					</LeftWrapper>
-				) : (
-					<LeftWrapper>
-						<Image
-							onClick={() => {
-								router.push('/');
-							}}
-							src="/img/logo.png"
-							alt={'logo'}
-							width={140}
-							height={34}
-						/>
-					</LeftWrapper>
-				)}
+				<LeftWrapper onClick={() => router.push('/')}>
+					<Image
+						src={isMobile ? '/img/mobileLogo.png' : '/img/logo.png'}
+						alt={'logo'}
+						width={isMobile ? 100 : 140}
+						height={34}
+					/>
+				</LeftWrapper>
 				<RightWrapper>
-					{isMobile ? (
-						<SearchWrapper>
-							<SearchHeaderInput />
-						</SearchWrapper>
-					) : (
-						<SearchWrapper>
-							<SearchHeaderInput />
-						</SearchWrapper>
-					)}
+					<SearchWrapper>
+						<SearchHeaderInput />
+					</SearchWrapper>
 					<ButtonWrapper>
-						{isMobile ? (
-							<div></div>
-						) : (
+						{isMobile ? null : (
 							<Image
 								onClick={() => {
 									if (!isLogin) {
-										alert('🦁 로그인을 먼저 해주세요 🦁');
 										router.push('/login');
-									} else {
-										router.push('/post');
 									}
 								}}
-								src="/img/newPost.png"
-								alt={'newPost'}
+								src={isLogin ? '/img/welcome.png' : '/img/login.png'}
+								alt={isLogin ? '로그인버튼' : '로그인'}
 								width={44}
 								height={44}
 								style={{ cursor: 'pointer' }}
@@ -100,20 +81,17 @@ const NavBar = () => {
 							height={44}
 							style={{ cursor: 'pointer' }}
 						/>
-						{isLogin ? (
-							<Image src="/img/welcome.png" width={44} height={44} alt={'로그인버튼'} />
-						) : (
+						{!isMobile && (
 							<Image
-								src="/img/login.png"
-								onClick={() => {
-									router.push(`/login`);
-								}}
+								onClick={handlePostClick}
+								src="/img/newPost.png"
+								alt={'newPost'}
 								width={44}
 								height={44}
-								alt={'로그인버튼'}
 								style={{ cursor: 'pointer' }}
 							/>
 						)}
+						{/* {isLogin && <button onClick={handleLogoutClick}>로그아웃</button>} */}
 					</ButtonWrapper>
 				</RightWrapper>
 			</Wrapper>
