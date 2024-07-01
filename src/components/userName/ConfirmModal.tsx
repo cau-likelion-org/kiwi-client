@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { signUp } from '@/apis/login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { token, userEmailAtom, userNameAtom } from '@/app/recoilContextProvider';
 import { useRouter } from 'next/navigation';
 import LocalStorage from '@/utils/localStorage';
+import { signUp } from '@/apis/signup';
 
 const ConfirmModal = (props: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>; nickname: string }) => {
 	const route = useRouter();
