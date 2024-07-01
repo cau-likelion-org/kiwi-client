@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Server } from './settings';
 import LocalStorage from '@/utils/localStorage';
 import { ISearchResult, ISearchResultList, SearchResult } from '@/types/search';
+import { getAuthAxios } from './authAxois';
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -22,15 +23,13 @@ export const getSearchResult = async (keyword: string): Promise<ISearchResult | 
 
 export const newDocs = async (body: CreateDocs) => {
 	try {
-		const token = LocalStorage.getItem('access');
-		const result = await axios.post(`${baseURL}docs/`, body, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-		return result.data;
+		const access = LocalStorage.getItem('access');
+		
+		const authAxios = getAuthAxios(access);
+		const response = await authAxios.post(`${baseURL}docs/`, body);
+
+		return response.data;
 	} catch (error) {
-		alert('로그아웃 후 다시 시도해주세요!');
 		throw error;
 	}
 };
