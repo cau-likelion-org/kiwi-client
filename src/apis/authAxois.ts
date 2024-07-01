@@ -30,7 +30,7 @@ export const AuthVerify = () => {
 };
 
 // 주어진 토큰을 사용하여 API 요청에 인증된 Axios 인스턴스를 초기화
-export const getAuthAxios = (token: string) => {
+export const getAuthAxios = (token: string | null) => {
 	// Axios 인스턴스 생성
 	const authAxios = axios.create({
 		baseURL,
