@@ -24,10 +24,6 @@ export const getSearchResult = async (keyword: string): Promise<ISearchResult | 
 export const newDocs = async (body: CreateDocs) => {
 	try {
 		const access = LocalStorage.getItem('access');
-
-		if (!access) {
-			throw new Error('Access token이 없습니다.');
-		}
 		
 		const authAxios = getAuthAxios(access);
 		const response = await authAxios.post(`${baseURL}docs/`, body);
