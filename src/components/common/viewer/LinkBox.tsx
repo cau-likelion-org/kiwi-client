@@ -15,8 +15,12 @@ const LinkBox: React.FC<LinkBoxProps> = ({ width = '51', height = '34', text, do
 	const [isLogin, setIsLogin] = useState(false);
 
 	useEffect(() => {
-		const loginStatus = AuthVerify();
-		setIsLogin(loginStatus === true);
+		const checkLoginStatus = async () => {
+			const loginStatus = await AuthVerify();
+			setIsLogin(loginStatus === true);
+		};
+
+		checkLoginStatus();
 	}, []);
 
 	const handleClick = () => {

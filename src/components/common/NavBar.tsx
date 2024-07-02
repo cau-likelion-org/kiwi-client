@@ -38,8 +38,12 @@ const NavBar = () => {
 
 	// 유효한 토큰을 가진 경우에만 상태 변경
 	useEffect(() => {
-		const loginStatus = AuthVerify();
-		setIsLogin(loginStatus === true);
+		const checkLoginStatus = async () => {
+			const loginStatus = await AuthVerify();
+			setIsLogin(loginStatus === true);
+		};
+
+		checkLoginStatus();
 	}, [pathname]);
 
 	return (

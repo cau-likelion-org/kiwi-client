@@ -7,26 +7,52 @@ const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 const parseJwt = (token: string | null) => {
 	if (token) return JSON.parse(atob(token.split('.')[1]));
 };
-// 토큰 유효성 검사
-export const AuthVerify = () => {
-	const access = LocalStorage.getItem('access');
-	const refresh = LocalStorage.getItem('refresh');
 
-	if (!access || !refresh) {
-		return '필요 토큰 미존재';
+// 토큰 유효성 검사 및 재발급
+export const checkAndRefreshToken = async () => {
+	const accessToken = LocalStorage.getItem('access');
+	const refreshToken = LocalStorage.getItem('refresh');
+
+	if (!accessToken || !refreshToken) {
+		// console.log('필요 토큰 미존재');
+		return null;
 	}
 
-	const decodedAccess = parseJwt(access);
-	const decodedRefresh = parseJwt(refresh);
+	const decodedAccess = parseJwt(accessToken);
+	const decodedRefresh = parseJwt(refreshToken);
 
 	if (decodedAccess && decodedAccess.exp * 1000 < Date.now()) {
-		return 'Access 토큰 만료';
-	}
-	if (decodedRefresh && decodedRefresh.exp * 1000 < Date.now()) {
-		return 'Refresh 토큰 만료';
+		// console.log('access 토큰 만료');
+		if (decodedRefresh && decodedRefresh.exp * 1000 >= Date.now()) {
+			try {
+				// console.log('자동 재연장')
+				const { accessToken: newAccessToken } = await getNewToken();
+				return newAccessToken;
+			} catch (error) {
+				LocalStorage.removeItem('access');
+				LocalStorage.removeItem('refresh');
+				return null;
+			}
+		} else {
+			// console.log('Refresh 토큰 만료');
+			alert('토큰 만료로 자동 로그아웃되었습니다. 다시 로그인해주세요.');
+			LocalStorage.removeItem('access');
+			LocalStorage.removeItem('refresh');
+			return null;
+		}
 	}
 
-	return decodedAccess ? true : false;
+	return accessToken;
+};
+
+// 토큰 유효성 검사 함수
+export const AuthVerify = async () => {
+	const accessToken = await checkAndRefreshToken();
+
+	if (!accessToken) {
+		return false;
+	}
+	return true;
 };
 
 // 주어진 토큰을 사용하여 API 요청에 인증된 Axios 인스턴스를 초기화
