@@ -1,13 +1,13 @@
 'use client';
 
-import { styled } from 'styled-components';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import SearchHeaderInput from '../search/searchHeaderInput/searchHeaderInput';
+import SearchHeaderInput from '@/components/search/searchHeaderInput/searchHeaderInput';
 import { AuthVerify } from '@/apis/authAxois';
+import * as S from './NavBar.styled';
 
 export interface IMenu {
 	src: string;
@@ -48,22 +48,47 @@ const NavBar = () => {
 
 	return (
 		<>
-			<Margin />
-			<Wrapper>
-				<LeftWrapper onClick={() => router.push('/')}>
-					<Image
-						src={isMobile ? '/img/mobileLogo.png' : '/img/logo.png'}
-						alt={'logo'}
-						width={isMobile ? 100 : 140}
-						height={34}
-					/>
-				</LeftWrapper>
-				<RightWrapper>
-					<SearchWrapper>
-						<SearchHeaderInput />
-					</SearchWrapper>
-					<ButtonWrapper>
-						{isMobile ? null : (
+			<S.Margin />
+			<S.Wrapper>
+				{isMobile ? (
+					<S.LeftWrapper>
+						<Image
+							onClick={() => {
+								router.push('/');
+							}}
+							src="/img/mobileLogo.png"
+							alt={'logo'}
+							width={100}
+							height={34}
+						/>
+					</S.LeftWrapper>
+				) : (
+					<S.LeftWrapper>
+						<Image
+							onClick={() => {
+								router.push('/');
+							}}
+							src="/img/logo.png"
+							alt={'logo'}
+							width={140}
+							height={34}
+						/>
+					</S.LeftWrapper>
+				)}
+				<S.RightWrapper>
+					{isMobile ? (
+						<S.SearchWrapper>
+							<SearchHeaderInput />
+						</S.SearchWrapper>
+					) : (
+						<S.SearchWrapper>
+							<SearchHeaderInput />
+						</S.SearchWrapper>
+					)}
+					<S.ButtonWrapper>
+						{isMobile ? (
+							<div></div>
+						) : (
 							<Image
 								onClick={() => {
 									if (!isLogin) {
@@ -95,74 +120,11 @@ const NavBar = () => {
 								style={{ cursor: 'pointer' }}
 							/>
 						)}
-						{/* {isLogin && <button onClick={handleLogoutClick}>로그아웃</button>} */}
-					</ButtonWrapper>
-				</RightWrapper>
-			</Wrapper>
+					</S.ButtonWrapper>
+				</S.RightWrapper>
+			</S.Wrapper>
 		</>
 	);
 };
 
 export default NavBar;
-
-const Margin = styled.div`
-	width: 100%;
-	min-height: 64px;
-`;
-
-const Wrapper = styled.div`
-	width: 100%;
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	min-height: 64px;
-	background-color: white;
-	top: 0;
-	z-index: 10;
-`;
-
-const LeftWrapper = styled.div`
-	display: flex;
-	cursor: pointer;
-	justify-content: center;
-	align-items: center;
-	margin-left: 3%;
-	@media screen and (max-width: 540px) {
-		margin-left: 3%;
-	}
-`;
-
-const RightWrapper = styled.div`
-	display: flex;
-	width: 60%;
-	margin-right: 1%;
-	justify-content: space-between;
-	align-items: center;
-	@media screen and (min-width: 1024px) {
-		width: 40%;
-	}
-`;
-
-const SearchWrapper = styled.div`
-	display: flex;
-	position: relative;
-	width: 50%;
-	@media screen and (max-width: 540px) {
-		width: 60%;
-		margin-top: 0.5rem;
-	}
-`;
-
-const ButtonWrapper = styled.div`
-	display: flex;
-	width: 40%;
-	margin-top: 6px;
-	margin-right: 1.5rem;
-	justify-content: space-between;
-	align-items: center;
-	@media screen and (max-width: 540px) {
-		width: 35%;
-		gap: 0.5rem;
-	}
-`;
