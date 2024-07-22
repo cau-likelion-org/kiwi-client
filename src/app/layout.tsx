@@ -1,6 +1,6 @@
 import './global.css';
 import StyledComponentsRegistry from './lib/registry';
-import NavBar from '@/components/common/NavBar';
+import NavBar from '@/components/common/navbar/NavBar';
 import type { Metadata } from 'next';
 import RecoidContextProvider from './recoilContextProvider';
 import ReactQueryProvider from './ReactQueryProvider';

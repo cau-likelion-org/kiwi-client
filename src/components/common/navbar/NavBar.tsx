@@ -1,6 +1,5 @@
 'use client';
 
-import { styled } from 'styled-components';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { token } from '@/app/recoilContextProvider';
@@ -8,7 +7,8 @@ import { useRecoilValue } from 'recoil';
 import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import SearchHeaderInput from '../search/searchHeaderInput/searchHeaderInput';
+import SearchHeaderInput from '@/components/search/searchHeaderInput/searchHeaderInput';
+import * as S from './NavBar.styled';
 
 export interface IMenu {
 	src: string;
@@ -35,10 +35,10 @@ const NavBar = () => {
 
 	return (
 		<>
-			<Margin />
-			<Wrapper>
+			<S.Margin />
+			<S.Wrapper>
 				{isMobile ? (
-					<LeftWrapper>
+					<S.LeftWrapper>
 						<Image
 							onClick={() => {
 								router.push('/');
@@ -48,9 +48,9 @@ const NavBar = () => {
 							width={100}
 							height={34}
 						/>
-					</LeftWrapper>
+					</S.LeftWrapper>
 				) : (
-					<LeftWrapper>
+					<S.LeftWrapper>
 						<Image
 							onClick={() => {
 								router.push('/');
@@ -60,19 +60,19 @@ const NavBar = () => {
 							width={140}
 							height={34}
 						/>
-					</LeftWrapper>
+					</S.LeftWrapper>
 				)}
-				<RightWrapper>
+				<S.RightWrapper>
 					{isMobile ? (
-						<SearchWrapper>
+						<S.SearchWrapper>
 							<SearchHeaderInput />
-						</SearchWrapper>
+						</S.SearchWrapper>
 					) : (
-						<SearchWrapper>
+						<S.SearchWrapper>
 							<SearchHeaderInput />
-						</SearchWrapper>
+						</S.SearchWrapper>
 					)}
-					<ButtonWrapper>
+					<S.ButtonWrapper>
 						{isMobile ? (
 							<div></div>
 						) : (
@@ -114,73 +114,11 @@ const NavBar = () => {
 								style={{ cursor: 'pointer' }}
 							/>
 						)}
-					</ButtonWrapper>
-				</RightWrapper>
-			</Wrapper>
+					</S.ButtonWrapper>
+				</S.RightWrapper>
+			</S.Wrapper>
 		</>
 	);
 };
 
 export default NavBar;
-
-const Margin = styled.div`
-	width: 100%;
-	min-height: 64px;
-`;
-
-const Wrapper = styled.div`
-	width: 100%;
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	min-height: 64px;
-	background-color: white;
-	top: 0;
-	z-index: 10;
-`;
-
-const LeftWrapper = styled.div`
-	display: flex;
-	cursor: pointer;
-	justify-content: center;
-	align-items: center;
-	margin-left: 3%;
-	@media screen and (max-width: 540px) {
-		margin-left: 3%;
-	}
-`;
-
-const RightWrapper = styled.div`
-	display: flex;
-	width: 60%;
-	margin-right: 1%;
-	justify-content: space-between;
-	align-items: center;
-	@media screen and (min-width: 1024px) {
-		width: 40%;
-	}
-`;
-
-const SearchWrapper = styled.div`
-	display: flex;
-	position: relative;
-	width: 50%;
-	@media screen and (max-width: 540px) {
-		width: 60%;
-		margin-top: 0.5rem;
-	}
-`;
-
-const ButtonWrapper = styled.div`
-	display: flex;
-	width: 40%;
-	margin-top: 6px;
-	margin-right: 1.5rem;
-	justify-content: space-between;
-	align-items: center;
-	@media screen and (max-width: 540px) {
-		width: 35%;
-		gap: 0.5rem;
-	}
-`;
