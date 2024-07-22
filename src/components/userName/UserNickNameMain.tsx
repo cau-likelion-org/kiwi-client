@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ConfirmModal from './ConfirmModal';
-import { checkNickName, getRandomNickname } from '@/apis/login';
+import { checkNickName, getRandomNickname } from '@/apis/signup';
 
 const UserNickNameMain = () => {
 	const [userNickname, setUserNickname] = useState('어쩔사자티비');

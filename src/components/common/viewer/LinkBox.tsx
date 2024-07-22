@@ -1,5 +1,6 @@
+import { AuthVerify } from '@/apis/authAxois';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface LinkBoxProps {
 	width?: string;
@@ -11,16 +12,21 @@ interface LinkBoxProps {
 
 const LinkBox: React.FC<LinkBoxProps> = ({ width = '51', height = '34', text, docTitle = '' }) => {
 	const router = useRouter();
-	let token: string | null;
-	if (typeof window !== 'undefined') {
-		token = localStorage.getItem('access');
-	}
+	const [isLogin, setIsLogin] = useState(false);
+
+	useEffect(() => {
+		const checkLoginStatus = async () => {
+			const loginStatus = await AuthVerify();
+			setIsLogin(loginStatus === true);
+		};
+
+		checkLoginStatus();
+	}, []);
 
 	const handleClick = () => {
 		if (text === '편집') {
-			if (!token) {
-				alert('🦁로그인을 먼저 해주세요🦁');
-				router.push('/login');
+			if (!isLogin) {
+				alert('로그인 후 편집이 가능합니다');
 			} else {
 				let encodedTitle = encodeURIComponent(docTitle);
 				router.push(`/edit?title=${encodedTitle}`);
