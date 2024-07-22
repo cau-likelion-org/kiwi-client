@@ -1,13 +1,13 @@
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
 import { ICommand, commands } from '@uiw/react-md-editor';
-import Modal from '../common/post/Modal';
+import Modal from '../common/post/modal/Modal';
 import MDEditor from '@uiw/react-md-editor';
 import { IOption } from '@/types/request';
 import { uploadImageToServer } from '@/apis/docs';
 import { useRouter } from 'next/navigation';
+import * as S from './MD.styled';
 
 const customCommands = commands
 	.getCommands()
@@ -93,12 +93,12 @@ const Upload: React.FC = () => {
 
 	return (
 		<>
-			<Wrapper>
-				<BtnWrapper>
-					<Btn onClick={cancelPost}>취소</Btn>
-					<Btn onClick={onModal}>완료</Btn>
-				</BtnWrapper>
-				<Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
+			<S.Wrapper>
+				<S.BtnWrapper>
+					<S.Btn onClick={cancelPost}>취소</S.Btn>
+					<S.Btn onClick={onModal}>완료</S.Btn>
+				</S.BtnWrapper>
+				<S.Input value={title} onChange={inputChange} placeholder="문서 제목을 입력하세요" />
 				<div className="markarea">
 					<MDEditor
 						commands={[...customCommands, imageUploadCommand, toggleCommand]}
@@ -108,7 +108,7 @@ const Upload: React.FC = () => {
 						className="md-editor"
 					/>
 				</div>
-			</Wrapper>
+			</S.Wrapper>
 			{modal && (
 				<Modal md={md} title={title} closeModal={closeModal} generation={generation} setGeneration={setGeneration} />
 			)}
@@ -117,49 +117,3 @@ const Upload: React.FC = () => {
 };
 
 export default Upload;
-
-const Wrapper = styled.div`
-	width: 98%;
-	.md-editor {
-		white-space: pre-line;
-	}
-`;
-
-const BtnWrapper = styled.div`
-	width: 98%;
-	display: flex;
-	align-items: flex-end;
-	justify-content: end;
-	margin-top: 1rem;
-	padding: 1rem;
-	gap: 1rem;
-`;
-
-const Btn = styled.div`
-	border-radius: 1.25rem;
-	background: #4c4df5;
-	display: flex;
-	padding: 1rem 2rem;
-	justify-content: center;
-	align-items: center;
-	color: #fff;
-	text-align: center;
-	font-family: Pretendard;
-	font-size: 1.3rem;
-	font-style: normal;
-	font-weight: 600;
-	line-height: normal;
-`;
-
-const Input = styled.input`
-	width: 98%;
-	font-family: Pretendard;
-	margin-left: 1rem;
-	font-size: 2.5rem;
-	border: none;
-	border-bottom: 2px solid #d9d9d9;
-	margin-bottom: 1.5rem;
-	&:focus {
-		outline: none;
-	}
-`;
