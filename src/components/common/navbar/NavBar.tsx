@@ -87,8 +87,6 @@ const NavBar = () => {
 					)}
 					<S.ButtonWrapper>
 						{isMobile ? (
-							<div></div>
-						) : (
 							<Image
 								onClick={() => {
 									if (!isLogin) {
@@ -101,6 +99,8 @@ const NavBar = () => {
 								height={44}
 								style={{ cursor: 'pointer' }}
 							/>
+						) : (
+							<div></div>
 						)}
 						<Image
 							onClick={gotoRandomDoc}
