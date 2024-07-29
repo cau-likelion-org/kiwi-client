@@ -86,22 +86,18 @@ const NavBar = () => {
 						</S.SearchWrapper>
 					)}
 					<S.ButtonWrapper>
-						{isMobile ? (
-							<Image
-								onClick={() => {
-									if (!isLogin) {
-										router.push('/login');
-									}
-								}}
-								src={isLogin ? '/img/welcome.png' : '/img/login.png'}
-								alt={isLogin ? '로그인버튼' : '로그인'}
-								width={44}
-								height={44}
-								style={{ cursor: 'pointer' }}
-							/>
-						) : (
-							<div></div>
-						)}
+						<Image
+							onClick={() => {
+								if (!isLogin) {
+									router.push('/login');
+								}
+							}}
+							src={isLogin ? '/img/welcome.png' : '/img/login.png'}
+							alt={isLogin ? '로그인버튼' : '로그인'}
+							width={44}
+							height={44}
+							style={{ cursor: 'pointer' }}
+						/>
 						<Image
 							onClick={gotoRandomDoc}
 							src="/img/random.png"
