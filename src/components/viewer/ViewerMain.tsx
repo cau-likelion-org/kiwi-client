@@ -5,13 +5,6 @@ import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-// import MDEditor from '@uiw/react-md-editor';
-// import ReactMarkdown from 'react-markdown';
-// import { renderToStaticMarkup } from 'react-dom/server';
-
-interface LinkProps {
-	link?: string;
-}
 
 const ViewerMain = () => {
 	const router = useRouter();
@@ -34,7 +27,7 @@ const ViewerMain = () => {
 	const isClickedSort = (link: string) => {
 		let encodedTitle = encodeURIComponent(link);
 		router.push(`/sort?title=${encodedTitle}`);
-	}
+	};
 
 	const isClickedLink = (link: string) => {
 		let encodedTitle = encodeURIComponent(link);
@@ -63,7 +56,7 @@ const ViewerMain = () => {
 		const quoteRegex = /^>\s?(.*)$/gm; // 인용문
 		const strikethroughRegex = /~~(.*?)~~/g;
 		const codeRegex = /`(.*?)`/g; // 코드
-		const codeBlockRegex = /```([^`]+)```/gs; //코드박스
+		const codeBlockRegex = /```([^`]+)```/g; //코드박스
 		const tableRegex = /\n\|(.+\n)*.*\|/g; // 표
 		const hrRegex = /^---$/gm;
 		const checklistRegex = /-\s\[\s\]/g;
@@ -406,7 +399,7 @@ const ContentsBody = styled.div`
 		border-radius: 4px;
 		color: #333;
 		overflow-x: auto;
-		white-space: pre-wrap; 
+		white-space: pre-wrap;
 		word-wrap: break-word;
 	}
 
@@ -575,9 +568,4 @@ const SortBox = styled.div`
 			border-color: #0757f1;
 		}
 	}
-`;
-const Pre = styled.pre`
-  overflow-x: auto;
-  white-space: pre-wrap; /* 줄바꿈을 유지하면서, 필요한 경우에만 줄을 바꿉니다. */
-  word-wrap: break-word; /* 단어가 너무 길어질 경우 단어를 자르는 속성입니다. */
 `;

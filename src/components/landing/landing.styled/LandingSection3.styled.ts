@@ -80,7 +80,7 @@ export const Box = styled.div`
 	font-weight: bold;
 	@media screen and (min-width: 1024px) {
 		width: 60%;
-		font-size: 2rem;
+		font-size: 2.5rem;
 	}
 	@media screen and (max-width: 540px) {
 		width: 94%;
@@ -152,7 +152,7 @@ export const TextWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-	letter-spacing: 0.3rem;
+	letter-spacing: 0.35rem;
 	font-weight: 500;
 	@media screen and (min-width: 1024px) {
 		letter-spacing: 0.4rem;
