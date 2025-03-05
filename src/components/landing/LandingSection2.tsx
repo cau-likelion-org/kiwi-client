@@ -40,12 +40,12 @@ const LandingSection2 = ({ data }: { data: RecentDocs[] | undefined }) => {
 				<S.StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</S.Box>
 			<S.ShortCutWrapper>
-				<S.ShortCuts1 onClick={() => handleClick('12기')}>
-					<div className="overlay">{'12기 문서 바로가기'}</div>
+				<S.ShortCuts1 onClick={() => handleClick('11기')}>
+					<div className="overlay">{'11기 문서 바로가기'}</div>
 					<S.StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
 				</S.ShortCuts1>
-				<S.ShortCuts2 onClick={() => handleClick('13기')}>
-					<div className="overlay">{'13기 문서 바로가기'}</div>
+				<S.ShortCuts2 onClick={() => handleClick('12기')}>
+					<div className="overlay">{'12기 문서 바로가기'}</div>
 					<S.StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
 				</S.ShortCuts2>
 			</S.ShortCutWrapper>

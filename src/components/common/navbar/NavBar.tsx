@@ -6,8 +6,8 @@ import { getRandomDoc } from '@/apis/viewer';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import SearchHeaderInput from '@/components/search/searchHeaderInput/searchHeaderInput';
-import * as S from './NavBar.styled';
 import { AuthVerify } from '@/apis/authAxois';
+import * as S from './NavBar.styled';
 
 export interface IMenu {
 	src: string;
