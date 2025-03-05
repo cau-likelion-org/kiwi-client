@@ -15,6 +15,7 @@ const options: IOption[] = [
 	{ value: '10기', label: '10기' },
 	{ value: '11기', label: '11기' },
 	{ value: '12기', label: '12기' },
+	{ value: '13기', label: '13기' },
 ];
 
 type ModalProps = {
