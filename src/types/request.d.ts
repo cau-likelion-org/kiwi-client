@@ -1,6 +1,6 @@
 // type 정의
 
-export type Generation = '9기' | '10기' | '11기' | '12기' | '13기';
+export type Generation = string;
 
 export interface IOption {
 	value: Generation;

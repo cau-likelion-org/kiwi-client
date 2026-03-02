@@ -5,6 +5,7 @@ import { RecentDocs } from '@/types/request';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'react-responsive';
 import * as S from './landing.styled/LandingSection2.styled';
+import { generation } from '@/constants/generation';
 
 const LandingSection2 = ({ data }: { data: RecentDocs[] | undefined }) => {
 	const isMobile = useMediaQuery({ query: '(max-width: 540px)' });
@@ -40,12 +41,12 @@ const LandingSection2 = ({ data }: { data: RecentDocs[] | undefined }) => {
 				<S.StyledImage2 src="/img/recent.png" alt="닉네임 박스 이미지" fill priority />
 			</S.Box>
 			<S.ShortCutWrapper>
-				<S.ShortCuts1 onClick={() => handleClick('12기')}>
-					<div className="overlay">{'12기 문서 바로가기'}</div>
+				<S.ShortCuts1 onClick={() => handleClick(`${generation - 1}기`)}>
+					<div className="overlay">{`${generation - 1}기 문서 바로가기`}</div>
 					<S.StyledImage src="/img/shortCut1.png" alt="말풍선" fill priority />
 				</S.ShortCuts1>
-				<S.ShortCuts2 onClick={() => handleClick('13기')}>
-					<div className="overlay">{'13기 문서 바로가기'}</div>
+				<S.ShortCuts2 onClick={() => handleClick(`${generation}기`)}>
+					<div className="overlay">{`${generation}기 문서 바로가기`}</div>
 					<S.StyledImage src="/img/shortCut2.png" alt="말풍선" fill priority />
 				</S.ShortCuts2>
 			</S.ShortCutWrapper>

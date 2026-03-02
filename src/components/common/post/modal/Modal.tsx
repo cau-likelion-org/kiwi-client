@@ -9,14 +9,20 @@ import { newDocs } from '@/apis/docs';
 import { useRecoilValue } from 'recoil';
 import { userNameAtom } from '@/app/recoilContextProvider';
 import * as S from './Modal.styled';
+import { generation } from '@/constants/generation';
 
-const options: IOption[] = [
-	{ value: '9기', label: '9기' },
-	{ value: '10기', label: '10기' },
-	{ value: '11기', label: '11기' },
-	{ value: '12기', label: '12기' },
-	{ value: '13기', label: '13기' },
-];
+
+
+const options: IOption[] = Array.from(
+  { length: 4 },
+  (_, i) => {
+    const value = generation - (3 - i);
+    return {
+      value: `${value}기`,
+      label: `${value}기`,
+    };
+  }
+);
 
 type ModalProps = {
 	md: string;
