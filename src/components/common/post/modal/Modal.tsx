@@ -11,18 +11,13 @@ import { userNameAtom } from '@/app/recoilContextProvider';
 import * as S from './Modal.styled';
 import { generation } from '@/constants/generation';
 
-
-
-const options: IOption[] = Array.from(
-  { length: 4 },
-  (_, i) => {
-    const value = generation - (3 - i);
-    return {
-      value: `${value}기`,
-      label: `${value}기`,
-    };
-  }
-);
+const options: IOption[] = Array.from({ length: 4 }, (_, i) => {
+	const value = generation - (3 - i);
+	return {
+		value: `${value}기`,
+		label: `${value}기`,
+	};
+});
 
 type ModalProps = {
 	md: string;
